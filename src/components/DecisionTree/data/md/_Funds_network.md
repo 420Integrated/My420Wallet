@@ -1,4 +1,4 @@
-## Expecting Non-Ethereum Funds
+## Expecting Non-420coin Funds
 
 #### Using a Ledger Wallet
 
@@ -16,7 +16,7 @@
 
 * Access MEW offline through your recovery method (mnemonic phrase or private key) to connect to the appropriate network.
   * This should allow you to interact with your funds.
-* Use a blockchain-appropriate explorer for an accurate depiction of your holdings, like gastracker.io for ETC funds.
+* Use a blockchain-appropriate explorer for an accurate depiction of your holdings, like smoketracker.io for ETC funds.
 
 #### Other
 
@@ -28,7 +28,7 @@
 
 #### Contact Form:
 
-* Email us at <mailto:support@myetherwallet.com>
+* Email us at <mailto:support@my420wallet.420integrated.com>
 
 * <p>Include a detailed description of the issue.</p>
   <note>Please include as many details as possible, such as phone / computer model, OS number, version of the app / site you are using, browser version etc.</note>

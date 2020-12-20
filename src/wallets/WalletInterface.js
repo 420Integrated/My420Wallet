@@ -12,10 +12,10 @@ import {
   isValidPrivate,
   isValidPublic,
   privateToPublic
-} from 'ethereumjs-util';
+} from 'fourtwentyjs-util';
 import { Misc } from '@/helpers';
 import commonGenerator from '@/helpers/commonGenerator';
-import { Transaction } from 'ethereumjs-tx';
+import { Transaction } from 'fourtwentyjs-tx';
 import { toChecksumAddress } from '@/helpers/addressUtils';
 import store from '@/store';
 class WalletInterface {

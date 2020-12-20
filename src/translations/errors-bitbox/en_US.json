@@ -5,5 +5,5 @@
   "user-timeout": "Timed out. To confirm a transaction, hold the BitBox touch button for 4 seconds.",
   "not-initialized": "The BitBox is not initialized. Use Shift Cryptosecurity's BitBox App to set up a wallet.",
   "upgrade-firmware": "Please upgrade to the newest firmware using Shift Cryptosecurity's BitBox App.",
-  "unsupported-firmware": "MyEtherWallet does not yet support this version of the firmware"
+  "unsupported-firmware": "My420Wallet does not yet support this version of the firmware"
 }

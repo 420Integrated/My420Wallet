@@ -61,7 +61,7 @@ export default {
         {
           src: googlePlay,
           url:
-            'https://play.google.com/store/apps/details?id=com.myetherwallet.mewwallet'
+            'https://play.google.com/store/apps/details?id=com.420integrated.my420wallet'
         }
       ]
     };

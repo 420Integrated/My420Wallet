@@ -10,7 +10,7 @@ export default function Ambrpay(account, web3) {
   }
 
   var _web3 = web3;
-  var ethAddress = account.address;
+  var fourtwentyAddress = account.address;
   var ambrpay = {
     apiKey: false,
     testMode: false,
@@ -76,35 +76,35 @@ export default function Ambrpay(account, web3) {
             }
             break;
           case '2':
-            throw 'Morden testnet is not available. Try ropsten testnet.';
+            throw 'Morden testnet is not available. Try ruderalis testnet.';
             networkName = 'Morden Testnet';
             break;
           case '3':
-            if (ambrpay.network == 'ropsten' || ambrpay.network == 'auto') {
-              networkName = 'Ropsten Testnet';
+            if (ambrpay.network == 'ruderalis' || ambrpay.network == 'auto') {
+              networkName = 'Ruderalis Testnet';
               ambrpay.contractAddress =
-                ambrpay.contractAddresses.ropsten.smartContractAddress;
+                ambrpay.contractAddresses.ruderalis.smartContractAddress;
               ambrpay.ABI = {
-                abi: JSON.parse(ambrpay.contractAddresses.ropsten.abi)
+                abi: JSON.parse(ambrpay.contractAddresses.ruderalis.abi)
               };
             } else {
               throw (
-                'your wallets network (ropsten) does not match the selected network for the transaction (' +
+                'your wallets network (ruderalis) does not match the selected network for the transaction (' +
                 ambrpay.network +
                 ')'
               );
             }
             break;
           case '4':
-            throw 'Rinkeby testnet is not available. Try ropsten testnet.';
+            throw 'Rinkeby testnet is not available. Try ruderalis testnet.';
             networkName = 'Rinkeby Testnet';
             break;
           case '42':
-            throw 'Kovan testnet is not available. Try ropsten testnet.';
+            throw 'Kovan testnet is not available. Try ruderalis testnet.';
             networkName = 'Kovan Testnet';
             break;
           default:
-            throw 'Uknown testnet. Try ropsten testnet.';
+            throw 'Uknown testnet. Try ruderalis testnet.';
             networkName = 'Unknown';
         }
 
@@ -198,8 +198,8 @@ export default function Ambrpay(account, web3) {
             transferOut = false;
           }
 
-          if (subscriptionPlan.acceptedCryptoCurrencies.Ethereum.price > 0) {
-            return subscriptionPlan.acceptedCryptoCurrencies.Ethereum.price;
+          if (subscriptionPlan.acceptedCryptoCurrencies.Fourtwentycoin.price > 0) {
+            return subscriptionPlan.acceptedCryptoCurrencies.Fourtwentycoin.price;
           } else {
             if (data.amount) {
               if (
@@ -211,9 +211,9 @@ export default function Ambrpay(account, web3) {
 
               customPrice = data.amount;
 
-              if (subscriptionPlan.currencyCode == 'ETH') {
+              if (subscriptionPlan.currencyCode == 'FOURTWENTY') {
                 if (data.amount < 0.01) {
-                  throw 'the minimum amount is 0.01 ETH';
+                  throw 'the minimum amount is 0.01 FOURTWENTY';
                 }
               } else {
                 if (customPrice < 1) {
@@ -227,7 +227,7 @@ export default function Ambrpay(account, web3) {
                 return ambrpay
                   .getExchangePrice(
                     subscriptionPlan.currencyCode,
-                    'ETH',
+                    'FOURTWENTY',
                     customPrice
                   )
                   .then(price => {
@@ -259,7 +259,7 @@ export default function Ambrpay(account, web3) {
             (1 + subscriptionPlan.priceLimitPercentage / 100);
 
           return new Promise(function (resolve, reject) {
-            var instance = new _web3.eth.Contract(
+            var instance = new _web3.fourtwenty.Contract(
               ambrpay.ABI.abi,
               ambrpay.contractAddress
             );
@@ -267,16 +267,16 @@ export default function Ambrpay(account, web3) {
               .createSubscriptionWithTransfer(
                 receiverWallet,
                 subscriptionPlan.daysInterval,
-                _web3.utils.toWei(subscriptionPriceLimit.toString(), 'ether'),
+                _web3.utils.toWei(subscriptionPriceLimit.toString(), '420coin'),
                 transferOut,
-                _web3.utils.toWei(subscriptionFeeAmount.toString(), 'ether')
+                _web3.utils.toWei(subscriptionFeeAmount.toString(), '420coin')
               )
               .send({
                 value: _web3.utils.toWei(
                   subscriptionTotalAmount.toString(),
-                  'ether'
+                  '420coin'
                 ),
-                gas: 500000,
+                smoke: 500000,
                 from: senderWallet
               })
               .then(res => {
@@ -296,7 +296,7 @@ export default function Ambrpay(account, web3) {
             customerEmail: data.customerEmail,
             customerDescription: data.customerDescription,
             transactionHash: txHash.transactionHash,
-            subscriptionCurrency: 'ETH',
+            subscriptionCurrency: 'FOURTWENTY',
             subscriptionPrice: subscriptionAmount,
             customPrice: customPrice,
             interval: data.interval,
@@ -375,7 +375,7 @@ export default function Ambrpay(account, web3) {
     },
     getMetaMaskAccount: function () {
       return new Promise(function (resolve, reject) {
-        return resolve(ethAddress);
+        return resolve(fourtwentyAddress);
       });
     },
     getSubscriptionFunds: function () {
@@ -389,7 +389,7 @@ export default function Ambrpay(account, web3) {
             throw 'Error retrieving your metamask wallet address. Make sure metamask is unlocked';
           }
           return new Promise(function (resolve, reject) {
-            var instance = new _web3.eth.Contract(
+            var instance = new _web3.fourtwenty.Contract(
               ambrpay.ABI.abi,
               ambrpay.contractAddress
             );
@@ -429,9 +429,9 @@ export default function Ambrpay(account, web3) {
     getMetaMaskBalance: function () {
       return new Promise(function (resolve, reject) {
         return ambrpay.getMetaMaskAccount().then(address => {
-          return _web3.eth.getBalance(address, function (e, o) {
+          return _web3.fourtwenty.getBalance(address, function (e, o) {
             if (e) return reject(e);
-            var value = _web3.utils.fromWei(o, 'ether');
+            var value = _web3.utils.fromWei(o, '420coin');
             value = web3.utils.toDecimal(value);
             return resolve(value);
           });
@@ -440,12 +440,12 @@ export default function Ambrpay(account, web3) {
     },
     unsubscribe: function (pos, contractAddress) {
       return new Promise(function (resolve, reject) {
-        var instance = new _web3.eth.Contract(ambrpay.ABI.abi, contractAddress);
+        var instance = new _web3.fourtwenty.Contract(ambrpay.ABI.abi, contractAddress);
 
         return ambrpay.getMetaMaskAccount().then(address => {
           return instance.methods
             .deactivateSubscription(pos)
-            .send({ gas: 500000, from: address })
+            .send({ smoke: 500000, from: address })
             .then(res => {
               resolve(res);
             })
@@ -458,7 +458,7 @@ export default function Ambrpay(account, web3) {
     addFunds: function (amount) {
       return new Promise(function (resolve, reject) {
         return ambrpay.getMetaMaskAccount().then(address => {
-          var instance = new _web3.eth.Contract(
+          var instance = new _web3.fourtwenty.Contract(
             ambrpay.ABI.abi,
             ambrpay.contractAddress
           );
@@ -467,7 +467,7 @@ export default function Ambrpay(account, web3) {
             .addFunds(address)
             .send({
               value: _web3.utils.toWei(amount),
-              gas: 500000,
+              smoke: 500000,
               from: address
             })
             .then(res => {
@@ -482,14 +482,14 @@ export default function Ambrpay(account, web3) {
     withdrawFunds: function (amount) {
       return new Promise(function (resolve, reject) {
         return ambrpay.getMetaMaskAccount().then(address => {
-          var instance = new _web3.eth.Contract(
+          var instance = new _web3.fourtwenty.Contract(
             ambrpay.ABI.abi,
             ambrpay.contractAddress
           );
 
           return instance.methods
             .withdrawFunds(_web3.utils.toWei(amount))
-            .send({ gas: 500000, from: address })
+            .send({ smoke: 500000, from: address })
             .then(res => {
               return resolve(res);
             })

@@ -48,7 +48,7 @@
 import { WalletInterface } from '@/wallets';
 import { PRIV_KEY as privKeyType } from '@/wallets/bip44/walletTypes';
 import { mapState, mapActions } from 'vuex';
-import { isHexString } from 'ethereumjs-util';
+import { isHexString } from 'fourtwentyjs-util';
 import WarningMessage from '@/components/WarningMessage';
 import CustomerSupport from '@/components/CustomerSupport';
 import StandardButton from '@/components/Buttons/StandardButton';

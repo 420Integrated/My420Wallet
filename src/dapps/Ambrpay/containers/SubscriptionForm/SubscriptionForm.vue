@@ -17,10 +17,10 @@
                 <p>
                   <img
                     class="currency-icon"
-                    src="@/assets/images/currency/eth.svg"
+                    src="@/assets/images/currency/fourtwenty.svg"
                   />
-                  <span class="token-txt">{{ $t('common.currency.eth') }}</span
-                  >-{{ $t('common.currency.ethereum') }}
+                  <span class="token-txt">{{ $t('common.currency.fourtwenty') }}</span
+                  >-{{ $t('common.currency.fourtwentycoin') }}
                 </p>
               </div>
             </b-col>
@@ -133,7 +133,7 @@ export default {
       const value = new BigNumber(newVal);
       const accountBalance = this.web3.utils.fromWei(
         new BigNumber(this.account.balance).toFixed(),
-        'ether'
+        '420coin'
       );
       const automationFee = new BigNumber(value.times(0.1));
       const totalVal = value.plus(automationFee);
@@ -182,7 +182,7 @@ export default {
       if (this.account) {
         this.sendAmount = this.web3.utils.fromWei(
           new BigNumber(this.account.balance).toFixed(),
-          'ether'
+          '420coin'
         );
       }
     },

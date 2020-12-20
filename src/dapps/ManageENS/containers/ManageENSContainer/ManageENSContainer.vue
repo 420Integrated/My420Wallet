@@ -226,7 +226,7 @@
           <h4>
             {{
               $t('ens.release-deed-confirmation', {
-                deedValueEth: deedValueEth,
+                deedValueFourtwenty: deedValueFourtwenty,
                 network: network.type.name
               })
             }}
@@ -316,7 +316,7 @@
     <interface-bottom-text
       :link-text="$t('common.help-center')"
       :question="$t('common.have-issues')"
-      link="https://kb.myetherwallet.com"
+      link="https://kb.my420wallet.420integrated.com"
     />
   </div>
 </template>
@@ -436,7 +436,7 @@ export default {
       multiCoinSupport: false,
       isAddress: isAddress,
       currencyInputs: newCoinsCopy,
-      selectedCurrency: 'ETH',
+      selectedCurrency: 'FOURTWENTY',
       selectedText: 'Email',
       hasError: false,
       txtRecordInputs: newtxtRecords,
@@ -449,13 +449,13 @@ export default {
     validIpfs() {
       return isIpfs.multihash(this.localContentHash);
     },
-    deedValueEth() {
-      return utils.fromWei(this.deedValue, 'ether');
+    deedValueFourtwenty() {
+      return utils.fromWei(this.deedValue, '420coin');
     },
     isValidAddresses() {
       for (const type in this.currencyInputs) {
         if (
-          this.currencyInputs[type].id === this.currencyInputs.ETH.id &&
+          this.currencyInputs[type].id === this.currencyInputs.FOURTWENTY.id &&
           this.currencyInputs[type].value === ''
         )
           return false;
@@ -539,7 +539,7 @@ export default {
       input.click();
     },
     isInvalidAddress(type) {
-      if (type.id === this.supportedCoins.ETH.id && type.value === '')
+      if (type.id === this.supportedCoins.FOURTWENTY.id && type.value === '')
         return true;
       return type.value !== '' && !type.validator.validate(type.value);
     },

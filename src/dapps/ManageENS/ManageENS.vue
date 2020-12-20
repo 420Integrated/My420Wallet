@@ -99,8 +99,8 @@ import FifsRegistrarAbi from './ABI/fifsRegistrarAbi.js';
 import ResolverAbi from './ABI/resolverAbi.js';
 import OldEnsAbi from './ABI/oldEnsAbi.js';
 import OldDeedAbi from './ABI/oldDeedAbi.js';
-import * as unit from 'ethjs-unit';
-import * as nameHashPckg from 'eth-ens-namehash';
+import * as unit from 'fourtwentyjs-unit';
+import * as nameHashPckg from 'fourtwenty-ens-namehash';
 import normalise from '@/helpers/normalise';
 import { mapState } from 'vuex';
 import { Toast } from '@/helpers';
@@ -169,7 +169,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('main', ['web3', 'network', 'account', 'gasPrice', 'ens']),
+    ...mapState('main', ['web3', 'network', 'account', 'smokePrice', 'ens']),
     registrarTLD() {
       if (!this.network.type || !this.network.type.ens) {
         return '';
@@ -235,10 +235,10 @@ export default {
   },
   methods: {
     async fetchUsd() {
-      const url = 'https://cryptorates.mewapi.io/ticker?filter=ETH';
+      const url = 'https://cryptorates.mewapi.io/ticker?filter=FOURTWENTY';
       const fetchValues = await fetch(url);
       const values = await fetchValues.json();
-      this.usd = values.data.ETH.quotes.USD.price;
+      this.usd = values.data.FOURTWENTY.quotes.USD.price;
     },
     async setup() {
       this.isPermanentLive = true;
@@ -292,18 +292,18 @@ export default {
         this.web3.utils.toChecksumAddress(this.account.address);
     },
     async getController(name) {
-      const nameHash = nameHashPckg.hash(`${name}.eth`);
+      const nameHash = nameHashPckg.hash(`${name}.fourtwenty`);
       const owner = await this.ensRegistryContract.methods
         .owner(nameHash)
         .call();
       return owner;
     },
     async checkDeed() {
-      const contract = new this.web3.eth.Contract(OldEnsAbi, OLD_ENS_ADDRESS);
+      const contract = new this.web3.fourtwenty.Contract(OldEnsAbi, OLD_ENS_ADDRESS);
       const entries = await contract.methods.entries(this.labelHash).call();
       if (entries[1] !== '0x0000000000000000000000000000000000000000') {
         this.hasDeed = true;
-        const deedContract = new this.web3.eth.Contract(OldDeedAbi, entries[1]);
+        const deedContract = new this.web3.fourtwenty.Contract(OldDeedAbi, entries[1]);
         const owner = await deedContract.methods.owner().call();
         this.isDeedOwner =
           this.web3.utils.toChecksumAddress(owner) ===
@@ -354,7 +354,7 @@ export default {
             data: data,
             value: withFivePercent
           };
-          this.web3.eth
+          this.web3.fourtwenty
             .sendTransaction(txObj)
             .then(() => {
               Toast.responseHandler(
@@ -374,14 +374,14 @@ export default {
     },
     async releaseDeed() {
       if (this.hasDeed && this.isDeedOwner) {
-        const contract = new this.web3.eth.Contract(OldEnsAbi, OLD_ENS_ADDRESS);
+        const contract = new this.web3.fourtwenty.Contract(OldEnsAbi, OLD_ENS_ADDRESS);
         const obj = {
           from: this.account.address,
           to: OLD_ENS_ADDRESS,
           data: contract.methods.releaseDeed(this.labelHash).encodeABI(),
           value: 0
         };
-        this.web3.eth.sendTransaction(obj).catch(err => {
+        this.web3.fourtwenty.sendTransaction(obj).catch(err => {
           Toast.responseHandler(err, Toast.ERROR);
         });
       } else {
@@ -392,12 +392,12 @@ export default {
       const web3 = this.web3;
       const tld = this.registrarTLD;
       this.registrarAddress = await this.getRegistrarAddress(tld);
-      this.ensRegistryContract = new web3.eth.Contract(
+      this.ensRegistryContract = new web3.fourtwenty.Contract(
         RegistryAbi,
         this.network.type.ens.registry
       );
       if (this.registrarType === REGISTRAR_TYPES.FIFS) {
-        this.registrarContract = new web3.eth.Contract(
+        this.registrarContract = new web3.fourtwenty.Contract(
           FifsRegistrarAbi,
           this.registrarAddress
         );
@@ -406,11 +406,11 @@ export default {
           this.contractControllerAddress = await this.ens
             .resolver(this.registrarTLD, ResolverAbi)
             .interfaceImplementer(permanentRegistrar.INTERFACE_CONTROLLER);
-          this.registrarControllerContract = new this.web3.eth.Contract(
+          this.registrarControllerContract = new this.web3.fourtwenty.Contract(
             PermanentRegistrarControllerAbi,
             this.contractControllerAddress
           );
-          this.registrarContract = new this.web3.eth.Contract(
+          this.registrarContract = new this.web3.fourtwenty.Contract(
             baseRegistrarAbi,
             this.registrarAddress
           );
@@ -436,13 +436,13 @@ export default {
       if (onlyGenerate) {
         return setControllerTx;
       }
-      this.web3.eth.sendTransaction(setControllerTx).catch(err => {
+      this.web3.fourtwenty.sendTransaction(setControllerTx).catch(err => {
         Toast.responseHandler(err, Toast.ERROR);
       });
     },
     transferDomain(toAddress) {
       if (this.registrarType === REGISTRAR_TYPES.FIFS || this.isSubDomain) {
-        this.web3.eth
+        this.web3.fourtwenty
           .sendTransaction({
             from: this.account.address,
             to: this.network.type.ens.registry,
@@ -488,7 +488,7 @@ export default {
         currentResolverAddress.toLowerCase()
       )
         return false;
-      const publicResolverContract = new web3.eth.Contract(
+      const publicResolverContract = new web3.fourtwenty.Contract(
         ResolverAbi,
         publicResolverAddress
       );
@@ -499,7 +499,7 @@ export default {
           .setResolver(this.nameHash, publicResolverAddress)
           .encodeABI(),
         value: 0,
-        gasPrice: new BigNumber(unit.toWei(this.gasPrice, 'gwei')).toFixed()
+        smokePrice: new BigNumber(unit.toWei(this.smokePrice, 'maher')).toFixed()
       };
       const multiCallRecords = [];
       for (const coin in this.supportedCoins) {
@@ -531,7 +531,7 @@ export default {
           .multicall(multiCallRecords)
           .encodeABI(),
         value: 0,
-        gasPrice: new BigNumber(unit.toWei(this.gasPrice, 'gwei')).toFixed()
+        smokePrice: new BigNumber(unit.toWei(this.smokePrice, 'maher')).toFixed()
       };
       web3.mew.sendBatchTransactions(
         [migrateRecordsTx, setResolverTx].filter(Boolean)
@@ -547,7 +547,7 @@ export default {
       const web3 = this.web3;
       const address = this.account.address;
       const publicResolverAddress = this.publicResolverAddress;
-      const publicResolverContract = new web3.eth.Contract(
+      const publicResolverContract = new web3.fourtwenty.Contract(
         ResolverAbi,
         publicResolverAddress
       );
@@ -561,10 +561,10 @@ export default {
         to: publicResolverAddress,
         data: publicResolverContract.methods.multicall(arr).encodeABI(),
         value: 0,
-        gasPrice: new BigNumber(unit.toWei(this.gasPrice, 'gwei')).toFixed(),
-        gas: 100000
+        smokePrice: new BigNumber(unit.toWei(this.smokePrice, 'maher')).toFixed(),
+        smoke: 100000
       };
-      web3.eth.sendTransaction(setAddrTx).catch(err => {
+      web3.fourtwenty.sendTransaction(setAddrTx).catch(err => {
         Toast.responseHandler(err, Toast.ERROR);
       });
     },
@@ -587,7 +587,7 @@ export default {
           .setResolver(this.nameHash, this.publicResolverAddress)
           .encodeABI(),
         value: 0,
-        gasPrice: new BigNumber(unit.toWei(this.gasPrice, 'gwei')).toFixed()
+        smokePrice: new BigNumber(unit.toWei(this.smokePrice, 'maher')).toFixed()
       };
       web3.mew
         .sendBatchTransactions([registerTx, setResolverTx].filter(Boolean))
@@ -610,7 +610,7 @@ export default {
       const web3 = this.web3;
       this.labelHash = web3.utils.sha3(this.parsedHostName);
       this.nameHash = nameHashPckg.hash(this.parsedDomainName);
-      const resolver = await this.ens.resolver('resolver.eth');
+      const resolver = await this.ens.resolver('resolver.fourtwenty');
       this.publicResolverAddress = await resolver.addr();
 
       if (this.parsedTld !== '' && isSupported === undefined) {
@@ -899,7 +899,7 @@ export default {
       const currentResolverAddress = await this.ensRegistryContract.methods
         .resolver(this.nameHash)
         .call();
-      const resolverContract = new this.web3.eth.Contract(
+      const resolverContract = new this.web3.fourtwenty.Contract(
         ResolverAbi,
         currentResolverAddress
       );
@@ -914,7 +914,7 @@ export default {
           value: 0
         };
 
-        this.web3.eth.sendTransaction(txObj).then(() => {
+        this.web3.fourtwenty.sendTransaction(txObj).then(() => {
           this.contentHash = ipfsHash;
           this.ipfsProcessing = false;
         });
@@ -973,7 +973,7 @@ export default {
         Toast.responseHandler(e, false);
       }
       try {
-        const publicResolverContract = new this.web3.eth.Contract(
+        const publicResolverContract = new this.web3.fourtwenty.Contract(
           ResolverAbi,
           this.publicResolverAddress
         );
@@ -987,7 +987,7 @@ export default {
         const currentResolverAddress = await this.ensRegistryContract.methods
           .resolver(this.nameHash)
           .call();
-        const resolverContract = new this.web3.eth.Contract(
+        const resolverContract = new this.web3.fourtwenty.Contract(
           ResolverAbi,
           currentResolverAddress
         );
@@ -1018,12 +1018,12 @@ export default {
             });
           });
         } else {
-          this.supportedCoins.ETH.value = await this.ens
+          this.supportedCoins.FOURTWENTY.value = await this.ens
             .resolver(this.parsedDomainName)
             .addr();
         }
       } catch (e) {
-        this.supportedCoins.ETH.value = '0x';
+        this.supportedCoins.FOURTWENTY.value = '0x';
       }
       this.owner = owner;
       if (renew) {
@@ -1094,10 +1094,10 @@ export default {
         from: address,
         to: resolverAddr,
         data: contract.methods.multicall(multicalls).encodeABI(),
-        gasPrice: new BigNumber(unit.toWei(this.gasPrice, 'gwei')).toFixed(),
+        smokePrice: new BigNumber(unit.toWei(this.smokePrice, 'maher')).toFixed(),
         value: 0
       };
-      this.web3.eth.sendTransaction(tx).catch(err => {
+      this.web3.fourtwenty.sendTransaction(tx).catch(err => {
         Toast.responseHandler(err, Toast.ERROR);
       });
     },

@@ -15,12 +15,12 @@
   "tx-fee": "Transaction Fee",
   "tx-hash": "Transaction Hash",
   "max-tx-fee": "Max Transaction Fee",
-  "cost-eth-convert": "Cost {txFeeEth} ETH = ${convert}",
+  "cost-fourtwenty-convert": "Cost {txFeeFourtwenty} FOURTWENTY = ${convert}",
   "add-data": "Add Data",
   "ph-add-data": "Add Data (e.g. 0x7834f874g298hf298h234f)",
   "nonce": "Nonce",
   "data": "Data",
-  "data-gas": "Data & Gas Limit",
+  "data-smoke": "Data & Smoke Limit",
   "dep-amount": "Deposit Amount",
   "button-entire": "Entire Balance",
   "transaction-receipt": "Transaction Receipt",
@@ -43,7 +43,7 @@
   "success": {
     "title": "Success",
     "sub-title": "Transaction sent!",
-    "button-check-status": "Check Status on Etherscan.io",
+    "button-check-status": "Check Status on fourtwentyscan.420integrated.com",
     "button-check-explorer": "Check Status on {explorrerName}"
   },
   "invalid-data": "Provided data is invalid or empty!",

@@ -31,19 +31,19 @@ class RSKUtils {
 }
 const rskUtils = new RSKUtils(RSK.chainID);
 export default {
-  ETH: {
+  FOURTWENTY: {
     id: 60,
     symbol: 'ETH',
-    name: 'Ethereum',
-    validator: new MValidator('Ethereum'),
+    name: '420coin',
+    validator: new MValidator('420coin'),
     encode: formatsByName['ETH'].encoder,
     decode: formatsByName['ETH'].decoder
   },
   ETC: {
     id: 61,
     symbol: 'ETC',
-    name: 'Ethereum Classic',
-    validator: new MValidator('EthereumClassic'),
+    name: '420coin Classic',
+    validator: new MValidator('420coinClassic'),
     encode: formatsByName['ETC'].encoder,
     decode: formatsByName['ETC'].decoder
   },

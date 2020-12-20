@@ -92,13 +92,13 @@
             :tokens-with-balance="tokensWithBalance"
             :get-balance="getBalance"
             :tokens="tokens"
-            :highest-gas="highestGas"
+            :highest-smoke="highestSmoke"
             :nonce="nonce"
             :value="value"
             :data="data"
             :to="to"
-            :gaslimit="gaslimit"
-            :gas="gas"
+            :smokelimit="smokelimit"
+            :smoke="smoke"
             :tokensymbol="tokensymbol"
             :is-prefilled="prefilled"
             :clear-prefilled="clearPrefilled"
@@ -125,7 +125,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import ENS from 'ethereum-ens';
+import ENS from 'fourtwenty-ens';
 import TokenOverview from '@/dapps/Aave/components/TokenOverview';
 import WalletPasswordModal from '@/components/WalletPasswordModal';
 import EnterPinNumberModal from '@/components/EnterPinNumberModal';
@@ -151,12 +151,12 @@ import { toChecksumAddress } from '@/helpers/addressUtils';
 import * as networkTypes from '@/networks/types';
 import { BigNumber } from 'bignumber.js';
 import store from 'store';
-import TokenBalance from '@myetherwallet/eth-token-balance';
+import TokenBalance from '@my420wallet/fourtwenty-token-balance';
 import sortByBalance from '@/helpers/sortByBalance.js';
 import AddressQrcodeModal from '@/components/AddressQrcodeModal';
 import web3Utils from 'web3-utils';
 import { isAddress } from '@/helpers/addressUtils';
-import { ETH } from '@/networks/types';
+import { FOURTWENTY } from '@/networks/types';
 import {
   LedgerWallet,
   TrezorWallet,
@@ -178,10 +178,10 @@ import {
   BCVAULT as BC_VAULT
 } from '@/wallets/bip44/walletTypes';
 import {
-  getGasBasedOnType,
+  getSmokeBasedOnType,
   getOther,
   getEconomy
-} from '@/helpers/gasMultiplier.js';
+} from '@/helpers/smokeMultiplier.js';
 import ExpiryAbi from './expiryAbi.js';
 
 const ENS_TOKEN_ADDRESS = '0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85';
@@ -221,7 +221,7 @@ export default {
       pollBlock: () => {},
       pollNetwork: () => {},
       pollddress: () => {},
-      highestGas: '0',
+      highestSmoke: '0',
       alert: {
         show: false,
         msg: ''
@@ -240,8 +240,8 @@ export default {
       value: '0',
       data: '',
       to: '',
-      gaslimit: '21000',
-      gas: 0,
+      smokelimit: '21000',
+      smoke: 0,
       tokensymbol: '',
       prefilled: false,
       bcVaultWallets: []
@@ -296,8 +296,8 @@ export default {
       'setENS',
       'decryptWallet',
       'toggleSideMenu',
-      'setGasPrice',
-      'setEthGasPrice'
+      'setSmokePrice',
+      'setFourtwentySmokePrice'
     ]),
     checkPrefilled() {
       const _self = this;
@@ -308,8 +308,8 @@ export default {
           value,
           data,
           to,
-          gaslimit,
-          gas,
+          smokelimit,
+          smoke,
           tokensymbol,
           network
         } = _self.linkQuery;
@@ -319,9 +319,9 @@ export default {
             : '0';
         _self.data = data && web3Utils.isHexStrict(data) ? data : '';
         _self.to = to && isAddress(to) ? to : '';
-        _self.gaslimit =
-          gaslimit && new BigNumber(gaslimit).gt(0) ? gaslimit : '21000';
-        _self.gas = gas && new BigNumber(gas).gt(0) ? new BigNumber(gas) : 0;
+        _self.smokelimit =
+          smokelimit && new BigNumber(smokelimit).gt(0) ? smokelimit : '21000';
+        _self.smoke = smoke && new BigNumber(smoke).gt(0) ? new BigNumber(smoke) : 0;
         _self.tokensymbol = tokensymbol ? tokensymbol : '';
         if (network) {
           const foundNetwork = _self.Networks[network.toUpperCase()];
@@ -339,8 +339,8 @@ export default {
       this.value = '0';
       this.data = '';
       this.to = '';
-      this.gaslimit = '21000';
-      this.gas = 0;
+      this.smokelimit = '21000';
+      this.smoke = 0;
       this.tokensymbol = '';
       this.prefilled = false;
     },
@@ -475,7 +475,7 @@ export default {
         const hashes = names.map(item => {
           return item.id;
         });
-        const contract = new this.web3.eth.Contract(
+        const contract = new this.web3.fourtwenty.Contract(
           ExpiryAbi,
           EXPIRY_CHECK_CONTRACT
         );
@@ -522,7 +522,7 @@ export default {
         const tb = new TokenBalance(this.web3.currentProvider);
         try {
           tokens = await tb.getBalance(this.account.address, true, true, true, {
-            gas: '0x11e1a300'
+            smoke: '0x11e1a300'
           });
           tokens = tokens.map(token => {
             token.address = token.addr;
@@ -570,7 +570,7 @@ export default {
         nonce: '0x00',
         timestamp: 0
       });
-      const fetchedNonce = await this.web3.eth
+      const fetchedNonce = await this.web3.fourtwenty
         .getTransactionCount(this.account.address)
         .catch(e => {
           Toast.responseHandler(e, Toast.ERROR);
@@ -589,12 +589,12 @@ export default {
             outputs: [{ name: 'out', type: 'uint256' }]
           }
         ];
-        const contract = new web3.eth.Contract(contractAbi);
+        const contract = new web3.fourtwenty.Contract(contractAbi);
         if (this.account.address && this.account.address !== '') {
           const data = contract.methods
             .balanceOf(this.account.address)
             .encodeABI();
-          const balance = await web3.eth
+          const balance = await web3.fourtwenty
             .call({
               to: token.address,
               data: data
@@ -713,7 +713,7 @@ export default {
       }
     },
     getBlock() {
-      this.web3.eth
+      this.web3.fourtwenty
         .getBlockNumber()
         .then(res => {
           this.blockNumber = res;
@@ -726,10 +726,10 @@ export default {
     getBalance() {
       const web3 = this.web3;
       if (this.address) {
-        web3.eth
+        web3.fourtwenty
           .getBalance(this.address.toLowerCase())
           .then(res => {
-            this.balance = web3.utils.fromWei(res, 'ether');
+            this.balance = web3.utils.fromWei(res, '420coin');
             this.setAccountBalance(res);
           })
           .catch(e => {
@@ -740,7 +740,7 @@ export default {
     checkWeb3WalletAddrChange() {
       const web3 = this.web3;
       try {
-        window.ethereum.on('accountsChanged', account => {
+        window.fourtwentycoin.on('accountsChanged', account => {
           if (account.length > 1) {
             const wallet = new Web3Wallet(account[0]);
             this.decryptWallet([wallet, web3]);
@@ -764,10 +764,10 @@ export default {
       }
     },
     matchWeb3WalletNetwork() {
-      this.web3.eth.net.getId().then(id => {
+      this.web3.fourtwenty.net.getId().then(id => {
         this.checkAndSetNetwork(id);
       });
-      window.ethereum.on('networkChanged', netId => {
+      window.fourtwentycoin.on('networkChanged', netId => {
         this.setupOnlineEnvironment();
         this.checkAndSetNetwork(netId);
       });
@@ -783,7 +783,7 @@ export default {
       if (this.online) {
         if (this.account.address !== null) {
           if (this.account.identifier === WEB3_TYPE) {
-            if (window.ethereum.isMetaMask || window.ethereum.isMew) {
+            if (window.fourtwentycoin.isMetaMask || window.fourtwentycoin.isMew) {
               this.checkWeb3WalletAddrChange();
               this.matchWeb3WalletNetwork();
             } else {
@@ -792,12 +792,12 @@ export default {
             }
           }
           this.callSetENS();
-          if (this.network.type.name === ETH.name) this.fetchNames();
+          if (this.network.type.name === FOURTWENTY.name) this.fetchNames();
           this.getBlock();
           this.getBalance();
           this.setTokens();
           this.setNonce();
-          this.getHighestGas();
+          this.getHighestSmoke();
           this.getBlockUpdater().then(_sub => {
             this.pollBlock = _sub;
           });
@@ -809,7 +809,7 @@ export default {
     }),
     async getBlockUpdater() {
       return new Promise(resolve => {
-        let subscription = this.web3.eth
+        let subscription = this.web3.fourtwenty
           .subscribe('newBlockHeaders', err => {
             if (err) {
               subscription = setInterval(this.getBlock, 14000);
@@ -821,24 +821,24 @@ export default {
           });
       });
     },
-    getHighestGas() {
-      const gasType = store.get('gasPriceType') || 'economy';
-      const getCustomGas = getOther();
-      this.web3.eth
-        .getGasPrice()
+    getHighestSmoke() {
+      const smokeType = store.get('smokePriceType') || 'economy';
+      const getCustomSmoke = getOther();
+      this.web3.fourtwenty
+        .getSmokePrice()
         .then(res => {
-          const parsedGas = getEconomy(
-            this.web3.utils.fromWei(res, 'gwei')
+          const parsedSmoke = getEconomy(
+            this.web3.utils.fromWei(res, 'maher')
           ).toString();
-          if (gasType === 'economy') {
-            this.setGasPrice(parsedGas);
-          } else if (gasType === 'other' && getCustomGas) {
-            this.setGasPrice(getCustomGas);
+          if (smokeType === 'economy') {
+            this.setSmokePrice(parsedSmoke);
+          } else if (smokeType === 'other' && getCustomSmoke) {
+            this.setSmokePrice(getCustomSmoke);
           } else {
-            this.setGasPrice(getGasBasedOnType(parsedGas));
+            this.setSmokePrice(getSmokeBasedOnType(parsedSmoke));
           }
-          this.highestGas = parsedGas;
-          this.setEthGasPrice(this.highestGas);
+          this.highestSmoke = parsedSmoke;
+          this.setFourtwentySmokePrice(this.highestSmoke);
         })
         .catch(e => {
           Toast.responseHandler(e, Toast.ERROR);
@@ -862,19 +862,19 @@ export default {
       clearInterval(this.pollAddress);
     },
     web3WalletPollNetwork() {
-      if (!window.web3.eth) {
+      if (!window.web3.fourtwenty) {
         Toast.responseHandler(
           new Error(this.$t('interface.web3-not-found')),
           Toast.ERROR
         );
       }
       if (
-        !window.web3.eth.net ||
-        typeof window.web3.eth.net.getId !== 'function'
+        !window.web3.fourtwenty.net ||
+        typeof window.web3.fourtwenty.net.getId !== 'function'
       )
         return;
       this.pollNetwork = setInterval(() => {
-        window.web3.eth.net
+        window.web3.fourtwenty.net
           .getId()
           .then(id => {
             if (this.network.type.chainID.toString() !== id) {
@@ -894,7 +894,7 @@ export default {
     },
     web3WalletPollAddress() {
       this.pollAddress = setInterval(() => {
-        if (!window.web3.eth) {
+        if (!window.web3.fourtwenty) {
           Toast.responseHandler(
             new Error(this.$t('interface.web3-not-found')),
             Toast.ERROR
@@ -902,7 +902,7 @@ export default {
           clearInterval(this.pollAddress);
         }
 
-        window.web3.eth.getAccounts((err, accounts) => {
+        window.web3.fourtwenty.getAccounts((err, accounts) => {
           if (err) {
             Toast.responseHandler(err, false);
             clearInterval(this.pollAddress);

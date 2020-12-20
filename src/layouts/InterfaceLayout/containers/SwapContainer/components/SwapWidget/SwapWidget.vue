@@ -105,7 +105,7 @@
             </div>
 
             <div v-show="!isExitToFiat" class="send-form">
-              <div class="the-form gas-amount">
+              <div class="the-form smoke-amount">
                 <drop-down-address-selector
                   :currency="toCurrency"
                   :current-address="currentAddress"
@@ -132,7 +132,7 @@
               v-show="isExitToFiat && fromCurrency !== baseCurrency"
               class="send-form"
             >
-              <div class="the-form gas-amount">
+              <div class="the-form smoke-amount">
                 <drop-down-address-selector
                   :currency="fromCurrency"
                   :current-address="currentAddress"
@@ -152,7 +152,7 @@
             </div>
 
             <div v-show="showRefundAddress" class="send-form">
-              <div class="the-form gas-amount">
+              <div class="the-form smoke-amount">
                 <drop-down-address-selector
                   :currency="fromCurrency"
                   :current-address="currentAddress"
@@ -217,7 +217,7 @@
               <interface-bottom-text
                 :link-text="$t('common.help-center')"
                 :question="$t('common.have-issues')"
-                link="https://kb.myetherwallet.com"
+                link="https://kb.my420wallet.420integrated.com"
               />
             </div>
           </div>
@@ -265,7 +265,7 @@ import {
   MIN_SWAP_AMOUNT,
   ERC20
 } from '@/partners';
-import ethUnit from 'ethjs-unit';
+import fourtwentyUnit from 'fourtwentyjs-unit';
 
 const errorLogger = debug('v5:swapContainer-widget');
 
@@ -294,8 +294,8 @@ export default {
       type: Object,
       default: function () {
         return {
-          symbol: 'ETH',
-          name: 'Ethereum'
+          symbol: 'FOURTWENTY',
+          name: '420coin'
         };
       }
     },
@@ -336,8 +336,8 @@ export default {
       currentAddress: '',
       refundAddress: '',
       exitFromAddress: '',
-      fromCurrency: 'ETH',
-      toCurrency: 'ETH',
+      fromCurrency: 'FOURTWENTY',
+      toCurrency: 'FOURTWENTY',
       displayToValue: 1,
       displayFromValue: 1,
       fromValue: 1,
@@ -355,7 +355,7 @@ export default {
         {
           network: this.$store.state.main.network.type.name,
           web3: this.$store.state.main.web3,
-          gasPrice: this.$store.state.main.gasPrice,
+          smokePrice: this.$store.state.main.smokePrice,
           getRateForUnit: false
         },
         {
@@ -394,8 +394,8 @@ export default {
       loadingError: false,
       switchCurrencyOrder: false,
       bityExitToFiat: false,
-      gasNotice: false,
-      moreEthNeeded: false,
+      smokeNotice: false,
+      moreFourtwentyNeeded: false,
       recalculating: true,
       showWarning: false,
       exitToFiatCallback: () => {},
@@ -410,7 +410,7 @@ export default {
     ...mapState('main', [
       'account',
       'ens',
-      'gasPrice',
+      'smokePrice',
       'web3',
       'network',
       'online'
@@ -582,11 +582,11 @@ export default {
     }
   },
   watch: {
-    ['gasPrice'](value) {
+    ['smokePrice'](value) {
       if (!this.selectedProvider) {
         this.selectedProvider = {};
       }
-      this.swap.updateGasPrice(this.selectedProvider.provider, value);
+      this.swap.updateSmokePrice(this.selectedProvider.provider, value);
     },
     ['this.network.type.name']() {
       this.swap.updateNetwork(this.network.type.name, this.web3);
@@ -646,7 +646,7 @@ export default {
         {
           network: newVal.type.name,
           web3: this.web3,
-          gasPrice: this.gasPrice,
+          smokePrice: this.smokePrice,
           getRateForUnit: false
         },
         { tokensWithBalance: this.tokensWithBalance }
@@ -712,11 +712,11 @@ export default {
     },
     reset() {
       this.lastFeeEstimate = new BigNumber(0);
-      this.gasNotice = false;
+      this.smokeNotice = false;
       this.fromCurrency = 'BTC';
-      this.toCurrency = 'ETH';
+      this.toCurrency = 'FOURTWENTY';
       this.overrideFrom = { name: 'Bitcoin', symbol: 'BTC' };
-      this.overrideTo = { name: 'Ether', symbol: 'ETH' };
+      this.overrideTo = { name: 'Fourtwentycoin', symbol: 'FOURTWENTY' };
       this.fromValue = 1;
       this.overrideAddress = !this.overrideAddress;
       this.providerSelectedName = '';
@@ -818,7 +818,7 @@ export default {
     },
     async getBalance(currency) {
       if (SwapProviders.isToken(currency) && currency !== this.baseCurrency) {
-        const balance = await new this.web3.eth.Contract(
+        const balance = await new this.web3.fourtwenty.Contract(
           ERC20,
           this.swap.getTokenAddress(currency)
         ).methods
@@ -867,8 +867,8 @@ export default {
             this.bestRate,
             this.fromCurrency
           );
-          // this.intermediateGasCheck();
-          this.gasCheck();
+          // this.intermediateSmokeCheck();
+          this.smokeCheck();
           break;
         case 'from':
           this.toValue = this.swap.calculateToValue(
@@ -876,8 +876,8 @@ export default {
             this.bestRate,
             this.toCurrency
           );
-          // this.intermediateGasCheck();
-          this.gasCheck();
+          // this.intermediateSmokeCheck();
+          this.smokeCheck();
           break;
         case `${this.providerNames.simplex}to`:
           this.simplexUpdate = true;
@@ -955,8 +955,8 @@ export default {
           fromValue = this.swap.calculateFromValue(this.toValue, this.bestRate);
           this.toValue = toValue;
           this.fromValue = fromValue;
-          // this.intermediateGasCheck();
-          this.gasCheck();
+          // this.intermediateSmokeCheck();
+          this.smokeCheck();
           break;
       }
 
@@ -1072,75 +1072,75 @@ export default {
         }
       }
     },
-    async checkForEnoughGas(swapDetails) {
-      let ethNeeded = new BigNumber(0);
+    async checkForEnoughSmoke(swapDetails) {
+      let fourtwentyNeeded = new BigNumber(0);
       this.lastFeeEstimate = new BigNumber(0);
-      const gasPrice = new BigNumber(ethUnit.toWei(this.gasPrice, 'gwei'));
+      const smokePrice = new BigNumber(fourtwentyUnit.toWei(this.smokePrice, 'maher'));
       if (
         SwapProviders.isToken(swapDetails.fromCurrency) ||
         SwapProviders.isToken(swapDetails.toCurrency)
       ) {
         if (Array.isArray(swapDetails.dataForInitialization)) {
           for (let i = 0; i < swapDetails.dataForInitialization.length; i++) {
-            if (swapDetails.dataForInitialization[i].gas) {
+            if (swapDetails.dataForInitialization[i].smoke) {
               this.lastFeeEstimate = this.lastFeeEstimate.plus(
-                gasPrice.times(swapDetails.dataForInitialization[i].gas)
+                smokePrice.times(swapDetails.dataForInitialization[i].smoke)
               );
-              ethNeeded = ethNeeded.plus(
+              fourtwentyNeeded = fourtwentyNeeded.plus(
                 new BigNumber(swapDetails.dataForInitialization[i].value)
               );
             } else {
-              const gas = await this.web3.eth.estimateGas(
+              const smoke = await this.web3.fourtwenty.estimateSmoke(
                 swapDetails.dataForInitialization[i]
               );
               this.lastFeeEstimate = this.lastFeeEstimate.plus(
-                gasPrice.times(gas)
+                smokePrice.times(smoke)
               );
-              ethNeeded = ethNeeded.plus(
+              fourtwentyNeeded = fourtwentyNeeded.plus(
                 swapDetails.dataForInitialization[i].value
               );
             }
           }
         }
         const enoughToContinue = new BigNumber(this.account.balance)
-          .minus(ethNeeded.plus(this.lastFeeEstimate))
+          .minus(fourtwentyNeeded.plus(this.lastFeeEstimate))
           .gt(0);
 
-        this.moreEthNeeded = new BigNumber(this.account.balance).lt(
+        this.moreFourtwentyNeeded = new BigNumber(this.account.balance).lt(
           this.lastFeeEstimate
         );
 
-        if (!ethNeeded.gt(0)) {
+        if (!fourtwentyNeeded.gt(0)) {
           this.lastFeeEstimate = new BigNumber(0);
         }
 
         return enoughToContinue;
       }
     },
-    intermediateGasCheck() {
-      if (this.fromCurrency === 'ETH' && this.lastFeeEstimate.gt(0)) {
-        this.gasNotice = new BigNumber(this.account.balance)
+    intermediateSmokeCheck() {
+      if (this.fromCurrency === 'FOURTWENTY' && this.lastFeeEstimate.gt(0)) {
+        this.smokeNotice = new BigNumber(this.account.balance)
           .minus(
             new BigNumber(
-              new BigNumber(ethUnit.toWei(this.fromValue, 'ether'))
+              new BigNumber(fourtwentyUnit.toWei(this.fromValue, '420coin'))
             ).plus(this.lastFeeEstimate)
           )
           .lte(0);
       } else {
-        this.gasNotice = false;
+        this.smokeNotice = false;
       }
     },
-    async gasCheck() {
+    async smokeCheck() {
       try {
         if (
           !SwapProviders.isToken(this.fromCurrency) ||
           !SwapProviders.isToken(this.toCurrency)
         ) {
-          this.gasNotice = false;
+          this.smokeNotice = false;
           return;
         }
         if (!this.selectedProvider.provider) {
-          this.gasNotice = false;
+          this.smokeNotice = false;
           return;
         }
         const providerDetails = this.providerList.find(entry => {
@@ -1164,23 +1164,23 @@ export default {
         if (swapDetails.marketImpact) {
           throw Error('marketImpactAbort');
         }
-        const enoughForGas = await this.checkForEnoughGas(swapDetails);
-        if (!enoughForGas) {
-          throw Error('notEnoughWithGas');
+        const enoughForSmoke = await this.checkForEnoughSmoke(swapDetails);
+        if (!enoughForSmoke) {
+          throw Error('notEnoughWithSmoke');
         }
-        this.gasNotice = false;
+        this.smokeNotice = false;
       } catch (e) {
         if (e.message === 'marketImpactAbort') {
           this.finalizingSwap = false;
           // Toast.responseHandler('liquidity-too-low', 1, true);
           return;
-        } else if (e.message === 'notEnoughWithGas') {
+        } else if (e.message === 'notEnoughWithSmoke') {
           this.finalizingSwap = false;
-          this.gasNotice = true;
-          // Toast.responseHandler('not-enough-eth-gas', 1, true);
+          this.smokeNotice = true;
+          // Toast.responseHandler('not-enough-fourtwenty-smoke', 1, true);
           return;
         }
-        this.gasNotice = false;
+        this.smokeNotice = false;
       }
     },
     async swapConfirmationModalOpen() {
@@ -1208,9 +1208,9 @@ export default {
           if (this.swapDetails.marketImpact) {
             throw Error('marketImpactAbort');
           }
-          const enoughForGas = await this.checkForEnoughGas(this.swapDetails);
-          if (!enoughForGas) {
-            throw Error('notEnoughWithGas');
+          const enoughForSmoke = await this.checkForEnoughSmoke(this.swapDetails);
+          if (!enoughForSmoke) {
+            throw Error('notEnoughWithSmoke');
           }
           this.finalizingSwap = false;
 
@@ -1253,10 +1253,10 @@ export default {
           this.finalizingSwap = false;
           Toast.responseHandler('liquidity-too-low', 1, true);
           return;
-        } else if (e.message === 'notEnoughWithGas') {
+        } else if (e.message === 'notEnoughWithSmoke') {
           this.finalizingSwap = false;
-          this.gasNotice = true;
-          Toast.responseHandler('not-enough-eth-gas', 1, true);
+          this.smokeNotice = true;
+          Toast.responseHandler('not-enough-fourtwenty-smoke', 1, true);
           return;
         }
         //abort (empty response from provider or failure to finalize details)

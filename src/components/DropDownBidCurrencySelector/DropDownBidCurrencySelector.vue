@@ -10,7 +10,7 @@
         class="dropdown-input-box"
         @click="openDropdownFocustToSearchInput"
       >
-        <div class="selected-coin">{{ $t('common.currency.eth') }}</div>
+        <div class="selected-coin">{{ $t('common.currency.fourtwenty') }}</div>
         <div class="dropdown-open-button">
           <i
             v-if="!dropdownOpen"
@@ -25,7 +25,7 @@
         class="dropdown-list-box"
       >
         <ul>
-          <li>{{ $t('common.currency.eth') }}</li>
+          <li>{{ $t('common.currency.fourtwenty') }}</li>
           <li>{{ $t('common.currency.btc') }}</li>
         </ul>
       </div>

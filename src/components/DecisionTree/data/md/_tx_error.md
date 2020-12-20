@@ -4,19 +4,19 @@
 
 1. ‘Invalid Address’
 
-   * MEW only supports Ethereum-related crypto transactions.
-   * If you’re trying to send a token that has launched mainnet, you will likely need to send this crypto to an Ethereum address at an exchange like Binance to make the swap to mainnet.
+   * MEW only supports 420coin-related crypto transactions.
+   * If you’re trying to send a token that has launched mainnet, you will likely need to send this crypto to an 420coin address at an exchange like Binance to make the swap to mainnet.
 
 2. ‘Not Checksummed’
 
    * <p>The checksum version of your address is the version that includes both capital and lowercase letters, for accuracy.</p>
      <strong>The address itself is not different.</strong>
-   * You can find this version by searching your address on Etherscan.io.
+   * You can find this version by searching your address on fourtwentyscan.420integrated.com.
 
-3. ‘Out of Gas’ or ‘Insufficient funds’
+3. ‘Out of Smoke’ or ‘Insufficient funds’
 
-   * <p>All transactions on the Ethereum blockchain require ETH for the fuel to make transactions happen.</p>
-     <strong>We recommend having at least .01 ETH to cover this cost.</strong>
+   * <p>All transactions on the 420coin blockchain require 420coin for the fuel to make transactions happen.</p>
+     <strong>We recommend having at least .01 420coin to cover this cost.</strong>
    * None of this fee comes to us, but goes to the remote miners working to keep the blockchain secure and progressing.
 
 4. Unintelligible Error / Other
@@ -28,7 +28,7 @@
 
 #### Contact Form:
 
-* Email us at <mailto:support@myetherwallet.com>
+* Email us at <mailto:support@my420wallet.420integrated.com>
 
 * <p>Include a detailed description of the issue.</p>
   <note>Please include as many details as possible, such as phone / computer model, OS number, version of the app / site you are using, browser version etc.</note>

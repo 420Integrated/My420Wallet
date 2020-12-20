@@ -49,7 +49,7 @@ export default {
   methods: {
     sign() {
       try {
-        this.web3.eth
+        this.web3.fourtwenty
           .sign(this.signature, this.account.address)
           .then(signed => {
             this.sendSigned(signed);

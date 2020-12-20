@@ -1,7 +1,7 @@
 import WalletConnect from '@walletconnect/browser';
 import WalletConnectQRCodeModal from '@walletconnect/qrcode-modal';
 import store from '@/store';
-import { Transaction } from 'ethereumjs-tx';
+import { Transaction } from 'fourtwentyjs-tx';
 import { WALLET_CONNECT as walletConnectType } from '../../bip44/walletTypes';
 import { sanitizeHex, getBufferFromHex } from '../../utils';
 import errorHandler from './errorHandler';
@@ -52,7 +52,7 @@ class WalletConnectWallet {
           .sendTransaction(txJSON)
           .then(hash => {
             prom.eventEmitter.emit('transactionHash', hash);
-            store.state.main.web3.eth.sendTransaction.method._confirmTransaction(
+            store.state.main.web3.fourtwenty.sendTransaction.method._confirmTransaction(
               prom,
               hash,
               { params: [txJSON] }

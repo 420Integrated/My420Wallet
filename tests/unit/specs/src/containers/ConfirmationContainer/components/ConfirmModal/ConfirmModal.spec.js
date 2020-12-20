@@ -19,8 +19,8 @@ describe('ConfirmModal.vue', () => {
   const data = '0x111';
   const from = '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D';
   const to = '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068E';
-  const gas = 10;
-  const gasPrice = 1;
+  const smoke = 10;
+  const smokePrice = 1;
   const nonce = 10;
   const value = 10;
   const isHardwareWallet = false;
@@ -60,8 +60,8 @@ describe('ConfirmModal.vue', () => {
         from,
         to,
         fee,
-        gas,
-        gasPrice,
+        smoke,
+        smokePrice,
         nonce,
         value,
         isHardwareWallet
@@ -74,24 +74,24 @@ describe('ConfirmModal.vue', () => {
     wrapper = null;
   });
 
-  it('should render correct gas props', () => {
+  it('should render correct smoke props', () => {
     wrapper.setData({ modalDetailInformation: true });
     expect(
       wrapper.vm.$el
         .querySelectorAll('.grid-block')[1]
         .querySelectorAll('p')[1]
         .textContent.trim()
-    ).toEqual(`${wrapper.props().gas}`);
+    ).toEqual(`${wrapper.props().smoke}`);
   });
 
-  it('should render correct gasPrice props', () => {
+  it('should render correct smokePrice props', () => {
     wrapper.setData({ modalDetailInformation: true });
     expect(
       wrapper.vm.$el
         .querySelectorAll('.grid-block')[2]
         .querySelectorAll('p')[1]
         .textContent.trim()
-    ).toEqual(wrapper.props().gasPrice + ' Gwei');
+    ).toEqual(wrapper.props().smokePrice + ' Maher');
   });
 
   it('should render correct fee props', () => {

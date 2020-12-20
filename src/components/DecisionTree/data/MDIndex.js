@@ -59,7 +59,7 @@ export default {
       'Cant_send_tx',
       'Making_swap',
       'Using_dapp',
-      'Buying_ETH',
+      'Buying_FOURTWENTY',
       'Other'
     ]
   },
@@ -420,7 +420,7 @@ export default {
 
   Tokens_custom: {
     title:
-      'My tokens show in my wallet on Etherscan, but I cannot see them on MEW',
+      'My tokens show in my wallet on Fourtwentyscan, but I cannot see them on MEW',
     subtitle: '',
     breadcrumb: 'custom tokens',
     md: _Tokens_custom
@@ -452,11 +452,11 @@ export default {
   },
 
   /*
-  Funds non-Ethereum
+  Funds non-420coin
   */
 
   Funds_other: {
-    title: "I'm expecting non-Ethereum funds",
+    title: "I'm expecting non-420coin funds",
     subtitle: '(ETC, CLO, EXP, MIX, PIRL, TOMO, etc.)',
     breadcrumb: 'other funds',
     md: _Funds_network
@@ -511,14 +511,14 @@ export default {
 
   fiat_to_crypto: {
     title: "I'm swapping fiat for crypto",
-    subtitle: '(USD$ -> ETH/BTC, etc.)',
+    subtitle: '(USD$ -> FOURTWENTY/BTC, etc.)',
     breadcrumb: 'buying crypto',
-    sub: ['Buying_ETH']
+    sub: ['Buying_FOURTWENTY']
   },
 
   crypto_to_fiat: {
     title: "I'm swapping crypto for fiat",
-    subtitle: '(ETH/BTC -> USD$, etc.)',
+    subtitle: '(FOURTWENTY/BTC -> USD$, etc.)',
     breadcrumb: 'selling crypto',
     md: _bity
   },
@@ -601,14 +601,14 @@ export default {
 
   /*
   =====================================================================================
-  Trying to buy ETH
+  Trying to buy 420coin
   =====================================================================================
   */
 
-  Buying_ETH: {
-    title: "I'm trying to buy ETH",
+  Buying_FOURTWENTY: {
+    title: "I'm trying to buy 420coin",
     subtitle: '',
-    breadcrumb: 'buying eth',
+    breadcrumb: 'buying 420coin',
     sub: ['buy_bug', 'buy_fail']
   },
 
@@ -620,7 +620,7 @@ export default {
   },
 
   buy_fail: {
-    title: 'I completed the process, but do not see my ETH',
+    title: 'I completed the process, but do not see my FOURTWENTY',
     subtitle: '',
     breadcrumb: 'missing funds',
     md: _simplex

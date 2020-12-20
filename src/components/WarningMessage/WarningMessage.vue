@@ -10,7 +10,7 @@
       <div class="link">
         > {{ $t('common.read') }}:
         <a
-          href="https://kb.myetherwallet.com/posts/offline/using-mew-offline/"
+          href="https://kb.my420wallet.420integrated.com/posts/offline/using-mew-offline/"
           target="_blank"
           rel="noopener noreferrer"
           >{{ this.$t('common.article.using-mew-offline') }}</a

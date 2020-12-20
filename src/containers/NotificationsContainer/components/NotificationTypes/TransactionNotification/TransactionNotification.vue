@@ -22,7 +22,7 @@
         </li>
         <li v-if="!isTokenTransfer">
           <p>{{ $t('sendTx.amount') }}:</p>
-          <p>{{ convertToEth(details.amount) }} {{ network.type.name }}</p>
+          <p>{{ convertToFourtwenty(details.amount) }} {{ network.type.name }}</p>
         </li>
         <li>
           <p>{{ $t('sendTx.to-addr') }}:</p>
@@ -60,22 +60,22 @@
             </a>
           </p>
         </li>
-        <li v-if="notice.body.gasUsed">
+        <li v-if="notice.body.smokeUsed">
           <p>{{ $t('sendTx.tx-fee') }}:</p>
           <p>
-            {{ convertToEth(details.gasPrice * details.gasUsed) }}
+            {{ convertToFourtwenty(details.smokePrice * details.smokeUsed) }}
             {{ network.type.name }}
             <span>
-              (${{ getFiatValue(details.gasPrice * details.gasUsed) }})
+              (${{ getFiatValue(details.smokePrice * details.smokeUsed) }})
             </span>
           </p>
         </li>
         <li>
           <p>{{ $t('sendTx.max-tx-fee') }}:</p>
           <p>
-            {{ convertToEth(details.gasPrice * details.gasLimit) }}
+            {{ convertToFourtwenty(details.smokePrice * details.smokeLimit) }}
             {{ network.type.name }} (${{
-              getFiatValue(details.gasPrice * details.gasLimit)
+              getFiatValue(details.smokePrice * details.smokeLimit)
             }})
           </p>
         </li>
@@ -122,11 +122,11 @@ export default {
         return {};
       }
     },
-    convertToGwei: {
+    convertToMaher: {
       type: Function,
       default: function () {}
     },
-    convertToEth: {
+    convertToFourtwenty: {
       type: Function,
       default: function () {}
     },

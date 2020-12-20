@@ -14,7 +14,7 @@
               <p>
                 {{ concatBalance }} <b>{{ network.type.name }}</b>
               </p>
-              <p v-if="network.type.name === 'ETH'" class="converted-balance">
+              <p v-if="network.type.name === 'FOURTWENTY'" class="converted-balance">
                 {{ convertedBalance }}
               </p>
             </div>
@@ -249,7 +249,7 @@ export default {
     async fetchBalance(address) {
       if (address !== '0x' || isAddress(address)) {
         try {
-          const balance = await this.web3.eth.getBalance(address);
+          const balance = await this.web3.fourtwenty.getBalance(address);
           return this.web3.utils.fromWei(balance);
         } catch (e) {
           return '0';

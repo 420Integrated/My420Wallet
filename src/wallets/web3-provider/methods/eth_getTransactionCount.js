@@ -1,13 +1,13 @@
 import utils from 'web3-utils';
 import { toPayload } from '../jsonrpc';
-import EthCalls from '../web3Calls';
+import FourtwentyCalls from '../web3Calls';
 import store from 'store';
 import BigNumber from 'bignumber.js';
 import { Misc } from '@/helpers';
 
 export default async ({ payload, requestManager }, res, next) => {
-  if (payload.method !== 'eth_getTransactionCount') return next();
-  const ethCalls = new EthCalls(requestManager);
+  if (payload.method !== 'fourtwenty_getTransactionCount') return next();
+  const fourtwentyCalls = new FourtwentyCalls(requestManager);
   const addr = payload.params[0];
   let cached = {};
   if (store.get(utils.sha3(addr)) === undefined) {
@@ -22,7 +22,7 @@ export default async ({ payload, requestManager }, res, next) => {
   const timeDiff =
     Math.round((new Date().getTime() - cached.timestamp) / 1000) / 60;
   if (timeDiff > 1) {
-    const liveNonce = await ethCalls.getTransactionCount(addr);
+    const liveNonce = await fourtwentyCalls.getTransactionCount(addr);
     const liveNonceBN = new BigNumber(liveNonce);
     const cachedNonceBN = new BigNumber(cached.nonce);
     if (timeDiff > 15) {

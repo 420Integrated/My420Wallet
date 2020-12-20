@@ -77,7 +77,7 @@ export default {
     this.$refs.xwalletModal.$on('show', () => {
       new MewConnectWallet(this.codeDisplay)
         .then(wallet => {
-          if (!this.web3.eth) this.setWeb3Instance();
+          if (!this.web3.fourtwenty) this.setWeb3Instance();
           this.decryptWallet([wallet]).then(() => {
             this.$router.push({
               path: 'interface'

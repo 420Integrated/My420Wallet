@@ -12,7 +12,6 @@
   "others": "Others",
   "affiliates": "Affiliates",
   "ledger": "Ledger Wallet",
-  "ethCard": "Ether Card",
   "bitbox": "BitBox",
   "bity": "Bity",
   "billfodl": "Billfodl",
@@ -25,7 +24,7 @@
   "team": "Team",
   "feedback": "Feedback",
   "privacy": "Privacy",
-  "copyright": "© 2020 MyEtherWallet. All Rights reserved.",
+  "copyright": "© 2020 420integrated. All Rights reserved.",
   "pricing-p": "Pricing taken from",
   "advanced": "Advanced",
   "send-offline": "Send Offline Helper",
@@ -34,8 +33,8 @@
   "mew-wallet": "MEW wallet",
   "cool-wallet": "CoolWallet",
   "donation": {
-    "desc": "MyEtherWallet is open-source and free to the community. Your donations go a long way towards making that possible.",
-    "ether": "Ethereum Donation",
+    "desc": "My420Wallet is open-source and free to the community. Your donations go a long way towards making that possible.",
+    "fourtwenty": "420coin Donation",
     "bitcoin": "Bitcoin Donation"
   },
   "coingecko": "Coingecko",

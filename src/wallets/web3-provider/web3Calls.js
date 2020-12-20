@@ -3,7 +3,7 @@ import utils from 'web3-utils';
 import { formatters } from 'web3-core-helpers';
 class Web3Calls {
   constructor(requestManager) {
-    const ethereumCalls = [
+    const fourtwentycoinCalls = [
       new Method({
         name: 'getId',
         call: 'net_version',
@@ -11,42 +11,42 @@ class Web3Calls {
         outputFormatter: utils.hexToNumber
       }),
       new Method({
-        name: 'getGasPrice',
-        call: 'eth_gasPrice',
+        name: 'getSmokePrice',
+        call: 'fourtwenty_smokePrice',
         params: 0
       }),
       new Method({
         name: 'getBlockNumber',
-        call: 'eth_blockNumber',
+        call: 'fourtwenty_blockNumber',
         params: 0
       }),
       new Method({
         name: 'getBlockByNumber',
-        call: 'eth_getBlockByNumber',
+        call: 'fourtwenty_getBlockByNumber',
         params: 2
       }),
       new Method({
-        name: 'estimateGas',
-        call: 'eth_estimateGas',
+        name: 'estimateSmoke',
+        call: 'fourtwenty_estimateSmoke',
         params: 1,
         inputFormatter: [formatters.inputCallFormatter],
         outputFormatter: utils.hexToNumber
       }),
       new Method({
         name: 'sendSignedTransaction',
-        call: 'eth_sendRawTransaction',
+        call: 'fourtwenty_sendRawTransaction',
         params: 1,
         inputFormatter: [null]
       }),
       new Method({
         name: 'getTransactionReceipt',
-        call: 'eth_getTransactionReceipt',
+        call: 'fourtwenty_getTransactionReceipt',
         params: 1,
         inputFormatter: [null]
       }),
       new Method({
         name: 'getTransactionCount',
-        call: 'eth_getTransactionCount',
+        call: 'fourtwenty_getTransactionCount',
         params: 2,
         inputFormatter: [
           function (address) {
@@ -65,12 +65,12 @@ class Web3Calls {
         ]
       })
     ];
-    this.ethereumCalls = {};
-    ethereumCalls.forEach(call => {
-      call.attachToObject(this.ethereumCalls);
+    this.fourtwentycoinCalls = {};
+    fourtwentycoinCalls.forEach(call => {
+      call.attachToObject(this.fourtwentycoinCalls);
       call.setRequestManager(requestManager);
     });
-    return this.ethereumCalls;
+    return this.fourtwentycoinCalls;
   }
 }
 export default Web3Calls;

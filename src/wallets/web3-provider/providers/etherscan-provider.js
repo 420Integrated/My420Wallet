@@ -1,27 +1,27 @@
-import EtherScanRequestManger from './etherscan-request-manager';
+import FourtwentyScanRequestManger from './fourtwentyscan-request-manager';
 import MiddleWare from '../middleware';
 import {
-  ethSendTransaction,
-  ethSignTransaction,
-  ethGetTransactionCount,
-  ethSign,
-  ethAccounts,
-  ethCoinbase,
+  fourtwentySendTransaction,
+  fourtwentySignTransaction,
+  fourtwentyGetTransactionCount,
+  fourtwentySign,
+  fourtwentyAccounts,
+  fourtwentyCoinbase,
   netVersion,
-  ethGetBlockByNumber,
-  ethGetTransactionReceipt,
-  ethGetBlockNumber
+  fourtwentyGetBlockByNumber,
+  fourtwentyGetTransactionReceipt,
+  fourtwentyGetBlockNumber
 } from '../methods';
-import EtherscanProxy from '../etherscan-proxy';
-class EtherscanProvider {
+import FourtwentyscanProxy from '../fourtwentyscan-proxy';
+class FourtwentyscanProvider {
   constructor(host, options, store, eventHub) {
     this.host = host;
     this.apikey = options.apikey || 'UDJW3ARXWN9EHMTFUA2FW4V1KA7QZGAGCB';
     options.apikey = this.apikey;
     this.store = store;
     this.eventHub = eventHub;
-    this.proxy = new EtherscanProxy(this.host, this.apikey);
-    this.requestManager_ = new EtherScanRequestManger(host, options);
+    this.proxy = new FourtwentyscanProxy(this.host, this.apikey);
+    this.requestManager_ = new FourtwentyScanRequestManger(host, options);
     this.requestThrottler = {
       requests: [],
       remaining: 5,
@@ -55,15 +55,15 @@ class EtherscanProvider {
       eventHub: this.eventHub
     };
     const middleware = new MiddleWare();
-    middleware.use(ethSendTransaction);
-    middleware.use(ethSignTransaction);
-    middleware.use(ethGetTransactionReceipt);
-    middleware.use(ethSign);
-    middleware.use(ethAccounts);
-    middleware.use(ethGetTransactionCount);
-    middleware.use(ethCoinbase);
-    middleware.use(ethGetBlockByNumber);
-    middleware.use(ethGetBlockNumber);
+    middleware.use(fourtwentySendTransaction);
+    middleware.use(fourtwentySignTransaction);
+    middleware.use(fourtwentyGetTransactionReceipt);
+    middleware.use(fourtwentySign);
+    middleware.use(fourtwentyAccounts);
+    middleware.use(fourtwentyGetTransactionCount);
+    middleware.use(fourtwentyCoinbase);
+    middleware.use(fourtwentyGetBlockByNumber);
+    middleware.use(fourtwentyGetBlockNumber);
     middleware.use(netVersion);
     middleware.use(async ({ payload }, res) => {
       this.proxy
@@ -78,9 +78,9 @@ class EtherscanProvider {
         });
     });
     middleware.run(req, callback).then(() => {
-      callback(new Error('Etherscan doesnt support this function'));
+      callback(new Error('Fourtwentyscan doesnt support this function'));
     });
   }
   disconnect() {}
 }
-export default EtherscanProvider;
+export default FourtwentyscanProvider;

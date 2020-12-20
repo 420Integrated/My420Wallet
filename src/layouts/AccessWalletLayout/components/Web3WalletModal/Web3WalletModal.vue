@@ -240,10 +240,10 @@ export default {
     },
     async getWeb3Wallet() {
       if (!this.web3WalletExists) return;
-      if (window.ethereum) {
-        const web3 = new Web3(window.ethereum);
+      if (window.fourtwentycoin) {
+        const web3 = new Web3(window.fourtwentycoin);
         try {
-          await window.ethereum.enable();
+          await window.fourtwentycoin.enable();
         } catch (e) {
           Toast.responseHandler(e, Toast.WARN);
           if (
@@ -255,16 +255,16 @@ export default {
 
           return;
         }
-        this.signIn(web3, 'ethereum');
+        this.signIn(web3, 'fourtwentycoin');
       } else if (window.web3) {
         this.signIn(window.web3);
       }
     },
     async signIn(web3, type) {
       try {
-        const acc = await web3.eth.getAccounts();
-        if (type === 'ethereum') {
-          window.ethereum.autoRefreshOnNetworkChange = false;
+        const acc = await web3.fourtwenty.getAccounts();
+        if (type === 'fourtwentycoin') {
+          window.fourtwentycoin.autoRefreshOnNetworkChange = false;
         }
         if (!acc.length) return (this.unlockWeb3Wallet = true);
         const wallet = new Web3Wallet(acc[0]);

@@ -7,7 +7,7 @@ import {
 } from '@/builds/mewcx/cxHelpers/cxEvents.js';
 import { toPayload } from '../jsonrpc';
 export default async ({ payload }, res, next) => {
-  if (payload.method !== 'eth_accounts') return next();
+  if (payload.method !== 'fourtwenty_accounts') return next();
   const id = window.extensionID;
   const callerUrl = window.location.origin;
   const obj = {

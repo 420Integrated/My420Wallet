@@ -1,17 +1,17 @@
-import ethSendTransaction from './eth_sendTransaction';
-import ethRequestAccounts from './eth_requestAccounts';
-import ethSign from './eth_sign';
-import ethAccounts from './eth_accounts';
-import ethCoinbase from './eth_coinbase';
-import ethSubscribe from './eth_subscribe';
-import ethUnsubscribe from './eth_unsubscribe';
+import fourtwentySendTransaction from './fourtwenty_sendTransaction';
+import fourtwentyRequestAccounts from './fourtwenty_requestAccounts';
+import fourtwentySign from './fourtwenty_sign';
+import fourtwentyAccounts from './fourtwenty_accounts';
+import fourtwentyCoinbase from './fourtwenty_coinbase';
+import fourtwentySubscribe from './fourtwenty_subscribe';
+import fourtwentyUnsubscribe from './fourtwenty_unsubscribe';
 
 export {
-  ethSendTransaction,
-  ethSign,
-  ethAccounts,
-  ethCoinbase,
-  ethRequestAccounts,
-  ethSubscribe,
-  ethUnsubscribe
+  fourtwentySendTransaction,
+  fourtwentySign,
+  fourtwentyAccounts,
+  fourtwentyCoinbase,
+  fourtwentyRequestAccounts,
+  fourtwentySubscribe,
+  fourtwentyUnsubscribe
 };

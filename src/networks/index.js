@@ -9,7 +9,7 @@ Object.keys(types).forEach(key => {
 });
 
 Object.keys(nodes).forEach(key => {
-  if (nodes[key].service === nodes['ethmew'].service) {
+  if (nodes[key].service === nodes['fourtwentymew'].service) {
     nodeList[nodes[key].type.name].splice(0, 0, nodes[key]);
   } else if (
     nodes[key].service === 'infura.io' &&
@@ -17,7 +17,6 @@ Object.keys(nodes).forEach(key => {
     platform.name === 'firefox'
   )
     return;
-  // temp until infura fix https://github.com/INFURA/infura/issues/174
   else {
     nodeList[nodes[key].type.name].push(nodes[key]);
   }
@@ -27,7 +26,7 @@ if (BUILD_TYPE === MEW_CX) {
   const obj = {};
   Object.keys(nodeList).forEach(network => {
     obj[network] = nodeList[network].filter(item => {
-      return item.service === 'myetherwallet.com-ws';
+      return item.service === 'my420wallet.420integrated.com-ws';
     });
   });
 

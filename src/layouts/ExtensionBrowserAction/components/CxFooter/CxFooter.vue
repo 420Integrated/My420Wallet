@@ -62,7 +62,7 @@ export default {
       lowerLinks: [
         {
           title: 'footer.feedback',
-          href: 'mailto:support@myetherwallet.com'
+          href: 'mailto:support@my420wallet.420integrated.com'
         },
         {
           title: 'footer.privacy',
@@ -74,40 +74,40 @@ export default {
         },
         {
           title: `v${version}`,
-          href: `https://github.com/MyEtherWallet/MyEtherWallet/releases/tag/v${version}`
+          href: `https://github.com/420integrated/My420Wallet/releases/tag/v${version}`
         }
       ],
       links: [
         {
-          to: 'https://www.facebook.com/myetherwallet',
+          to: 'https://www.facebook.com/420integrated',
           class: 'fa-facebook'
         },
         {
-          to: 'https://www.twitter.com/@myetherwallet',
+          to: 'https://www.twitter.com/@420integrated',
           class: 'fa-twitter'
         },
         {
-          to: 'https://www.instagram.com/myetherwallet',
+          to: 'https://www.instagram.com/420integrated',
           class: 'fa-instagram'
         },
         {
-          to: 'https://www.linkedin.com/company/myetherwallet',
+          to: 'https://www.linkedin.com/company/420integrated',
           class: 'fa-linkedin'
         },
         {
-          to: 'https://www.github.com/myetherwallet',
+          to: 'https://www.github.com/420integrated',
           class: 'fa-github'
         },
         {
-          to: 'https://www.reddit.com/r/myetherwallet',
+          to: 'https://www.reddit.com/r/420integrated',
           class: 'fa-reddit-alien'
         },
         {
-          to: 'https://www.medium.com/@myetherwallet',
+          to: 'https://www.medium.com/@my420wallet',
           class: 'fa-medium'
         },
         {
-          to: 'https://t.me/myetherwallet',
+          to: 'https://t.me/420integrated',
           class: 'fa-telegram'
         }
       ]

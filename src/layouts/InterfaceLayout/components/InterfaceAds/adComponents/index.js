@@ -1,9 +1,9 @@
-import buyEthAd from './buyEthAd';
+import buyFourtwentyAd from './buyFourtwentyAd';
 import staticAd from './staticAd';
 import mewConnectAd from './mewConnectAd';
 import mewWalletAd from './mewWalletAd';
 export default {
-  buyEthAd,
+  buyFourtwentyAd,
   staticAd,
   mewConnectAd,
   mewWalletAd

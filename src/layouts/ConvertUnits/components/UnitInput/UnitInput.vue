@@ -69,7 +69,7 @@ export default {
   data() {
     return {
       selectedLeft: 'wei',
-      selectedRight: 'ether',
+      selectedRight: '420coin',
       valueLeft: 1000000000000000000,
       valueRight: 1
     };
@@ -109,7 +109,7 @@ export default {
   },
   methods: {
     getValueOfUnit(unit) {
-      unit = unit ? unit.toLowerCase() : 'ether';
+      unit = unit ? unit.toLowerCase() : '420coin';
       const unitValue = utils.unitMap[unit];
       return new BigNumber(unitValue, 10);
     },

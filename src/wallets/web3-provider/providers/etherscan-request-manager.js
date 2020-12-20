@@ -1,11 +1,11 @@
 import { Manager as Web3RequestManager } from 'web3-core-requestmanager';
 import MiddleWare from '../middleware';
-import EtherscanProxy from '../etherscan-proxy';
-class EtherscanRequestManager {
+import FourtwentyscanProxy from '../fourtwentyscan-proxy';
+class FourtwentyscanRequestManager {
   constructor(host, options) {
     this.host = host;
     this.apikey = options.apikey;
-    this.proxy = new EtherscanProxy(this.host, this.apikey);
+    this.proxy = new FourtwentyscanProxy(this.host, this.apikey);
     return new Web3RequestManager(this);
   }
   send(payload, callback) {
@@ -26,9 +26,9 @@ class EtherscanRequestManager {
         });
     });
     middleware.run(req, callback).then(() => {
-      callback(new Error('Etherscan doesnt support this function'));
+      callback(new Error('Fourtwentyscan doesnt support this function'));
     });
   }
   disconnect() {}
 }
-export default EtherscanRequestManager;
+export default FourtwentyscanRequestManager;

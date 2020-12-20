@@ -1,9 +1,9 @@
 {
   "string": "Schedule Transaction",
   "title": "Schedule a transaction",
-  "dapp-desc": "Schedule a transaction using the decentralized Ethereum Alarm Clock protocol",
+  "dapp-desc": "Schedule a transaction using the decentralized 420coin Alarm Clock protocol",
   "warning": {
-    "not-enough-eth": " Not enough ETH on account to schedule",
+    "not-enough-fourtwenty": " Not enough FOURTWENTY on account to schedule",
     "amount-higher-balance": "Amount higher than balance",
     "min-bounty": "Please set a bounty of {min} or higher"
   },
@@ -13,15 +13,15 @@
   "timezone": "Timezone",
   "time-bounty": {
     "title": "Time Bounty",
-    "desc": "The amount of ETH you wish to offer to TimeNodes in exchange for execution. The higher the Time Bounty, the likelier your transaction will get executed.",
-    "caption": "Covers up to {gas} Gwei gas price on future execution"
+    "desc": "The amount of FOURTWENTY you wish to offer to TimeNodes in exchange for execution. The higher the Time Bounty, the likelier your transaction will get executed.",
+    "caption": "Covers up to {smoke} Maher smoke price on future execution"
   },
   "mode": "Scheduling mode",
   "set": {
     "exec-window": " Please set an execution window of {min} or higher",
-    "gas-price": "Please set a gas price of {min} or higher",
-    "gas-limit": "Please set a gas limit of 0 or higher",
-    "future-gas-limit": "Please set a future gas limit of 0 or higher"
+    "smoke-price": "Please set a smoke price of {min} or higher",
+    "smoke-limit": "Please set a smoke limit of 0 or higher",
+    "future-smoke-limit": "Please set a future smoke limit of 0 or higher"
   },
   "invalid-number": "Invalid deposit number",
   "provide-data-in-hex": "Please provide the data in a hexadecimal format.",
@@ -34,8 +34,8 @@
   "block-num": "Block Number",
   "curr-block": "Current block number:",
   "add-data": "Add Data",
-  "future-gas-price": "Future Gas Price (Gwei)",
-  "future-gas-limit": "Future Gas Limit",
+  "future-smoke-price": "Future Smoke Price (Maher)",
+  "future-smoke-limit": "Future Smoke Limit",
   "req-deposit": "Require a deposit",
   "exec-window": "Execution Window",
   "toast": {

@@ -4,25 +4,25 @@ const devid = 'DEVO7QQqPHCK2h3cGXhh2rY';
 const networks = [
   {
     mainnet: {
-      ticker: 'ETH',
+      ticker: 'FOURTWENTY',
       netid: '1'
     }
   },
   {
     rinkeby: {
-      ticker: 'ETH',
+      ticker: 'FOURTWENTY',
       netid: '4'
     }
   },
   {
-    ropsten: {
-      ticker: 'ETH',
+    ruderalis: {
+      ticker: 'FOURTWENTY',
       netid: '3'
     }
   },
   {
     kovan: {
-      ticker: 'ETH',
+      ticker: 'FOURTWENTY',
       netid: '42'
     }
   },
@@ -34,7 +34,7 @@ const networks = [
   },
   {
     goerli: {
-      ticker: 'ETH',
+      ticker: 'FOURTWENTY',
       netid: '5'
     }
   }
@@ -46,8 +46,8 @@ class PocketRequestManager {
       this.query = 'mainnet';
     } else if (host.includes('rinkeby')) {
       this.query = 'rinkeby';
-    } else if (host.includes('ropsten')) {
-      this.query = 'ropsten';
+    } else if (host.includes('ruderalis')) {
+      this.query = 'ruderalis';
     } else if (host.includes('kovan')) {
       this.query = 'kovan';
     } else if (host.includes('poa')) {

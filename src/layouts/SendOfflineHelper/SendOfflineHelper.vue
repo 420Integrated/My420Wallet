@@ -102,15 +102,15 @@
                 </li>
                 <li class="detail-container with-divider">
                   <span class="detail-name"
-                    >{{ $t('common.gas.current-gas') }}:</span
+                    >{{ $t('common.smoke.current-smoke') }}:</span
                   >
                   <span class="detail-text">
-                    {{ toGwei(genInfo.gasPrice) }}
-                    {{ $t('common.gas.gwei') }}
+                    {{ toMaher(genInfo.smokePrice) }}
+                    {{ $t('common.smoke.maher') }}
                   </span>
                 </li>
-                <div v-if="showGenInfoGasWarning" class="gas-price-warning">
-                  {{ $t('errorsGlobal.high-gas-limit-warning') }}
+                <div v-if="showGenInfoSmokeWarning" class="smoke-price-warning">
+                  {{ $t('errorsGlobal.high-smoke-limit-warning') }}
                 </div>
                 <li class="detail-container">
                   <span class="detail-name">{{ $t('sendTx.retrieved') }}:</span>
@@ -235,7 +235,7 @@
               <li class="detail-container">
                 <span class="detail-name">{{ $t('common.value') }}:</span>
                 <span class="detail-text">
-                  {{ toEth(value) }}
+                  {{ toFourtwenty(value) }}
                   {{ selectedNetwork.type.currencyName }}
                 </span>
               </li>
@@ -260,22 +260,22 @@
                 >
               </li>
               <li class="detail-container">
-                <span class="detail-name">{{ $t('common.gas.limit') }}:</span>
-                <span class="detail-text">{{ gasLimit }}</span>
+                <span class="detail-name">{{ $t('common.smoke.limit') }}:</span>
+                <span class="detail-text">{{ smokeLimit }}</span>
               </li>
               <li class="detail-container">
-                <span class="detail-name">{{ $t('common.gas.price') }}:</span>
+                <span class="detail-name">{{ $t('common.smoke.price') }}:</span>
                 <span class="detail-text"
-                  >{{ toGwei(gasPrice) }} {{ $t('common.gas.gwei') }}</span
+                  >{{ toMaher(smokePrice) }} {{ $t('common.smoke.maher') }}</span
                 >
               </li>
-              <div v-if="showGasWarning" class="gas-price-warning">
-                {{ $t('errorsGlobal.high-gas-limit-warning') }}
+              <div v-if="showSmokeWarning" class="smoke-price-warning">
+                {{ $t('errorsGlobal.high-smoke-limit-warning') }}
               </div>
               <li class="detail-container">
-                <span class="detail-name">{{ $t('common.gas.fee') }}:</span>
+                <span class="detail-name">{{ $t('common.smoke.fee') }}:</span>
                 <span class="detail-text">
-                  {{ toEth(toWei(fee)) }}
+                  {{ toFourtwenty(toWei(fee)) }}
                   {{ selectedNetwork.type.currencyName }}
                   ($ {{ calculateCost(fee) }})
                 </span>
@@ -363,7 +363,7 @@
 </template>
 
 <script>
-import { Transaction } from 'ethereumjs-tx';
+import { Transaction } from 'fourtwentyjs-tx';
 import { mapState, mapActions } from 'vuex';
 import Misc from '@/helpers/misc';
 import BigNumber from 'bignumber.js';
@@ -376,7 +376,7 @@ import DropDownAddressSelector from '@/components/DropDownAddressSelector';
 import StandardButton from '@/components/Buttons/StandardButton';
 import ExpandingOption from '@/components/ExpandingOption';
 import ConfirmationModal from './components/ConfirmationModal';
-import ENS from 'ethereum-ens';
+import ENS from 'fourtwenty-ens';
 export default {
   components: {
     'page-title': PageTitleComponent,
@@ -403,16 +403,16 @@ export default {
       minAccountBalance: 0,
       fee: 0,
       nonce: 0,
-      gasPrice: 0,
-      gasLimit: 0,
+      smokePrice: 0,
+      smokeLimit: 0,
       to: '0x',
       value: 0,
       data: '0x',
       chainID: 0,
-      ethPrice: 0,
+      fourtwentyPrice: 0,
       genInfo: {
         address: '0x',
-        gasPrice: 0,
+        smokePrice: 0,
         nonce: 0,
         chainID: this.$store.state.main.network.type.chainID,
         networkName: this.$store.state.main.network.type.name_long
@@ -438,14 +438,14 @@ export default {
       'web3',
       'wallet',
       'online',
-      'gasLimitWarning'
+      'smokeLimitWarning'
     ]),
-    showGasWarning() {
-      return this.gasPrice >= this.gasLimitWarning;
+    showSmokeWarning() {
+      return this.smokePrice >= this.smokeLimitWarning;
     },
-    showGenInfoGasWarning() {
-      const num = new BigNumber(this.toGwei(this.genInfo.gasPrice)).gte(
-        this.gasLimitWarning
+    showGenInfoSmokeWarning() {
+      const num = new BigNumber(this.toMaher(this.genInfo.smokePrice)).gte(
+        this.smokeLimitWarning
       );
       return num;
     },
@@ -468,10 +468,10 @@ export default {
       return {
         from: this.from,
         nonce: this.nonce,
-        gasPrice: this.toGwei(this.gasPrice),
-        gasLimit: this.gasLimit,
+        smokePrice: this.toMaher(this.smokePrice),
+        smokeLimit: this.smokeLimit,
         to: this.to,
-        value: this.toEth(this.value),
+        value: this.toFourtwenty(this.value),
         data: this.data,
         chainID: this.chainID
       };
@@ -479,7 +479,7 @@ export default {
     envDetails() {
       return {
         network: this.selectedNetwork,
-        ethPrice: this.ethPrice
+        fourtwentyPrice: this.fourtwentyPrice
       };
     }
   },
@@ -533,7 +533,7 @@ export default {
       if (this.rawSigned !== '') {
         this.error = this.txHash = '';
         this.txReceipt = {};
-        this.web3.eth
+        this.web3.fourtwenty
           .sendSignedTransaction(this.rawSigned)
           .once('transactionHash', hash => {
             this.txHash = hash;
@@ -562,8 +562,8 @@ export default {
     getTransactionDetails(rawSigned) {
       const positions = {
         nonce: 0,
-        gasPrice: 1,
-        gasLimit: 2,
+        smokePrice: 1,
+        smokeLimit: 2,
         to: 3,
         value: 4,
         data: 5,
@@ -593,17 +593,17 @@ export default {
         this.from = Misc.sanitizeHex(tx.getSenderAddress().toString('hex'));
         const asJson = tx.toJSON();
         this.to = asJson[positions.to];
-        this.gasLimit = new BigNumber(asJson[positions.gasLimit]).toFixed();
+        this.smokeLimit = new BigNumber(asJson[positions.smokeLimit]).toFixed();
         this.nonce = new BigNumber(asJson[positions.nonce]).toFixed();
         this.value = new BigNumber(asJson[positions.value]).toFixed();
 
         this.data = asJson[positions.data];
         this.minAccountBalance = tx.getUpfrontCost().toString();
-        this.gasPrice = new BigNumber(
-          Misc.sanitizeHex(tx.gasPrice.toString('hex'))
+        this.smokePrice = new BigNumber(
+          Misc.sanitizeHex(tx.smokePrice.toString('hex'))
         ).toFixed();
-        this.fee = new BigNumber(this.toGwei(this.gasPrice))
-          .times(this.gasLimit)
+        this.fee = new BigNumber(this.toMaher(this.smokePrice))
+          .times(this.smokeLimit)
           .toString();
       }
     },
@@ -612,28 +612,28 @@ export default {
       const fetchValues = await fetch(url);
       const result = await fetchValues.json();
       const values = result.data;
-      if (!values['ETH']) return 0;
-      this.ethPrice = new BigNumber(values['ETH'].quotes.USD.price);
+      if (!values['FOURTWENTY']) return 0;
+      this.fourtwentyPrice = new BigNumber(values['FOURTWENTY'].quotes.USD.price);
     },
-    toEth(val) {
+    toFourtwenty(val) {
       if (!val || isNaN(val)) return 0;
-      return web3Utils.fromWei(new BigNumber(val).toString(), 'ether');
+      return web3Utils.fromWei(new BigNumber(val).toString(), '420coin');
     },
     toWei(val) {
       if (!val) return 0;
-      return web3Utils.toWei(new BigNumber(val).toFixed(), 'gwei');
+      return web3Utils.toWei(new BigNumber(val).toFixed(), 'maher');
     },
-    toGwei(val) {
+    toMaher(val) {
       if (!val) return 0;
-      return web3Utils.fromWei(new BigNumber(val).toFixed(), 'gwei');
+      return web3Utils.fromWei(new BigNumber(val).toFixed(), 'maher');
     },
     dateTimeDisplay(unixTimeStamp) {
       return new Date(unixTimeStamp).toString();
     },
-    calculateCost(inGwei) {
-      const fromGweiToWei = this.toWei(inGwei);
-      const cost = new BigNumber(this.ethPrice)
-        .times(this.toEth(fromGweiToWei))
+    calculateCost(inMaher) {
+      const fromMaherToWei = this.toWei(inMaher);
+      const cost = new BigNumber(this.fourtwentyPrice)
+        .times(this.toFourtwenty(fromMaherToWei))
         .precision(2, BigNumber.ROUND_UP)
         .toNumber();
       return cost < 0.01 ? 0.01 : cost;
@@ -641,11 +641,11 @@ export default {
     async generateInformation(data) {
       if (data.address === '') return;
       this.genInfo['address'] = data.address;
-      this.genInfo['gasPrice'] = await this.web3.eth.getGasPrice();
-      this.genInfo['nonce'] = await this.web3.eth.getTransactionCount(
+      this.genInfo['smokePrice'] = await this.web3.fourtwenty.getSmokePrice();
+      this.genInfo['nonce'] = await this.web3.fourtwenty.getTransactionCount(
         data.address
       );
-      this.genInfo['blockNumber'] = await this.web3.eth.getBlockNumber();
+      this.genInfo['blockNumber'] = await this.web3.fourtwenty.getBlockNumber();
       this.genInfo['chainID'] = this.selectedNetwork.type.chainID;
       this.genInfo['timestamp'] = Date.now(); //;
       this.exportGeneratedInfo();

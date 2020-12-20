@@ -21,13 +21,13 @@ const BModalStub = {
 
 describe('InterfaceTokens.vue', () => {
   const customTokens = [
-    { name: 'ETH', balance: 200 },
+    { name: 'FOURTWENTY', balance: 200 },
     { name: 'BTH', balance: 300 },
     { name: 'ETC', balance: 400 }
   ];
 
   const localTokens = [
-    { name: 'ETH', balance: 200 },
+    { name: 'FOURTWENTY', balance: 200 },
     { name: 'BTH', balance: 300 },
     { name: 'ETC', balance: 400 }
   ];

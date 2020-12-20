@@ -1,5 +1,5 @@
 <template>
-  <div class="buy-eth-ad">
+  <div class="buy-fourtwenty-ad">
     <div class="content-block">
       <div class="flex-vertical-center">
         <div class="top-block">{{ $t('interface.ads.buy-with-credit') }}</div>
@@ -32,7 +32,7 @@ export default {
       showWidget: false,
       suppliedFromAmount: 100,
       suppliedTo: {
-        symbol: 'ETH',
+        symbol: 'FOURTWENTY',
         name: ''
       },
       suppliedFrom: {
@@ -53,7 +53,7 @@ export default {
           'showSwapWidgetTo',
           this.account.address,
           'USD',
-          'ETH',
+          'FOURTWENTY',
           1
         );
       }
@@ -63,5 +63,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'buyEthAd.scss';
+@import 'buyFourtwentyAd.scss';
 </style>

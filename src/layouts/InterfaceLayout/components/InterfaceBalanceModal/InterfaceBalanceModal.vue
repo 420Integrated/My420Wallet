@@ -96,7 +96,7 @@ export default {
     async fetchBalanceData() {
       if (this.online) {
         const newArr = [];
-        const url = 'https://cryptorates.mewapi.io/convert/ETH';
+        const url = 'https://cryptorates.mewapi.io/convert/FOURTWENTY';
         const fetchValues = await fetch(url);
         const values = await fetchValues.json();
         delete values['lastCalled'];

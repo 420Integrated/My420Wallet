@@ -6,7 +6,7 @@ import {
   WEB3_REJECT
 } from '@/builds/mewcx/cxHelpers/cxEvents.js';
 export default async ({ payload }, res, next) => {
-  if (payload.method !== 'eth_subscribe') return next();
+  if (payload.method !== 'fourtwenty_subscribe') return next();
   const id = window.extensionID;
   const actualEvent = new CustomEvent(WEB3_SUBSCRIBE.replace('{{id}}', id), {
     detail: payload
@@ -20,7 +20,7 @@ export default async ({ payload }, res, next) => {
   window.addEventListener(
     WEB3_SUBSCRIPTION_LISTENER.replace('{{id}}', id),
     response => {
-      window.ethereum.emit('data', response.detail);
+      window.fourtwentycoin.emit('data', response.detail);
     }
   );
   window.addEventListener(WEB3_REJECT, response => {

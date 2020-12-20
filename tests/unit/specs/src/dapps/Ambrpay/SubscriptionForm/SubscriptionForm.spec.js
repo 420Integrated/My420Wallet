@@ -105,7 +105,7 @@ describe('SubscriptionForm.vue', () => {
     wrapper.find('.action-text').trigger('click');
     const entireBal = state.web3.utils.fromWei(
       new BigNumber(state.account.balance).toFixed(),
-      'ether'
+      '420coin'
     );
 
     expect(wrapper.vm.$data.sendAmount).toEqual(entireBal);

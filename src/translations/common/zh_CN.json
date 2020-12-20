@@ -43,15 +43,15 @@
   "icon": "图标",
   "no-icon": "没有图标",
   "currency": {
-    "eth": "ETH",
+    "fourtwenty": "FOURTWENTY",
     "btc": "BTC",
     "usd": "USD",
-    "peth": "PETH",
-    "ethereum": "Ethereum",
+    "pfourtwenty": "PFOURTWENTY",
+    "fourtwentycoin": "420coin",
     "etc": "ETC"
   },
-  "mew": "MyEtherWallet",
-  "support-email": "support@myetherwallet.com",
+  "mew": "My420Wallet",
+  "support-email": "support@my420wallet.420integrated.com",
   "support": {
     "string": "Support",
     "browser": "Browser",
@@ -91,7 +91,7 @@
   },
   "mew-wallet": {
     "string": "MEW wallet",
-    "desc": "MEW's official fully-fledged app brings Ethereum to your iOS or Android smartphone. MEW wallet puts you in full control. {learn-more}"
+    "desc": "MEW's official fully-fledged app brings 420coin to your iOS or Android smartphone. MEW wallet puts you in full control. {learn-more}"
   },
   "swap": "Swap",
   "token": "Token | Tokens",
@@ -148,14 +148,14 @@
   "issue-info": "Issue information",
   "learn-more": "Learn more",
   "dapps": "Dapps",
-  "gas": {
-    "current-gas": "Current Gas Price",
-    "limit": "Gas Limit",
-    "price": "Gas Price",
-    "gwei": "Gwei",
+  "smoke": {
+    "current-smoke": "Current Smoke Price",
+    "limit": "Smoke Limit",
+    "price": "Smoke Price",
+    "maher": "Maher",
     "wei": "Wei",
     "fee": "Fee",
-    "string": "Gas"
+    "string": "Smoke"
   },
   "search": "Search",
   "loading": "Loading",
@@ -163,8 +163,8 @@
   "signature": "Signature",
   "to": "To",
   "ok": "OK",
-  "buy-eth": "Buy ETH",
-  "dont-have-eth": "Don't have ETH? Buy ETH!",
+  "buy-fourtwenty": "Buy FOURTWENTY",
+  "dont-have-fourtwenty": "Don't have FOURTWENTY? Buy FOURTWENTY!",
   "security": "Security",
   "status": "Status",
   "time": "Time",

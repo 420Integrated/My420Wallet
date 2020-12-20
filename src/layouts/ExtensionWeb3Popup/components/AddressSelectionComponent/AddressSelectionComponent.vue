@@ -79,7 +79,7 @@ export default {
     },
     currency: {
       type: String,
-      default: 'ETH'
+      default: 'FOURTWENTYRTWENTYRTWENTY'
     },
     walletType: {
       type: String,

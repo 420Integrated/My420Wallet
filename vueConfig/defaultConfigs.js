@@ -40,7 +40,7 @@ module.exports = {
     'Referrer-Policy': 'same-origin'
   },
   pwa: {
-    name: 'MyEtherWallet',
+    name: 'My420Wallet',
     workboxOptions: {
       importWorkboxFrom: 'local',
       skipWaiting: true,

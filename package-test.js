@@ -17,14 +17,14 @@ const EXCEPTIONS = [
   'postcss-url',
   'webpack',
   'canvas',
-  'ethereum-ens',
+  'fourtwenty-ens',
   'babel-jest',
   'multicoin-address-validator',
   'vee-validate',
   '@xkeshi/vue-qrcode',
   '@vue/test-utils',
   'graphql',
-  '@myetherwallet/eth-token-balance',
+  '@my420wallet/fourtwenty-token-balance',
   '@makerdao/dai',
   'bootstrap-vue',
   'web3',
@@ -33,13 +33,13 @@ const EXCEPTIONS = [
   'web3-core-requestmanager',
   'web3-utils',
   'i18n-iso-countries',
-  '@myetherwallet/mewconnect-web-client',
+  '@my420wallet/mewconnect-web-client',
   '@walletconnect/browser',
   '@walletconnect/qrcode-modal',
-  'ethereumjs-wallet',
+  'fourtwentyjs-wallet',
   '@makerdao/dai-plugin-mcd',
   '@makerdao/dai-plugin-migrations',
-  'ethereumjs-util',
+  'fourtwentyjs-util',
   '@makerdao/dai-plugin-migrations',
   'worker-loader',
   'eslint-plugin-vue',
@@ -68,7 +68,7 @@ const looper = () => {
         '\nREFUSING TO CONTINUE because above packages are TOO FAR OUT OF DATE!'
       );
       console.error(
-        'In order to build MyEtherWallet, you must edit package.json.'
+        'In order to build My420Wallet, you must edit package.json.'
       );
       console.error(
         'Update the versions for the packages above to their current versions.'

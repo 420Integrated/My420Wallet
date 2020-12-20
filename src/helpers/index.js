@@ -1,5 +1,5 @@
-import Wallet from 'ethereumjs-wallet';
-import ThirdPartyWallets from 'ethereumjs-wallet/thirdparty';
+import Wallet from 'fourtwentyjs-wallet';
+import ThirdPartyWallets from 'fourtwentyjs-wallet/thirdparty';
 import parseTokensHex from './parseTokensHex';
 import Configs from './configs';
 import Blockies from './blockies';

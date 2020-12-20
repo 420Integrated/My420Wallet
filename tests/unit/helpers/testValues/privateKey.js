@@ -3,8 +3,8 @@ const address = '0xB783eA3D37757f201C8e46dB7A30fB9dDe4EeCd3';
 
 const rawTransactionDetails = {
   nonce: '0x00',
-  gasPrice: '0xb2d05e00',
-  gasLimit: '0x5208',
+  smokePrice: '0xb2d05e00',
+  smokeLimit: '0x5208',
   to: '0xB783eA3D37757f201C8e46dB7A30fB9dDe4EeCd3',
   value: '0x0de0b6b3a7640000',
   data: '0x',

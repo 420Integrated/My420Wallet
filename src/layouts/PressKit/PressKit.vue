@@ -10,7 +10,7 @@
             class="subtitle text-center"
             ><a
               slot="mediumlink"
-              href="https://medium.com/myetherwallet"
+              href="https://medium.com/420integrated"
               target="_blank"
               rel="noopener noreferrer"
               >Medium blog</a

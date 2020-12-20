@@ -34,15 +34,15 @@ const WEB3_SUBSCRIPTION_ERR = 'web3SubscriptionErr';
 const WEB3_UNSUBSCRIBE = 'web3{{id}}Unsubscribe';
 const CX_UNSUBSCRIBE = 'cxUnsubcribe';
 const WEB3_UNSUBSCRIBE_RES = 'web3{{id}}UnsubscribeRes';
-const WEB3_QUERY_GASPRICE = 'web3{{id}}QueryGasPrice';
-const WEB3_RECEIVE_GASPRICE = 'web3{{id}}ReceiveGasPrice';
-const CX_GET_GASPRICE = 'cxGetGasPrice';
+const WEB3_QUERY_SMOKEPRICE = 'web3{{id}}QuerySmokePrice';
+const WEB3_RECEIVE_SMOKEPRICE = 'web3{{id}}ReceiveSmokePrice';
+const CX_GET_SMOKEPRICE = 'cxGetSmokePrice';
 const WEB3_GET_TX_COUNT = 'web3{{id}}GetTxCount';
 const CX_GET_TX_COUNT = 'cxGetTxCount';
 const WEB3_RECEIVE_TX_COUNT = 'web3{{id}}ReceiveTxCount';
-const WEB3_GET_GAS = 'web3{{id}}GetGas';
-const WEB3_RECEIVE_GAS = 'web3{{id}}ReceiveGas';
-const CX_GET_GAS = 'cxGetGas';
+const WEB3_GET_SMOKE = 'web3{{id}}GetSmoke';
+const WEB3_RECEIVE_SMOKE = 'web3{{id}}ReceiveSmoke';
+const CX_GET_SMOKE = 'cxGetSmoke';
 const WEB3_SIGN_TX = 'web3CxSignTx';
 const WEB3_SIGN_MSG = 'web3CxSignMsg';
 
@@ -83,15 +83,15 @@ export {
   WEB3_UNSUBSCRIBE,
   CX_UNSUBSCRIBE,
   WEB3_UNSUBSCRIBE_RES,
-  WEB3_QUERY_GASPRICE,
-  WEB3_RECEIVE_GASPRICE,
-  CX_GET_GASPRICE,
+  WEB3_QUERY_SMOKEPRICE,
+  WEB3_RECEIVE_SMOKEPRICE,
+  CX_GET_SMOKEPRICE,
   WEB3_GET_TX_COUNT,
   CX_GET_TX_COUNT,
   WEB3_RECEIVE_TX_COUNT,
-  WEB3_GET_GAS,
-  WEB3_RECEIVE_GAS,
-  CX_GET_GAS,
+  WEB3_GET_SMOKE,
+  WEB3_RECEIVE_SMOKE,
+  CX_GET_SMOKE,
   WEB3_SIGN_TX,
   WEB3_SIGN_MSG
 };

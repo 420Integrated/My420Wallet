@@ -8,64 +8,64 @@ const OLD_MED_CONST = 1.25;
 const OLD_FAST_CONST = 1.5;
 const LIMITER = 25;
 
-const getEconomy = gasPrice => {
-  return new BigNumber(gasPrice).div(1).toFixed(9);
+const getEconomy = smokePrice => {
+  return new BigNumber(smokePrice).div(1).toFixed(9);
 };
-const getRegular = gasPrice => {
-  if (gasPrice > LIMITER) {
-    let initialValue = new BigNumber(gasPrice).times(MED_MULTIPLIER);
+const getRegular = smokePrice => {
+  if (smokePrice > LIMITER) {
+    let initialValue = new BigNumber(smokePrice).times(MED_MULTIPLIER);
     initialValue = initialValue.plus(MED_CONST);
 
     return new BigNumber(initialValue).toFixed(9);
   }
 
-  return new BigNumber(gasPrice).times(1.25).toFixed(9);
+  return new BigNumber(smokePrice).times(1.25).toFixed(9);
 };
-const getFast = gasPrice => {
-  if (gasPrice > LIMITER) {
-    let initialValue = new BigNumber(gasPrice).times(FAST_MULTIPLIER);
+const getFast = smokePrice => {
+  if (smokePrice > LIMITER) {
+    let initialValue = new BigNumber(smokePrice).times(FAST_MULTIPLIER);
     initialValue = initialValue.plus(FAST_CONST);
 
     return new BigNumber(initialValue).toFixed(9);
   }
 
-  return new BigNumber(gasPrice).times(1.5).toFixed(9);
+  return new BigNumber(smokePrice).times(1.5).toFixed(9);
 };
 
 const getOther = () => {
-  const storedPrice = store.get('customGasPrice') || 0;
+  const storedPrice = store.get('customSmokePrice') || 0;
   return new BigNumber(storedPrice).toFixed(9);
 };
 
-const fastToEconomy = gasPrice => {
-  const oldConverted = gasPrice / OLD_FAST_CONST;
+const fastToEconomy = smokePrice => {
+  const oldConverted = smokePrice / OLD_FAST_CONST;
   if (LIMITER > oldConverted) {
     return oldConverted;
   }
-  let initialValue = new BigNumber(gasPrice).minus(FAST_CONST);
+  let initialValue = new BigNumber(smokePrice).minus(FAST_CONST);
   initialValue = initialValue.div(FAST_MULTIPLIER);
   return new BigNumber(initialValue).toFixed(9);
 };
 
-const regularToEconomy = gasPrice => {
-  const oldConverted = gasPrice / OLD_MED_CONST;
+const regularToEconomy = smokePrice => {
+  const oldConverted = smokePrice / OLD_MED_CONST;
   if (LIMITER > oldConverted) {
     return oldConverted;
   }
-  let initialValue = new BigNumber(gasPrice).minus(MED_CONST);
+  let initialValue = new BigNumber(smokePrice).minus(MED_CONST);
   initialValue = initialValue.div(MED_MULTIPLIER);
   return new BigNumber(initialValue).toFixed(9);
 };
 
-const getGasBasedOnType = gasPrice => {
-  const gasPriceType = store.get('gasPriceType') || 'economy';
-  switch (gasPriceType) {
+const getSmokeBasedOnType = smokePrice => {
+  const smokePriceType = store.get('smokePriceType') || 'economy';
+  switch (smokePriceType) {
     case 'economy':
-      return getEconomy(gasPrice);
+      return getEconomy(smokePrice);
     case 'regular':
-      return getRegular(gasPrice);
+      return getRegular(smokePrice);
     case 'fast':
-      return getFast(gasPrice);
+      return getFast(smokePrice);
     default:
       return getOther();
   }
@@ -76,7 +76,7 @@ export {
   getRegular,
   getFast,
   getOther,
-  getGasBasedOnType,
+  getSmokeBasedOnType,
   fastToEconomy,
   regularToEconomy
 };

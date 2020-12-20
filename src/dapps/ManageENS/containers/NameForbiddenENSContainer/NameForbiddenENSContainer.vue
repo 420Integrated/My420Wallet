@@ -4,7 +4,7 @@
     <interface-bottom-text
       :link-text="$t('common.help-center')"
       :question="$t('common.have-issues')"
-      link="https://kb.myetherwallet.com"
+      link="https://kb.my420wallet.420integrated.com"
     />
   </div>
 </template>

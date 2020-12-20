@@ -4,7 +4,7 @@ import { isAddress } from './addressUtils';
 import url from 'url';
 import utils from 'web3-utils';
 import store from '@/store';
-import { isHexString, toBuffer as utilsToBuffer } from 'ethereumjs-util';
+import { isHexString, toBuffer as utilsToBuffer } from 'fourtwentyjs-util';
 import { uint, address, string, bytes, bool, int } from './solidityTypes';
 import xss from 'xss';
 import { MEW_CX } from '@/builds/configs/types';
@@ -79,11 +79,11 @@ const formatDate = date => {
   });
   return `${day}. ${dateString} ${GMTtime} - ${localTime} ${stripTimezone}`;
 };
-const isValidETHAddress = address => {
+const isValidFOURTWENTYAddress = address => {
   return isAddress(address);
 };
-const isValidENSorEtherAddress = address => {
-  return isValidETHAddress(address) || isValidENSAddress(address);
+const isValidENSorFourtwentycoinAddress = address => {
+  return isValidFOURTWENTYAddress(address) || isValidENSAddress(address);
 };
 const isValidENSAddress = function (address) {
   try {
@@ -128,13 +128,13 @@ const validateHexString = str => {
 
 const reorderNetworks = () => {
   const oldObject = Object.assign({}, nodeList);
-  delete oldObject['ETH'];
+  delete oldObject['FOURTWENTY'];
   delete oldObject['RIN'];
   delete oldObject['ROP'];
   const newObject = Object.assign(
     {},
     {
-      ETH: nodeList['ETH'],
+      FOURTWENTY: nodeList['FOURTWENTY'],
       ROP: nodeList['ROP'],
       RIN: nodeList['RIN'],
       ...oldObject
@@ -248,7 +248,7 @@ const downloadMEWWalletApp = () => {
     return;
   } else if (isAndroid) {
     window.location.href =
-      'https://play.google.com/store/apps/details?id=com.myetherwallet.mewwallet';
+      'https://play.google.com/store/apps/details?id=com.420integrated.my420wallet';
   } else if (isApple) {
     window.location.href = 'https://itunes.apple.com/app/id1464614025';
   } else {
@@ -261,9 +261,9 @@ export default {
   doesExist,
   padLeftEven,
   formatDate,
-  isValidENSorEtherAddress,
+  isValidENSorFourtwentycoinAddress,
   isValidENSAddress,
-  isValidETHAddress,
+  isValidFOURTWENTYAddress,
   sanitizeHex,
   validateHexString,
   scrollToTop,

@@ -33,7 +33,7 @@
       <div v-for="wallet in searchResult" :key="wallet.address + 'favorites'">
         <wallet-info-component
           :prices="tokenPrices"
-          :usd="ethPrice"
+          :usd="fourtwentyPrice"
           :address="wallet.address"
           :balance="wallet.balance"
           :wallet="wallet.wallet"
@@ -56,7 +56,7 @@ import WalletTitleAndSearchComponent from '../../components/WalletTitleAndSearch
 import ExtensionBrowserActionWrapper from '../../wrappers/ExtensionBrowserActionWrapper';
 import sortByBalance from '@/helpers/sortByBalance.js';
 import BigNumber from 'bignumber.js';
-import TokenBalance from '@myetherwallet/eth-token-balance';
+import TokenBalance from '@my420wallet/fourtwenty-token-balance';
 
 export default {
   components: {
@@ -69,7 +69,7 @@ export default {
       type: Object,
       default: () => {}
     },
-    ethPrice: {
+    fourtwentyPrice: {
       type: Number,
       default: 0
     },
@@ -126,7 +126,7 @@ export default {
       const tb = new TokenBalance(this.web3.currentProvider);
       const newLogo = {
         // eslint-disable-next-line
-        src: require(`@/assets/images/networks/eth-logo.svg`)
+        src: require(`@/assets/images/networks/fourtwenty-logo.svg`)
       };
       return tb
         .getBalance(address)
@@ -196,7 +196,7 @@ export default {
       this.loading = false;
     },
     async getBalance(addr) {
-      const balance = await this.web3.eth.getBalance(addr);
+      const balance = await this.web3.fourtwenty.getBalance(addr);
       return web3utils.fromWei(balance);
     }
   }

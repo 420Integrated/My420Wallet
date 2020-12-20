@@ -15,7 +15,7 @@
       <b-link
         class="email-us-btn"
         rel="noopener noreferrer"
-        href="mailto:support@myetherwallet.com"
+        href="mailto:support@my420wallet.420integrated.com"
         target="_blank"
         >{{ $t('dappsSubmission.contact-support') }}</b-link
       >

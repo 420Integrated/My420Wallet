@@ -6,7 +6,7 @@ If they cannot provide one..
 
 ***
 
-#### Search your public address on Etherscan.io to find your most recent transactions.
+#### Search your public address on fourtwentyscan.420integrated.com to find your most recent transactions.
 
 It’s possible one of these is the transaction you’re looking for. This is how you will find the transaction hash.
 <br>

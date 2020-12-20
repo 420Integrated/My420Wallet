@@ -3,7 +3,7 @@
     <settings-modal
       v-if="address !== null"
       ref="settings"
-      :gas-price="gasPrice"
+      :smoke-price="smokePrice"
       :address="address"
     />
     <logout-modal ref="logout" />
@@ -21,15 +21,15 @@
         <div class="spacer"></div>
         <div class="d-flex">
           <div class="d-flex menu-items">
-            <a href="https://ccswap.myetherwallet.com/#/" target="_blank">
-              <div class="d-flex buy-eth">
+            <a href="https://ccswap.my420wallet.420integrated.com/#/" target="_blank">
+              <div class="d-flex buy-fourtwenty">
                 <img
                   alt
-                  class="buy-eth-icon"
-                  src="@/assets/images/icons/buy-eth.svg"
+                  class="buy-fourtwenty-icon"
+                  src="@/assets/images/icons/buy-fourtwenty.svg"
                   height="24"
                 />
-                <p>{{ $t('mewcx.buy-eth') }}</p>
+                <p>{{ $t('mewcx.buy-fourtwenty') }}</p>
               </div>
             </a>
             <b-nav-item-dropdown
@@ -45,11 +45,11 @@
                 <p>{{ serviceUrl }} ({{ network.type.name }})</p>
               </b-dropdown-item>
               <b-dropdown-item
-                v-show="network.type.name === 'ETH'"
-                :href="'https://ethplorer.io/address/' + address"
+                v-show="network.type.name === 'FOURTWENTY'"
+                :href="'https://fourtwentyscan.420integrated.com/address/' + address"
                 target="_blank"
                 rel="noopener noreferrer"
-                >{{ $t('header.ethplorer') }} ({{
+                >{{ $t('header.fourtwentyexplorer') }} ({{
                   $tc('common.token', 2)
                 }})</b-dropdown-item
               >
@@ -193,12 +193,12 @@ export default {
     const isMewCx = Misc.isMewCx();
     return {
       isMewCx: isMewCx,
-      gasPrice: '0',
+      smokePrice: '0',
       networkOpen: false,
       networkShow: 0,
       colors: {
         KOV: '#adc101',
-        ETH: '#0e97c0',
+        FOURTWENTY: '#0e97c0',
         GOERLI: '#adc101',
         ROP: '#adc101',
         RIN: '#adc101'
@@ -222,7 +222,7 @@ export default {
   },
   watch: {
     web3() {
-      this.setHighGasPrice();
+      this.setHighSmokePrice();
     }
   },
   mounted() {
@@ -254,11 +254,11 @@ export default {
         this.isMobileMenuOpen = false;
       });
     },
-    setHighGasPrice() {
-      this.web3.eth
-        .getGasPrice()
+    setHighSmokePrice() {
+      this.web3.fourtwenty
+        .getSmokePrice()
         .then(res => {
-          this.gasPrice = new BigNumber(res).toString();
+          this.smokePrice = new BigNumber(res).toString();
         })
         .catch(e => {
           Toast.responseHandler(e, Toast.ERROR);

@@ -56,7 +56,7 @@
               </div>
             </div>
           </div>
-          <div class="the-form gas-amount">
+          <div class="the-form smoke-amount">
             <input
               v-model="toData"
               :disabled="selectedCoinType.symbol !== network.type.name"
@@ -81,22 +81,22 @@
           <div class="title-container">
             <div class="title">
               <div class="title-helper">
-                <h4>{{ $t('common.gas.limit') }}</h4>
-                <popover :popcontent="$t('popover.gas-limit')" />
+                <h4>{{ $t('common.smoke.limit') }}</h4>
+                <popover :popcontent="$t('popover.smoke-limit')" />
               </div>
             </div>
           </div>
-          <div class="the-form gas-amount">
+          <div class="the-form smoke-amount">
             <input
-              v-model="gasLimit"
-              :placeholder="$t('common.gas.limit')"
+              v-model="smokeLimit"
+              :placeholder="$t('common.smoke.limit')"
               type="number"
             />
             <div class="good-button-container">
               <i
                 :class="[
                   'fa fa-check-circle good-button',
-                  gasLimit > 0 ? '' : 'not-good'
+                  smokeLimit > 0 ? '' : 'not-good'
                 ]"
                 aria-hidden="true"
               />
@@ -112,7 +112,7 @@
               </div>
             </div>
           </div>
-          <div class="the-form gas-amount">
+          <div class="the-form smoke-amount">
             <input
               v-model="localNonce"
               :placeholder="$t('sendTx.nonce')"
@@ -133,22 +133,22 @@
           <div class="title-container">
             <div class="title">
               <div class="title-helper">
-                <h4>{{ $t('common.gas.price') }}</h4>
+                <h4>{{ $t('common.smoke.price') }}</h4>
                 <popover :popcontent="txSpeedMsg" />
               </div>
             </div>
           </div>
-          <div class="the-form gas-amount">
+          <div class="the-form smoke-amount">
             <input
-              v-model="localGasPrice"
-              :placeholder="$t('common.gas.price')"
+              v-model="localSmokePrice"
+              :placeholder="$t('common.smoke.price')"
               type="number"
             />
             <div class="good-button-container">
               <i
                 :class="[
                   'fa fa-check-circle good-button',
-                  localGasPrice > 0 ? '' : 'not-good'
+                  localSmokePrice > 0 ? '' : 'not-good'
                 ]"
                 aria-hidden="true"
               />
@@ -193,7 +193,7 @@ import InterfaceContainerTitle from '../../components/InterfaceContainerTitle';
 import CurrencyPicker from '@/layouts/InterfaceLayout/components/CurrencyPicker';
 import SignedTxModal from './components/SignedTxModal';
 import BigNumber from 'bignumber.js';
-import * as unit from 'ethjs-unit';
+import * as unit from 'fourtwentyjs-unit';
 import { mapState } from 'vuex';
 import store from 'store';
 import { Misc, Toast } from '@/helpers';
@@ -232,11 +232,11 @@ export default {
       type: String,
       default: ''
     },
-    gaslimit: {
+    smokelimit: {
       type: String,
       default: ''
     },
-    gas: {
+    smoke: {
       type: Number,
       default: 0
     },
@@ -254,7 +254,7 @@ export default {
       type: String,
       default: '0'
     },
-    highestGas: {
+    highestSmoke: {
       type: String,
       default: '0'
     }
@@ -264,13 +264,13 @@ export default {
       toAmt: 0,
       address: '',
       toData: '0x',
-      gasLimit: 21000,
+      smokeLimit: 21000,
       selectedCoinType: {},
       raw: {},
       signed: '{}',
       localNonce: this.nonce,
       file: '',
-      localGasPrice: this.highestGas,
+      localSmokePrice: this.highestSmoke,
       clearAddress: false
     };
   },
@@ -304,9 +304,9 @@ export default {
         this.address.length > 0 &&
         this.validAddress &&
         this.toAmt >= 0 &&
-        this.gasLimit > 0 &&
+        this.smokeLimit > 0 &&
         this.localNonce >= 0 &&
-        this.localGasPrice
+        this.localSmokePrice
       );
     },
     validData() {
@@ -340,9 +340,9 @@ export default {
       this.toAmt = 0;
       this.address = '';
       this.toData = '0x';
-      this.gasLimit = 21000;
+      this.smokeLimit = 21000;
       this.localNonce = this.nonce;
-      this.localGasPrice = this.highestGas;
+      this.localSmokePrice = this.highestSmoke;
       this.clearAddress = !this.clearAddress;
       this.selectedCoinType = {
         name: this.network.type.name_long,
@@ -361,10 +361,10 @@ export default {
         this.toAmt = new BigNumber(this.value).toFixed();
         this.toData = Misc.validateHexString(this.data) ? this.data : '';
         this.address = this.to;
-        this.gasLimit = this.gaslimit
-          ? new BigNumber(this.gaslimit).toString()
+        this.smokeLimit = this.smokelimit
+          ? new BigNumber(this.smokelimit).toString()
           : '21000';
-        this.localGasPrice = new BigNumber(this.gas).toFixed();
+        this.localSmokePrice = new BigNumber(this.smoke).toFixed();
         this.selectedCoinType = foundToken ? foundToken : this.selectedCoinType;
         Toast.responseHandler(
           'Form has been prefilled. Please proceed with caution!',
@@ -418,7 +418,7 @@ export default {
       const symbol = this.network.type.currencyName;
       if (locCurrency.symbol !== symbol && locAddress !== '') {
         const locVal = locAmount === '' || locAmount === null ? '0' : locAmount;
-        const contract = new this.web3.eth.Contract(abi, locCurrency.address);
+        const contract = new this.web3.fourtwenty.Contract(abi, locCurrency.address);
         const convertedAmount = new BigNumber(locVal).times(
           new BigNumber(10).pow(locCurrency.decimals)
         );
@@ -442,7 +442,7 @@ export default {
       reader.onloadend = function (evt) {
         try {
           const file = JSON.parse(evt.target.result);
-          self.localGasPrice = unit.fromWei(file.gasPrice, 'gwei');
+          self.localSmokePrice = unit.fromWei(file.smokePrice, 'maher');
           self.localNonce = file.nonce;
         } catch (e) {
           Toast.responseHandler(e, Toast.WARN);
@@ -453,12 +453,12 @@ export default {
     async generateTx() {
       const symbol = this.network.type.currencyName;
       const isToken = this.selectedCoinType.symbol !== symbol;
-      const amtWei = unit.toWei(this.toAmt, 'ether');
+      const amtWei = unit.toWei(this.toAmt, '420coin');
       const raw = {
         nonce: Misc.sanitizeHex(new BigNumber(this.localNonce).toString(16)),
-        gasLimit: Misc.sanitizeHex(new BigNumber(this.gasLimit).toString(16)),
-        gasPrice: Misc.sanitizeHex(
-          new BigNumber(unit.toWei(this.localGasPrice, 'gwei')).toString(16)
+        smokeLimit: Misc.sanitizeHex(new BigNumber(this.smokeLimit).toString(16)),
+        smokePrice: Misc.sanitizeHex(
+          new BigNumber(unit.toWei(this.localSmokePrice, 'maher')).toString(16)
         ),
         to: isToken
           ? this.selectedCoinType.address

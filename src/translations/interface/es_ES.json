@@ -5,7 +5,7 @@
     "http-access": "HTTP Basic Access Authentication",
     "warning": "Warning: This information will be saved to your local storage, make sure your computer is secure.",
     "dont-know": "Don't know what it is?",
-    "eth-node": "ETH Node Name",
+    "fourtwenty-node": "FOURTWENTY Node Name",
     "user-name": "User Name",
     "port": "Port",
     "button-change": "Change",
@@ -39,7 +39,7 @@
     "token-added-success": "Successfully added token!"
   },
   "ads": {
-    "buy-with-credit": "Buy ETH with Credit Card",
+    "buy-with-credit": "Buy FOURTWENTY with Credit Card",
     "ios": "Available for iOS",
     "android": "and Android",
     "twitter": "Follow us on Twitter",
@@ -86,9 +86,9 @@
     "add-contact": "Add Contact"
   },
   "no-avail": "This function is not available.",
-  "dashboard-swap": "MEW has partnered with Bity, Kyber Network, Changelly, and Simplex to allow users to swap fiat to crypto, ETH and BTC, ETH and ERC20.",
-  "etherscan-tx-url": "https://etherscan.io/tx/[[txHash]]",
-  "etherscan-address-url": "https://etherscan.io/address/[[address]]",
+  "dashboard-swap": "MEW has partnered with Bity, Kyber Network, Changelly, and Simplex to allow users to swap fiat to crypto, FOURTWENTY and BTC, FOURTWENTY and ERC20.",
+  "fourtwentyscan-tx-url": "https://fourtwentyscan.420integrated.com/tx/[[txHash]]",
+  "fourtwentyscan-address-url": "https://fourtwentyscan.420integrated.com/address/[[address]]",
   "address-book": {
     "edit": "Edit",
     "add": "Add",
@@ -112,7 +112,7 @@
     "header": "MY ADDRESS ICON",
     "subheader": "Always look for this icon when sending to this wallet",
     "paper": "Paper Wallet",
-    "link2": "https://www.myetherwallet.com",
+    "link2": "https://www.my420wallet.420integrated.com",
     "my-priv": "MY PRIVATE KEY",
     "warning": "Please Keep Your Paper Wallet at a {safe} Place! Please {do-not} Share Your Private Key With Anyone!",
     "safe": "SAFE",

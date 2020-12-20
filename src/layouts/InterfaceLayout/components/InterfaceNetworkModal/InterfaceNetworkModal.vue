@@ -89,7 +89,7 @@
           <div class="input-block-container">
             <input
               v-model="name"
-              :placeholder="$t('interface.network-modal.eth-node')"
+              :placeholder="$t('interface.network-modal.fourtwenty-node')"
               class="custom-input-text-1"
               type="text"
               name="nodeName"
@@ -133,7 +133,7 @@
             <input
               v-show="selectedNetworkName === 'CUS'"
               v-model="blockExplorerTX"
-              :placeholder="$t('interface.etherscan-tx-url')"
+              :placeholder="$t('interface.fourtwentyscan-tx-url')"
               class="custom-input-text-1"
               type="text"
               name="customExplorerTx"
@@ -151,7 +151,7 @@
             <input
               v-show="selectedNetworkName === 'CUS'"
               v-model="blockExplorerAddr"
-              :placeholder="$t('interface.etherscan-address-url')"
+              :placeholder="$t('interface.fourtwentyscan-address-url')"
               class="custom-input-text-1"
               type="text"
               name="customExplorerAddr"
@@ -263,7 +263,7 @@
             <interface-bottom-text
               :link-text="$t('common.help-center')"
               :question="$t('common.dont-know')"
-              link="https://kb.myetherwallet.com"
+              link="https://kb.my420wallet.420integrated.com"
             />
           </div>
         </div>
@@ -289,8 +289,8 @@ export default {
   data() {
     return {
       types: networkTypes,
-      selectedNetworkName: 'ETH',
-      chainID: networkTypes['ETH'].chainID,
+      selectedNetworkName: 'FOURTWENTY',
+      chainID: networkTypes['FOURTWENTY'].chainID,
       port: 443,
       name: '',
       url: '',
@@ -344,7 +344,7 @@ export default {
       homePage: '',
       blockExplorerTX: '',
       blockExplorerAddr: '',
-      chainID: networkTypes['ETH'].chainID,
+      chainID: networkTypes['FOURTWENTY'].chainID,
       tokens: [],
       contracts: [],
       currencyName: 'CUS'
@@ -362,7 +362,7 @@ export default {
         if (this.customNetworks.length > 0) {
           this.switchNetwork(this.customNetworks[0]);
         } else {
-          this.switchNetwork(this.Networks.ETH[0]);
+          this.switchNetwork(this.Networks.FOURTWENTY[0]);
         }
       }
       store.set('customNetworks', this.customNetworks);

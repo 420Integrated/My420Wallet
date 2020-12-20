@@ -1,15 +1,15 @@
 {
-  "title-about": "About MyEtherWallet",
+  "title-about": "About My420Wallet",
   "what-is-mew": {
-    "title": "What is MyEtherWallet?",
-    "desc1": "MyEtherWallet (MEW) is a free, open-source, client-side interface. MEW allows you to interact directly with the blockchain, while you remain in full control of your keys and funds.",
+    "title": "What is My420Wallet?",
+    "desc1": "My420Wallet (MEW) is a free, open-source, client-side interface. MEW allows you to interact directly with the blockchain, while you remain in full control of your keys and funds.",
     "desc2": "Please think about this carefully. YOU are the one who is in control. MEW is not a bank or exchange. We don't hold your keys, your funds, or your information. This means we can't access accounts, recover keys, reset passwords, or reverse transactions.",
     "warning": "WARNING: You And Only You Are Responsible For Your Security."
   },
   "where-are-my-funds": {
     "title": "Where are my funds stored?",
-    "desc": "Your tokens and coins are not on MyEtherWallet. Just like they aren't on your hardware wallet, on MetaMask, or on blockchain explorers. All funds are on the blockchain itself. This means that we do not control them. We are a doorway that allows you to interact with the blockchain in a convenient way.",
-    "warning": "WARNING: MyEtherWallet Does Not Control Your Funds. You Do!"
+    "desc": "Your tokens and coins are not on My420Wallet. Just like they aren't on your hardware wallet, on MetaMask, or on blockchain explorers. All funds are on the blockchain itself. This means that we do not control them. We are a doorway that allows you to interact with the blockchain in a convenient way.",
+    "warning": "WARNING: My420Wallet Does Not Control Your Funds. You Do!"
   },
   "what-is-blockchain": {
     "title": "What is Blockchain?",
@@ -32,12 +32,12 @@
       "desc": "That includes your keystore file and mnemonic phrase."
     },
     "tip2": {
-      "title": "Don't trust any free ETH",
-      "desc": "If they're giving away free ETH, it's not real. If they email you saying they're us, it's not real. If they ask for your private key, it's not real."
+      "title": "Don't trust any free FOURTWENTY",
+      "desc": "If they're giving away free FOURTWENTY, it's not real. If they email you saying they're us, it's not real. If they ask for your private key, it's not real."
     },
     "tip3": {
       "title": "Bookmark our website",
-      "desc": "Always check the URL for our 'MyEtherWallet Inc [US]' certification. And install our {link} for an extra layer of security!",
+      "desc": "Always check the URL for our 'My420Wallet Inc [US]' certification. And install our {link} for an extra layer of security!",
       "link": "Chrome extension"
     },
     "tip4": {
@@ -48,7 +48,7 @@
     "tip5": {
       "title": "Feel free to contact us",
       "desc": "Please feel free to contact us. Our email is {link}. We're here to help.",
-      "link": "support@myetherwallet.com"
+      "link": "support@my420wallet.420integrated.com"
     }
   },
   "title-upside": "What's the upside?",

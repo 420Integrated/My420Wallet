@@ -34,7 +34,7 @@ export default async ({ event, payload }, res, next) => {
             event: WEB3_SUBSCRIBTION_RES,
             payload: {
               jsonrpc: '2.0',
-              method: 'eth_subscription',
+              method: 'fourtwenty_subscription',
               params: {
                 subscription: subscription.id,
                 result: response
@@ -49,8 +49,8 @@ export default async ({ event, payload }, res, next) => {
   };
 
   subscription = options
-    ? web3.eth.subscribe(possibleEvents[payload.params[0]], options, cb)
-    : web3.eth.subscribe(possibleEvents[payload.params[0]], cb);
+    ? web3.fourtwenty.subscribe(possibleEvents[payload.params[0]], options, cb)
+    : web3.fourtwenty.subscribe(possibleEvents[payload.params[0]], cb);
   timer = setInterval(() => {
     if (subscription.id) {
       clearInterval(timer);

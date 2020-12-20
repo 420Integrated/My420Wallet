@@ -17,15 +17,15 @@ import {
   CX_UNSUBSCRIBE,
   WEB3_REJECT,
   WEB3_UNSUBSCRIBE_RES,
-  WEB3_QUERY_GASPRICE,
-  CX_GET_GASPRICE,
-  WEB3_RECEIVE_GASPRICE,
+  WEB3_QUERY_SMOKEPRICE,
+  CX_GET_SMOKEPRICE,
+  WEB3_RECEIVE_SMOKEPRICE,
   WEB3_GET_TX_COUNT,
   WEB3_RECEIVE_TX_COUNT,
   CX_GET_TX_COUNT,
-  WEB3_GET_GAS,
-  WEB3_RECEIVE_GAS,
-  CX_GET_GAS,
+  WEB3_GET_SMOKE,
+  WEB3_RECEIVE_SMOKE,
+  CX_GET_SMOKE,
   REJECT_MEW_CX_ACC
 } from './cxEvents';
 
@@ -113,7 +113,7 @@ chrome.storage.onChanged.addListener(function (res) {
     const oldValKey = JSON.parse(res.defNetwork.oldValue).key;
     const isNew = oldValKey !== newValKey;
     const netVersion = {
-      ETH: 1,
+      FOURTWENTY: 1,
       ROP: 3,
       RIN: 4,
       GOERLI: 5,
@@ -191,34 +191,34 @@ events[WEB3_GET_TX_COUNT] = function (e) {
     }
   );
 };
-events[WEB3_QUERY_GASPRICE] = function () {
+events[WEB3_QUERY_SMOKEPRICE] = function () {
   chrome.runtime.sendMessage(
     extensionID,
     {
-      event: CX_GET_GASPRICE
+      event: CX_GET_SMOKEPRICE
     },
     {},
     data => {
       window.dispatchEvent(
-        new CustomEvent(WEB3_RECEIVE_GASPRICE.replace('{{id}}', extensionID), {
+        new CustomEvent(WEB3_RECEIVE_SMOKEPRICE.replace('{{id}}', extensionID), {
           detail: data
         })
       );
     }
   );
 };
-events[WEB3_GET_GAS] = function (e) {
+events[WEB3_GET_SMOKE] = function (e) {
   const payload = recursivePayloadStripper(e.detail);
   chrome.runtime.sendMessage(
     extensionID,
     {
-      event: CX_GET_GAS,
+      event: CX_GET_SMOKE,
       payload: payload
     },
     {},
     data => {
       window.dispatchEvent(
-        new CustomEvent(WEB3_RECEIVE_GAS.replace('{{id}}', extensionID), {
+        new CustomEvent(WEB3_RECEIVE_SMOKE.replace('{{id}}', extensionID), {
           detail: data
         })
       );

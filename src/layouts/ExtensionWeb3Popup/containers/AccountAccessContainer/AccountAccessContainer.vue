@@ -110,7 +110,7 @@ export default {
       const proms = [];
       for (let i = 0; i < this.accounts.length; i++) {
         if (isAddress(this.accounts[i].address)) {
-          proms.push(this.web3.eth.getBalance(this.accounts[i].address));
+          proms.push(this.web3.fourtwenty.getBalance(this.accounts[i].address));
         }
       }
       Promise.all(proms).then(values => {

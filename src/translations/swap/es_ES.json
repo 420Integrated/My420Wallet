@@ -30,10 +30,10 @@
     "no-swap-offline": "swap is not available offline",
     "swap-only-mainnet": "Swap is only available on mainnet",
     "kyber-token-list-update-failed": "Failed to update Kyber Network available token list",
-    "kyber-gasLimit-list-update-failed": "Failed to update Kyber Network trade gasLimit list",
+    "kyber-smokeLimit-list-update-failed": "Failed to update Kyber Network trade smokeLimit list",
     "kyber-list-update-failed": "Failed to update Kyber Network default information",
     "dexag-cannot-complete": "Error retrieving trade, try a different dex",
-    "gas-too-high": "Gas price is too high. Please lower your gas price and try again."
+    "smoke-too-high": "Smoke price is too high. Please lower your smoke price and try again."
   },
   "notice": {
     "retrieve-changelly-rate-failed": "Failed to retrieve Changelly rate from {fromCurrency} to {toCurrency}",
@@ -42,9 +42,9 @@
     "retrieve-simplex-rate-failed": "Failed to retrieve Simplex rate from {fromCurrency} to {toCurrency}"
   },
   "tag-line": {
-    "bity": "Swap ETH, BTC, REP, or sell for fiat using your phone!",
-    "kybernetwork": "Swap ETH and ERC20 tokens!",
-    "changelly": "Swap ETH, ERC20 tokens, and more!",
+    "bity": "Swap FOURTWENTYRTWENTYRTWENTY, BTC, REP, or sell for fiat using your phone!",
+    "kybernetwork": "Swap FOURTWENTYRTWENTYRTWENTY and ERC20 tokens!",
+    "changelly": "Swap FOURTWENTYRTWENTYRTWENTY, ERC20 tokens, and more!",
     "simplex": "Buy crypto with a credit card!",
     "dexag": "Instantly compare prices across decentralized exchanges"
   },

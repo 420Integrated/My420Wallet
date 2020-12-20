@@ -33,12 +33,12 @@
               :class="[item.active ? '' : 'disabled', 'result-item']"
             >
               <span class="domain-name"
-                >{{ domainName }}.{{ item.domain }}.eth</span
+                >{{ domainName }}.{{ item.domain }}.fourtwenty</span
               >
               <div class="buy-button-container">
                 <span class="amt"
-                  >{{ web3.utils.fromWei(item.price, 'ether') }}
-                  {{ $t('common.currency.eth') }}</span
+                  >{{ web3.utils.fromWei(item.price, '420coin') }}
+                  {{ $t('common.currency.fourtwenty') }}</span
                 >
                 <button @click="buyDomain(item)">
                   <span v-if="item.active">{{ $t('subDomain.buy') }}</span>
@@ -55,7 +55,7 @@
         <interface-bottom-text
           :link-text="$t('common.help-center')"
           :question="$t('common.have-issues')"
-          link="https://kb.myetherwallet.com"
+          link="https://kb.my420wallet.420integrated.com"
         />
       </div>
     </div>
@@ -88,7 +88,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('main', ['ethDonationAddress', 'ens', 'account', 'web3']),
+    ...mapState('main', ['fourtwentyConationAddress', 'ens', 'account', 'web3']),
     sortedResults() {
       const newArr = this.results;
       newArr.sort((a, b) => {
@@ -114,7 +114,7 @@ export default {
     }
   },
   mounted() {
-    const web3C = this.web3.eth.Contract;
+    const web3C = this.web3.fourtwenty.Contract;
     domains.forEach(domain => {
       const updatedDomain = Object.assign({}, domain);
       updatedDomain.contract = new web3C(SubdomainAbi, domain.registrar);
@@ -157,8 +157,8 @@ export default {
       const domain = this.web3.utils.sha3(item.domain);
       const subdomain = this.domainName;
       const ownerAddress = this.account.address;
-      const referrerAddress = this.ethDonationAddress;
-      const resolverAddress = await this.ens.resolver('resolver.eth').addr();
+      const referrerAddress = this.fourtwentyDonationAddress;
+      const resolverAddress = await this.ens.resolver('resolver.fourtwenty').addr();
       const itemContract = this.knownRegistrarInstances[item.domain];
       const data = await (item.version === '1.0'
         ? itemContract.contract.methods
@@ -185,7 +185,7 @@ export default {
         to: itemContract.registrar,
         value: item.price
       };
-      this.web3.eth.sendTransaction(raw).catch(err => {
+      this.web3.fourtwenty.sendTransaction(raw).catch(err => {
         Toast.responseHandler(err, Toast.ERROR);
       });
     }

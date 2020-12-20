@@ -45,7 +45,7 @@ xdescribe('ProvidersRadioSelector.vue', () => {
   it('should render correct noProvidersPair data', () => {
     const noProvidersPair = {
       fromCurrency: 'BTC',
-      toCurrency: 'ETH'
+      toCurrency: 'FOURTWENTY'
     };
 
     wrapper.setProps({ noProvidersPair });
@@ -68,28 +68,28 @@ xdescribe('ProvidersRadioSelector.vue', () => {
         fromValue: '100',
         rate: '2',
         fromCurrency: 'BTC',
-        toCurrency: 'ETH'
+        toCurrency: 'FOURTWENTY'
       },
       {
         provider: 'bity',
         fromValue: '100',
         rate: '2',
         fromCurrency: 'BTC',
-        toCurrency: 'ETH'
+        toCurrency: 'FOURTWENTY'
       },
       {
         provider: 'simplex',
         fromValue: '100',
         rate: '2',
         fromCurrency: 'BTC',
-        toCurrency: 'ETH'
+        toCurrency: 'FOURTWENTY'
       },
       {
         provider: 'changelly',
         fromValue: '100',
         rate: '2',
         fromCurrency: 'BTC',
-        toCurrency: 'ETH'
+        toCurrency: 'FOURTWENTY'
       }
     ];
     wrapper.setProps({ providerData });

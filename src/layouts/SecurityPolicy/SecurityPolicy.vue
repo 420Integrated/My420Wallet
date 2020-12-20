@@ -1,31 +1,31 @@
 <template>
   <div class="page-container policy">
     <div>
-      <h1 class="mb-5 text-center">MyEtherWallet security policy</h1>
+      <h1 class="mb-5 text-center">MyFourtwentyerWallet security policy</h1>
       <p>
-        MyEtherWallet (MEW) looks forward to working with the security community
+        MyFourtwentyerWallet (MEW) looks forward to working with the security community
         to identify vulnerabilities in order to keep our users and MEW safe.
       </p>
       <p>
         MEW is passionate about providing a seamless and secure experience to
         our community. We are devoted to protecting our users private
         information and providing them an opportunity to interact with the
-        Ethereum blockchain in the safest manner possible. Security is our first
+        420coin blockchain in the safest manner possible. Security is our first
         priority and obligation and we always appreciate the valuable
         contributions! If you have any information regarding security
         vulnerabilities on the
         <strong>
-          MyEtherWallet website, MEW wallet App, MEWconnect App and MEW CX
+          MyFourtwentyerWallet website, MEW wallet App, MEWconnect App and MEW CX
         </strong>
         report it to
-        <a href="mailto:bugbounty@myetherwallet.com">
-          bugbounty@myetherwallet.com
+        <a href="mailto:bugbounty@my420wallet.420integrated.com">
+          bugbounty@my420wallet.420integrated.com
         </a>
         according to our guidelines (jump to reporting rules)!
       </p>
       <p>
         Any vulnerabilities submitted under this policy will be used for the
-        purposes of improving MyEtherWallet security as well as the user
+        purposes of improving MyFourtwentyerWallet security as well as the user
         experience. We aim to establish a positive feedback between MEW and
         researchers that will contribute to this program - we appreciate your
         patience as we strive to perfect this process.
@@ -37,7 +37,7 @@
         <ul>
           <li>MEW wallet App (Beta version Included)</li>
           <li>MEWconnect App (Beta version Included)</li>
-          <li>Current live version of MyEtherWallet . com</li>
+          <li>Current live version of MyFourtwentyerWallet . com</li>
           <li>MEW CX</li>
         </ul>
       </div>
@@ -56,14 +56,14 @@
           <td>Scope</td>
           <td>
             <div>
-              <strong>MyEtherWallet.com</strong>
+              <strong>MyFourtwentyerWallet.com</strong>
               <div>
                 Code base can be found:
                 <a
-                  href="https://github.com/MyEtherWallet/MyEtherWallet"
+                  href="https://github.com/420integrated/My420Wallet"
                   target="_blank"
                 >
-                  https://github.com/MyEtherWallet/MyEtherWallet
+                  https://github.com/420integrated/My420Wallet
                 </a>
               </div>
             </div>
@@ -84,9 +84,9 @@
                   <li>
                     Android:
                     <a
-                      href="https://play.google.com/store/apps/details?id=com.myetherwallet.mewwallet"
+                      href="https://play.google.com/store/apps/details?id=com.420integrated.my420wallet"
                       target="_blank"
-                      >https://play.google.com/store/apps/details?id=com.myetherwallet.mewwallet</a
+                      >https://play.google.com/store/apps/details?id=com.420integrated.my420wallet</a
                     >
                   </li>
                 </ul>
@@ -97,18 +97,18 @@
               <div>
                 Code base Android:
                 <a
-                  href="https://github.com/MyEtherWallet/MEWconnect-Android"
+                  href="https://github.com/420integrated/My420Wallet/MEWconnect-Android"
                   target="_blank"
                 >
-                  https://github.com/MyEtherWallet/MEWconnect-Android
+                  https://github.com/420integrated/My420Wallet/MEWconnect-Android
                 </a>
                 <br />
                 Code base iOS:
                 <a
-                  href="https://github.com/MyEtherWallet/MEWconnect-iOS"
+                  href="https://github.com/420integrated/My420Wallet/MEWconnect-iOS"
                   target="_blank"
                 >
-                  https://github.com/MyEtherWallet/MEWconnect-iOS
+                  https://github.com/420integrated/My420Wallet/MEWconnect-iOS
                 </a>
                 <br />
                 iOS store:
@@ -121,10 +121,10 @@
                 <br />
                 Android:
                 <a
-                  href="https://play.google.com/store/apps/details?id=com.myetherwallet.mewconnect"
+                  href="https://play.google.com/store/apps/details?id=com.420integrated.m420wconnect"
                   target="_blank"
                 >
-                  https://play.google.com/store/apps/details?id=com.myetherwallet.mewconnect
+                  https://play.google.com/store/apps/details?id=com.420integrated.m420wconnect
                 </a>
               </div>
             </div>
@@ -133,10 +133,10 @@
               <div>
                 Code base can be found:
                 <a
-                  href="https://github.com/MyEtherWallet/MyEtherWallet"
+                  href="https://github.com/420integrated/My420Wallet"
                   target="_blank"
                 >
-                  https://github.com/MyEtherWallet/MyEtherWallet
+                  https://github.com/420integrated/My420Wallet
                 </a>
                 <br />
                 Chrome Web Store:
@@ -163,9 +163,9 @@
                 https://en.wikipedia.org/wiki/Common_Vulnerability_Scoring_System
               </a>
               ). Please note these are general guidelines, and that reward
-              decisions are up to the discretion of MyEtherWallet.
+              decisions are up to the discretion of MyFourtwentyerWallet.
               <strong>
-                Each bounty reward will be paid in ETH with equivalent USD
+                Each bounty reward will be paid in FOURTWENTY with equivalent USD
                 value, at the time of transfer:
               </strong>
             </div>
@@ -190,7 +190,7 @@
           <td>SLA</td>
           <td>
             <div>
-              MyEtherWallet will make a best effort to meet the following SLAs
+              MyFourtwentyerWallet will make a best effort to meet the following SLAs
               for researches participating in our bug bounty program:
               <br /><br />
               <strong
@@ -217,7 +217,7 @@
             <div>
               Please do not discuss this program or any vulnerabilities (even
               resolved ones) outside, without express consent from
-              MyEtherWallet.
+              MyFourtwentyerWallet.
             </div>
           </td>
         </tr>
@@ -267,7 +267,7 @@
               These includes bugs with sufficient severity and not limited to:
             </div>
             <div class="mb-2">
-              <strong>MyEtherWallet Website and MEW CX:</strong>
+              <strong>MyFourtwentyerWallet Website and MEW CX:</strong>
             </div>
             <ul class="mb-3">
               <li>Clickjacking</li>
@@ -290,7 +290,7 @@
               <li>Unauthorised P2P connection</li>
               <li>
                 Modification of request received by the Mobile application on
-                MCBeta.myetherwallet.com
+                MCBeta.my420wallet.420integrated.com
               </li>
             </ul>
           </td>
@@ -304,7 +304,7 @@
               following issues are considered out of scope:
             </div>
             <div class="mb-2">
-              <strong>MyEtherWallet Website and MEW CX</strong>
+              <strong>MyFourtwentyerWallet Website and MEW CX</strong>
             </div>
             <ul>
               <li>Clickjacking on pages with no sensitive information.</li>
@@ -345,7 +345,7 @@
               <li>Text-only injection in error pages</li>
               <li>
                 Any other service not directly hosted or controlled by
-                MyEtherWallet.com. MEW will determine at its discretion whether
+                MyFourtwentyerWallet.com. MEW will determine at its discretion whether
                 a vulnerability is eligible for a reward and the amount of the
                 award.
               </li>
@@ -393,7 +393,7 @@
       </tbody>
     </table>
 
-    <div>Thank you for helping keep MyEtherWallet and our community safe!</div>
+    <div>Thank you for helping keep MyFourtwentyerWallet and our community safe!</div>
   </div>
 </template>
 

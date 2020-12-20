@@ -1,5 +1,9 @@
 const currencies = [
   {
+    name: 'fourtwentycoin',
+    symbol: '420'
+  },
+  {
     name: 'bitcoin',
     symbol: 'btc'
   },
@@ -195,8 +199,8 @@ const multiCoinCurrencies = [
     symbol: 'neo'
   },
   {
-    name: 'NeoGas',
-    symbol: 'gas'
+    name: 'NeoSmoke',
+    symbol: 'smoke'
   },
   {
     name: 'Qtum',

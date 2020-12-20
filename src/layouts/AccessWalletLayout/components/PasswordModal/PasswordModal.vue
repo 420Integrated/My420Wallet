@@ -94,13 +94,13 @@ export default {
   },
   methods: {
     ...mapActions('main', ['decryptWallet']),
-    walletRequirePass(ethjson) {
-      if (!ethjson) return false;
-      if (ethjson.encseed != null) return true;
-      else if (ethjson.Crypto != null || ethjson.crypto != null) return true;
-      else if (ethjson.hash != null && ethjson.locked) return true;
-      else if (ethjson.hash != null && !ethjson.locked) return false;
-      else if (ethjson.publisher == 'MyEtherWallet' && !ethjson.encrypted)
+    walletRequirePass(fourtwentyjson) {
+      if (!fourtwentyjson) return false;
+      if (fourtwentyjson.encseed != null) return true;
+      else if (fourtwentyjson.Crypto != null || fourtwentyjson.crypto != null) return true;
+      else if (fourtwentyjson.hash != null && fourtwentyjson.locked) return true;
+      else if (fourtwentyjson.hash != null && !fourtwentyjson.locked) return false;
+      else if (fourtwentyjson.publisher == '420integrated/My420Wallet' && !fourtwentyjson.encrypted)
         return false;
       return true;
     },

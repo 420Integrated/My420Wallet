@@ -7,7 +7,7 @@
 
   * Briefly explain the feature you would like us to implement
   * What are the current issues this feature will solve
-  * Is this feature cross compatible with other ethereum networks
+  * Is this feature cross compatible with other 420coin networks
   * Are you willing to help us with development support if required
   * Where can this be added? e.g: `/interface`, `/create-wallet`, etc.
 

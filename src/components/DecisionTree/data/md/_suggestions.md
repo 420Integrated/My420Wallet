@@ -6,5 +6,5 @@
 
 #### Contact Form:
 
-* Email us at <mailto:support@myetherwallet.com>
+* Email us at <mailto:support@my420wallet.420integrated.com>
 * Include a detailed description of the suggestion.

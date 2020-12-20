@@ -1,6 +1,6 @@
-import unit from 'ethjs-unit';
+import unit from 'fourtwentyjs-unit';
 import utils from 'web3-utils';
-import EthCalls from '../web3Calls';
+import FourtwentyCalls from '../web3Calls';
 import { WEB3_WALLET, WALLET_CONNECT } from '../../bip44/walletTypes';
 import EventNames from '../events';
 import { toPayload } from '../jsonrpc';
@@ -26,20 +26,20 @@ export default async (
   res,
   next
 ) => {
-  if (payload.method !== 'eth_sendTransaction') return next();
+  if (payload.method !== 'fourtwenty_sendTransaction') return next();
   const tx = Object.assign({}, payload.params[0]);
-  tx.gasPrice = unit.toWei(store.state.gasPrice, 'gwei').toString();
+  tx.smokePrice = unit.toWei(store.state.smokePrice, 'maher').toString();
   const localTx = Object.assign({}, tx);
-  delete localTx['gas'];
+  delete localTx['smoke'];
   delete localTx['nonce'];
-  const ethCalls = new EthCalls(requestManager);
+  const fourtwentyCalls = new FourtwentyCalls(requestManager);
   try {
     tx.nonce = !tx.nonce
-      ? await store.state.web3.eth.getTransactionCount(
+      ? await store.state.web3.fourtwenty.getTransactionCount(
           store.state.wallet.getAddressString()
         )
       : tx.nonce;
-    tx.gas = !tx.gas ? await ethCalls.estimateGas(localTx) : tx.gas;
+    tx.smoke = !tx.smoke ? await fourtwentyCalls.estimateSmoke(localTx) : tx.smoke;
   } catch (e) {
     res(e);
     return;
@@ -63,7 +63,7 @@ export default async (
         });
       } else {
         eventHub.$emit(EventNames.SHOW_TX_CONFIRM_MODAL, _tx, _response => {
-          const _promiObj = store.state.web3.eth.sendSignedTransaction(
+          const _promiObj = store.state.web3.fourtwenty.sendSignedTransaction(
             _response.rawTransaction
           );
 

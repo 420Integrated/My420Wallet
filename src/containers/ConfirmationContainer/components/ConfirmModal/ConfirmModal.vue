@@ -63,18 +63,18 @@
                 </p>
               </div>
               <div class="grid-block">
-                <p>{{ $t('common.gas.limit') }}</p>
-                <p>{{ gas }}</p>
+                <p>{{ $t('common.smoke.limit') }}</p>
+                <p>{{ smoke }}</p>
               </div>
               <div class="grid-block">
-                <p>{{ $t('common.gas.price') }}</p>
-                <p>{{ gasPrice }} {{ $t('common.gas.gwei') }}</p>
+                <p>{{ $t('common.smoke.price') }}</p>
+                <p>{{ smokePrice }} {{ $t('common.smoke.maher') }}</p>
               </div>
-              <div v-if="showGasWarning" class="gas-price-warning">
-                {{ $t('errorsGlobal.high-gas-limit-warning') }}
+              <div v-if="showSmokeWarning" class="smoke-price-warning">
+                {{ $t('errorsGlobal.high-smoke-limit-warning') }}
               </div>
-              <div v-else-if="showLowGasWarning" class="gas-price-warning">
-                {{ $t('errorsGlobal.low-gas-price') }}
+              <div v-else-if="showLowSmokeWarning" class="smoke-price-warning">
+                {{ $t('errorsGlobal.low-smoke-price') }}
               </div>
               <div class="grid-block">
                 <p>{{ $t('sendTx.tx-fee') }}</p>
@@ -141,11 +141,11 @@ export default {
       type: String,
       default: ''
     },
-    gas: {
+    smoke: {
       type: String,
       default: ''
     },
-    gasPrice: {
+    smokePrice: {
       type: String,
       default: '0'
     },
@@ -165,11 +165,11 @@ export default {
       type: Boolean,
       default: false
     },
-    showGasWarning: {
+    showSmokeWarning: {
       type: Boolean,
       default: false
     },
-    showLowGasWarning: {
+    showLowSmokeWarning: {
       type: Boolean,
       default: false
     }
@@ -177,7 +177,7 @@ export default {
   data() {
     return {
       modalDetailInformation:
-        this.showGasWarning || this.showLowGasWarning || false,
+        this.showSmokeWarning || this.showLowSmokeWarning || false,
       transactionSigned: false,
       tokenTransferTo: '',
       tokenTransferVal: '',
@@ -191,10 +191,10 @@ export default {
     data(newVal) {
       this.parseData(newVal);
     },
-    showGasWarning(newVal) {
+    showSmokeWarning(newVal) {
       this.modalDetailInformation = newVal;
     },
-    showLowGasWarning(newVal) {
+    showLowSmokeWarning(newVal) {
       this.modalDetailInformation = newVal;
     }
   },

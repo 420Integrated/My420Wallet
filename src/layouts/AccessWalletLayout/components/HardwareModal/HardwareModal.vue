@@ -141,64 +141,6 @@ export default {
               : '',
           link: 'https://trezor.io/?offer_id=12&aff_id=2029'
         },
-        {
-          name: KEEPKEY_TYPE,
-          imgPath: keepkey,
-          text: 'KeepKey',
-          disabled: false,
-          msg: '',
-          link: 'http://lddy.no/a4im'
-        },
-        {
-          name: COOLWALLET_TYPE,
-          imgPath: coolwallet,
-          text: 'CoolWallet',
-          disabled: false,
-          msg: '',
-          link: 'https://www.coolwallet.io/mew/?ref=myetherwallet1'
-        },
-        {
-          name: FINNEY_TYPE,
-          imgPath: finney,
-          text: 'FINNEY',
-          disabled: false,
-          msg: '',
-          link:
-            'http://shop.sirinlabs.com?rfsn=2397639.54fdf&utm_source=refersion&utm_medium=affiliate&utm_campaign=2397639.54fdf'
-        },
-        {
-          name: 'BitBox',
-          imgPath: bitbox,
-          text: 'BitBox',
-          disabled: false,
-          msg: '',
-          // link: 'https://shiftcrypto.ch/?ref=MEW'
-          link: ''
-        },
-        {
-          name: XWALLET_TYPE,
-          imgPath: xwallet,
-          text: 'XWallet',
-          disabled: false,
-          msg: '',
-          link: 'https://xwallet.pundix.com'
-        },
-        {
-          name: SECALOT_TYPE,
-          imgPath: secalot,
-          text: 'Secalot',
-          disabled: false,
-          msg: '',
-          link: 'https://www.secalot.com/'
-        },
-        {
-          name: BCVAULT_TYPE,
-          imgPath: bcvault,
-          text: 'BC Vault',
-          disabled: false,
-          msg: '',
-          link: 'https://bc-vault.com/?wpam_id=53'
-        }
       ]
     };
   },

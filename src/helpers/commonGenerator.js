@@ -1,4 +1,4 @@
-import Common from 'ethereumjs-common';
+import Common from 'fourtwentyjs-common';
 
 const commonGenerator = network => {
   const customCommon = Common.forCustomChain('mainnet', {

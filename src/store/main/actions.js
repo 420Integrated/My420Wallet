@@ -7,7 +7,7 @@ import {
   WALLET_CONNECT,
   WALLET_LINK
 } from '@/wallets/bip44/walletTypes';
-import * as unit from 'ethjs-unit';
+import * as unit from 'fourtwentyjs-unit';
 import { formatters } from 'web3-core-helpers';
 import { MEW_CX } from '@/builds/configs/types';
 import {
@@ -183,8 +183,8 @@ const setAccountBalance = function ({ commit }, balance) {
   commit('SET_ACCOUNT_BALANCE', balance);
 };
 
-const setGasPrice = function ({ commit }, gasPrice) {
-  commit('SET_GAS_PRICE', gasPrice);
+const setSmokePrice = function ({ commit }, smokePrice) {
+  commit('SET_SMOKE_PRICE', smokePrice);
 };
 
 const setAddressBook = function ({ commit }, addressBook) {
@@ -202,7 +202,7 @@ const setLocale = function ({ commit }, val) {
 const setWeb3Instance = function ({ dispatch, commit, state }, provider) {
   const hostUrl = state.network.url
     ? url.parse(state.network.url)
-    : state.Networks['ETH'][0];
+    : state.Networks['FOURTWENTY'][0];
   const options = {};
   // eslint-disable-next-line
   const parsedUrl = `${hostUrl.protocol}//${hostUrl.host}${
@@ -238,23 +238,23 @@ const setWeb3Instance = function ({ dispatch, commit, state }, provider) {
             data: arr[i].data,
             from: arr[i].from,
             value: arr[i].value,
-            gasPrice: arr[i].gasPrice
+            smokePrice: arr[i].smokePrice
           };
-          const gas = await (arr[i].gas === undefined
-            ? web3Instance.eth.estimateGas(localTx)
-            : arr[i].gas);
+          const smoke = await (arr[i].smoke === undefined
+            ? web3Instance.fourtwenty.estimateSmoke(localTx)
+            : arr[i].smoke);
           const nonce = await (arr[i].nonce === undefined
-            ? web3Instance.eth.getTransactionCount(state.account.address)
+            ? web3Instance.fourtwenty.getTransactionCount(state.account.address)
             : arr[i].nonce);
           arr[i].nonce = new BigNumber(nonce + i).toFixed();
-          arr[i].gas = gas;
+          arr[i].smoke = smoke;
           arr[i].chainId = !arr[i].chainId
             ? state.network.type.chainID
             : arr[i].chainId;
-          arr[i].gasPrice =
-            arr[i].gasPrice === undefined
-              ? unit.toWei(state.gasPrice, 'gwei')
-              : arr[i].gasPrice;
+          arr[i].smokePrice =
+            arr[i].smokePrice === undefined
+              ? unit.toWei(state.smokePrice, 'maher')
+              : arr[i].smokePrice;
           arr[i] = formatters.inputCallFormatter(arr[i]);
         }
 
@@ -334,8 +334,8 @@ const toggleTempHide = function ({ commit }) {
   commit('TOGGLE_TEMP_HIDE');
 };
 
-const setEthGasPrice = function ({ commit }, val) {
-  commit('SET_ETH_GASPRICE', val);
+const setFourtwentySmokePrice = function ({ commit }, val) {
+  commit('SET_FOURTWENTY_SMOKEPRICE', val);
 };
 
 export default {
@@ -350,7 +350,7 @@ export default {
   removeCustomPath,
   removeNotification,
   setAccountBalance,
-  setGasPrice,
+  setSmokePrice,
   setState,
   setENS,
   setLastPath,
@@ -365,5 +365,5 @@ export default {
   toggleSideMenu,
   setLocale,
   toggleTempHide,
-  setEthGasPrice
+  setFourtwentySmokePrice
 };

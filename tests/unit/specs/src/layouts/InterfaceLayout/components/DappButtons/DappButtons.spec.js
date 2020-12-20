@@ -21,7 +21,7 @@ describe('DappButtons.vue', () => {
   const iconDisabled =
     'https://media.kasperskydaily.com/wp-content/uploads/sites/92/2016/09/06021623/bitcoin-easy-explanation-featured.jpg';
   const param = 'DappButtons param';
-  const supportedNetworks = ['ETH'];
+  const supportedNetworks = ['FOURTWENTY'];
   beforeAll(() => {
     const baseSetup = Tooling.createLocalVueInstance();
     localVue = baseSetup.localVue;

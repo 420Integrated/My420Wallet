@@ -18,7 +18,7 @@ describe('InterfaceLayout.vue', () => {
   //   Vue.config.warnHandler = () => {};
   //   Vue.config.errorHandler = () => {};
   //   const actions = {
-  //     setGasPrice: jest.fn()
+  //     setSmokePrice: jest.fn()
   //   };
   //   store = new Vuex.Store({
   //     actions,

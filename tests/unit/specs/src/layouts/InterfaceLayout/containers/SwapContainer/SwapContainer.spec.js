@@ -101,9 +101,9 @@ describe('SwapContainer.vue', () => {
   it('should clear the form', () => {
     wrapper.setData({
       fromCurrency: 'BTC',
-      toCurrency: 'ETH',
+      toCurrency: 'FOURTWENTY',
       overrideFrom: { name: 'Bitcoin', symbol: 'BTC' },
-      overrideTo: { name: 'Ether', symbol: 'ETH' },
+      overrideTo: { name: 'Fourtwentycoin', symbol: '420' },
       fromValue: '5',
       providerSelectedName: 'Simplex',
       toAddress: '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D',
@@ -112,14 +112,14 @@ describe('SwapContainer.vue', () => {
     });
     wrapper.find('.clear-all-btn').trigger('click');
     expect(wrapper.vm.$data.fromCurrency).toEqual('BTC');
-    expect(wrapper.vm.$data.toCurrency).toEqual('ETH');
+    expect(wrapper.vm.$data.toCurrency).toEqual('FOURTWENTY');
     expect(wrapper.vm.$data.overrideFrom).toEqual({
       name: 'Bitcoin',
       symbol: 'BTC'
     });
     expect(wrapper.vm.$data.overrideTo).toEqual({
-      name: 'Ether',
-      symbol: 'ETH'
+      name: 'Fourtwentycoin',
+      symbol: '420'
     });
     expect(wrapper.vm.$data.fromValue).toEqual(1);
     expect(wrapper.vm.$data.providerSelectedName).toEqual('');

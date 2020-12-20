@@ -65,7 +65,7 @@
     },
     "modal": {
       "title": "Access via MetaMask",
-      "text": "Please use MyEtherWallet on a secure (SSL/HTTPS) connection to connect.",
+      "text": "Please use My420Wallet on a secure (SSL/HTTPS) connection to connect.",
       "button-install": "Install Metamask",
       "button-refresh": "Refresh",
       "terms": "To Access my Wallet, I accept {terms}."

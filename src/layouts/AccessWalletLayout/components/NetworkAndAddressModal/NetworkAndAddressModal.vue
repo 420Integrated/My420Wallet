@@ -395,7 +395,7 @@ export default {
     },
     convertBalance(bal) {
       if (bal === 'loading') return bal;
-      return new BigNumber(web3utils.fromWei(bal, 'ether')).toFixed(3);
+      return new BigNumber(web3utils.fromWei(bal, '420coin')).toFixed(3);
     },
     removeCustomPathLocal(path) {
       this.removeCustomPath(path).then(() => {
@@ -446,7 +446,7 @@ export default {
     setBalances: web3utils._.debounce(function () {
       this.HDAccounts.forEach(account => {
         if (account.account) {
-          this.web3.eth
+          this.web3.fourtwenty
             .getBalance(account.account.getAddressString())
             .then(balance => {
               account.balance = balance;
@@ -478,7 +478,7 @@ export default {
         });
     },
     async setHDAccounts() {
-      if (!this.web3.eth) this.setWeb3Instance();
+      if (!this.web3.fourtwenty) this.setWeb3Instance();
       this.HDAccounts = [];
       for (
         let i = this.currentIndex;

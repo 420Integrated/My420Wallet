@@ -12,7 +12,7 @@ function capitalize(value) {
 describe('DropDownUnitSelector.vue', () => {
   let localVue, i18n, wrapper, store;
 
-  const options = ['Wei', 'Kwei', 'Mwei', 'Gwei', 'Szabo'];
+  const options = ['Wei', 'Kwei', 'Mwei', 'Maher', 'Szabo'];
   beforeAll(() => {
     const baseSetup = Tooling.createLocalVueInstance();
     localVue = baseSetup.localVue;

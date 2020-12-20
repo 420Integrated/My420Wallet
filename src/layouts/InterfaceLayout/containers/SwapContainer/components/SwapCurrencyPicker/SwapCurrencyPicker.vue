@@ -200,7 +200,7 @@ export default {
       this.selectedCurrency = this.defaultValue;
     } else if (typeof this.fromSource === 'boolean') {
       if (this.fromSource) {
-        this.selectedCurrency = { name: 'Ether', symbol: 'ETH' };
+        this.selectedCurrency = { name: 'Fourtwentycoin', symbol: 'FOURTWENTY' };
       } else {
         this.selectedCurrency = { name: 'Bitcoin', symbol: 'BTC' };
       }
@@ -219,7 +219,7 @@ export default {
     },
     iconFetcher(tok) {
       try {
-        if (tok === 'ETH') return false;
+        if (tok === 'FOURTWENTY') return false;
         const address = this.swapTokenAddress(tok);
         if (!address) {
           try {

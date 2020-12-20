@@ -36,12 +36,12 @@
             <li>{{ rawTx.chainID }}</li>
           </ul>
           <ul>
-            <li>{{ $t('common.gas.limit') }}t</li>
-            <li>{{ rawTx.gasLimit }}</li>
+            <li>{{ $t('common.smoke.limit') }}t</li>
+            <li>{{ rawTx.smokeLimit }}</li>
           </ul>
           <ul>
-            <li>{{ $t('common.gas.price') }}</li>
-            <li>{{ rawTx.gasPrice }}</li>
+            <li>{{ $t('common.smoke.price') }}</li>
+            <li>{{ rawTx.smokePrice }}</li>
           </ul>
         </div>
         <expanding-option

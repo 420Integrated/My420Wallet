@@ -45,52 +45,42 @@ export default {
       links: [
         {
           img: facebook,
-          to: 'https://www.facebook.com/MyEtherWallet',
+          to: 'https://www.facebook.com/420integrated',
           name: this.$t('home.social.facebook')
         },
         {
           img: twitter,
-          to: 'https://twitter.com/myetherwallet',
+          to: 'https://twitter.com/420integrated',
           name: this.$t('home.social.twitter')
         },
         {
           img: medium,
-          to: 'https://medium.com/@myetherwallet',
+          to: 'https://medium.com/@420integrated',
           name: this.$t('home.social.medium')
         },
         {
           img: reddit,
-          to: 'https://www.reddit.com/r/myetherwallet',
+          to: 'https://www.reddit.com/r/420integrated',
           name: this.$t('home.social.reddit')
         },
         {
           img: github,
-          to: 'https://www.github.com/myetherwallet',
+          to: 'https://www.github.com/420integrated',
           name: this.$t('home.social.github')
         },
         {
-          img: vkontakte,
-          to: 'https://vk.com/public190491855',
-          name: this.$t('home.social.vkontakte')
-        },
-        {
           img: youtube,
-          to: 'https://www.youtube.com/c/myetherwallet',
+          to: 'https://www.youtube.com/c/420integrated',
           name: this.$t('home.social.youtube')
         },
         {
-          img: mewtopia,
-          to: 'https://www.mewtopia.com',
-          name: this.$t('home.social.mewtopia')
-        },
-        {
           img: instagram,
-          to: 'https://www.instagram.com/myetherwallet',
+          to: 'https://www.instagram.com/420integrated',
           name: this.$t('home.social.instagram')
         },
         {
           img: telegram,
-          to: 'https://t.me/myetherwallet',
+          to: 'https://t.me/420integrated',
           name: this.$t('home.social.telegram')
         }
       ]

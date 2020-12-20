@@ -12,62 +12,62 @@
       >
         <div class="modal-contents">
           <full-width-dropdown
-            ref="gasDropdown"
+            ref="smokeDropdown"
             :title="$t('interface.config.tx-speed')"
             class="tx-speed"
           >
             <div class="radio-buttons">
               <ul>
                 <li
-                  v-for="(val, key) in gasPriceInputs"
+                  v-for="(val, key) in smokePriceInputs"
                   :key="key"
-                  :class="selectedGasType === key ? 'selected' : ''"
+                  :class="selectedSmokeType === key ? 'selected' : ''"
                 >
                   <div>
                     <input
                       :id="key"
                       :value="key"
-                      :checked="selectedGasType === key"
+                      :checked="selectedSmokeType === key"
                       name="speedRadioInputs"
                       type="radio"
-                      @change="selectGasType(key)"
+                      @change="selectSmokeType(key)"
                     />
                     <label :for="key">
                       {{ $t('interface.' + key) }}
-                      ({{ displayedGasPriceValue(gasPriceInputs[key].gwei) }}
-                      {{ $t('common.gas.gwei') }})
+                      ({{ displayedSmokePriceValue(smokePriceInputs[key].maher) }}
+                      {{ $t('common.smoke.maher') }})
                     </label>
                   </div>
                 </li>
-                <li :class="selectedGasType === 'other' ? 'selected' : ''">
+                <li :class="selectedSmokeType === 'other' ? 'selected' : ''">
                   <div>
                     <input
                       id="ccc"
-                      :checked="selectedGasType === 'other'"
+                      :checked="selectedSmokeType === 'other'"
                       type="radio"
                       name="speedRadioInputs"
                       value="other"
-                      @change="selectGasType('other')"
+                      @change="selectSmokeType('other')"
                     />
                     <input
                       ref="customInput"
-                      v-model="customGas"
+                      v-model="customSmoke"
                       type="number"
-                      :placeholder="$t('common.gas.price-range')"
-                      @focus="selectedGasType = 'other'"
+                      :placeholder="$t('common.smoke.price-range')"
+                      @focus="selectedSmokeType = 'other'"
                     />
-                    <p class="gwei">{{ $t('common.gas.gwei') }}</p>
+                    <p class="maher">{{ $t('common.smoke.maher') }}</p>
                   </div>
                   <p class="hidden">
-                    {{ customGasEth }}
+                    {{ customSmokeFourtwenty }}
                     {{ network.type.currencyName }}
                     <span
                       v-if="
-                        ethPrice !== 0 &&
-                        customGasEth !== 0 &&
-                        network.type.name === 'ETH'
+                        fourtwentyPrice !== 0 &&
+                        customSmokeFourtwenty !== 0 &&
+                        network.type.name === 'FOURTWENTY'
                       "
-                      >($ {{ convert(customGasEth) }})</span
+                      >($ {{ convert(customSmokeFourtwenty) }})</span
                     >
                   </p>
                 </li>
@@ -82,8 +82,8 @@
                   leftArrow: false,
                   mobileFullWidth: true
                 }"
-                :button-disabled="selectedGasType === 'other' && customGas < 1"
-                :click-function="saveGasChanges"
+                :button-disabled="selectedSmokeType === 'other' && customSmoke < 1"
+                :click-function="saveSmokeChanges"
               />
             </div>
           </full-width-dropdown>
@@ -204,7 +204,7 @@
                       />
                       <a
                         :href="
-                          'https://etherscan.io/address/' + contact.address
+                          'https://fourtwentyscan.420integrated.com/address/' + contact.address
                         "
                         rel="noopener noreferrer"
                         class="contact-addr"
@@ -264,7 +264,7 @@ import {
   getOther,
   fastToEconomy,
   regularToEconomy
-} from '@/helpers/gasMultiplier';
+} from '@/helpers/smokeMultiplier';
 export default {
   name: 'Settings',
   components: {
@@ -281,10 +281,10 @@ export default {
   data() {
     return {
       inputFileName: '',
-      selectedGasType: 'economy',
-      customGas: 0,
-      customGasEth: 0,
-      ethPrice: 0,
+      selectedSmokeType: 'economy',
+      customSmoke: 0,
+      customSmokeFourtwenty: 0,
+      fourtwentyPrice: 0,
       fileName: '',
       file: '',
       importedFile: '',
@@ -295,7 +295,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('main', ['network', 'online', 'addressBook', 'gasPrice']),
+    ...mapState('main', ['network', 'online', 'addressBook', 'smokePrice']),
     sortedAddressBook() {
       return this.addressBook.slice().sort((a, b) => {
         a = a.nickname.toString().toLowerCase();
@@ -304,61 +304,61 @@ export default {
         return a < b ? -1 : a > b ? 1 : 0;
       });
     },
-    gasPriceInputs() {
+    smokePriceInputs() {
       return {
         economy: {
-          gwei: getEconomy(this.baseGasPrice)
+          maher: getEconomy(this.baseSmokePrice)
         },
         regular: {
-          gwei: getRegular(this.baseGasPrice)
+          maher: getRegular(this.baseSmokePrice)
         },
         fast: {
-          gwei: getFast(this.baseGasPrice)
+          maher: getFast(this.baseSmokePrice)
         }
       };
     },
-    baseGasPrice() {
+    baseSmokePrice() {
       // computed hack to make it react to network
       this.network;
-      const fetchedGasPrice =
-        store.get('fetchedGasPrice') || store.get('gasPrice') || 41;
-      const type = store.get('gasPriceType') || 'economy';
-      const gasPrice = type === 'other' ? fetchedGasPrice : this.gasPrice;
+      const fetchedSmokePrice =
+        store.get('fetchedSmokePrice') || store.get('smokePrice') || 41;
+      const type = store.get('smokePriceType') || 'economy';
+      const smokePrice = type === 'other' ? fetchedSmokePrice : this.smokePrice;
       return type === 'fast'
-        ? fastToEconomy(gasPrice)
+        ? fastToEconomy(smokePrice)
         : type === 'regular'
-        ? regularToEconomy(gasPrice)
-        : gasPrice;
+        ? regularToEconomy(smokePrice)
+        : smokePrice;
     }
   },
   watch: {
-    customGas(newVal) {
-      store.set('customGasPrice', newVal);
+    customSmoke(newVal) {
+      store.set('customSmokePrice', newVal);
       if (newVal !== '') {
         if (new BigNumber(newVal).gte(1)) {
-          const toGwei = new BigNumber(
-            utils.toWei(`${new BigNumber(newVal).toFixed(9)}`, 'gwei')
+          const toMaher = new BigNumber(
+            utils.toWei(`${new BigNumber(newVal).toFixed(9)}`, 'maher')
           ).toFixed();
-          this.customGasEth = new BigNumber(
-            `${utils.fromWei(toGwei, 'ether')}`
+          this.customSmokeFourtwenty = new BigNumber(
+            `${utils.fromWei(toMaher, '420coin')}`
           ).toFixed();
         } else {
-          this.customGas = 1;
+          this.customSmoke = 1;
         }
       }
     }
   },
   mounted() {
     if (this.online) {
-      this.getEthPrice();
+      this.getFourtwentyPrice();
     }
     this.exportConfig();
-    this.getGasType();
-    this.customGas = getOther();
+    this.getSmokeType();
+    this.customSmoke = getOther();
   },
   methods: {
-    ...mapActions('main', ['setGasPrice', 'setAddressBook']),
-    displayedGasPriceValue(value) {
+    ...mapActions('main', ['setSmokePrice', 'setAddressBook']),
+    displayedSmokePriceValue(value) {
       const newVal = new BigNumber(value).toString();
       const showMore = `~${new BigNumber(value).toString()}`;
       const showSome = `~${new BigNumber(value).toFixed(2).toString()}`;
@@ -386,7 +386,7 @@ export default {
           store.set('customTokens', file.main.customTokens);
           store.set('customNetworks', file.main.customNetworks);
           store.set('customDeriviationPaths', file.main.customDeriviationPaths);
-          store.set('gas', file.main.gas);
+          store.set('smoke', file.main.smoke);
 
           this.popup = true;
 
@@ -408,22 +408,22 @@ export default {
 
       this.importedFile = e.target.files[0];
     },
-    getGasType() {
-      const type = store.get('gasPriceType');
-      const amt = store.get('gasPrice');
-      const customGas = getOther();
+    getSmokeType() {
+      const type = store.get('smokePriceType');
+      const amt = store.get('smokePrice');
+      const customSmoke = getOther();
       if (type) {
-        this.selectedGasType = type;
+        this.selectedSmokeType = type;
       }
 
       if (amt) {
-        if (this.gasPriceInputs[type] !== undefined) {
-          this.setGasPrice(
-            new BigNumber(this.gasPriceInputs[type].gwei).toNumber()
+        if (this.smokePriceInputs[type] !== undefined) {
+          this.setSmokePrice(
+            new BigNumber(this.smokePriceInputs[type].maher).toNumber()
           );
         } else {
-          this.customGas = customGas;
-          this.setGasPrice(new BigNumber(customGas).toNumber());
+          this.customSmoke = customSmoke;
+          this.setSmokePrice(new BigNumber(customSmoke).toNumber());
         }
       }
     },
@@ -432,25 +432,25 @@ export default {
       uploadInput.value = '';
       uploadInput.click();
     },
-    saveGasChanges() {
-      store.set('gasPriceType', this.selectedGasType);
-      if (this.gasPriceInputs[this.selectedGasType] !== undefined) {
-        this.setGasPrice(
+    saveSmokeChanges() {
+      store.set('smokePriceType', this.selectedSmokeType);
+      if (this.smokePriceInputs[this.selectedSmokeType] !== undefined) {
+        this.setSmokePrice(
           new BigNumber(
-            this.gasPriceInputs[this.selectedGasType].gwei
+            this.smokePriceInputs[this.selectedSmokeType].maher
           ).toNumber()
         );
       } else {
-        const gasPrice = new BigNumber(this.customGas).toNumber().toFixed(9);
-        store.set('customGasPrice', gasPrice);
-        this.setGasPrice(gasPrice);
+        const smokePrice = new BigNumber(this.customSmoke).toNumber().toFixed(9);
+        store.set('customSmokePrice', smokePrice);
+        this.setSmokePrice(smokePrice);
       }
-      if (this.$refs.gasDropdown) {
-        this.$refs.gasDropdown.dropdownOpen = false;
+      if (this.$refs.smokeDropdown) {
+        this.$refs.smokeDropdown.dropdownOpen = false;
       }
     },
-    selectGasType(type) {
-      this.selectedGasType = type;
+    selectSmokeType(type) {
+      this.selectedSmokeType = type;
       if (type === 'other') {
         this.$refs.customInput.focus();
       }
@@ -466,11 +466,11 @@ export default {
           notifications.push(obj);
         }
       });
-      const gas = {};
-      if (this.gasPriceInputs[this.selectedGasType] !== undefined) {
-        gas['speed'] = this.selectedGasType;
+      const smoke = {};
+      if (this.smokePriceInputs[this.selectedSmokeType] !== undefined) {
+        smoke['speed'] = this.selectedSmokeType;
       } else {
-        gas['price'] = this.customGas;
+        smoke['price'] = this.customSmoke;
       }
 
       const exportableObject = {
@@ -488,7 +488,7 @@ export default {
             store.get('customDeriviationPaths') !== undefined
               ? store.get('customDeriviationPaths')
               : [],
-          gas: gas,
+          smoke: smoke,
           skipTutorial: true
         },
         notifications: notifications
@@ -502,12 +502,12 @@ export default {
       this.file = window.URL.createObjectURL(file);
     },
     convert(price) {
-      const convertedPrice = new BigNumber(price * this.ethPrice).toFixed();
+      const convertedPrice = new BigNumber(price * this.fourtwentyPrice).toFixed();
       return this.$options.filters.concatAddr(convertedPrice);
     },
-    async getEthPrice() {
+    async getFourtwentyPrice() {
       const price = await fetch(
-        'https://cryptorates.mewapi.io/ticker?filter=ETH'
+        'https://cryptorates.mewapi.io/ticker?filter=FOURTWENTY'
       )
         .then(res => {
           return res.json();
@@ -516,7 +516,7 @@ export default {
           Toast.responseHandler(e, Toast.ERROR);
         });
 
-      this.ethPrice = price && price.data ? price.data.ETH.quotes.USD.price : 0;
+      this.fourtwentyPrice = price && price.data ? price.data.FOURTWENTY.quotes.USD.price : 0;
     },
     openAddrBookModal(action, obj) {
       const idx = this.addressBook.indexOf(obj);

@@ -83,11 +83,11 @@ const formatTransactionHash = (val, network) => {
         nonce: val[txIndexes.txDetails]
           ? new BigNumber(val[txIndexes.txDetails].nonce).toString()
           : '0',
-        gasPrice: val[txIndexes.txDetails]
-          ? new BigNumber(val[txIndexes.txDetails].gasPrice).toString()
+        smokePrice: val[txIndexes.txDetails]
+          ? new BigNumber(val[txIndexes.txDetails].smokePrice).toString()
           : '0',
-        gasLimit: val[txIndexes.txDetails]
-          ? new BigNumber(val[txIndexes.txDetails].gas).toString()
+        smokeLimit: val[txIndexes.txDetails]
+          ? new BigNumber(val[txIndexes.txDetails].smoke).toString()
           : '0',
         tokenTransferTo: val[txIndexes.txDetails]
           ? val[txIndexes.txDetails].tokenTransferTo
@@ -112,8 +112,8 @@ const formatTransactionReciept = (entry, val) => {
   entry.body.errorMessage = parseStatus(val[txIndexes.response].status)
     ? ''
     : INVESTIGATE_FAILURE_KEY;
-  entry.body.gasUsed = new BigNumber(
-    val[txIndexes.response].gasUsed
+  entry.body.smokeUsed = new BigNumber(
+    val[txIndexes.response].smokeUsed
   ).toString();
   if (val[txIndexes.response].contractAddress) {
     entry.body.contractAddress = val[txIndexes.response].contractAddress;
@@ -155,8 +155,8 @@ const formatTransactionError = (val, network) => {
       to: val[txIndexes.txDetails].to,
       amount: new BigNumber(val[txIndexes.txDetails].value).toString(),
       nonce: new BigNumber(val[txIndexes.txDetails].nonce).toString(),
-      gasPrice: new BigNumber(val[txIndexes.txDetails].gasPrice).toString(),
-      gasLimit: new BigNumber(val[txIndexes.txDetails].gas).toString()
+      smokePrice: new BigNumber(val[txIndexes.txDetails].smokePrice).toString(),
+      smokeLimit: new BigNumber(val[txIndexes.txDetails].smoke).toString()
     },
     expanded: false
   };
@@ -175,8 +175,8 @@ const formatTransactionErrorUpdate = (entry, val) => {
 };
 
 const formatSwap = (val, network) => {
-  const isEthereum = val[swapIndexes.label] !== type.SWAP_ORDER;
-  const initialState = isEthereum
+  const isFourtwentycoin = val[swapIndexes.label] !== type.SWAP_ORDER;
+  const initialState = isFourtwentycoin
     ? swapOnlyStatuses.SENT
     : swapOnlyStatuses.NEW;
 
@@ -186,18 +186,18 @@ const formatSwap = (val, network) => {
     read: false,
     timestamp: Date.now(),
     type: notificationType.SWAP,
-    status: isEthereum
+    status: isFourtwentycoin
       ? val[swapIndexes.response]
         ? notificationStatuses.PENDING
         : notificationStatuses.FAILED
       : notificationStatuses.PENDING,
-    swapStatus: isEthereum
+    swapStatus: isFourtwentycoin
       ? val[swapIndexes.response]
         ? initialState
         : notificationStatuses.FAILED
       : initialState,
-    hasTransaction: isEthereum && val[swapIndexes.response],
-    hash: isEthereum ? val[swapIndexes.response] : undefined,
+    hasTransaction: isFourtwentycoin && val[swapIndexes.response],
+    hash: isFourtwentycoin ? val[swapIndexes.response] : undefined,
     network: network,
     body: {
       error: false,
@@ -224,13 +224,13 @@ const formatSwap = (val, network) => {
     expanded: false
   };
 
-  if (isEthereum) {
+  if (isFourtwentycoin) {
     formatted.body = {
       ...formatted.body,
       amount: new BigNumber(val[swapIndexes.txDetails].value).toString(),
       nonce: new BigNumber(val[swapIndexes.txDetails].nonce).toString(),
-      gasPrice: new BigNumber(val[swapIndexes.txDetails].gasPrice).toString(),
-      gasLimit: new BigNumber(val[swapIndexes.txDetails].gas).toString()
+      smokePrice: new BigNumber(val[swapIndexes.txDetails].smokePrice).toString(),
+      smokeLimit: new BigNumber(val[swapIndexes.txDetails].smoke).toString()
     };
   }
 
@@ -243,9 +243,9 @@ const formatSwapReciept = async (entry, val) => {
       ? notificationStatuses.COMPLETE
       : notificationStatuses.FAILED;
     entry.body.timeRemaining = -1;
-    if (Number.isNaN(entry.body.gasLimit)) {
-      entry.body.gasLimit = new BigNumber(
-        val[swapIndexes.response].gasUsed
+    if (Number.isNaN(entry.body.smokeLimit)) {
+      entry.body.smokeLimit = new BigNumber(
+        val[swapIndexes.response].smokeUsed
       ).toString();
     }
   }
@@ -286,8 +286,8 @@ const formatSwapError = (val, network) => {
       hash: undefined,
       amount: new BigNumber(val[swapIndexes.txDetails].value).toString(),
       nonce: new BigNumber(val[swapIndexes.txDetails].nonce).toString(),
-      gasPrice: new BigNumber(val[swapIndexes.txDetails].gasPrice).toString(),
-      gasLimit: new BigNumber(val[swapIndexes.txDetails].gas).toString(),
+      smokePrice: new BigNumber(val[swapIndexes.txDetails].smokePrice).toString(),
+      smokeLimit: new BigNumber(val[swapIndexes.txDetails].smoke).toString(),
       to: val[swapIndexes.details].toAddress,
       from: val[swapIndexes.details].fromAddress,
       fromValue: val[swapIndexes.details].fromValue,

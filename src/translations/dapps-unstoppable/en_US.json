@@ -10,11 +10,11 @@
   "pay-with-credit-card": "Pay with Credit Card",
   "pay-with-crypto": "Pay with Crypto",
   "send-payment": "Send Payment",
-  "ethereum-payment-address": "Ethereum payment address",
+  "fourtwenty-payment-address": "420coin payment address",
   "payment-amount": "Payment Amount",
   "pending-crypto-payment": "Pending Payment: {confirmations} of {confirmationsRequired} confirmations",
   "secured-by-stripe": "Secured Checkout Powered by Stripe",
-  "insufficient-balance": "Insufficient balance: Add more ETH to your wallet or pay with Credit Card",
+  "insufficient-balance": "Insufficient balance: Add more FOURTWENTY to your wallet or pay with Credit Card",
   "pay": "Pay",
   "confirm-payment": "You are about to pay ${amount} for {numberDomains} domains",
   "error": {

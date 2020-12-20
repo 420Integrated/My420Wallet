@@ -8,7 +8,7 @@ export default async ({ event, payload }, callback, next) => {
   const listenerFunc = () => {
     if (errored) {
       chrome.tabs.create({
-        url: 'https://github.com/MyEtherWallet/MyEtherWallet/issues/new'
+        url: 'https://github.com/420integrated/My420Wallet/issues/new'
       });
     } else {
       chrome.tabs.create({
@@ -19,7 +19,7 @@ export default async ({ event, payload }, callback, next) => {
       });
     }
   };
-  store.state.main.web3.eth
+  store.state.main.web3.fourtwenty
     .sendSignedTransaction(payload.signedTx)
     .once('transactionHash', hash => {
       funcHash = hash;

@@ -5,7 +5,7 @@
     "http-access": "Базовая аутентификация HTTP",
     "warning": "Внимание: эта информация будет сохранена в вашем локальном хранилище, убедитесь, что ваш компьютер безопасен.",
     "dont-know": "Не знаете, что это?",
-    "eth-node": "Название ETH узла",
+    "fourtwenty-node": "Название FOURTWENTY узла",
     "user-name": "Имя пользователя",
     "port": "Порт",
     "button-change": "Поменять",
@@ -39,7 +39,7 @@
     "token-added-success": "Токен успешно добавлен!"
   },
   "ads": {
-    "buy-with-credit": "Покупка ETH при помощи кредитной карты",
+    "buy-with-credit": "Покупка FOURTWENTY при помощи кредитной карты",
     "ios": "Доступно на iOS",
     "android": "и Android",
     "twitter": "Подписаться на Twitter",
@@ -87,8 +87,8 @@
   },
   "no-avail": "Эта функция недоступна.",
   "dashboard-swap": "MEW является партнером Bity, Kyber Network, Changelly и Simplex, чтобы позволить пользователям обменивать фиатные деньги на криптовалюту, эфириум и биткоины, эфириум и ERC20.",
-  "etherscan-tx-url": "https://etherscan.io/tx/[[txHash]]",
-  "etherscan-address-url": "https://etherscan.io/address/[[address]]",
+  "fourtwentyscan-tx-url": "https://fourtwentyscan.420integrated.com/tx/[[txHash]]",
+  "fourtwentyscan-address-url": "https://fourtwentyscan.420integrated.com/address/[[address]]",
   "address-book": {
     "edit": "Изменить",
     "add": "Добавить",
@@ -112,7 +112,7 @@
     "header": "ИКОНКА МОЕГО АДРЕСА",
     "subheader": "Всегда ищите эту иконку при отправке на этот кошелек",
     "paper": "Бумажный кошелек",
-    "link2": "https://www.myetherwallet.com",
+    "link2": "https://www.my420wallet.420integrated.com",
     "my-priv": "МОЙ ЗАКРЫТЫЙ КЛЮЧ",
     "warning": "Пожалуйста, храните бумажный кошелек в {safe} месте! Пожалуйста, {do-not} своим закрытым ключом с кем-либо!",
     "safe": "БЕЗОПАСНОМ",

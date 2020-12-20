@@ -3,12 +3,12 @@ import { Manager as Web3RequestManager } from 'web3-core-requestmanager';
 import MiddleWare from '../middleware';
 import workerTimer from '@/helpers/webWorkerTimer';
 import {
-  ethSendTransaction,
-  ethSignTransaction,
-  ethSign,
-  ethAccounts,
-  ethCoinbase,
-  ethGetTransactionCount,
+  fourtwentySendTransaction,
+  fourtwentySignTransaction,
+  fourtwentySign,
+  fourtwentyAccounts,
+  fourtwentyCoinbase,
+  fourtwentyGetTransactionCount,
   netVersion
 } from '../methods';
 const MAX_RETRIES = 10;
@@ -89,12 +89,12 @@ class WSProvider {
         eventHub
       };
       const middleware = new MiddleWare();
-      middleware.use(ethSendTransaction);
-      middleware.use(ethSignTransaction);
-      middleware.use(ethSign);
-      middleware.use(ethAccounts);
-      middleware.use(ethGetTransactionCount);
-      middleware.use(ethCoinbase);
+      middleware.use(fourtwentySendTransaction);
+      middleware.use(fourtwentySignTransaction);
+      middleware.use(fourtwentySign);
+      middleware.use(fourtwentyAccounts);
+      middleware.use(fourtwentyGetTransactionCount);
+      middleware.use(fourtwentyCoinbase);
       middleware.use(netVersion);
       middleware.run(req, callback).then(() => {
         this.wsProvider.connection.send(JSON.stringify(payload));

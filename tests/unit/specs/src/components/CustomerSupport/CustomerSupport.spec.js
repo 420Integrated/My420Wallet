@@ -138,7 +138,7 @@ describe('CustomerSupport.vue', () => {
       '\n\n' +
       description;
     expect(wrapper.vm.issueLinkOut).toEqual(
-      `mailto:support@myetherwallet.com?subject=${encodeURIComponent(
+      `mailto:support@my420wallet.420integrated.com?subject=${encodeURIComponent(
         Misc.stripTags(subject)
       )}&body=${encodeURIComponent(Misc.stripTags(body))}`
     );

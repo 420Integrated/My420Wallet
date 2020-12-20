@@ -21,13 +21,13 @@
       <div class="buttons">
         <standard-button
           v-show="txHashExlporrer"
-          :options="buttonCheckEtherscan"
+          :options="buttonCheckFourtwentyscan"
           :click-function="goToLink"
         />
         <standard-button
-          v-show="network.type.name === 'ETH' && txHashExlporrer"
-          :options="buttonCheckEthVm"
-          :click-function="goToEthVm"
+          v-show="network.type.name === 'FOURTWENTY' && txHashExlporrer"
+          :options="buttonCheckFourtwentyVm"
+          :click-function="goToFourtwentyVm"
         />
         <standard-button :options="buttonOk" :click-function="hideModal" />
       </div>
@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     ...mapState('main', ['network', 'wallet']),
-    buttonCheckEtherscan() {
+    buttonCheckFourtwentyscan() {
       return {
         // eslint-disable-next-line
         title: this.$t('sendTx.success.button-check-explorer', {
@@ -79,11 +79,11 @@ export default {
         fullWidth: true
       };
     },
-    buttonCheckEthVm() {
+    buttonCheckFourtwentyVm() {
       return {
         // eslint-disable-next-line
         title: this.$t('sendTx.success.button-check-explorer', {
-          explorrerName: this.$t('footer.ethvm')
+          explorrerName: this.$t('footer.fourtwentyvm')
         }),
         buttonStyle: 'green-border',
         fullWidth: true
@@ -106,13 +106,13 @@ export default {
       // eslint-disable-next-line
       window.open(this.txHashExlporrer, '_blank');
     },
-    goToEthVm() {
-      const ethVmLink = this.txHashExlporrer.replace(
-        'https://etherscan.io/tx/',
-        'https://www.ethvm.com/tx/'
+    goToFourtwentyVm() {
+      const fourtwentyVmLink = this.txHashExlporrer.replace(
+        'https://fourtwentyscan.420integrated.com/tx/',
+        'https://www.fourtwentyvm.com/tx/'
       );
       // eslint-disable-next-line
-      window.open(ethVmLink, '_blank');
+      window.open(fourtwentyVmLink, '_blank');
     },
     hideModal() {
       if (this.linkTo !== '/') {

@@ -1,14 +1,14 @@
 import {
-  ethereum,
-  ethereumClassic,
-  ropsten,
+  420coin,
+  420coinClassic,
+  ruderalis,
   singularDTV,
   expanse,
   ubiq,
   ellaism,
   etherGem,
   callisto,
-  ethereumSocial,
+  420coinSocial,
   musicoin,
   goChain,
   eosClassic,
@@ -29,15 +29,15 @@ import {
   lightstreamsNetwork,
   mintmeComCoin,
   ethercore,
-  ledgerEthereum
+  ledgerFourtwentycoin
 } from './paths';
-const renamedLedger = Object.assign({}, ledgerEthereum);
+const renamedLedger = Object.assign({}, ledgerFourtwentycoin);
 renamedLedger.label = 'Ledger';
 
 export default [
-  ethereum,
-  ethereumClassic,
-  ropsten,
+  420coin,
+  420coinClassic,
+  ruderalis,
   renamedLedger,
   singularDTV,
   expanse,
@@ -45,7 +45,7 @@ export default [
   ellaism,
   etherGem,
   callisto,
-  ethereumSocial,
+  420coinSocial,
   musicoin,
   goChain,
   eosClassic,

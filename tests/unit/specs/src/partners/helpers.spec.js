@@ -13,7 +13,7 @@ describe('simplex.js', () => {
         provider: 'provider1',
         rate: 0.01,
         rate2: 493.34285,
-        toToken1: 'ETH',
+        toToken1: 'FOURTWENTY',
         toToken2: 'REP'
       },
       {
@@ -24,7 +24,7 @@ describe('simplex.js', () => {
         provider: 'provider2',
         rate: 0.001,
         rate2: 493.34285,
-        toToken1: 'ETH',
+        toToken1: 'FOURTWENTY',
         toToken2: 'REP'
       },
       {
@@ -35,7 +35,7 @@ describe('simplex.js', () => {
         provider: 'provider3',
         rate: 0.08,
         rate2: 493.34285,
-        toToken1: 'ETH',
+        toToken1: 'FOURTWENTY',
         toToken2: 'REP'
       },
       {
@@ -46,7 +46,7 @@ describe('simplex.js', () => {
         provider: 'provider4',
         rate: 0.7,
         rate2: 493.34285,
-        toToken1: 'ETH',
+        toToken1: 'FOURTWENTY',
         toToken2: 'REP'
       },
       {
@@ -57,7 +57,7 @@ describe('simplex.js', () => {
         provider: 'provider5',
         rate: 0.0007,
         rate2: 493.34285,
-        toToken1: 'ETH',
+        toToken1: 'FOURTWENTY',
         toToken2: 'REP'
       }
     ];

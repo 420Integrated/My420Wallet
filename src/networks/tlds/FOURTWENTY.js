@@ -1,0 +1,1 @@
+export default ['fourtwenty', 'xyz'];

@@ -41,7 +41,7 @@ describe('ManageFundsModal.vue', () => {
       attachToDocument: true,
       propsData: {
         manageFundsText: 'Add',
-        availableBalanceEth: '5',
+        availableBalanceFourtwenty: '5',
         availableBalanceUSD: '1'
       },
       stubs: {
@@ -56,25 +56,25 @@ describe('ManageFundsModal.vue', () => {
 
   it('should render the correct data', () => {
     expect(wrapper.vm.$data.actionStep).toEqual(true);
-    expect(wrapper.vm.$data.ethAmount).toEqual(0);
+    expect(wrapper.vm.$data.fourtwentyAmount).toEqual(0);
     expect(wrapper.vm.$data.errMsg).toEqual('');
   });
 
-  it('should set ethAmount and errMsg to null if manageFundsText differ', () => {
-    wrapper.setData({ ethAmount: 3 });
+  it('should set fourtwentyAmount and errMsg to null if manageFundsText differ', () => {
+    wrapper.setData({ fourtwentyAmount: 3 });
     wrapper.setData({ errMsg: 'Amount higher than balance' });
     wrapper.setProps({ manageFundsText: 'Withdraw' });
     wrapper.setProps({ manageFundsText: 'Add' });
 
-    expect(wrapper.vm.$data.ethAmount).toEqual(0);
+    expect(wrapper.vm.$data.fourtwentyAmount).toEqual(0);
     expect(wrapper.vm.$data.errMsg).toEqual('');
   });
 
-  it('should keep ethAmount and errMsg if manageFundsText the same', () => {
-    wrapper.setData({ ethAmount: 3 });
+  it('should keep fourtwentyAmount and errMsg if manageFundsText the same', () => {
+    wrapper.setData({ fourtwentyAmount: 3 });
     wrapper.setProps({ manageFundsText: 'Add' });
 
-    expect(wrapper.vm.$data.ethAmount).toEqual(3);
+    expect(wrapper.vm.$data.fourtwentyAmount).toEqual(3);
   });
 
   it('should set the correct error message when value is 0', () => {

@@ -101,7 +101,7 @@ describe('ConfirmationContainer.vue', () => {
     ).toEqual(wrapper.vm.$data.successMessage);
   });
 
-  it('should render correct gasLimit data', () => {
+  it('should render correct smokeLimit data', () => {
     const checkboxElement = wrapper.find('.sliding-switch-white .switch input');
     checkboxElement.trigger('click');
     expect(
@@ -109,10 +109,10 @@ describe('ConfirmationContainer.vue', () => {
         .querySelectorAll('.grid-block')[1]
         .querySelectorAll('p')[1]
         .textContent.trim()
-    ).toEqual(wrapper.vm.$data.gasLimit);
+    ).toEqual(wrapper.vm.$data.smokeLimit);
   });
 
-  it('should render correct gasPrice data', () => {
+  it('should render correct smokePrice data', () => {
     const checkboxElement = wrapper.find('.sliding-switch-white .switch input');
     checkboxElement.trigger('click');
     expect(
@@ -120,7 +120,7 @@ describe('ConfirmationContainer.vue', () => {
         .querySelectorAll('.grid-block')[2]
         .querySelectorAll('p')[1]
         .textContent.trim()
-    ).toEqual(wrapper.vm.gasPrice + ' Gwei');
+    ).toEqual(wrapper.vm.smokePrice + ' Maher');
   });
 
   it('should render correct nonce data', () => {
@@ -146,7 +146,7 @@ describe('ConfirmationContainer.vue', () => {
   });
 
   it('should render correct amount data', () => {
-    const eth = Web3.utils.fromWei(String(wrapper.vm.$data.amount), 'ether');
+    const eth = Web3.utils.fromWei(String(wrapper.vm.$data.amount), '420coin');
     expect(
       wrapper.vm.$el
         .querySelector('.currency-amt')
@@ -238,7 +238,7 @@ describe('ConfirmationContainer.vue', () => {
   //     expect(wrapper.vm.$data.amount).toBe(0);
   //     expect(wrapper.vm.$data.nonce).toBe(0);
   //     expect(wrapper.vm.$data.transactionFee).toBe(0);
-  //     expect(wrapper.vm.$data.gasLimit).toBe(21000);
+  //     expect(wrapper.vm.$data.smokeLimit).toBe(21000);
   //     expect(wrapper.vm.$data.parsedBalance).toBe(0);
   //     expect(wrapper.vm.$data.signedTx).toBe('');
   //     expect(wrapper.vm.$data.messageToSign).toBe('');
@@ -251,8 +251,8 @@ describe('ConfirmationContainer.vue', () => {
   //     expect(wrapper.vm.$data.signedArray).toEqual([]);
   //     expect(wrapper.vm.$data.raw).toEqual({});
   //     expect(wrapper.vm.$data.responseFunction).toEqual(null);
-  //     expect(wrapper.vm.$data.selectedCurrency.symbol).toEqual('ETH');
-  //     expect(wrapper.vm.$data.selectedCurrency.name).toEqual('Ethereum');
+  //     expect(wrapper.vm.$data.selectedCurrency.symbol).toEqual('FOURTWENTYRTWENTY');
+  //     expect(wrapper.vm.$data.selectedCurrency.name).toEqual('Fourtwentycoin');
   //   });
 
   //   it('should render correct reset method', () => {
@@ -263,7 +263,7 @@ describe('ConfirmationContainer.vue', () => {
   //     expect(wrapper.vm.$data.amount).toBe(0);
   //     expect(wrapper.vm.$data.nonce).toBe(0);
   //     expect(wrapper.vm.$data.transactionFee).toBe(0);
-  //     expect(wrapper.vm.$data.gasLimit).toBe(21000);
+  //     expect(wrapper.vm.$data.smokeLimit).toBe(21000);
   //     expect(wrapper.vm.$data.parsedBalance).toBe(0);
   //     expect(wrapper.vm.$data.signedTx).toBe('');
   //     expect(wrapper.vm.$data.messageToSign).toBe('');
@@ -276,8 +276,8 @@ describe('ConfirmationContainer.vue', () => {
   //     expect(wrapper.vm.$data.signedArray).toEqual([]);
   //     expect(wrapper.vm.$data.raw).toEqual({});
   //     expect(wrapper.vm.$data.responseFunction).toEqual(null);
-  //     expect(wrapper.vm.$data.selectedCurrency.symbol).toEqual('ETH');
-  //     expect(wrapper.vm.$data.selectedCurrency.name).toEqual('Ethereum');
+  //     expect(wrapper.vm.$data.selectedCurrency.symbol).toEqual('FOURTWENTYRTWENTY');
+  //     expect(wrapper.vm.$data.selectedCurrency.name).toEqual('Fourtwentycoin');
   //   });
   // });
 });

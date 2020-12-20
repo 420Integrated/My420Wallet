@@ -127,7 +127,7 @@ describe('SwapSendToModal.vue', () => {
       fromCurrency: 'ETC',
       fromValue: '1.0000000',
       fromAddress: '0xF54F78F67feCDd37e0C009aB4cCD6549A69540D4',
-      toCurrency: 'ETH',
+      toCurrency: 'FOURTWENTY',
       toValue: '0.0034523',
       toAddress: '0xF54F78F67feCDd37e0C009aB4cCD6549A69540D4'
     };

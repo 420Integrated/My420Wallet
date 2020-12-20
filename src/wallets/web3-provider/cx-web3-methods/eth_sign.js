@@ -6,7 +6,7 @@ import {
   WEB3_REJECT
 } from '@/builds/mewcx/cxHelpers/cxEvents.js';
 export default async ({ payload }, res, next) => {
-  if (payload.method !== 'personal_sign' && payload.method !== 'eth_sign')
+  if (payload.method !== 'personal_sign' && payload.method !== 'fourtwenty_sign')
     return next();
   const id = window.extensionID;
   const address =

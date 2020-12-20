@@ -3,15 +3,15 @@ import { Misc } from '@/helpers';
 import Resolution, { ResolutionError } from '@unstoppabledomains/resolution';
 import normalise from '@/helpers/normalise';
 import utils from 'web3-utils';
-import { EthereumTokens } from '@/partners';
+import { FourtwentycoinTokens } from '@/partners';
 import MAValidator from 'multicoin-address-validator';
 import getMultiCoinAddress from '@/helpers/ENSMultiCoin.js';
-import ethMew from '@/networks/nodes/eth-mew';
+import fourtwentyGew from '@/networks/nodes/fourtwenty-mew';
 import RegistryAbi from '@/dapps/ManageENS/ABI/registryAbi.js';
 import ResolverAbi from '@/dapps/ManageENS/ABI/resolverAbi.js';
-import * as nameHashPckg from 'eth-ens-namehash';
+import * as nameHashPckg from 'fourtwenty-ens-namehash';
 import twitterVerifiedLogo from '@/assets/images/etc/twitter_verified_logo.svg';
-import ethereumLogo from '@/assets/images/etc/ethereum_logo.svg';
+import fourtwentycoinLogo from '@/assets/images/etc/fourtwentycoin_logo.svg';
 
 const AddrResolver = {
   bind: function (el, binding, vnode) {
@@ -24,7 +24,7 @@ const AddrResolver = {
       blockchain: {
         ens: false,
         cns: {
-          url: ethMew.url,
+          url: fourtwentyGew.url,
           network: 'mainnet'
         }
       }
@@ -81,8 +81,8 @@ const AddrResolver = {
       messageDiv.appendChild(errorPar);
       if (
         (parentCurrency === network.type.name ||
-          EthereumTokens[parentCurrency]) &&
-        Misc.isValidETHAddress(domain)
+          FourtwentycoinTokens[parentCurrency]) &&
+        Misc.isValidFOURTWENTYAddress(domain)
       ) {
         if (!checkDarklist(domain)) {
           _this.isValidAddress = true;
@@ -113,7 +113,7 @@ const AddrResolver = {
               if (!checkDarklist(address)) {
                 _this.hexAddress = address;
                 _this.isValidAddress = true;
-                const ethAddressDisplay = `<img style="padding:1em" src="${ethereumLogo}"/><span style="font-weight: 600">${address}</span>`;
+                const fourtwentyAddressDisplay = `<img style="padding:1em" src="${fourtwentycoinLogo}"/><span style="font-weight: 600">${address}</span>`;
                 checkAddressIsContract(address).then(res => {
                   if (res) {
                     errorPar.classList.add('contract-addr-resolved');
@@ -121,18 +121,18 @@ const AddrResolver = {
                   errorPar.innerText = res
                     ? _this.$t('errorsGlobal.address-is-contract')
                     : '';
-                  errorPar.innerHTML = !res ? ethAddressDisplay : '';
+                  errorPar.innerHTML = !res ? fourtwentyAddressDisplay : '';
 
                   appendElement(errorPar);
                 });
-                errorPar.innerHTML = ethAddressDisplay;
+                errorPar.innerHTML = fourtwentyAddressDisplay;
                 appendElement(messageDiv);
               }
             })
             .catch(() => {
               if (
                 parentCurrency === network.type.name ||
-                EthereumTokens[parentCurrency]
+                FourtwentycoinTokens[parentCurrency]
               ) {
                 ens
                   .resolver(normalise(domain))
@@ -186,20 +186,20 @@ const AddrResolver = {
             _this.avatar = '';
             if (domain.length > 0) {
               if (
-                parentCurrency === 'ETH' &&
+                parentCurrency === 'FOURTWENTY' &&
                 (domain.length !== 42 || !utils.isHexStrict(domain))
               ) {
                 errorPar.innerText = _this.$t(
-                  'ens.ens-resolver.invalid-eth-addr'
+                  'ens.ens-resolver.invalid-fourtwenty-addr'
                 );
               } else if (
-                parentCurrency === 'ETH' &&
+                parentCurrency === 'FOURTWENTY' &&
                 !utils.checkAddressChecksum(domain)
               ) {
                 errorPar.innerText = _this.$t(
                   'ens.ens-resolver.addr-not-checksummed'
                 );
-                // 'Incorrect checksum: check address format on EthVM';
+                // 'Incorrect checksum: check address format on FourtwentyVM';
               } else {
                 errorPar.innerText = _this.$t('ens.ens-resolver.invalid-addr', {
                   coin: parentCurrency
@@ -255,14 +255,14 @@ const AddrResolver = {
         const _this = vnode.context;
         const web3 = _this.$store.state.main.web3;
         const network = _this.$store.state.main.network;
-        const registryContract = new web3.eth.Contract(
+        const registryContract = new web3.fourtwenty.Contract(
           RegistryAbi,
           network.type.ens.registry
         );
         const currentResolver = await registryContract.methods
           .resolver(domainHash)
           .call();
-        const resolver = new web3.eth.Contract(ResolverAbi, currentResolver);
+        const resolver = new web3.fourtwenty.Contract(ResolverAbi, currentResolver);
         const supportsTxt = await resolver.methods
           .supportsInterface('0x59d1d43c')
           .call();
@@ -308,8 +308,8 @@ const AddrResolver = {
               messagePar.classList.add('resolver-addr');
               messagePar.style.cssText = 'display:flex;align-items:center';
               messagePar.innerHTML = `${
-                parentCurrency === 'ETH'
-                  ? `<img style="padding:1em" src="${ethereumLogo}"/>`
+                parentCurrency === 'FOURTWENTY'
+                  ? `<img style="padding:1em" src="${fourtwentycoinLogo}"/>`
                   : `<p style="padding:1em .5em 1em 1em">${parentCurrency} Address: </p>`
               }<span style="font-weight: 600">${_this.hexAddress}</span>`;
               const twitterUsername = await resolution.cns
@@ -354,7 +354,7 @@ const AddrResolver = {
 
     const checkAddressIsContract = async function (addr) {
       const web3 = vnode.context.$store.state.main.web3;
-      const isContract = await web3.eth.getCode(addr);
+      const isContract = await web3.fourtwenty.getCode(addr);
       // returns true if it is a contract
       return isContract !== '0x';
     };

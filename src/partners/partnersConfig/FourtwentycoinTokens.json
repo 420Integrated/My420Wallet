@@ -1,0 +1,8 @@
+{
+  "TEST": {
+    "symbol": "TEST",
+    "name": "TEST",
+    "decimals": 18,
+    "contractAddress": "0x0e8d6b471e332f140e7d9dbb99e5e3822f728da6"
+  }  
+}

@@ -1,6 +1,6 @@
 const chainCurrencies = [
   { symbol: 'BTC', name: 'Bitcoin' },
-  { symbol: 'ETH', name: 'Ether' }
+  { symbol: 'FOURTWENTY', name: 'Fourtwentycoin' }
 ];
 
 const fiat = [

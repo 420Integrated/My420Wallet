@@ -3,7 +3,7 @@ import GettingStarted from '@/layouts/GettingStarted/GettingStarted.vue';
 import Congratulations from '@/layouts/GettingStarted/components/Congratulations/Congratulations.vue';
 import SomeHelpfulTips from '@/layouts/GettingStarted/components/SomeHelpfulTips/SomeHelpfulTips.vue';
 import WhatIfILoseMyKeysOrPassword from '@/layouts/GettingStarted/components/WhatIfILoseMyKeysOrPassword/WhatIfILoseMyKeysOrPassword.vue';
-import WhatIsMyEtherWallet from '@/layouts/GettingStarted/components/WhatIsMyEtherWallet/WhatIsMyEtherWallet.vue';
+import WhatIsMy420Wallet from '@/layouts/GettingStarted/components/WhatIsMy420Wallet/WhatIsMy420Wallet.vue';
 import WhereAreMyFundsStored from '@/layouts/GettingStarted/components/WhereAreMyFundsStored/WhereAreMyFundsStored.vue';
 import { Tooling } from '@@/helpers';
 import { RouterLinkStub } from '@@/helpers/setupTooling';
@@ -26,7 +26,7 @@ describe('GettingStarted.vue', () => {
       attachToDocument: true,
       stubs: {
         'router-link': RouterLinkStub,
-        'what-is-mew': WhatIsMyEtherWallet,
+        'what-is-mew': WhatIsMy420Wallet,
         'where-my-funds-stored': WhereAreMyFundsStored,
         'what-if-i-lose-key': WhatIfILoseMyKeysOrPassword,
         'some-helpful-tips': SomeHelpfulTips,

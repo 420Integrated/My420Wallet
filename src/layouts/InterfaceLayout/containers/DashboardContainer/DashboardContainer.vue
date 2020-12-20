@@ -8,7 +8,7 @@
         <div class="buttons">
           <button-send-tx :go-to="goTo" class="clickable" />
           <button-nft-manager
-            :disabled="!isOnlineAndEth"
+            :disabled="!isOnlineAndFourtwenty"
             :go-to="goTo"
             class="clickable"
           />
@@ -31,7 +31,7 @@
         <div class="swap-info">
           <div v-for="pair in swapPairs" :key="pair.from + pair.to">
             <div
-              :class="isOnlineAndEth ? 'swap-enabled' : 'swap-disabled'"
+              :class="isOnlineAndFourtwenty ? 'swap-enabled' : 'swap-disabled'"
               class="swap-to clickable"
               @click.prevent="showSwapWidget(pair)"
             >
@@ -124,7 +124,7 @@ export default {
       type: Function,
       default: function () {}
     },
-    highestGas: {
+    highestSmoke: {
       type: String,
       default: '0'
     }
@@ -139,16 +139,16 @@ export default {
       hexAddress: '',
       address: '',
       value: '0',
-      gasLimit: '21000',
+      smokeLimit: '21000',
       data: '',
       selectedCurrency: '',
-      ethPrice: 0,
+      fourtwentyPrice: 0,
       swapPairs: [
-        { from: 'ETH', to: 'BTC', amt: 1, rate: 0 },
-        { from: 'ETH', to: 'EUR', amt: 1, rate: 0 },
-        { from: 'ETH', to: 'KNC', amt: 1, rate: 0 },
-        { from: 'BAT', to: 'ETH', amt: 1, rate: 0 },
-        { from: 'ETH', to: 'DAI', amt: 1, rate: 0 }
+        { from: 'FOURTWENTY', to: 'BTC', amt: 1, rate: 0 },
+        { from: 'FOURTWENTY', to: 'EUR', amt: 1, rate: 0 },
+        { from: 'FOURTWENTY', to: 'KNC', amt: 1, rate: 0 },
+        { from: 'BAT', to: 'FOURTWENTY', amt: 1, rate: 0 },
+        { from: 'FOURTWENTY', to: 'DAI', amt: 1, rate: 0 }
       ],
       swap: new SwapProviders(
         providers,
@@ -164,8 +164,8 @@ export default {
       ),
       updatingRates: false,
       suppliedFrom: {
-        symbol: 'ETH',
-        name: 'Ethereum'
+        symbol: 'FOURTWENTY',
+        name: '420coin'
       },
       suppliedTo: {
         symbol: 'BTC',
@@ -191,13 +191,13 @@ export default {
       actualReturnedDapp.push(newestDapp);
       return actualReturnedDapp;
     },
-    isOnlineAndEth() {
-      return this.online && this.network.type.name === 'ETH';
+    isOnlineAndFourtwenty() {
+      return this.online && this.network.type.name === 'FOURTWENTY';
     }
   },
   watch: {
     ['swap.haveProviderRates']() {
-      if (this.isOnlineAndEth) {
+      if (this.isOnlineAndFourtwenty) {
         this.haveProviderRates = this.swap.haveProviderRates;
         this.setupSwap();
       }
@@ -220,7 +220,7 @@ export default {
     }
   },
   mounted() {
-    if (this.online && this.network.type.name === 'ETH') {
+    if (this.online && this.network.type.name === 'FOURTWENTY') {
       this.showSwapValues = true;
     } else {
       this.showSwapValues = false;
@@ -267,14 +267,14 @@ export default {
       }
     },
     async setupSwap() {
-      if (this.isOnlineAndEth) {
+      if (this.isOnlineAndFourtwenty) {
         for (let i = 0; i < this.swapPairs.length; i++) {
           const swappers = await this.swap.standAloneRateEstimate(
             this.swapPairs[i].from,
             this.swapPairs[i].to,
             this.swapPairs[i].amt
           );
-          if (this.isOnlineAndEth) {
+          if (this.isOnlineAndFourtwenty) {
             if (swappers) {
               this.$set(
                 this.swapPairs[i],
@@ -287,7 +287,7 @@ export default {
       }
     },
     showSwapWidget(vals) {
-      if (this.isOnlineAndEth) {
+      if (this.isOnlineAndFourtwenty) {
         this.$eventHub.$emit(
           'showSwapWidget',
           this.account.address,

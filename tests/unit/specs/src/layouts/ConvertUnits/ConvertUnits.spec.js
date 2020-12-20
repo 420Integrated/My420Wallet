@@ -32,17 +32,17 @@ describe('ConvertUnits.vue', () => {
       const trElement = trElements[i];
       const tdElements = trElement.getElementsByTagName('td');
       expect(tdElements[0].textContent.trim()).toEqual(
-        wrapper.vm.$data.etherUnitRef[i].name
+        wrapper.vm.$data.fourtwentyerUnitRef[i].name
       );
       expect(tdElements[1].textContent.trim()).toEqual(
-        wrapper.vm.$data.etherUnitRef[i].unit1
+        wrapper.vm.$data.fourtwentyerUnitRef[i].unit1
       );
       expect(tdElements[2].textContent.trim()).toEqual(
-        wrapper.vm.$data.etherUnitRef[i].unit2 +
-          wrapper.vm.$data.etherUnitRef[i].unit2e
+        wrapper.vm.$data.fourtwentyerUnitRef[i].unit2 +
+          wrapper.vm.$data.fourtwentyerUnitRef[i].unit2e
       );
       expect(tdElements[3].textContent.trim()).toEqual(
-        wrapper.vm.$data.etherUnitRef[i].desc
+        wrapper.vm.$data.fourtwentyerUnitRef[i].desc
       );
     }
   });

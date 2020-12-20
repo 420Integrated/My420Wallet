@@ -43,7 +43,7 @@
             Peepeth:
             <a
               :href="
-                'https://peepeth.com/' + txtRecordsWithValue['vnd.peepeth']
+                'https://peepfourtwenty.com/' + txtRecordsWithValue['vnd.peepeth']
               "
               target="_blank"
             >
@@ -72,7 +72,7 @@
     <div v-if="hasDeed && isDeedOwner" class="content-container deed-container">
       <div>
         <p class="label">Deed Value:</p>
-        <p class="content">{{ deedValueEth }} {{ network.type.name }}</p>
+        <p class="content">{{ deedValueFourtwenty }} {{ network.type.name }}</p>
       </div>
       <div class="submit-container">
         <button
@@ -121,7 +121,7 @@
     <interface-bottom-text
       :link-text="$t('common.help-center')"
       :question="$t('common.have-issues')"
-      link="https://kb.myetherwallet.com"
+      link="https://kb.my420wallet.420integrated.com"
     />
   </div>
 </template>
@@ -207,8 +207,8 @@ export default {
   },
   computed: {
     ...mapState('main', ['account', 'network']),
-    deedValueEth() {
-      return fromWei(this.deedValue, 'ether');
+    deedValueFourtwenty() {
+      return fromWei(this.deedValue, '420coin');
     },
     fullDomainName() {
       return `${this.hostName}.${this.tld}`;

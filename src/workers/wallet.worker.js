@@ -1,11 +1,11 @@
-import Wallet from 'ethereumjs-wallet';
-import ThirdPartyWallets from 'ethereumjs-wallet/thirdparty';
+import Wallet from 'fourtwentyjs-wallet';
+import ThirdPartyWallets from 'fourtwentyjs-wallet/thirdparty';
 Wallet.ThirdParty = ThirdPartyWallets;
 const Configs = {
   kdf: 'scrypt',
   n: 131072
 };
-const fromMyEtherWalletV2 = json => {
+const fromMy420WalletV2 = json => {
   if (json.privKey.length !== 64) {
     throw new Error('Invalid private key length');
   }
@@ -17,7 +17,7 @@ const getWalletFromPrivKeyFile = (jsonfile, password) => {
   let wallet;
   if (!jsonfile) throw new Error('Invalid Wallet file');
   if (jsonfile.encseed != null) {
-    wallet = Wallet.fromEthSale(jsonfile, password);
+    wallet = Wallet.fromFourtwentySale(jsonfile, password);
     wallet.filename = wallet.getV3Filename();
     return wallet;
   } else if (jsonfile.Crypto != null || jsonfile.crypto != null) {
@@ -25,11 +25,11 @@ const getWalletFromPrivKeyFile = (jsonfile, password) => {
     wallet.filename = wallet.getV3Filename();
     return wallet;
   } else if (jsonfile.hash != null) {
-    wallet = Wallet.ThirdParty.fromEtherWallet(jsonfile, password);
+    wallet = Wallet.ThirdParty.fromFourtwentycoinWallet(jsonfile, password);
     wallet.filename = wallet.getV3Filename();
     return wallet;
-  } else if (jsonfile.publisher == 'MyEtherWallet') {
-    wallet = fromMyEtherWalletV2(jsonfile);
+  } else if (jsonfile.publisher == '420integrated/My420Wallet') {
+    wallet = fromMy420WalletV2(jsonfile);
     wallet.filename = wallet.getV3Filename();
     return wallet;
   }

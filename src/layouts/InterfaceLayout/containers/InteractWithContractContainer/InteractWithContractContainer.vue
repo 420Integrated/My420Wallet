@@ -170,7 +170,7 @@
         <div>
           <div class="title-container">
             <div class="title">
-              <h4>{{ $t('contract.value-in-eth') }}:</h4>
+              <h4>{{ $t('contract.value-in-fourtwenty') }}:</h4>
             </div>
           </div>
           <input
@@ -178,7 +178,7 @@
             step="any"
             type="text"
             name
-            placeholder="ETH"
+            placeholder="FOURTWENTY"
             class="non-bool-input"
           />
         </div>
@@ -272,7 +272,7 @@ import CurrencyPicker from '../../components/CurrencyPicker';
 import InterfaceContainerTitle from '../../components/InterfaceContainerTitle';
 import { Misc, Toast } from '@/helpers';
 import { isAddress } from '@/helpers/addressUtils';
-import * as unit from 'ethjs-unit';
+import * as unit from 'fourtwentyjs-unit';
 import store from 'store';
 import BigNumber from 'bignumber.js';
 
@@ -296,7 +296,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('main', ['network', 'gasPrice', 'account', 'web3']),
+    ...mapState('main', ['network', 'smokePrice', 'account', 'web3']),
     mergedContracts() {
       const customContracts = store.get('customContracts') || [];
       const concatContracts = this.network.type.contracts.concat(
@@ -354,7 +354,7 @@ export default {
       return _contractArgs;
     },
     txValue() {
-      return Misc.sanitizeHex(unit.toWei(this.value, 'ether').toString(16));
+      return Misc.sanitizeHex(unit.toWei(this.value, '420coin').toString(16));
     }
   },
   watch: {
@@ -403,7 +403,7 @@ export default {
         !method.hasOwnProperty('stateMutability')
       )
         return;
-      const contract = new this.web3.eth.Contract(
+      const contract = new this.web3.fourtwenty.Contract(
         [method],
         this.address.toLowerCase()
       );
@@ -476,7 +476,7 @@ export default {
     },
     async write() {
       const web3 = this.web3;
-      const contract = new web3.eth.Contract(
+      const contract = new web3.fourtwenty.Contract(
         [this.selectedMethod],
         this.address.toLowerCase()
       );
@@ -495,14 +495,14 @@ export default {
             Toast.responseHandler(e, false);
           });
       } else {
-        const nonce = await web3.eth.getTransactionCount(
+        const nonce = await web3.fourtwenty.getTransactionCount(
           this.account.address.toLowerCase()
         );
         let errored = false;
-        const gasLimit = await contract.methods[this.selectedMethod.name](
+        const smokeLimit = await contract.methods[this.selectedMethod.name](
           ...this.contractArgs
         )
-          .estimateGas({
+          .estimateSmoke({
             from: this.account.address.toLowerCase(),
             value: this.txValue
           })
@@ -521,15 +521,15 @@ export default {
 
           const raw = {
             from: this.account.address.toLowerCase(),
-            gas: gasLimit,
+            smoke: smokeLimit,
             nonce: nonce,
-            gasPrice: Number(unit.toWei(this.gasPrice, 'gwei')),
+            smokePrice: Number(unit.toWei(this.smokePrice, 'maher')),
             value: this.txValue,
             to: this.address.toLowerCase(),
             data: data
           };
           this.loading = false;
-          web3.eth.sendTransaction(raw).catch(err => {
+          web3.fourtwenty.sendTransaction(raw).catch(err => {
             Toast.responseHandler(err, Toast.ERROR);
           });
         }

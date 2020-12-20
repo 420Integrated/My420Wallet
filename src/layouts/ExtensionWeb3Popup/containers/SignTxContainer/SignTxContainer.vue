@@ -7,7 +7,7 @@
       <amount-info-component
         :direction="'from'"
         :address="txParams.from"
-        :amount="hexToNumString(txParams.value, 'ether')"
+        :amount="hexToNumString(txParams.value, '420coin')"
         :currency="
           txParams.tokenSymbol ? txParams.tokenSymbol : network.type.name
         "
@@ -19,7 +19,7 @@
         :amount="
           txParams.tokenSymbol
             ? hexToNumString(txParams.tokenTransferVal)
-            : hexToNumString(txParams.value, 'ether')
+            : hexToNumString(txParams.value, '420coin')
         "
         :currency="
           txParams.tokenSymbol ? txParams.tokenSymbol : network.type.name
@@ -54,15 +54,15 @@
           </span>
         </div>
         <div class="detail-item">
-          <span class="title"> {{ $t('common.gas.string') }} </span>
+          <span class="title"> {{ $t('common.smoke.string') }} </span>
           <span class="content">
-            {{ hexToNumString(txParams.gas) }}
+            {{ hexToNumString(txParams.smoke) }}
           </span>
         </div>
         <div class="detail-item">
-          <span class="title"> {{ $t('common.gas.price') }} </span>
+          <span class="title"> {{ $t('common.smoke.price') }} </span>
           <span class="content">
-            {{ hexToNumString(txParams.gasPrice, 'gwei') }}
+            {{ hexToNumString(txParams.smokePrice, 'maher') }}
           </span>
         </div>
         <div class="detail-item">
@@ -127,8 +127,8 @@ export default {
     txParams() {
       const {
         nonce,
-        gasPrice,
-        gas,
+        smokePrice,
+        smoke,
         to,
         value,
         data,
@@ -139,8 +139,8 @@ export default {
       } = this.linkQuery;
       const obj = {
         nonce: nonce,
-        gasPrice: gasPrice,
-        gas: gas,
+        smokePrice: smokePrice,
+        smoke: smoke,
         to: to,
         value: value === '0x' ? 0x0 : value,
         data: data,

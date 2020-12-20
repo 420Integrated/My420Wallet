@@ -4,7 +4,7 @@ GITHUB_TOKEN="$2"
 REPO="$3"
 CHANGELOG=`awk -v version="$RELEASE" '/### Release / {printit = $3 == version}; printit;' 'CHANGELOG.md'`
 mkdir release
-cd dist; zip -r ../release/MyEtherWallet-$RELEASE.zip *; cd ..
+cd dist; zip -r ../release/My420Wallet-$RELEASE.zip *; cd ..
 cd chrome-extension; zip -r ../release/MEW-CX-$RELEASE.zip *; cd ..
 
 if [ -n "$4" ]; then
@@ -13,7 +13,7 @@ if [ -n "$4" ]; then
     done
 fi
 
-sha256sum ./release/MyEtherWallet-$RELEASE.zip > ./release/MyEtherWallet-$RELEASE-CHECKSUM-SHA256
+sha256sum ./release/My420Wallet-$RELEASE.zip > ./release/My420Wallet-$RELEASE-CHECKSUM-SHA256
 sha256sum ./release/MEW-CX-$RELEASE.zip > ./release/MEW-CX-$RELEASE-CHECKSUM-SHA256
 
 GH_API="https://api.github.com"
@@ -23,7 +23,7 @@ GH_TAGS="$GH_REPO/releases/tags/$RELEASE"
 payload=$(
     jq --null-input \
     --arg tag "$RELEASE" \
-    --arg name "MyEtherWallet $RELEASE" \
+    --arg name "My420Wallet $RELEASE" \
     --arg body "$CHANGELOG" \
     '{ tag_name: $tag, name: $name, body: $body, draft: false }'
 )

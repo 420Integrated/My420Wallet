@@ -48,13 +48,13 @@ jobs:
       - name: deploy to sentry
         env:
           SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_TOKEN}}
-          SENTRY_ORG: myetherwallet-inc
+          SENTRY_ORG: my420wallet-com
         run: |
           curl -sL https://sentry.io/get-cli/ | bash
           TAG=${{ steps.get_release_tag.outputs.VERSION }}
           RELEASE=${TAG//v/}
-          sentry-cli releases new -p myetherwallet $RELEASE
-          sentry-cli releases -p myetherwallet files $RELEASE upload-sourcemaps ./dist/sourcemaps --url-prefix 'https://www.myetherwallet.com/sourcemaps' --rewrite --validate
+          sentry-cli releases new -p my420wallet $RELEASE
+          sentry-cli releases -p my420wallet files $RELEASE upload-sourcemaps ./dist/sourcemaps --url-prefix 'https://www.my420wallet.420integrated.com/sourcemaps' --rewrite --validate
           sentry-cli releases set-commits $RELEASE --auto
           sentry-cli releases finalize $RELEASE
 

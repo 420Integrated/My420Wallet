@@ -3,7 +3,7 @@ const { v4: v4 } = require('uuid');
 
 const fetch = require('node-fetch');
 const web3 = require('web3');
-const defaultEthTokens = require('./src/_generated/tokens/tokens-eth.json');
+const defaultFourtwentyTokens = require('./src/_generated/tokens/tokens-fourtwenty.json');
 
 const swapConfigFolder = './src/_generated/partners';
 const changellyConfigFolder = './src/_generated/partners';
@@ -17,7 +17,7 @@ const explicitStringReplacements = {
 
 class CompileSwapOptions {
   constructor() {
-    this.web3 = new web3('https://api.myetherwallet.com/eth');
+    this.web3 = new web3('https://api.my420wallet.420integrated.com/fourtwenty');
     this.changellyBaseOptions = {};
     this.kyberBaseOptions = {};
 
@@ -26,7 +26,7 @@ class CompileSwapOptions {
 
   async getDecimals(address) {
     try {
-      return await new this.web3.eth.Contract(
+      return await new this.web3.fourtwenty.Contract(
         [
           {
             constant: true,
@@ -49,7 +49,7 @@ class CompileSwapOptions {
         .call();
     } catch (e) {
       try {
-        const tokenFound = defaultEthTokens.find(
+        const tokenFound = defaultFourtwentyTokens.find(
           token =>
             token.address.toLowerCase() == address.contractAddress.toLowerCase()
         );
@@ -135,7 +135,7 @@ class CompileSwapOptions {
 
       this.KyberCurrencies = tokenDetails;
       return {
-        ETH: tokenDetails,
+        FOURTWENTY: tokenDetails,
         other: {}
       };
     } catch (e) {
@@ -144,7 +144,7 @@ class CompileSwapOptions {
   }
 
   async getDexAgSupported(    priorCollected = {
-    ETH: {},
+    FOURTWENTY: {},
     other: {}
   }) {
     try {
@@ -157,7 +157,7 @@ class CompileSwapOptions {
           id: v4()
         }
       );
-      const tokenDetails = priorCollected.ETH;
+      const tokenDetails = priorCollected.FOURTWENTY;
       for (let i = 0; i < tokenList.length; i++) {
         if(!tokenDetails[tokenList[i].symbol] && tokenList[i].address){
           this.needDecimalCheck.push({
@@ -175,7 +175,7 @@ class CompileSwapOptions {
       }
 
       return {
-        ETH: tokenDetails,
+        FOURTWENTY: tokenDetails,
         other: priorCollected.other
       };
     } catch (e) {
@@ -192,7 +192,7 @@ class CompileSwapOptions {
   }
 
   createEntry(item) {
-    const matchRegEx = /(?<=https:\/\/etherscan\.io\/token\/)(.*)(?=\?)/;
+    const matchRegEx = /(?<=https:\/\/fourtwentyscan\/420integrated\.com\/token\/)(.*)(?=\?)/;
     const match = matchRegEx.exec(item.addressUrl);
     let decimals = this.KyberCurrencies[item.name.toUpperCase()]
       ? this.KyberCurrencies[item.name.toUpperCase()].decimals
@@ -224,7 +224,7 @@ class CompileSwapOptions {
   }
 
   processChangelly(accumulator, currentValue) {
-    const regex = /https:\/\/etherscan\.io/;
+    const regex = /https:\/\/fourtwentyscan\/420integrated\.com/;
     if (!currentValue.enabled) return accumulator;
     if (explicitStringReplacements[currentValue.name.toUpperCase()]) {
       currentValue = {
@@ -233,7 +233,7 @@ class CompileSwapOptions {
       };
     }
     if (regex.test(currentValue.transactionUrl)) {
-      accumulator.ETH[currentValue.name.toUpperCase()] = this.createEntry(
+      accumulator.FOURTWENTY[currentValue.name.toUpperCase()] = this.createEntry(
         currentValue
       );
     } else {
@@ -256,7 +256,7 @@ class CompileSwapOptions {
 
   async supplyChangellySupported(
     priorCollected = {
-      ETH: {},
+      FOURTWENTY: {},
       other: {}
     }
   ) {
@@ -279,14 +279,14 @@ class CompileSwapOptions {
 
         const changellyCurrencies = currencyList.reduce(
           this.processChangelly.bind(this),
-          { ETH: {}, other: {} }
+          { FOURTWENTY: {}, other: {} }
         );
         this.formatChangellyBaseOptions({
-          ...changellyCurrencies.ETH,
+          ...changellyCurrencies.FOURTWENTY,
           ...changellyCurrencies.other
         });
         return {
-          ETH: { ...changellyCurrencies.ETH, ...priorCollected.ETH },
+          FOURTWENTY: { ...changellyCurrencies.FOURTWENTY, ...priorCollected.FOURTWENTY },
           other: { ...changellyCurrencies.other, ...priorCollected.other }
         };
       }
@@ -316,13 +316,13 @@ class CompileSwapOptions {
 
     for (let i = 0; i < this.needDecimalCheck.length; i++) {
       const decimals = await this.getDecimals(this.needDecimalCheck[i]);
-      if (withChangelly.ETH[this.needDecimalCheck[i].symbol] && decimals) {
-        withChangelly.ETH[this.needDecimalCheck[i].symbol].decimals = +decimals;
-        if(allTokens.ETH[this.needDecimalCheck[i].symbol]){
-          allTokens.ETH[this.needDecimalCheck[i].symbol].decimals = +decimals;
+      if (withChangelly.FOURTWENTY[this.needDecimalCheck[i].symbol] && decimals) {
+        withChangelly.FOURTWENTY[this.needDecimalCheck[i].symbol].decimals = +decimals;
+        if(allTokens.FOURTWENTY[this.needDecimalCheck[i].symbol]){
+          allTokens.FOURTWENTY[this.needDecimalCheck[i].symbol].decimals = +decimals;
         }
-      } else if (allTokens.ETH[this.needDecimalCheck[i].symbol] && decimals) {
-        allTokens.ETH[this.needDecimalCheck[i].symbol].decimals = +decimals;
+      } else if (allTokens.FOURTWENTY[this.needDecimalCheck[i].symbol] && decimals) {
+        allTokens.FOURTWENTY[this.needDecimalCheck[i].symbol].decimals = +decimals;
       }
     }
 
@@ -336,13 +336,13 @@ class CompileSwapOptions {
       );
     }
 
-    if (Object.keys(withChangelly.ETH).length > 0) {
+    if (Object.keys(withChangelly.FOURTWENTY).length > 0) {
       if (!fs.existsSync(swapConfigFolder)) {
         fs.mkdirSync(swapConfigFolder);
       }
       fs.writeFileSync(
-        `${swapConfigFolder}/EthereumTokens.json`,
-        JSON.stringify(allTokens.ETH)
+        `${swapConfigFolder}/FourtwentycoinTokens.json`,
+        JSON.stringify(allTokens.FOURTWENTY)
       );
     }
     if (Object.keys(this.changellyBaseOptions).length > 0) {
@@ -366,7 +366,7 @@ class CompileSwapOptions {
         fs.mkdirSync(kyberConfigFolder);
       }
       fs.writeFileSync(
-        `${kyberConfigFolder}/currenciesETH.json`,
+        `${kyberConfigFolder}/currenciesFOURTWENTY.json`,
         JSON.stringify(this.kyberBaseOptions)
       );
     }

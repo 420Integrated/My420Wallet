@@ -67,7 +67,7 @@
               }}</span>
               <a
                 :title="sub.receiverWallet"
-                :href="'https://etherscan.io/address/' + sub.receiverWallet"
+                :href="'https://fourtwentyscan.420integrated.com/address/' + sub.receiverWallet"
                 rel="noopener noreferrer"
                 class="address-txt prevent-user-select"
               >
@@ -77,7 +77,7 @@
             <div class="info-row">
               <span class="info-title">{{ $t('sendTx.amount') }}</span
               ><span class="info-txt"
-                >{{ sub.price }} {{ $t('common.currency.eth') }}</span
+                >{{ sub.price }} {{ $t('common.currency.fourtwenty') }}</span
               >
             </div>
             <div v-show="sub.moreInfo" class="more-info-container">

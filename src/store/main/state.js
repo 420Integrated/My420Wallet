@@ -6,7 +6,7 @@ if (store.get('notifications') === undefined) store.set('notifications', {});
 const gettingStartedDone =
   store.get('skipTutorial') !== undefined ? store.get('skipTutorial') : false;
 const storedNetwork = store.get('network');
-let network = nodeList['ETH'][0];
+let network = nodeList['FOURTWENTY'][0];
 if (BUILD_TYPE !== MEW_CX && storedNetwork !== undefined) {
   network = storedNetwork;
   if (storedNetwork.type.name !== 'CUS') {
@@ -26,8 +26,8 @@ const addressBook =
   store.get('addressBook') !== undefined ? store.get('addressBook') : [];
 const notifications =
   store.get('notifications') !== undefined ? store.get('notifications') : {};
-const gasPrice =
-  store.get('gasPrice') !== undefined ? store.get('gasPrice') : 41;
+const smokePrice =
+  store.get('smokePrice') !== undefined ? store.get('smokePrice') : 41;
 const customPaths =
   store.get('customPaths') !== undefined ? store.get('customPaths') : {};
 const state = {
@@ -41,8 +41,8 @@ const state = {
   customPaths: customPaths,
   ens: null,
   Errors: {},
-  ethDonationAddress: '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D',
-  gasPrice: gasPrice,
+  fourtwentyConationAddress: '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D',
+  smokePrice: smokePrice,
   Networks: nodeList,
   network: network,
   notifications: notifications,
@@ -59,8 +59,8 @@ const state = {
   addressBook: addressBook,
   locale: store.get('locale') !== undefined ? store.get('locale') : 'en_US',
   tempHide: false,
-  gasLimitWarning: 250,
-  ethGasPrice: 0
+  smokeLimitWarning: 250,
+  fourtwentySmokePrice: 0
 };
 
 export default state;

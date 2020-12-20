@@ -22,7 +22,7 @@
             for="welcomeMessage.link1"
           >
             <a
-              href="https://medium.com/@myetherwallet/lets-make-it-official-mew5-myetherwallet-s-all-new-interface-is-here-2063117180a4"
+              href="https://medium.com/@420integrated/introducing-my420wallet"
               target="_blank"
               rel="noopener noreferrer"
               >{{ $t('welcomeMessage.link1') }}</a
@@ -33,10 +33,10 @@
             русском языке, присоединяйтесь к нашему сообществу в
             <a target="_blank" href=" https://vk.com/public190491855">ВК</a>!
             Для поддержки, пишите на
-            <a target="_blank" href="mailto:support@myetherwallet.com"
-              >support@myetherwallet.com</a
+            <a target="_blank" href="mailto:support@my420wallet.420integrated.com"
+              >support@my420wallet.420integrated.com</a
             >. Для самых свежих новостей, подпишитесь на наш
-            <a target="_blank" href="https://twitter.com/myetherwallet"
+            <a target="_blank" href="https://twitter.com/420integrated"
               >Твиттер</a
             >."
           </p>

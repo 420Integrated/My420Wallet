@@ -1,22 +1,22 @@
-import ethSendTransaction from './eth_sendTransaction';
-import ethSign from './eth_sign';
-import ethAccounts from './eth_accounts';
-import ethCoinbase from './eth_coinbase';
-import ethSignTransaction from './eth_signTransaction';
-import ethGetTransactionCount from './eth_getTransactionCount';
-import ethGetTransactionReceipt from './eth_getTransactionReceipt';
+import fourtwentySendTransaction from './fourtwenty_sendTransaction';
+import fourtwentySign from './fourtwenty_sign';
+import fourtwentyAccounts from './fourtwenty_accounts';
+import fourtwentyCoinbase from './fourtwenty_coinbase';
+import fourtwentySignTransaction from './fourtwenty_signTransaction';
+import fourtwentyGetTransactionCount from './fourtwenty_getTransactionCount';
+import fourtwentyGetTransactionReceipt from './fourtwenty_getTransactionReceipt';
 import netVersion from './net_version';
-import ethGetBlockByNumber from './eth_getBlockByNumber';
-import ethGetBlockNumber from './eth_blockNumber';
+import fourtwentyGetBlockByNumber from './fourtwenty_getBlockByNumber';
+import fourtwentyGetBlockNumber from './fourtwenty_blockNumber';
 export {
-  ethSendTransaction,
-  ethSign,
-  ethAccounts,
-  ethCoinbase,
-  ethSignTransaction,
-  ethGetTransactionCount,
+  fourtwentySendTransaction,
+  fourtwentySign,
+  fourtwentyAccounts,
+  fourtwentyCoinbase,
+  fourtwentySignTransaction,
+  fourtwentyGetTransactionCount,
   netVersion,
-  ethGetTransactionReceipt,
-  ethGetBlockByNumber,
-  ethGetBlockNumber
+  fourtwentyGetTransactionReceipt,
+  fourtwentyGetBlockByNumber,
+  fourtwentyGetBlockNumber
 };

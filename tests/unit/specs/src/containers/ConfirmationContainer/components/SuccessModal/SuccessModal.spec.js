@@ -85,13 +85,13 @@ describe('SuccessModal.vue', () => {
     expect(wrapper.vm.buttonOk.title).toEqual(linkMessage);
   });
 
-  it('should render correct buttonCheckEtherscan computed data', () => {
-    wrapper.setData({ etherscanLink: 'etherscanLink' });
+  it('should render correct buttonCheckFourtwentyscan computed data', () => {
+    wrapper.setData({ fourtwentyscanLink: 'fourtwentyscanLink' });
     expect(
       wrapper.vm.$el
         .querySelectorAll('.standard-button .the-button-box')[1]
         .textContent.trim()
-    ).toEqual(wrapper.vm.buttonCheckEtherscan.title);
+    ).toEqual(wrapper.vm.buttonCheckFourtwentyscan.title);
   });
 
   it('should render correct buttonOk computed data', () => {

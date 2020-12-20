@@ -89,12 +89,12 @@
       <div
         v-show="showBalanceReminder"
         v-if="balanceWarnHidden"
-        class="low-eth-warning"
+        class="low-fourtwenty-warning"
       >
         <div class="warning-container">
           <p class="actual-warning">
             <img src="@/assets/images/icons/exclamation.svg" />
-            The ETH balance of your wallet is running low.
+            The FOURTWENTY balance of your wallet is running low.
           </p>
           <img
             src="@/assets/images/icons/close.svg"
@@ -103,11 +103,11 @@
         </div>
         <div class="link-container">
           <a
-            href="https://ccswap.myetherwallet.com/#/"
+            href="https://ccswap.my420wallet.420integrated.com/#/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {{ $t('mewcx.buy-eth') }}
+            {{ $t('mewcx.buy-fourtwenty') }}
           </a>
         </div>
       </div>
@@ -143,7 +143,7 @@
                 class="fa fa-lg fa-spin fa-spinner"
               />
               <p v-else class="dollar-amt">
-                {{ isEth ? walletBalance : fixedEthBalance }}
+                {{ isFourtwenty ? walletBalance : fixedFourtwentyBalance }}
               </p>
             </div>
           </div>
@@ -154,10 +154,10 @@
             <i v-if="fetchingBalance" class="fa fa-lg fa-spin fa-spinner" />
             <div v-else>
               <p class="dollar-amt">
-                {{ isEth ? convertedBalance : fixedEthBalance }}
+                {{ isFourtwenty ? convertedBalance : fixedFourtwentyBalance }}
               </p>
-              <p v-if="isEth" class="value">
-                {{ fixedEthBalance }}
+              <p v-if="isFourtwenty" class="value">
+                {{ fixedFourtwentyBalance }}
               </p>
             </div>
           </div>
@@ -322,9 +322,9 @@ import walletWorker from 'worker-loader!@/workers/wallet.worker.js';
 import VerifyDetailsModal from '../VerifyDetailsModal';
 import createBlob from '@/helpers/createBlob.js';
 import web3utils from 'web3-utils';
-import TokenBalance from '@myetherwallet/eth-token-balance';
+import TokenBalance from '@my420wallet/fourtwenty-token-balance';
 import sortByBalance from '@/helpers/sortByBalance.js';
-import { ETH } from '@/networks/types';
+import { FOURTWENTY } from '@/networks/types';
 export default {
   components: {
     blockie: Blockie,
@@ -387,7 +387,7 @@ export default {
       return this.generateName(this.address);
     },
     showBalanceReminder() {
-      if (this.isEth && this.walletType !== 'watchOnly') {
+      if (this.isFourtwenty && this.walletType !== 'watchOnly') {
         return this.showLowBalance;
       }
       return false;
@@ -422,7 +422,7 @@ export default {
         this.address.substr(this.address.length - 6, this.address.length)
       );
     },
-    fixedEthBalance() {
+    fixedFourtwentyBalance() {
       const currencyBalance = new BigNumber(this.balance).toFixed(3);
       return `${currencyBalance} ${this.network.type.currencyName}`;
     },
@@ -488,8 +488,8 @@ export default {
 
       return newTokenObj;
     },
-    isEth() {
-      return this.network.type.name === ETH.name;
+    isFourtwenty() {
+      return this.network.type.name === FOURTWENTY.name;
     }
   },
   watch: {
@@ -545,7 +545,7 @@ export default {
       this.fetchingTokens = true;
       const tb = new TokenBalance(this.web3.currentProvider);
       tb.getBalance(this.address, true, true, true, {
-        gas: '0x11e1a300'
+        smoke: '0x11e1a300'
       })
         .then(res => {
           const tokens = [];
@@ -575,7 +575,7 @@ export default {
     },
     getBalance() {
       this.fetchingBalance = true;
-      this.web3.eth
+      this.web3.fourtwenty
         .getBalance(this.address)
         .then(res => {
           this.fetchingBalance = false;
@@ -589,13 +589,13 @@ export default {
     iconFallback(evt) {
       evt.target.src = this.network.type.icon;
     },
-    walletRequirePass(ethjson) {
-      if (!ethjson) return false;
-      if (ethjson.encseed != null) return true;
-      else if (ethjson.Crypto != null || ethjson.crypto != null) return true;
-      else if (ethjson.hash != null && ethjson.locked) return true;
-      else if (ethjson.hash != null && !ethjson.locked) return false;
-      else if (ethjson.publisher == 'MyEtherWallet' && !ethjson.encrypted)
+    walletRequirePass(fourtwentyjson) {
+      if (!fourtwentyjson) return false;
+      if (fourtwentyjson.encseed != null) return true;
+      else if (fourtwentyjson.Crypto != null || fourtwentyjson.crypto != null) return true;
+      else if (fourtwentyjson.hash != null && fourtwentyjson.locked) return true;
+      else if (fourtwentyjson.hash != null && !fourtwentyjson.locked) return false;
+      else if (fourtwentyjson.publisher == '420integrated/My420Wallet' && !fourtwentyjson.encrypted)
         return false;
       return true;
     },
@@ -647,7 +647,7 @@ export default {
     },
     generateName(address) {
       const stamp = new Date();
-      // from ethereumjs-wallet getV3Filename
+      // from fourtwentyjs-wallet getV3Filename
       return [
         'UTC--',
         stamp.toJSON().replace(/:/g, '-'),

@@ -32,12 +32,12 @@
     "no-swap-offline": "swap is not available offline",
     "swap-only-mainnet": "Swap is only available on mainnet",
     "kyber-token-list-update-failed": "Failed to update Kyber Network available token list",
-    "kyber-gasLimit-list-update-failed": "Failed to update Kyber Network trade gasLimit list",
+    "kyber-smokeLimit-list-update-failed": "Failed to update Kyber Network trade smokeLimit list",
     "kyber-list-update-failed": "Failed to update Kyber Network default information",
     "dexag-cannot-complete": "Error retrieving trade, try a different dex",
-    "gas-too-high": "Gas price is too high. Please lower your gas price and try again.",
+    "smoke-too-high": "Smoke price is too high. Please lower your smoke price and try again.",
     "error-generating-swap": "An error occurred while finalizing the swap details",
-    "not-enough-eth-gas": "Insufficient balance for Amount + Transaction Fee.",
+    "not-enough-fourtwenty-smoke": "Insufficient balance for Amount + Transaction Fee.",
     "not-enough-tx-fee": "Insufficient balance for Transaction Fee.",
     "liquidity-too-low": "The amount requested is greater than the amount available at this time",
     "currency-warning": "Make sure you have a compatible {currency} wallet for this swap, MEW does not support {currency}."
@@ -53,9 +53,9 @@
     "selected-provider-cleared": "Selected provider cleared"
   },
   "tag-line": {
-    "bity": "Swap ETH, BTC, REP, or sell for fiat using your phone!",
-    "kybernetwork": "Swap ETH and ERC20 tokens!",
-    "changelly": "Swap ETH, ERC20 tokens, and more!",
+    "bity": "Swap FOURTWENTY, BTC, REP, or sell for fiat using your phone!",
+    "kybernetwork": "Swap FOURTWENTY and ERC20 tokens!",
+    "changelly": "Swap FOURTWENTY, ERC20 tokens, and more!",
     "simplex": "Buy crypto with a credit card!",
     "dexag": "Instantly compare prices across decentralized exchanges"
   },
@@ -92,6 +92,6 @@
   "address-verification": "Address Verification",
   "message-to-sign": "Message to sign to verify destination address ownership",
   "proceed-to-sign": "Proceed to sign message",
-  "gas-price-source-notice": "*based on gas price from settings",
-  "current-gas-price": "Current gas price: {value} Gwei"
+  "smoke-price-source-notice": "*based on smoke price from settings",
+  "current-smoke-price": "Current smoke price: {value} Maher"
 }

@@ -1,15 +1,15 @@
 import PocketRequestManger from './pocket-request-manager';
 import MiddleWare from '../middleware';
 import {
-  ethSendTransaction,
-  ethSignTransaction,
-  ethSign,
-  ethAccounts,
-  ethCoinbase,
-  ethGetTransactionCount,
-  ethGetTransactionReceipt,
-  ethGetBlockByNumber,
-  ethGetBlockNumber,
+  fourtwentySendTransaction,
+  fourtwentySignTransaction,
+  fourtwentySign,
+  fourtwentyAccounts,
+  fourtwentyCoinbase,
+  fourtwentyGetTransactionCount,
+  fourtwentyGetTransactionReceipt,
+  fourtwentyGetBlockByNumber,
+  fourtwentyGetBlockNumber,
   netVersion
 } from '../methods';
 class PocketProvider {
@@ -24,15 +24,15 @@ class PocketProvider {
           eventHub
         };
         const middleware = new MiddleWare();
-        middleware.use(ethSendTransaction);
-        middleware.use(ethSignTransaction);
-        middleware.use(ethGetTransactionCount);
-        middleware.use(ethGetTransactionReceipt);
-        middleware.use(ethSign);
-        middleware.use(ethAccounts);
-        middleware.use(ethCoinbase);
-        middleware.use(ethGetBlockByNumber);
-        middleware.use(ethGetBlockNumber);
+        middleware.use(fourtwentySendTransaction);
+        middleware.use(fourtwentySignTransaction);
+        middleware.use(fourtwentyGetTransactionCount);
+        middleware.use(fourtwentyGetTransactionReceipt);
+        middleware.use(fourtwentySign);
+        middleware.use(fourtwentyAccounts);
+        middleware.use(fourtwentyCoinbase);
+        middleware.use(fourtwentyGetBlockByNumber);
+        middleware.use(fourtwentyGetBlockNumber);
         middleware.use(netVersion);
         middleware.run(req, callback).then(() => {
           requestManager.provider.send(payload, callback);

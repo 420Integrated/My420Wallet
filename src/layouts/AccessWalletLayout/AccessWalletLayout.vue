@@ -290,11 +290,11 @@ export default {
         });
     },
     checkIsMetamask() {
-      this.isMetaMask = window.ethereum && window.ethereum.isMetaMask;
+      this.isMetaMask = window.fourtwentycoin && window.fourtwentycoin.isMetaMask;
     },
     checkWeb3() {
       this.web3WalletExists =
-        typeof window.ethereum !== 'undefined' ||
+        typeof window.fourtwentycoin !== 'undefined' ||
         typeof window.web3 !== 'undefined';
     },
     isDisabled(className) {

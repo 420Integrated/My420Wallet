@@ -113,7 +113,7 @@
 </template>
 
 <script>
-import WhatIsMyEtherWallet from './components/WhatIsMyEtherWallet';
+import WhatIsMy420Wallet from './components/WhatIsMy420Wallet';
 import WhereAreMyFundsStored from './components/WhereAreMyFundsStored';
 import WhatIfILoseMyKeysOrPassword from './components/WhatIfILoseMyKeysOrPassword';
 import SomeHelpfulTips from './components/SomeHelpfulTips';
@@ -125,7 +125,7 @@ import { mapActions } from 'vuex';
 
 export default {
   components: {
-    'what-is-mew': WhatIsMyEtherWallet,
+    'what-is-mew': WhatIsMy420Wallet,
     'where-my-funds-stored': WhereAreMyFundsStored,
     'what-if-i-lose-key': WhatIfILoseMyKeysOrPassword,
     'some-helpful-tips': SomeHelpfulTips,

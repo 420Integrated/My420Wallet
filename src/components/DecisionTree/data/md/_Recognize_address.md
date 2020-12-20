@@ -1,6 +1,6 @@
 ## My Funds are Missing
 
-#### Check your public address on Etherscan.io for a full list of recent activity
+#### Check your public address on fourtwentyscan.420integrated.com for a full list of recent activity
 
 1. It all looks familiar.
 
@@ -14,7 +14,7 @@
      * Did you enter your key on any sites, or access your wallet from an unsecure location?
 
 <note>
-**We cannot recover funds, reverse transactions, or locate the IP of any wallet address. We are an empty, client-side interface used to interact with the Ethereum blockchain, but we do not control the blockchain.
+**We cannot recover funds, reverse transactions, or locate the IP of any wallet address. We are an empty, client-side interface used to interact with the 420coin blockchain, but we do not control the blockchain.
 <br>
 <br>
 Feel free to reach out with more information so we can go from here.
@@ -24,7 +24,7 @@ Feel free to reach out with more information so we can go from here.
 
 #### Contact Form:
 
-* Email us at <mailto:support@myetherwallet.com>
+* Email us at <mailto:support@my420wallet.420integrated.com>
 * <p>Include a detailed description of the issue.</p>
   <note>Please include as many details as possible, such as phone / computer model, OS number, version of the app / site you are using, browser version etc.</note>
 * Attach screenshots (optional)

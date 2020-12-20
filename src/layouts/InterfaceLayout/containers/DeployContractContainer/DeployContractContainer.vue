@@ -128,14 +128,14 @@
       >
         <div class="title-container">
           <div class="title">
-            <h4>{{ $t('contract.value-in-eth') }}:</h4>
+            <h4>{{ $t('contract.value-in-fourtwenty') }}:</h4>
           </div>
         </div>
         <div class="the-form contract-name">
           <input
             ref="value"
             v-model="value"
-            :placeholder="$t('contract.value-in-eth')"
+            :placeholder="$t('contract.value-in-fourtwenty')"
             step="any"
           />
         </div>
@@ -178,11 +178,11 @@
 <script>
 import InterfaceContainerTitle from '../../components/InterfaceContainerTitle';
 import { Misc, Toast } from '@/helpers';
-import ethUnit from 'ethjs-unit';
-import { Transaction } from 'ethereumjs-tx';
+import fourtwentyUnit from 'fourtwentyjs-unit';
+import { Transaction } from 'fourtwentyjs-tx';
 import BigNumber from 'bignumber.js';
 import store from 'store';
-import { generateAddress, bufferToHex, toBuffer } from 'ethereumjs-util';
+import { generateAddress, bufferToHex, toBuffer } from 'fourtwentyjs-util';
 import { mapState } from 'vuex';
 
 export default {
@@ -196,18 +196,18 @@ export default {
       abi: '',
       inputs: {},
       contractName: '',
-      gasLimit: 21000,
+      smokeLimit: 21000,
       data: '',
       value: 0
     };
   },
   computed: {
-    ...mapState('main', ['gasPrice', 'web3', 'network']),
+    ...mapState('main', ['smokePrice', 'web3', 'network']),
     isValidAbi() {
       return Misc.isJson(this.abi) && Array.isArray(JSON.parse(this.abi));
     },
     txValue() {
-      return Misc.sanitizeHex(ethUnit.toWei(this.value, 'ether').toString(16));
+      return Misc.sanitizeHex(fourtwentyUnit.toWei(this.value, '420coin').toString(16));
     },
     abiConstructor() {
       let _constructor = null;
@@ -272,7 +272,7 @@ export default {
     },
     txData() {
       return this.abi !== ''
-        ? new this.web3.eth.Contract(JSON.parse(this.abi))
+        ? new this.web3.fourtwenty.Contract(JSON.parse(this.abi))
             .deploy({ data: this.txByteCode, arguments: this.deployArgs })
             .encodeABI()
         : '0x';
@@ -303,23 +303,23 @@ export default {
     getType: Misc.solidityType,
     async sendTransaction() {
       try {
-        await this.estimateGas();
+        await this.estimateSmoke();
         const web3 = this.web3;
-        const coinbase = await web3.eth.getCoinbase();
-        const nonce = await web3.eth.getTransactionCount(coinbase);
+        const coinbase = await web3.fourtwenty.getCoinbase();
+        const nonce = await web3.fourtwenty.getTransactionCount(coinbase);
         const _tx = new Transaction({
           nonce: nonce,
           value: this.txValue,
-          gasPrice: Misc.sanitizeHex(
-            ethUnit.toWei(this.gasPrice, 'gwei').toString(16)
+          smokePrice: Misc.sanitizeHex(
+            fourtwentyUnit.toWei(this.smokePrice, 'maher').toString(16)
           ),
-          gasLimit: Misc.sanitizeHex(new BigNumber(this.gasLimit).toString(16)),
+          smokeLimit: Misc.sanitizeHex(new BigNumber(this.smokeLimit).toString(16)),
           data: this.txData
         });
         const json = _tx.toJSON(true);
         delete json.to;
         json.from = coinbase;
-        this.web3.eth.sendTransaction(json).catch(err => {
+        this.web3.fourtwenty.sendTransaction(json).catch(err => {
           Toast.responseHandler(err, Toast.ERROR);
         });
         const contractAddr = bufferToHex(
@@ -358,14 +358,14 @@ export default {
       this.sendTransaction();
       window.scrollTo(0, 0);
     },
-    async estimateGas() {
-      const coinbase = await this.web3.eth.getCoinbase();
+    async estimateSmoke() {
+      const coinbase = await this.web3.fourtwenty.getCoinbase();
       const params = {
         from: coinbase,
         data: this.txData,
         value: this.txValue
       };
-      this.gasLimit = await this.web3.eth.estimateGas(params).catch(err => {
+      this.smokeLimit = await this.web3.fourtwenty.estimateSmoke(params).catch(err => {
         Toast.responseHandler(err, Toast.WARN);
       });
     },

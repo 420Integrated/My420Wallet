@@ -103,10 +103,10 @@ const checkErrorJson = (results, source) => {
     }
   }
   if (
-    results.error.message.includes('gas required exceeds allowance') &&
-    source === 'eth_estimateGasList'
+    results.error.message.includes('smoke required exceeds allowance') &&
+    source === 'fourtwenty_estimateSmokeList'
   ) {
-    throw Error('Please try a different dex. Problem calculating gas Limit.');
+    throw Error('Please try a different dex. Problem calculating smoke Limit.');
   }
   if (isJson(results.error.message)) {
     throw Error(JSON.stringify(results.error.message));
@@ -138,7 +138,7 @@ const handleOrThrow = (e, source) => {
     } else if (
       e.message.includes('Error retrieving trade, try a different dex') ||
       e.message.includes(
-        'Please try a different dex. Problem calculating gas Limit.'
+        'Please try a different dex. Problem calculating smoke Limit.'
       )
     ) {
       Toast.responseHandler(e.message, 3);

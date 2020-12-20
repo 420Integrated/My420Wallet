@@ -70,17 +70,17 @@
               <div class="top-menu">
                 <b-nav>
                   <b-nav-item
-                    href="https://ccswap.myetherwallet.com/#/"
+                    href="https://ccswap.my420wallet.420integrated.com/#/"
                     target="_blank"
-                    class="buy-eth"
+                    class="buy-fourtwenty"
                     rel="noopener noreferrer"
                   >
                     <img
                       alt
-                      class="buy-eth-icon"
-                      src="@/assets/images/icons/buy-eth.svg"
+                      class="buy-fourtwenty-icon"
+                      src="@/assets/images/icons/buy-fourtwenty.svg"
                     />
-                    {{ $t('common.buy-eth') }}
+                    {{ $t('common.buy-fourtwenty') }}
                   </b-nav-item>
 
                   <b-nav-item-dropdown
@@ -108,24 +108,12 @@
                       <p>{{ $t('interface.tx-history') }}</p>
                     </template>
                     <b-dropdown-item
-                      v-show="network.type.name === 'ETH'"
-                      :href="'https://www.ethvm.com/address/' + address"
+                      v-show="network.type.name === 'FOURTWENTY'"
+                      :href="'https://www.fourtwentyvm.com/address/' + address"
                       target="_blank"
                       rel="noopener noreferrer"
-                      >{{ $t('header.ethvm') }} ({{
+                      >{{ $t('header.fourtwentyvm') }} ({{
                         network.type.name
-                      }})</b-dropdown-item
-                    >
-                    <b-dropdown-item :href="explorerUrl" target="_blank">
-                      {{ serviceUrl }} ({{ network.type.name }})
-                    </b-dropdown-item>
-                    <b-dropdown-item
-                      v-show="network.type.name === 'ETH'"
-                      :href="'https://ethplorer.io/address/' + address"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >{{ $t('header.ethplorer') }} ({{
-                        $tc('common.token', 2)
                       }})</b-dropdown-item
                     >
                   </b-nav-item-dropdown>
@@ -375,7 +363,7 @@ export default {
     this.$eventHub.$off('open-settings');
   },
   methods: {
-    ...mapActions('main', ['setLocale', 'setGasPrice', 'setEthGasPrice']),
+    ...mapActions('main', ['setLocale', 'setSmokePrice', 'setFourtwentySmokePrice']),
     getCurrentLang() {
       const storedLocale = this.supportedLanguages.find(item => {
         return item.langCode === this.locale;

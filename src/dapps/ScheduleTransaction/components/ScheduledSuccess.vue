@@ -58,9 +58,9 @@
 
 <script>
 import { mapState } from 'vuex';
-import { Transaction } from 'ethereumjs-tx';
+import { Transaction } from 'fourtwentyjs-tx';
 import BigNumber from 'bignumber.js';
-import { Util } from '@ethereum-alarm-clock/lib';
+import { Util } from '@fourtwenty-alarm-clock/lib';
 
 import { Toast } from '@/helpers';
 import { ERC20 } from '@/partners';
@@ -107,7 +107,7 @@ export default {
       'notifications',
       'web3',
       'account',
-      'gasPrice',
+      'smokePrice',
       'network'
     ]),
     getPathMined() {
@@ -126,7 +126,7 @@ export default {
           latestNotification.status === 'complete' &&
           this.txHash === latestNotification.hash
         ) {
-          const receipt = await this.web3.eth.getTransactionReceipt(
+          const receipt = await this.web3.fourtwenty.getTransactionReceipt(
             this.txHash
           );
           const util = new Util(this.web3);
@@ -136,7 +136,7 @@ export default {
           );
           this.mined = true;
         } else if (latestNotification.status === 'pending') {
-          const transaction = await this.web3.eth.getTransaction(
+          const transaction = await this.web3.fourtwenty.getTransaction(
             latestNotification.hash
           );
 
@@ -150,7 +150,7 @@ export default {
 
           if (
             transaction.input.includes(
-              EAC_SCHEDULING_CONFIG.APPROVE_TOKEN_TRANSFER_METHOD_ID
+              EAC_SCHEDULING_CONFIG.APPROVE_TOKEN_TRANSFER_MFOURTWENTYOD_ID
             )
           ) {
             if (
@@ -173,12 +173,12 @@ export default {
         return;
       }
 
-      const tokenContract = await new this.web3.eth.Contract(
+      const tokenContract = await new this.web3.fourtwenty.Contract(
         ERC20,
         this.selectedCurrency.address
       );
 
-      const coinbase = await this.web3.eth.getCoinbase();
+      const coinbase = await this.web3.fourtwenty.getCoinbase();
       const tokenAmount = new BigNumber(
         this.amount * Math.pow(10, this.selectedCurrency.decimals)
       );
@@ -186,7 +186,7 @@ export default {
       const approveTokensData = tokenContract.methods
         .approve(this.scheduledTxAddress, tokenAmount.toString())
         .encodeABI();
-      const nonce = await this.web3.eth.getTransactionCount(coinbase, 'latest');
+      const nonce = await this.web3.fourtwenty.getTransactionCount(coinbase, 'latest');
 
       const numIfHex = input =>
         this.web3.utils.isHexStrict(input)
@@ -199,21 +199,21 @@ export default {
         value: '',
         data: approveTokensData,
         nonce: numIfHex(nonce),
-        gasPrice: this.web3.utils.toWei(
-          numIfHex(this.gasPrice).toString(),
-          'gwei'
+        smokePrice: this.web3.utils.toWei(
+          numIfHex(this.smokePrice).toString(),
+          'maher'
         )
       };
 
-      const estimatedGasLimit = await this.web3.eth.estimateGas(
+      const estimatedSmokeLimit = await this.web3.fourtwenty.estimateSmoke(
         scheduledTokensApproveTransaction
       );
-      scheduledTokensApproveTransaction.gasLimit = estimatedGasLimit + 1000000;
+      scheduledTokensApproveTransaction.smokeLimit = estimatedSmokeLimit + 1000000;
       const approveTx = new Transaction(scheduledTokensApproveTransaction);
 
       const json = approveTx.toJSON(true);
       json.from = coinbase;
-      this.web3.eth.sendTransaction(json).catch(err => {
+      this.web3.fourtwenty.sendTransaction(json).catch(err => {
         Toast.responseHandler(err, Toast.ERROR);
       });
     }

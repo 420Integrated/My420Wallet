@@ -43,7 +43,7 @@
                 <p class="wallet-title">
                   {{ $t('mewcx.value-of-tokens', { plural: 's' }) }}
                 </p>
-                <p v-if="network.type.name === 'ETH'" class="dollar-amt">
+                <p v-if="network.type.name === 'FOURTWENTY'" class="dollar-amt">
                   {{ walletBalance }}
                 </p>
               </div>
@@ -53,7 +53,7 @@
                 {{ network.type.currencyName }} {{ $t('mewcx.balance') }}
               </p>
               <p class="dollar-amt">
-                {{ ethBalance }}
+                {{ fourtwentyBalance }}
               </p>
             </div>
             <div class="wallet-value-container">
@@ -148,7 +148,7 @@ export default {
   },
   data() {
     return {
-      ethBalance: '0',
+      fourtwentyBalance: '0',
       buttons: [
         {
           title: 'mewcx.keystore-file',
@@ -205,10 +205,10 @@ export default {
   watch: {
     wallet(newVal) {
       if (Object.keys(newVal).length > 0 && newVal.identifier === 'keystore') {
-        this.web3.eth
+        this.web3.fourtwenty
           .getBalance(newVal.getAddressString())
           .then(res => {
-            this.ethBalance = this.web3.utils.fromWei(res, 'ether');
+            this.fourtwentyBalance = this.web3.utils.fromWei(res, '420coin');
           })
           .catch(e => {
             Toast.responseHandler(e, Toast.ERROR);

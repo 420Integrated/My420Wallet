@@ -33,7 +33,7 @@ function createLocalVueInstance() {
   const actions = {
     clearWallet: jest.fn(),
     decryptWallet: jest.fn(),
-    setGasPrice: jest.fn(),
+    setSmokePrice: jest.fn(),
     addSwapNotification: jest.fn()
   };
 

@@ -2,8 +2,8 @@
   "name": "MEW CX",
   "short_name": "MEW CX",
   "manifest_version": 2,
-  "description": "MyEtherWallet Chrome Extension - Browse the blockchain. Bring your own MEW.",
-  "homepage_url": "https://www.myetherwallet.com/",
+  "description": "My420Wallet Chrome Extension - Browse the blockchain. Bring your own MEW.",
+  "homepage_url": "https://www.my420wallet.420integrated.com/",
   "icons": {
     "16": "img/icons/icon16.png",
     "32": "img/icons/icon32.png",

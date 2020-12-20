@@ -6,13 +6,13 @@ import {
   WEB3_INJECT_SUCCESS
 } from '@/builds/mewcx/cxHelpers/cxEvents.js';
 import {
-  ethAccounts,
-  ethCoinbase,
-  ethSendTransaction,
-  ethSign,
-  ethRequestAccounts,
-  ethSubscribe,
-  ethUnsubscribe
+  fourtwentyAccounts,
+  fourtwentyCoinbase,
+  fourtwentySendTransaction,
+  fourtwentySign,
+  fourtwentyRequestAccounts,
+  fourtwentySubscribe,
+  fourtwentyUnsubscribe
 } from '../cx-web3-methods';
 
 const EventEmitter = require('events').EventEmitter;
@@ -22,13 +22,13 @@ class MewCxProvider extends EventEmitter {
     super();
     this.host = host;
     this.middleware = new MiddleWare();
-    this.middleware.use(ethRequestAccounts);
-    this.middleware.use(ethSendTransaction);
-    this.middleware.use(ethSign);
-    this.middleware.use(ethAccounts);
-    this.middleware.use(ethCoinbase);
-    this.middleware.use(ethSubscribe);
-    this.middleware.use(ethUnsubscribe);
+    this.middleware.use(fourtwentyRequestAccounts);
+    this.middleware.use(fourtwentySendTransaction);
+    this.middleware.use(fourtwentySign);
+    this.middleware.use(fourtwentyAccounts);
+    this.middleware.use(fourtwentyCoinbase);
+    this.middleware.use(fourtwentySubscribe);
+    this.middleware.use(fourtwentyUnsubscribe);
     this.requestManager = new MEWCXRequestManager();
     this._id = 0;
     this.setListeners();
@@ -93,7 +93,7 @@ class MewCxProvider extends EventEmitter {
         this.clearListeners();
       },
       enable: function () {
-        return this.sendPromise('eth_requestAccounts').then(res => {
+        return this.sendPromise('fourtwenty_requestAccounts').then(res => {
           return res.result;
         });
       }

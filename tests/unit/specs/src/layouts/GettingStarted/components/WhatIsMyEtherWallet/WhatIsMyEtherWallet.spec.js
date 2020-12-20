@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
-import WhatIsMyEtherWallet from '@/layouts/GettingStarted/components/WhatIsMyEtherWallet/WhatIsMyEtherWallet.vue';
+import WhatIsMy420Wallet from '@/layouts/GettingStarted/components/WhatIsMy420Wallet/WhatIsMy420Wallet.vue';
 
 import { Tooling } from '@@/helpers';
 
-describe('WhatIsMyEtherWallet.vue', () => {
+describe('WhatIsMy420Wallet.vue', () => {
   let localVue, i18n, wrapper, store;
   const progressBarValue = 'Congratulations progressBarValue';
 
@@ -15,7 +15,7 @@ describe('WhatIsMyEtherWallet.vue', () => {
   });
 
   beforeEach(() => {
-    wrapper = shallowMount(WhatIsMyEtherWallet, {
+    wrapper = shallowMount(WhatIsMy420Wallet, {
       localVue,
       i18n,
       store,
@@ -37,5 +37,5 @@ describe('WhatIsMyEtherWallet.vue', () => {
     ).toEqual(progressBarValue);
   });
 
-  describe('WhatIsMyEtherWallet.vue Methods', () => {});
+  describe('WhatIsMy420Wallet.vue Methods', () => {});
 });

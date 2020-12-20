@@ -6,32 +6,32 @@ import {
   WEB3_SEND_TX,
   WEB3_RECEIVE_TX_HASH,
   WEB3_REJECT,
-  WEB3_QUERY_GASPRICE,
-  WEB3_RECEIVE_GASPRICE,
+  WEB3_QUERY_SMOKEPRICE,
+  WEB3_RECEIVE_SMOKEPRICE,
   WEB3_GET_TX_COUNT,
   WEB3_RECEIVE_TX_COUNT,
-  WEB3_GET_GAS,
-  WEB3_RECEIVE_GAS
+  WEB3_GET_SMOKE,
+  WEB3_RECEIVE_SMOKE
 } from '@/builds/mewcx/cxHelpers/cxEvents.js';
 
 export default async ({ payload }, res, next) => {
-  if (payload.method !== 'eth_sendTransaction') return next();
+  if (payload.method !== 'fourtwenty_sendTransaction') return next();
   const id = window.extensionID;
   const tx = Object.assign({}, payload.params[0]);
   const eventName = WEB3_SEND_TX.replace('{{id}}', id);
   const resolveName = WEB3_RECEIVE_TX_HASH.replace('{{id}}', id);
   const rejectName = WEB3_REJECT.replace('{{id}}', id);
-  const web3QueryGasPrice = WEB3_QUERY_GASPRICE.replace('{{id}}', id);
-  const web3ReceiveGasPrice = WEB3_RECEIVE_GASPRICE.replace('{{id}}', id);
+  const web3QuerySmokePrice = WEB3_QUERY_SMOKEPRICE.replace('{{id}}', id);
+  const web3ReceiveSmokePrice = WEB3_RECEIVE_SMOKEPRICE.replace('{{id}}', id);
   const web3GetNonce = WEB3_GET_TX_COUNT.replace('{{id}}', id);
   const web3ReceiveNonce = WEB3_RECEIVE_TX_COUNT.replace('{{id}}', id);
-  const web3GetGas = WEB3_GET_GAS.replace('{{id}}', id);
-  const web3ReceiveGas = WEB3_RECEIVE_GAS.replace('{{id}}', id);
+  const web3GetSmoke = WEB3_GET_SMOKE.replace('{{id}}', id);
+  const web3ReceiveSmoke = WEB3_RECEIVE_SMOKE.replace('{{id}}', id);
 
-  const gasPrice = await eventHandler(
-    web3QueryGasPrice,
+  const smokePrice = await eventHandler(
+    web3QuerySmokePrice,
     {},
-    web3ReceiveGasPrice,
+    web3ReceiveSmokePrice,
     rejectName
   );
   const nonce = await eventHandler(
@@ -44,21 +44,21 @@ export default async ({ payload }, res, next) => {
     web3ReceiveNonce,
     rejectName
   );
-  const gas = await eventHandler(
-    web3GetGas,
+  const smoke = await eventHandler(
+    web3GetSmoke,
     {
       detail: {
         tx: tx
       }
     },
-    web3ReceiveGas,
+    web3ReceiveSmoke,
     rejectName
   );
 
-  tx.gasPrice = tx.gasPrice ? tx.gasPrice : gasPrice;
+  tx.smokePrice = tx.smokePrice ? tx.smokePrice : smokePrice;
   try {
     tx.nonce = !tx.nonce ? await nonce : tx.nonce;
-    tx.gas = !tx.gas ? gas : tx.gas;
+    tx.smoke = !tx.smoke ? smoke : tx.smoke;
   } catch (e) {
     res(e);
     return;

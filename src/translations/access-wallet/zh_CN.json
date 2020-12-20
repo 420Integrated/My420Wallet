@@ -65,7 +65,7 @@
     },
     "modal": {
       "title": "通过 MetaMask 访问",
-      "text": "请在一个安全的 (SSL/HTTPS) 连接中使用 MyEtherWallet 来连接。",
+      "text": "请在一个安全的 (SSL/HTTPS) 连接中使用 My420Wallet 来连接。",
       "button-install": "安装 MetaMask",
       "button-refresh": "刷新",
       "terms": "访问我的电子钱包，表示我接受{terms}。"

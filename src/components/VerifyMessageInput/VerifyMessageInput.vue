@@ -54,7 +54,7 @@
 <script>
 import { Toast, Misc } from '@/helpers';
 import { mapState } from 'vuex';
-import { hashPersonalMessage, ecrecover, pubToAddress } from 'ethereumjs-util';
+import { hashPersonalMessage, ecrecover, pubToAddress } from 'fourtwentyjs-util';
 
 export default {
   props: {
@@ -70,7 +70,7 @@ export default {
       verifyMessageLabel: `
       {
         "address": "0xdecaf9cd2367cdbb726e904cd6397edfcae6068d",
-        "msg": "no one is giving away free ETH",
+        "msg": "no one is giving away free FOURTWENTY",
         "sig":
           "0xfd53681a1bbbdbd6074a884e628540f129c57
           634c055f91d45615c943db446fb0acc35ef34bf9

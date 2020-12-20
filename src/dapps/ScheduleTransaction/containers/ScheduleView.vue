@@ -12,7 +12,7 @@
                 <currency-picker
                   :currency="tokensWithBalance"
                   :clear-currency="clearCurrency"
-                  :page="'sendEgasAmountthAndTokens'"
+                  :page="'sendEsmokeAmountthAndTokens'"
                   :token="true"
                   @selectedCurrency="selectedCurrency = $event"
                 />
@@ -31,8 +31,8 @@
               <div v-show="!isValidAmount" class="text-danger">
                 {{ $t('scheduleTx.warning.amount-higher-balance') }}
               </div>
-              <div v-show="!hasEnoughEthToSchedule" class="text-danger">
-                {{ $t('scheduleTx.warning.not-enough-eth') }}
+              <div v-show="!hasEnoughFourtwentyToSchedule" class="text-danger">
+                {{ $t('scheduleTx.warning.not-enough-fourtwenty') }}
               </div>
             </b-col>
           </b-row>
@@ -125,10 +125,10 @@
                     >{{ bounty }}</b-button
                   >
                 </b-button-group>
-                <div class="timebounty-gasprice-coverage">
+                <div class="timebounty-smokeprice-coverage">
                   {{
                     $t('scheduleTx.time-bounty.caption', {
-                      gas: estimatedMaximumExecutionGasPrice
+                      smoke: estimatedMaximumExecutionSmokePrice
                     })
                   }}
                 </div>
@@ -138,7 +138,7 @@
                 <standard-input
                   :options="{
                     title: $t('scheduleTx.time-bounty.title'),
-                    placeHolder: 'ETH',
+                    placeHolder: 'FOURTWENTY',
                     value: timeBounty,
                     type: 'number'
                   }"
@@ -225,7 +225,7 @@
               :options="{
                 title: $t('scheduleTx.req-deposit'),
                 value: deposit,
-                placeHolder: $t('common.currency.eth'),
+                placeHolder: $t('common.currency.fourtwenty'),
                 type: 'number'
               }"
               @changedValue="deposit = $event"
@@ -239,42 +239,42 @@
                 <standard-input
                   :clear-input="clearInput"
                   :options="{
-                    title: $t('scheduleTx.future-gas-price'),
-                    value: futureGasPrice,
+                    title: $t('scheduleTx.future-smoke-price'),
+                    value: futureSmokePrice,
                     type: 'number'
                   }"
-                  @changedValue="futureGasPrice = $event"
+                  @changedValue="futureSmokePrice = $event"
                 />
-                <div v-show="!isValidFutureGasPrice" class="text-danger">
-                  {{ $t('scheduleTx.set.gas-price', { min: minGasPrice }) }}
+                <div v-show="!isValidFutureSmokePrice" class="text-danger">
+                  {{ $t('scheduleTx.set.smoke-price', { min: minSmokePrice }) }}
                 </div>
               </b-col>
               <b-col cols="12" md="4">
                 <standard-input
                   :clear-input="clearInput"
                   :options="{
-                    title: $t('common.gas.limit'),
-                    value: gasLimit,
+                    title: $t('common.smoke.limit'),
+                    value: smokeLimit,
                     type: 'number'
                   }"
-                  @changedValue="gasLimit = $event"
+                  @changedValue="smokeLimit = $event"
                 />
-                <div v-show="!isValidGasLimit" class="text-danger">
-                  {{ $t('scheduleTx.set.gas-limit') }}
+                <div v-show="!isValidSmokeLimit" class="text-danger">
+                  {{ $t('scheduleTx.set.smoke-limit') }}
                 </div>
               </b-col>
               <b-col cols="12" md="4">
                 <standard-input
                   :clear-input="clearInput"
                   :options="{
-                    title: $t('scheduleTx.future-gas-limit'),
-                    value: futureGasLimit,
+                    title: $t('scheduleTx.future-smoke-limit'),
+                    value: futureSmokeLimit,
                     type: 'number'
                   }"
-                  @changedValue="futureGasLimit = $event"
+                  @changedValue="futureSmokeLimit = $event"
                 />
-                <div v-show="!isValidFutureGasLimit" class="text-danger">
-                  {{ $t('scheduleTx.set.future-gas-limit') }}
+                <div v-show="!isValidFutureSmokeLimit" class="text-danger">
+                  {{ $t('scheduleTx.set.future-smoke-limit') }}
                 </div>
               </b-col>
             </b-row>
@@ -325,7 +325,7 @@
       </div>
     </div>
     <a
-      href="https://blog.chronologic.network/announcing-the-ethereum-alarm-clock-chronologic-partnership-b3d7545bea3b"
+      href="https://blog.chronologic.network/announcing-the-fourtwenty-alarm-clock-chronologic-partnership-b3d7545bea3b"
       target="_blank"
       rel="noopener noreferrer"
       class="eac-logo"
@@ -335,13 +335,13 @@
 
 <script>
 import { mapState } from 'vuex';
-import { EAC, Util } from '@ethereum-alarm-clock/lib';
+import { EAC, Util } from '@fourtwenty-alarm-clock/lib';
 import BigNumber from 'bignumber.js';
 import { Datetime } from 'vue-datetime';
 import 'vue-datetime/dist/vue-datetime.css';
 import moment from 'moment';
 import 'moment-timezone';
-import * as unit from 'ethjs-unit';
+import * as unit from 'fourtwentyjs-unit';
 import { Toast } from '@/helpers';
 import DropDownAddressSelector from '@/components/DropDownAddressSelector';
 import CurrencyPicker from '../../../layouts/InterfaceLayout/components/CurrencyPicker';
@@ -352,7 +352,7 @@ import {
   calcSchedulingTotalCost,
   canBeConvertedToWei,
   EAC_SCHEDULING_CONFIG,
-  estimateBountyForGasPrice
+  estimateBountyForSmokePrice
 } from '../ScheduleHelpers';
 
 export default {
@@ -381,11 +381,11 @@ export default {
       address: '',
       isValidAddress: false,
       amount: '0',
-      gasLimit: EAC_SCHEDULING_CONFIG.FUTURE_GAS_LIMIT,
-      futureGasLimit: EAC_SCHEDULING_CONFIG.FUTURE_GAS_LIMIT,
-      minGasLimit: 0,
-      futureGasPrice: '1',
-      minGasPrice: 0.1,
+      smokeLimit: EAC_SCHEDULING_CONFIG.FUTURE_SMOKE_LIMIT,
+      futureSmokeLimit: EAC_SCHEDULING_CONFIG.FUTURE_SMOKE_LIMIT,
+      minSmokeLimit: 0,
+      futureSmokePrice: '1',
+      minSmokePrice: 0.1,
       data: '',
       datetime: '',
       currentBlockNumber: '',
@@ -398,7 +398,7 @@ export default {
       deposit:
         EAC_SCHEDULING_CONFIG.TIME_BOUNTY_DEFAULTS[0] *
         EAC_SCHEDULING_CONFIG.BOUNTY_TO_DEPOSIT_MULTIPLIER,
-      ethPrice: new BigNumber(0),
+      fourtwentyPrice: new BigNumber(0),
       selectedTimeZone: moment.tz.guess(),
       selectedCurrency: '',
       showTokenTransferNotification: true,
@@ -412,7 +412,7 @@ export default {
     ...mapState('main', [
       'web3',
       'network',
-      'gasPrice',
+      'smokePrice',
       'notifications',
       'account',
       'online'
@@ -428,41 +428,41 @@ export default {
       });
 
       return formatter.format(
-        this.ethPrice.times(new BigNumber(this.timeBounty))
+        this.fourtwentyPrice.times(new BigNumber(this.timeBounty))
       );
     },
-    estimatedMaximumExecutionGasPrice() {
+    estimatedMaximumExecutionSmokePrice() {
       if (
-        !this.isValidFutureGasPrice ||
-        !this.isValidFutureGasLimit ||
+        !this.isValidFutureSmokePrice ||
+        !this.isValidFutureSmokeLimit ||
         !this.isValidTimeBounty
       )
         return 0;
 
-      const estimated = Util.estimateMaximumExecutionGasPrice(
-        new BigNumber(unit.toWei(this.timeBounty, 'ether')),
-        new BigNumber(unit.toWei(this.futureGasPrice, 'gwei')),
-        new BigNumber(this.futureGasLimit)
+      const estimated = Util.estimateMaximumExecutionSmokePrice(
+        new BigNumber(unit.toWei(this.timeBounty, '420coin')),
+        new BigNumber(unit.toWei(this.futureSmokePrice, 'maher')),
+        new BigNumber(this.futureSmokeLimit)
       );
 
-      return Math.round(unit.fromWei(estimated.toString(), 'gwei'));
+      return Math.round(unit.fromWei(estimated.toString(), 'maher'));
     },
     now() {
       return moment();
     },
     minBounty() {
-      if (!this.isValidFutureGasPrice) return 0;
-      const wei = unit.toWei(this.futureGasPrice, 'gwei');
-      return unit.fromWei(wei, 'ether');
+      if (!this.isValidFutureSmokePrice) return 0;
+      const wei = unit.toWei(this.futureSmokePrice, 'maher');
+      return unit.fromWei(wei, '420coin');
     },
     timezoneOptions() {
       return moment.tz.names();
     },
     schedulingCost() {
       if (
-        !this.isValidFutureGasPrice ||
-        !this.isValidGasLimit ||
-        !this.isValidFutureGasLimit ||
+        !this.isValidFutureSmokePrice ||
+        !this.isValidSmokeLimit ||
+        !this.isValidFutureSmokeLimit ||
         !this.isValidTimeBounty
       ) {
         // Make the scheduling cost ridiculously big to throw an error
@@ -470,31 +470,31 @@ export default {
       }
 
       return calcSchedulingTotalCost({
-        gasPrice: new BigNumber(unit.toWei(this.gasPrice.toString(), 'gwei')),
-        gasLimit: new BigNumber(this.gasLimit),
-        futureGasLimit: new BigNumber(this.futureGasLimit),
-        futureGasPrice: new BigNumber(
-          unit.toWei(this.futureGasPrice.toString(), 'gwei')
+        smokePrice: new BigNumber(unit.toWei(this.smokePrice.toString(), 'maher')),
+        smokeLimit: new BigNumber(this.smokeLimit),
+        futureSmokeLimit: new BigNumber(this.futureSmokeLimit),
+        futureSmokePrice: new BigNumber(
+          unit.toWei(this.futureSmokePrice.toString(), 'maher')
         ),
         timeBounty: new BigNumber(
-          unit.toWei(this.timeBounty.toString(), 'ether')
+          unit.toWei(this.timeBounty.toString(), '420coin')
         )
       });
     },
-    maxEthToSend() {
+    maxFourtwentyToSend() {
       const accountBalance = new BigNumber(this.account.balance);
-      const sendableEth = accountBalance.minus(this.schedulingCost);
-      return sendableEth.gt(0) ? sendableEth : new BigNumber(0);
+      const sendableFourtwenty = accountBalance.minus(this.schedulingCost);
+      return sendableFourtwenty.gt(0) ? sendableFourtwenty : new BigNumber(0);
     },
     validInputs() {
       return (
-        this.hasEnoughEthToSchedule &&
+        this.hasEnoughFourtwentyToSchedule &&
         this.isValidAmount &&
         this.isValidAddress &&
         this.isValidExecutionWindow &&
-        this.isValidFutureGasPrice &&
-        this.isValidFutureGasLimit &&
-        this.isValidGasLimit &&
+        this.isValidFutureSmokePrice &&
+        this.isValidFutureSmokeLimit &&
+        this.isValidSmokeLimit &&
         this.isValidTimeBounty &&
         this.isValidWindowStart &&
         this.isValidData
@@ -506,12 +506,12 @@ export default {
       const enteredAmount = new BigNumber(
         this.isTokenTransfer
           ? this.amount
-          : unit.toWei(this.amount.toString(), 'ether')
+          : unit.toWei(this.amount.toString(), '420coin')
       );
       const max = new BigNumber(
         this.isTokenTransfer
           ? this.selectedCurrency.balance
-          : this.maxEthToSend.toString()
+          : this.maxFourtwentyToSend.toString()
       );
 
       return enteredAmount.lte(max);
@@ -542,36 +542,36 @@ export default {
     },
     isValidTimeBounty() {
       const convertibleToWei = canBeConvertedToWei(this.web3, this.timeBounty);
-      const invalidFutureGasPrice = canBeConvertedToWei(
+      const invalidFutureSmokePrice = canBeConvertedToWei(
         this.web3,
-        this.futureGasPrice,
-        'gwei'
+        this.futureSmokePrice,
+        'maher'
       );
-      if (!invalidFutureGasPrice || !convertibleToWei) return false;
+      if (!invalidFutureSmokePrice || !convertibleToWei) return false;
 
-      const higherThanGasPrice = new BigNumber(
-        unit.toWei(this.timeBounty, 'ether')
-      ).gte(unit.toWei(this.futureGasPrice, 'gwei'));
-      return higherThanGasPrice;
+      const higherThanSmokePrice = new BigNumber(
+        unit.toWei(this.timeBounty, '420coin')
+      ).gte(unit.toWei(this.futureSmokePrice, 'maher'));
+      return higherThanSmokePrice;
     },
     isValidExecutionWindow() {
       return this.windowSize >= this.selectedMode.executionWindow.min;
     },
-    isValidFutureGasPrice() {
+    isValidFutureSmokePrice() {
       const isHigherThanMin =
-        parseFloat(this.futureGasPrice) >= this.minGasPrice;
+        parseFloat(this.futureSmokePrice) >= this.minSmokePrice;
       const convertibleToWei = canBeConvertedToWei(
         this.web3,
-        this.futureGasPrice,
-        'gwei'
+        this.futureSmokePrice,
+        'maher'
       );
       return isHigherThanMin && convertibleToWei;
     },
-    isValidGasLimit() {
-      return new BigNumber(this.gasLimit).gte(this.minGasLimit);
+    isValidSmokeLimit() {
+      return new BigNumber(this.smokeLimit).gte(this.minSmokeLimit);
     },
-    isValidFutureGasLimit() {
-      return new BigNumber(this.futureGasLimit).gte(this.minGasLimit);
+    isValidFutureSmokeLimit() {
+      return new BigNumber(this.futureSmokeLimit).gte(this.minSmokeLimit);
     },
     isValidDeposit() {
       return canBeConvertedToWei(this.web3, this.deposit);
@@ -579,7 +579,7 @@ export default {
     isValidData() {
       return this.web3.utils.isHexStrict(this.data) || this.data === '';
     },
-    hasEnoughEthToSchedule() {
+    hasEnoughFourtwentyToSchedule() {
       const accountBalance = new BigNumber(this.account.balance);
       return accountBalance.gt(this.schedulingCost);
     }
@@ -594,7 +594,7 @@ export default {
 
       if (latestNotification.hash) {
         if (latestNotification.status === 'pending') {
-          const transaction = await this.web3.eth.getTransaction(
+          const transaction = await this.web3.fourtwenty.getTransaction(
             latestNotification.hash
           );
 
@@ -606,7 +606,7 @@ export default {
             }
 
             const isTokenTransfer = transaction.input.includes(
-              EAC_SCHEDULING_CONFIG.TOKEN_TRANSFER_METHOD_ID
+              EAC_SCHEDULING_CONFIG.TOKEN_TRANSFER_MFOURTWENTYOD_ID
             );
             this.$router.push({
               name: 'Scheduled success',
@@ -627,13 +627,13 @@ export default {
       }
     },
     async selectedCurrency() {
-      this.futureGasLimit = await this.estimateGas();
-      this.gasLimit = this.isTokenTransfer
-        ? EAC_SCHEDULING_CONFIG.TOKEN_SCHEDULING_GAS_LIMIT
-        : EAC_SCHEDULING_CONFIG.FUTURE_GAS_LIMIT;
+      this.futureSmokeLimit = await this.estimateSmoke();
+      this.smokeLimit = this.isTokenTransfer
+        ? EAC_SCHEDULING_CONFIG.TOKEN_SCHEDULING_SMOKE_LIMIT
+        : EAC_SCHEDULING_CONFIG.FUTURE_SMOKE_LIMIT;
     },
     async hexAddress() {
-      this.futureGasLimit = await this.estimateGas();
+      this.futureSmokeLimit = await this.estimateSmoke();
     }
   },
   beforeMount() {
@@ -642,7 +642,7 @@ export default {
       symbol: this.network.type.name
     };
 
-    this.web3.eth
+    this.web3.fourtwenty
       .getBlockNumber()
       .then(res => {
         this.currentBlockNumber = res;
@@ -653,15 +653,15 @@ export default {
       });
 
     this.datetime = moment().add(1, 'days').toISOString();
-    this.futureGasPrice = (this.gasPrice >= this.minGasPrice
-      ? this.gasPrice
-      : this.minGasPrice
+    this.futureSmokePrice = (this.smokePrice >= this.minSmokePrice
+      ? this.smokePrice
+      : this.minSmokePrice
     ).toString();
 
     this.timeBountyPresets = [
-      estimateBountyForGasPrice(this.futureGasPrice * 5, this.futureGasLimit),
-      estimateBountyForGasPrice(this.futureGasPrice * 8, this.futureGasLimit),
-      estimateBountyForGasPrice(this.futureGasPrice * 13, this.futureGasLimit)
+      estimateBountyForSmokePrice(this.futureSmokePrice * 5, this.futureSmokeLimit),
+      estimateBountyForSmokePrice(this.futureSmokePrice * 8, this.futureSmokeLimit),
+      estimateBountyForSmokePrice(this.futureSmokePrice * 13, this.futureSmokeLimit)
     ];
 
     this.timeBounty = this.timeBountyPresets[0];
@@ -671,7 +671,7 @@ export default {
     if (this.online) {
       this.eac = new EAC(this.web3);
 
-      const url = 'https://cryptorates.mewapi.io/convert/ETH';
+      const url = 'https://cryptorates.mewapi.io/convert/FOURTWENTY';
       const fetchValues = await fetch(url);
       const values = await fetchValues.json();
 
@@ -680,7 +680,7 @@ export default {
         Toast.responseHandler(new Error(toastText), Toast.ERROR);
         return;
       }
-      this.ethPrice = new BigNumber(values['USDT']);
+      this.fourtwentyPrice = new BigNumber(values['USDT']);
     }
   },
   methods: {
@@ -699,8 +699,8 @@ export default {
       this.hexAddress = data.address;
       this.isValidAddress = data.valid;
     },
-    async estimateGas() {
-      const coinbase = await this.web3.eth.getCoinbase();
+    async estimateSmoke() {
+      const coinbase = await this.web3.fourtwenty.getCoinbase();
 
       if (this.isValidAmount && this.isValidAddress) {
         const tokenTransferData = await this.getTokenTransferData();
@@ -710,39 +710,39 @@ export default {
           from: coinbase,
           value: this.isTokenTransfer
             ? 0
-            : unit.toWei(this.amount.toString(), 'ether'),
+            : unit.toWei(this.amount.toString(), '420coin'),
           to: this.isTokenTransfer
             ? this.selectedCurrency.address
             : this.hexAddress,
           data: this.isTokenTransfer ? tokenTransferData : inputData
         };
 
-        let estimatedGasLimit;
+        let estimatedSmokeLimit;
         try {
-          estimatedGasLimit = await this.web3.eth.estimateGas(
+          estimatedSmokeLimit = await this.web3.fourtwenty.estimateSmoke(
             tokenSchedulingTransaction
           );
         } catch (e) {
           Toast.responseHandler(e, Toast.ERROR);
-          return EAC_SCHEDULING_CONFIG.FUTURE_GAS_LIMIT.toString();
+          return EAC_SCHEDULING_CONFIG.FUTURE_SMOKE_LIMIT.toString();
         }
 
-        const totalEstimatedGasLimit = new BigNumber(estimatedGasLimit).plus(
-          EAC_SCHEDULING_CONFIG.TOKEN_TRANSFER_ADDITIONAL_GAS
+        const totalEstimatedSmokeLimit = new BigNumber(estimatedSmokeLimit).plus(
+          EAC_SCHEDULING_CONFIG.TOKEN_TRANSFER_ADDITIONAL_SMOKE
         );
-        return totalEstimatedGasLimit.toString();
+        return totalEstimatedSmokeLimit.toString();
       }
 
-      return EAC_SCHEDULING_CONFIG.FUTURE_GAS_LIMIT.toString();
+      return EAC_SCHEDULING_CONFIG.FUTURE_SMOKE_LIMIT.toString();
     },
     async getTokenTransferData() {
       if (this.isTokenTransfer && this.isValidAmount && this.isValidAddress) {
-        const tokenContract = await new this.web3.eth.Contract(
+        const tokenContract = await new this.web3.fourtwenty.Contract(
           ERC20,
           this.selectedCurrency.address
         );
 
-        const coinbase = await this.web3.eth.getCoinbase();
+        const coinbase = await this.web3.fourtwenty.getCoinbase();
         const tokenAmount = new BigNumber(
           this.amount * Math.pow(10, this.selectedCurrency.decimals)
         );
@@ -758,9 +758,9 @@ export default {
       const {
         amount,
         hexAddress,
-        futureGasPrice,
-        futureGasLimit,
-        gasLimit,
+        futureSmokePrice,
+        futureSmokeLimit,
+        smokeLimit,
         selectedBlockNumber,
         deposit,
         windowSize,
@@ -782,9 +782,9 @@ export default {
 
       const timestamp = moment(datetime).unix();
 
-      const ethToWeiBN = value => {
+      const fourtwentyToWeiBN = value => {
         value = value === '' ? 0 : value;
-        return new BigNumber(unit.toWei(value.toString(), 'ether'));
+        return new BigNumber(unit.toWei(value.toString(), '420coin'));
       };
 
       const schedulingOptions = {
@@ -793,17 +793,17 @@ export default {
           timestampScheduling ? timestamp : selectedBlockNumber
         ),
         timestampScheduling,
-        callGas: new BigNumber(futureGasLimit),
+        callSmoke: new BigNumber(futureSmokeLimit),
         callData: isTokenTransfer ? await this.getTokenTransferData() : data,
-        callValue: isTokenTransfer ? new BigNumber(0) : ethToWeiBN(amount),
+        callValue: isTokenTransfer ? new BigNumber(0) : fourtwentyToWeiBN(amount),
         windowSize: new BigNumber(
           timestampScheduling ? windowSize * 60 : windowSize
         ),
-        bounty: ethToWeiBN(timeBounty),
-        requiredDeposit: ethToWeiBN(deposit),
-        gasPrice: new BigNumber(unit.toWei(futureGasPrice.toString(), 'gwei')),
+        bounty: fourtwentyToWeiBN(timeBounty),
+        requiredDeposit: fourtwentyToWeiBN(deposit),
+        smokePrice: new BigNumber(unit.toWei(futureSmokePrice.toString(), 'maher')),
         fee: new BigNumber(0),
-        scheduleGas: new BigNumber(gasLimit)
+        scheduleSmoke: new BigNumber(smokeLimit)
       };
 
       const endowment = await this.eac.computeEndowment(schedulingOptions);

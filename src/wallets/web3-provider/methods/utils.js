@@ -1,11 +1,11 @@
 import { formatters } from 'web3-core-helpers';
 const getSanitizedTx = tx => {
   return new Promise((resolve, reject) => {
-    if (!tx.gas && !tx.gasLimit && !tx.chainId)
-      return reject(new Error('"gas" or "chainId" is missing'));
-    if (tx.nonce < 0 || tx.gas < 0 || tx.gasPrice < 0 || tx.chainId < 0)
+    if (!tx.smoke && !tx.smokeLimit && !tx.chainId)
+      return reject(new Error('"smoke" or "chainId" is missing'));
+    if (tx.nonce < 0 || tx.smoke < 0 || tx.smokePrice < 0 || tx.chainId < 0)
       return reject(
-        new Error('Gas, gasPrice, nonce or chainId is lower than 0')
+        new Error('Smoke, smokePrice, nonce or chainId is lower than 0')
       );
 
     try {

@@ -1,7 +1,7 @@
 <template>
   <div class="amount-info-container">
-    <div class="eth-icon">
-      <img src="@/assets/images/currency/eth.svg" />
+    <div class="fourtwenty-icon">
+      <img src="@/assets/images/currency/fourtwenty.svg" />
     </div>
     <div class="amount-text-container">
       <p class="amount-text">
@@ -31,7 +31,7 @@ export default {
     },
     currency: {
       type: String,
-      default: 'ETH'
+      default: 'FOURTWENTY'
     },
     direction: {
       type: String,

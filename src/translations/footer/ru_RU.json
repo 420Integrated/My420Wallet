@@ -12,7 +12,6 @@
   "others": "Другие",
   "affiliates": "Партнеры",
   "ledger": "Ledger Wallet",
-  "ethCard": "Ether Card",
   "bitbox": "BitBox",
   "bity": "Bity",
   "billfodl": "Billfodl",
@@ -25,7 +24,7 @@
   "team": "Команда",
   "feedback": "Отзывы",
   "privacy": "Конфиденциальность",
-  "copyright": "© 2020 MyEtherWallet. Все права защищены.",
+  "copyright": "© 2020 420integrated. Все права защищены.",
   "pricing-p": "Расценки взяты из",
   "advanced": "Дополнительные параметры",
   "send-offline": "Помощник для оффлайн транзакций",
@@ -34,8 +33,8 @@
   "mew-wallet": "MEW wallet",
   "cool-wallet": "CoolWallet",
   "donation": {
-    "desc": "MyEtherWallet является ПО с открытым кодом и предоставляется сообществу бесплатно. Все это возможно благодаря вашей поддержке.",
-    "ether": "Поддержка в Ethereum",
+    "desc": "My420Wallet является ПО с открытым кодом и предоставляется сообществу бесплатно. Все это возможно благодаря вашей поддержке.",
+    "fourtwenty": "Поддержка в 420coin",
     "bitcoin": "Поддержка в Bitcoin"
   },
   "coingecko": "Coingecko",

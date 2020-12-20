@@ -1,10 +1,10 @@
 import { Manager as Web3RequestManager } from 'web3-core-requestmanager';
 import MiddleWare from '../middleware';
 import {
-  ethSendTransaction,
-  ethSign,
-  ethSignTransaction,
-  ethGetTransactionCount
+  fourtwentySendTransaction,
+  fourtwentySign,
+  fourtwentySignTransaction,
+  fourtwentyGetTransactionCount
 } from '../methods';
 class GivenProvider {
   constructor(host, options, store, eventHub) {
@@ -25,10 +25,10 @@ class GivenProvider {
         eventHub
       };
       const middleware = new MiddleWare();
-      middleware.use(ethSendTransaction);
-      middleware.use(ethSignTransaction);
-      middleware.use(ethGetTransactionCount);
-      middleware.use(ethSign);
+      middleware.use(fourtwentySendTransaction);
+      middleware.use(fourtwentySignTransaction);
+      middleware.use(fourtwentyGetTransactionCount);
+      middleware.use(fourtwentySign);
       middleware.run(req, callback).then(() => {
         this.givenProvider.send_(payload, callback);
       });

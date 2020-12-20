@@ -1,4 +1,4 @@
-import { bufferToInt } from 'ethereumjs-util';
+import { bufferToInt } from 'fourtwentyjs-util';
 
 const getBufferFromHex = hex => {
   hex = sanitizeHex(hex);
@@ -24,8 +24,8 @@ const getHexTxObject = tx => {
     data: sanitizeHex(tx.data.toString('hex')),
     chainId: tx.getChainId(),
     nonce: sanitizeHex(tx.nonce.toString('hex')),
-    gasLimit: sanitizeHex(tx.gasLimit.toString('hex')),
-    gasPrice: sanitizeHex(tx.gasPrice.toString('hex'))
+    smokeLimit: sanitizeHex(tx.smokeLimit.toString('hex')),
+    smokePrice: sanitizeHex(tx.smokePrice.toString('hex'))
   };
 };
 const getSignTransactionObject = tx => {
@@ -33,8 +33,8 @@ const getSignTransactionObject = tx => {
     rawTransaction: bufferToHex(tx.serialize()),
     tx: {
       nonce: bufferToHex(tx.nonce),
-      gasPrice: bufferToHex(tx.gasPrice),
-      gas: tx.gasLimit ? bufferToHex(tx.gasLimit) : bufferToHex(tx.gas),
+      smokePrice: bufferToHex(tx.smokePrice),
+      smoke: tx.smokeLimit ? bufferToHex(tx.smokeLimit) : bufferToHex(tx.smoke),
       to: bufferToHex(tx.to),
       value: bufferToHex(tx.value),
       input: bufferToHex(tx.data),

@@ -3,7 +3,7 @@
     <div class="global__interface-block__margin-top">
       <a
         :title="$t('interface.ads.twitter')"
-        href="https://twitter.com/intent/follow?screen_name=myetherwallet"
+        href="https://twitter.com/intent/follow?screen_name=my420wallet"
         onclick="window.open(this.href, 'twitter-share', 'width=580,height=296');return false;"
         rel="noopener noreferrer"
       >
@@ -33,7 +33,7 @@
           <mew-wallet-ad />
         </b-carousel-slide>
         <b-carousel-slide>
-          <buy-eth-ad />
+          <buy-fourtwenty-ad />
         </b-carousel-slide>
       </b-carousel>
     </div>
@@ -45,7 +45,7 @@ import ads from './adComponents';
 
 export default {
   components: {
-    'buy-eth-ad': ads.buyEthAd,
+    'buy-fourtwenty-ad': ads.buyFourtwentyAd,
     'mew-wallet-ad': ads.mewWalletAd
   },
   props: {},

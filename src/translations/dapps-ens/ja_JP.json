@@ -1,7 +1,7 @@
 {
   "title": "ENS Manager",
   "dapp-desc": "Register and manage an ENS domain",
-  "search-domain-desc": "Search for a domain name. Once you have registered one, you can tell your friends to send ETH to \"_____.eth\", instead of your public address (0x.....).",
+  "search-domain-desc": "Search for a domain name. Once you have registered one, you can tell your friends to send FOURTWENTY to \"_____.fourtwenty\", instead of your public address (0x.....).",
   "error": {
     "permanent-not-available": "ENS Permanent registrar is not available yet, please try again later",
     "domain-tld-not-supported": "Domain TLD {parsedTld} is not supported in this node!",
@@ -55,7 +55,7 @@
   "enable-dns-sec": "Please enable DNSSEC for domain: {domain}",
   "txt": {
     "setup-not-found": "No TXT setup found for {domain}!",
-    "add-txt-type-entry": "On your DNS management console, please add a TXT type DNS entry \" {txtString} \" with a value containing your Ethereum address in the format of \"a=YOURETHEREUMADDRESS\"",
+    "add-txt-type-entry": "On your DNS management console, please add a TXT type DNS entry \" {txtString} \" with a value containing your 420coin address in the format of \"a=YOURFOURTWENTYCOINADDRESS\"",
     "name-owned": "This name is currently owned in ENS by {owner} but TXT record is no longer available for {domain}!",
     "unclaim-desc": "You can unclaim this {domain} from ENS by clicking the following button",
     "unclaim": "Unclaim"
@@ -81,7 +81,7 @@
   "txt-record": "Text Records",
   "ens-resolver": {
     "address-reported-error": "Address has been reported. Please make sure you are sending funds to the correct address.",
-    "invalid-eth-addr": "Not a valid Ethereum address",
+    "invalid-fourtwenty-addr": "Not a valid 420coin address",
     "addr-not-checksummed": "This address is not checksummed properly. Please copy the address exactly as shown.",
     "invalid-addr": "Invalid {coin} address",
     "network-not-found": "{network}NS name is invalid or not found",

@@ -42,18 +42,18 @@ export default {
         }
         _self.switchNetwork(network).then(() => {
           _self.setWeb3Instance().then(() => {
-            _self.web3.eth.getGasPrice().then(res => {
-              _self.setGasPrice(
-                utils.fromWei(new BigNumber(res).toString(), 'gwei')
+            _self.web3.fourtwenty.getSmokePrice().then(res => {
+              _self.setSmokePrice(
+                utils.fromWei(new BigNumber(res).toString(), 'maher')
               );
             });
           });
         });
       } else {
         _self.setWeb3Instance().then(() => {
-          _self.web3.eth.getGasPrice().then(res => {
-            _self.setGasPrice(
-              utils.fromWei(new BigNumber(res).toString(), 'gwei')
+          _self.web3.fourtwenty.getSmokePrice().then(res => {
+            _self.setSmokePrice(
+              utils.fromWei(new BigNumber(res).toString(), 'maher')
             );
           });
         });
@@ -61,7 +61,7 @@ export default {
     });
   },
   methods: {
-    ...mapActions('main', ['setWeb3Instance', 'switchNetwork', 'setGasPrice'])
+    ...mapActions('main', ['setWeb3Instance', 'switchNetwork', 'setSmokePrice'])
   }
 };
 </script>

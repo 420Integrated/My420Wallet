@@ -31,7 +31,7 @@
               <i18n path="termsOfService.intro-p1" tag="p">
                 <template v-slot:privPol>
                   <a
-                    href="https://www.myetherwallet.com/privacy-policy"
+                    href="https://www.my420wallet.420integrated.com/privacy-policy"
                     target="_blank"
                     rel="noopener noreferrer"
                     >{{ parent.$t('termsOfService.privacy-policy') }}</a
@@ -92,7 +92,7 @@
               >
                 <template v-slot:article1>
                   <a
-                    href="https://kb.myetherwallet.com/en/getting-started/myetherwallet-an-introduction/"
+                    href="https://my420wallet.420integrated.com/my420wallet-an-introduction/"
                     target="_blank"
                     rel="noopener noreferrer"
                     >"{{ parent.$t('termsOfService.article1') }}"</a
@@ -100,7 +100,7 @@
                 </template>
                 <template v-slot:article2>
                   <a
-                    href="https://kb.myetherwallet.com/en/security-and-privacy/pro-tips-how-to-avoid-phishing-scams/"
+                    href="https://my420wallet.420integrated.com/security/"
                     target="_blank"
                     rel="noopener noreferrer"
                     >“{{ parent.$t('termsOfService.article2') }}”</a
@@ -190,7 +190,7 @@
               <i18n path="termsOfService.privacy-title-p" tag="p">
                 <template v-slot:link>
                   <a
-                    href="https://myetherwallet.com/privacy-policy"
+                    href="https://my420wallet.420integrated.com/privacy-policy"
                     target="_blank"
                     rel="noopener noreferrer"
                     >"{{ parent.$t('termsOfService.link') }}"</a
@@ -329,11 +329,11 @@
               <i18n path="termsOfService.contact-info-title-p" tag="p">
                 <template v-slot:suppEmail>
                   <a
-                    href="mailto:support@myetherwallet.com"
+                    href="mailto:support@my420wallet.420integrated.com"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    support@myetherwallet.com</a
+                    support@my420wallet.420integrated.com</a
                   >.
                 </template>
               </i18n>

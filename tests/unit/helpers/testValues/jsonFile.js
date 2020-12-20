@@ -29,8 +29,8 @@ const password = '123456789';
 
 const rawTransactionDetails = {
   nonce: '0x00',
-  gasPrice: '0xb2d05e00',
-  gasLimit: '0x5208',
+  smokePrice: '0xb2d05e00',
+  smokeLimit: '0x5208',
   to: '0x09386C7Cd7FC28479d81a0551D149eA20CA56460',
   value: '0x0de0b6b3a7640000',
   data: '0x',

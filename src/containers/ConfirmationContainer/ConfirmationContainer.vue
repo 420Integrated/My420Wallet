@@ -7,15 +7,15 @@
       :signed-tx="signedTx"
       :fee="transactionFee"
       :is-hardware-wallet="isHardwareWallet"
-      :gas-price="gasPrice"
+      :smoke-price="smokePrice"
       :from="fromAddress"
       :to="toAddress"
       :value="amount"
-      :gas="gasLimit"
+      :smoke="smokeLimit"
       :data="data"
       :nonce="nonce"
-      :show-gas-warning="showGasWarning"
-      :show-low-gas-warning="showLowGasWarning"
+      :show-smoke-warning="showSmokeWarning"
+      :show-low-smoke-warning="showLowSmokeWarning"
     />
     <confirm-collection-modal
       v-if="fromAddress !== null"
@@ -25,8 +25,8 @@
       :signed-array="signedArray"
       :un-signed-array="unSignedArray"
       :sending="sending"
-      :show-gas-warning="showCollectionGasWarning"
-      :show-collection-low-gas-warning="showCollectionLowGasWarning"
+      :show-smoke-warning="showCollectionSmokeWarning"
+      :show-collection-low-smoke-warning="showCollectionLowSmokeWarning"
     />
     <confirm-modal
       v-if="fromAddress !== null"
@@ -35,11 +35,11 @@
       :signed-tx="signedTx"
       :fee="transactionFee"
       :is-hardware-wallet="isHardwareWallet"
-      :gas-price="gasPrice"
+      :smoke-price="smokePrice"
       :from="fromAddress"
       :to="toAddress"
       :value="amount"
-      :gas="gasLimit"
+      :smoke="smokeLimit"
       :data="data"
       :nonce="nonce"
     />
@@ -78,9 +78,9 @@
 </template>
 
 <script>
-import * as unit from 'ethjs-unit';
+import * as unit from 'fourtwentyjs-unit';
 import BigNumber from 'bignumber.js';
-import { Transaction } from 'ethereumjs-tx';
+import { Transaction } from 'fourtwentyjs-tx';
 import ConfirmModal from './components/ConfirmModal';
 import ConfirmCollectionModal from './components/ConfirmCollectionModal';
 import SuccessModal from './components/SuccessModal';
@@ -134,9 +134,9 @@ export default {
       amount: '',
       amountValid: true,
       nonce: '',
-      gasLimit: '21000',
+      smokeLimit: '21000',
       data: '0x',
-      gasPrice: '0',
+      smokePrice: '0',
       parsedBalance: 0,
       toAddress: '',
       transactionFee: '',
@@ -161,11 +161,11 @@ export default {
       swapWigetData: {
         destAddress: '',
         fromCurrency: {
-          symbol: 'ETH',
+          symbol: 'FOURTWENTY',
           name: ''
         },
         toCurrency: {
-          symbol: 'ETH',
+          symbol: 'FOURTWENTY',
           name: ''
         },
         fromValue: undefined,
@@ -179,8 +179,8 @@ export default {
       'web3',
       'account',
       'network',
-      'gasLimitWarning',
-      'ethGasPrice'
+      'smokeLimitWarning',
+      'fourtwentySmokePrice'
     ]),
     fromAddress() {
       if (this.account) {
@@ -188,26 +188,26 @@ export default {
       }
       return null;
     },
-    showCollectionGasWarning() {
-      const foundGasAboveLimit = this.unSignedArray.find(item => {
-        const parsedGasPrice = this.web3.utils.fromWei(item.gasPrice, 'gwei');
-        return BigNumber(parsedGasPrice).gte(this.gasLimitWarning);
+    showCollectionSmokeWarning() {
+      const foundSmokeAboveLimit = this.unSignedArray.find(item => {
+        const parsedSmokePrice = this.web3.utils.fromWei(item.smokePrice, 'maher');
+        return BigNumber(parsedSmokePrice).gte(this.smokeLimitWarning);
       });
-      return foundGasAboveLimit ? true : false;
+      return foundSmokeAboveLimit ? true : false;
     },
-    showGasWarning() {
-      return this.gasPrice >= this.gasLimitWarning;
+    showSmokeWarning() {
+      return this.smokePrice >= this.smokeLimitWarning;
     },
-    showLowGasWarning() {
-      return Math.floor(this.ethGasPrice * 0.75) >= this.gasPrice;
+    showLowSmokeWarning() {
+      return Math.floor(this.fourtwentySmokePrice * 0.75) >= this.smokePrice;
     },
-    showCollectionLowGasWarning() {
-      const foundGasAboveLimit = this.unSignedArray.find(item => {
-        return BigNumber(Math.floor(this.ethGasPrice * 0.75)).gte(
-          item.gasPrice
+    showCollectionLowSmokeWarning() {
+      const foundSmokeAboveLimit = this.unSignedArray.find(item => {
+        return BigNumber(Math.floor(this.fourtwentySmokePrice * 0.75)).gte(
+          item.smokePrice
         );
       });
-      return foundGasAboveLimit ? true : false;
+      return foundSmokeAboveLimit ? true : false;
     }
   },
   watch: {
@@ -292,8 +292,8 @@ export default {
           to: `0x${newTx.to.toString('hex')}`,
           from: `0x${newTx.from.toString('hex')}`,
           value: `0x${newTx.value.toString('hex')}`,
-          gas: `0x${newTx.gasPrice.toString('hex')}`,
-          gasLimit: `0x${newTx.gasLimit.toString('hex')}`,
+          smoke: `0x${newTx.smokePrice.toString('hex')}`,
+          smokeLimit: `0x${newTx.smokeLimit.toString('hex')}`,
           data: `0x${newTx.data.toString('hex')}`,
           nonce: `0x${newTx.nonce.toString('hex')}`,
           v: `0x${newTx.v.toString('hex')}`,
@@ -464,11 +464,11 @@ export default {
             this.swapWigetData = {
               destAddress: '',
               fromCurrency: {
-                symbol: 'ETH',
+                symbol: 'FOURTWENTY',
                 name: ''
               },
               toCurrency: {
-                symbol: 'ETH',
+                symbol: 'FOURTWENTY',
                 name: ''
               },
               fromValue: 0
@@ -524,15 +524,15 @@ export default {
       this.raw = tx;
       this.nonce = tx.nonce === '0x' ? 0 : new BigNumber(tx.nonce).toFixed();
       this.data = tx.data;
-      this.gasLimit = new BigNumber(tx.gas).toFixed();
-      this.gasPrice = unit.fromWei(
-        new BigNumber(tx.gasPrice).toFixed(),
-        'gwei'
+      this.smokeLimit = new BigNumber(tx.smoke).toFixed();
+      this.smokePrice = unit.fromWei(
+        new BigNumber(tx.smokePrice).toFixed(),
+        'maher'
       );
       this.toAddress = tx.to;
       this.amount = tx.value === '0x' ? '0' : new BigNumber(tx.value).toFixed();
       this.transactionFee = unit
-        .fromWei(new BigNumber(tx.gas).times(tx.gasPrice).toFixed(), 'ether')
+        .fromWei(new BigNumber(tx.smoke).times(tx.smokePrice).toFixed(), '420coin')
         .toString();
       this.ens = {};
       if (tx.hasOwnProperty('ensObj')) {
@@ -572,7 +572,7 @@ export default {
           ]);
           Toast.responseHandler(err, Toast.ERROR);
         };
-        const promiEvent = web3.eth[_method](_rawTx);
+        const promiEvent = web3.fourtwenty[_method](_rawTx);
         promiEvent.catch(onError);
         promiEvent.on('error', onError);
         promiEvent.once('transactionHash', hash => {
@@ -640,9 +640,9 @@ export default {
       this.amount = '';
       this.amountValid = true;
       this.nonce = '';
-      this.gasLimit = '21000';
+      this.smokeLimit = '21000';
       this.data = '0x';
-      this.gasPrice = '0';
+      this.smokePrice = '0';
       this.parsedBalance = 0;
       this.toAddress = '';
       this.transactionFee = '';
@@ -658,11 +658,11 @@ export default {
       this.swapWigetData = {
         destAddress: '',
         fromCurrency: {
-          symbol: 'ETH',
+          symbol: 'FOURTWENTY',
           name: ''
         },
         toCurrency: {
-          symbol: 'ETH',
+          symbol: 'FOURTWENTY',
           name: ''
         },
         fromValue: 0

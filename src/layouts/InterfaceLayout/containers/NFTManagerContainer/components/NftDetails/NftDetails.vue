@@ -109,7 +109,7 @@ export default {
   },
   watch: {},
   mounted() {
-    this.ERC721tokenContract = new this.web3.eth.Contract([
+    this.ERC721tokenContract = new this.web3.fourtwenty.Contract([
       {
         constant: false,
         inputs: [
@@ -139,7 +139,7 @@ export default {
         this.nft.contract.toLowerCase() ===
         this.cryptoKittiesConfig.toLowerCase()
       ) {
-        this.cryptoKittiesContract = new this.web3.eth.Contract([
+        this.cryptoKittiesContract = new this.web3.fourtwenty.Contract([
           {
             constant: false,
             inputs: [
@@ -171,7 +171,7 @@ export default {
           to: this.nft.contract,
           data: txData
         };
-        this.web3.eth
+        this.web3.fourtwenty
           .sendTransaction(raw)
           .on('transactionHash', () => {
             this.$emit('nftTransferred', this.nft);

@@ -320,7 +320,7 @@ export default {
       if (!this.online) {
         return 'offline';
       }
-      if (this.network.type.name !== 'ETH') {
+      if (this.network.type.name !== 'FOURTWENTY') {
         return 'onlyMainNet';
       }
       if (this.loadingProviderRates) {

@@ -19,7 +19,7 @@
           }}</span>
           <div>
             <p class="funds-txt">
-              {{ availableBalanceEth }} {{ $t('common.currency.eth') }}
+              {{ availableBalanceFourtwenty }} {{ $t('common.currency.fourtwenty') }}
             </p>
             <p class="text-right">${{ availableBalanceUsd }}</p>
           </div>
@@ -29,30 +29,30 @@
           <p class="funds-txt">
             {{
               manageFundsText === 'Add'
-                ? $t('dappsAmbrpay.manage-funds.how-much-eth-add')
-                : $t('dappsAmbrpay.manage-funds.how-much-eth-withdraw')
+                ? $t('dappsAmbrpay.manage-funds.how-much-fourtwenty-add')
+                : $t('dappsAmbrpay.manage-funds.how-much-fourtwenty-withdraw')
             }}
           </p>
-          <span class="eth-text">{{ $t('common.currency.eth') }}</span>
-          <input v-model="ethAmount" class="mt-3" type="number" />
+          <span class="fourtwenty-text">{{ $t('common.currency.fourtwenty') }}</span>
+          <input v-model="fourtwentyAmount" class="mt-3" type="number" />
           <p v-show="errMsg" class="err-msg pl-2">{{ errMsg }}</p>
         </div>
         <div v-if="!actionStep" class="confirmation-container">
           <i class="check-icon fa fa-check" aria-hidden="true" />
           <p v-if="manageFundsText === 'Add'" class="mr-5 ml-5 mt-3 mb-1">
             {{ $t('dappsAmbrpay.manage-funds.subscription-fund') }}
-            <span class="mew-txt">{{ ethAmount }}</span>
+            <span class="mew-txt">{{ fourtwentyAmount }}</span>
             {{ $t('dappsAmbrpay.manage-funds.should-update') }}
           </p>
           <p v-if="manageFundsText === 'Withdraw'" class="mr-5 ml-5 mt-2">
             {{ $t('dappsAmbrpay.manage-funds.withdraw-fund') }}
-            <span class="mew-txt">{{ ethAmount }}</span>
+            <span class="mew-txt">{{ fourtwentyAmount }}</span>
             {{ $t('dappsAmbrpay.manage-funds.should-update') }}
           </p>
         </div>
         <div class="btn-container">
           <button
-            :class="errMsg || !ethAmount ? 'disabled' : ''"
+            :class="errMsg || !fourtwentyAmount ? 'disabled' : ''"
             class="mew-btn mt-4 mb-4"
             @click="onClick()"
           >
@@ -74,7 +74,7 @@ export default {
       type: String,
       default: ''
     },
-    availableBalanceEth: {
+    availableBalanceFourtwenty: {
       type: String,
       default: ''
     },
@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       actionStep: true,
-      ethAmount: 0,
+      fourtwentyAmount: 0,
       errMsg: ''
     };
   },
@@ -96,17 +96,17 @@ export default {
   watch: {
     manageFundsText(newVal, oldVal) {
       if (newVal !== oldVal) {
-        this.ethAmount = 0;
+        this.fourtwentyAmount = 0;
         this.errMsg = '';
       }
     },
-    ethAmount(newVal) {
+    fourtwentyAmount(newVal) {
       const value = new BigNumber(newVal);
       const accountBalance = this.web3.utils.fromWei(
         new BigNumber(this.account.balance).toFixed(),
-        'ether'
+        '420coin'
       );
-      const subAccountBalance = new BigNumber(this.availableBalanceEth);
+      const subAccountBalance = new BigNumber(this.availableBalanceFourtwenty);
 
       if (newVal <= 0) {
         this.errMsg = this.$t('dappsAmbrpay.errors.amount-higher-zero');
@@ -125,18 +125,18 @@ export default {
   methods: {
     onClick() {
       if (this.manageFundsText === 'Add' && this.actionStep === true) {
-        this.$emit('addFunds', this.ethAmount);
+        this.$emit('addFunds', this.fourtwentyAmount);
         this.actionStep = false;
       } else if (
         this.manageFundsText === 'Withdraw' &&
         this.actionStep === true
       ) {
-        this.$emit('withdrawFunds', this.ethAmount);
+        this.$emit('withdrawFunds', this.fourtwentyAmount);
         this.actionStep = false;
       } else {
         this.$refs['manageFundsModal'].hide();
         this.actionStep = true;
-        this.ethAmount = '';
+        this.fourtwentyAmount = '';
       }
     }
   }

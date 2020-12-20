@@ -87,7 +87,7 @@ export default {
     accountBalance() {
       return this.web3.utils.fromWei(
         new BigNumber(this.account.balance).toFixed(),
-        'ether'
+        '420coin'
       );
     }
   },
@@ -108,7 +108,7 @@ export default {
     },
     getBalance() {
       if (this.account.address) {
-        this.web3.eth
+        this.web3.fourtwenty
           .getBalance(this.account.address.toLowerCase())
           .then(res => {
             this.setAccountBalance(res);
@@ -121,7 +121,7 @@ export default {
     async fetchBalanceData() {
       if (this.online) {
         const newArr = [];
-        const url = 'https://cryptorates.mewapi.io/convert/ETH';
+        const url = 'https://cryptorates.mewapi.io/convert/FOURTWENTY';
         const fetchValues = await fetch(url);
         const values = await fetchValues.json();
         delete values['lastCalled'];

@@ -1,7 +1,7 @@
 import WalletLink from 'walletlink';
 
 import store from '@/store';
-import { Transaction } from 'ethereumjs-tx';
+import { Transaction } from 'fourtwentyjs-tx';
 import { WALLET_LINK as walletLinkType } from '../../bip44/walletTypes';
 import {
   getSignTransactionObject,
@@ -16,7 +16,7 @@ import HybridWalletInterface from '../walletInterface';
 
 const IS_HARDWARE = true;
 const APP_NAME = 'MEW';
-const APP_LOGO = 'https://www.myetherwallet.com/img/icons/icon192.png';
+const APP_LOGO = 'https://www.my420wallet.420integrated.com/img/icons/icon192.png';
 class WalletLinkWallet {
   constructor() {
     this.identifier = walletLinkType;
@@ -44,7 +44,7 @@ class WalletLinkWallet {
         const txJSON = tx.toJSON(true);
         return new Promise((resolve, reject) => {
           this.connection
-            .send('eth_signTransaction', txJSON)
+            .send('fourtwenty_signTransaction', txJSON)
             .then(signed => {
               const _tx = new Transaction(signed);
               const signedChainId = calculateChainIdFromV(_tx.v);

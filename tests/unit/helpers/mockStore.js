@@ -1,7 +1,7 @@
 import nodeList from '@/networks';
 import url from 'url';
 import Web3 from 'web3';
-const network = nodeList['ETH'][0];
+const network = nodeList['FOURTWENTY'][0];
 const hostUrl = url.parse(network.url);
 
 const newWeb3 = new Web3(
@@ -15,7 +15,7 @@ const state = {
     isHardware: false
   },
   customTokens: [
-    { name: 'ETH', balance: 200 },
+    { name: 'FOURTWENTY', balance: 200 },
     { name: 'BTH', balance: 300 },
     { name: 'ETC', balance: 400 }
   ],
@@ -23,8 +23,8 @@ const state = {
   customPaths: {},
   ens: true,
   Errors: {},
-  ethDonationAddress: '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D',
-  gasPrice: 41,
+  fourtwentyConationAddress: '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D',
+  smokePrice: 41,
   Networks: nodeList,
   token: {
     symbol: 'ABC',
@@ -39,21 +39,21 @@ const state = {
     port: 443,
     service: 'infura.io',
     type: {
-      blockExplorerAddr: 'https://etherscan.io/address/[[address]]',
-      blockExplorerTX: 'https://etherscan.io/tx/[[txHash]]',
+      blockExplorerAddr: 'https://fourtwentyscan.420integrated.com/address/[[address]]',
+      blockExplorerTX: 'https://fourtwentyscan.420integrated.com/tx/[[txHash]]',
       chainID: 1,
       contracts: [],
       ensResolver: '0x314159265dd8dbb310642f98f50c066173c1259b',
-      homePage: 'https://ethereum.org',
-      name: 'ETH',
-      name_long: 'Ethereum',
+      homePage: 'https://420integrated.com',
+      name: 'FOURTWENTY',
+      name_long: 'Fourtwentycoin',
       tokens: [],
       ens: {
         registry: '0x123456789',
         registrarTLD: 'eth',
         registrarType: 'auction'
       },
-      currencyName: 'ETH'
+      currencyName: 'FOURTWENTY'
     },
     url: 'https://mainnet.infura.io/mew'
   },
@@ -99,8 +99,8 @@ const getters = {
   customPaths: () => {},
   ens: () => {},
   Errors: () => {},
-  ethDonationAddress: () => '',
-  gasPrice: () => 41,
+  fourtwentyConationAddress: () => '',
+  smokePrice: () => 41,
   Networks: () => {
     return nodeList;
   },
@@ -111,14 +111,14 @@ const getters = {
       port: 443,
       service: 'infura.io',
       type: {
-        blockExplorerAddr: 'https://etherscan.io/address/[[address]]',
-        blockExplorerTX: 'https://etherscan.io/tx/[[txHash]]',
+        blockExplorerAddr: 'https://fourtwentyscan.420integrated.com/address/[[address]]',
+        blockExplorerTX: 'https://fourtwentyscan.420integrated.com/tx/[[txHash]]',
         chainID: 1,
         contracts: [],
         ensResolver: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
-        homePage: 'https://ethereum.org',
-        name: 'ETH',
-        name_long: 'Ethereum',
+        homePage: 'https://420integrated.com',
+        name: 'FOURTWENTY',
+        name_long: 'Fourtwentycoin',
         tokens: [],
         ens: {
           registry: '0x123456789',
@@ -136,7 +136,7 @@ const getters = {
   },
 
   customTokens: () => [
-    { name: 'ETH', balance: 200 },
+    { name: 'FOURTWENTY', balance: 200 },
     { name: 'BTH', balance: 300 },
     { name: 'ETC', balance: 400 }
   ],

@@ -8,11 +8,11 @@
   "pay-with-credit-card": "Оплатить кредитной картой",
   "pay-with-crypto": "Оплатить криптовалютой",
   "send-payment": "Отправить платеж",
-  "ethereum-payment-address": "Адрес оплаты Ethereum",
+  "fourtwenty-payment-address": "Адрес оплаты 420coin",
   "payment-amount": "Сумма платежа",
   "pending-crypto-payment": "Ожидающая оплата: {confirmations} подтверждений из {confirmationsRequired}",
   "secured-by-stripe": "Безопасная оплата с поддержкой Stripe",
-  "insufficient-balance": "Недостаточный баланс: добавьте больше ETH в кошелек или оплатите кредитной картой",
+  "insufficient-balance": "Недостаточный баланс: добавьте больше FOURTWENTY в кошелек или оплатите кредитной картой",
   "pay": "Оплатить",
   "confirm-payment": "Вы собираетесь заплатить ${amount} за {domain}",
   "error": {

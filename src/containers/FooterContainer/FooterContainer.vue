@@ -67,20 +67,20 @@
                 <p>{{ $t('footer.donation.desc') }}</p>
 
                 <a
-                  :href="'https://etherscan.io/address/' + ethDonationAddress"
+                  :href="'https://fourtwentyscan.420integrated.com/address/' + fourtwentyDonationAddress"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <div
-                    :data-eth="ethDonationAddress"
+                    :data-fourtwenty="fourtwentyDonationAddress"
                     class="crypto-link d-flex align-items-center"
                   >
                     <img
                       class="mr-2"
-                      src="~@/assets/images/currency/eth.svg"
+                      src="~@/assets/images/currency/fourtwenty.svg"
                       alt
                     />
-                    <div>{{ $t('footer.donation.ether') }}</div>
+                    <div>{{ $t('footer.donation.fourtwentyer') }}</div>
                   </div>
                 </a>
 
@@ -176,7 +176,7 @@ export default {
       lowerLinks: [
         {
           title: 'footer.feedback',
-          href: 'mailto:support@myetherwallet.com'
+          href: 'mailto:support@420integrated.com'
         },
         {
           title: 'footer.privacy',
@@ -188,7 +188,7 @@ export default {
         },
         {
           title: `v${version}`,
-          href: `https://github.com/MyEtherWallet/MyEtherWallet/releases/tag/v${version}`
+          href: `https://github.com/420integrated/My420Wallet/releases/tag/v${version}`
         }
       ],
       footerContent: [
@@ -210,15 +210,15 @@ export default {
             },
             {
               text: 'footer.mew-connect-protocol',
-              href: 'https://mewconnect.myetherwallet.com/#/'
+              href: 'https://mewconnect.my420wallet.420integrated.com/#/'
             },
             {
               text: 'footer.extension',
               href: 'https://www.mewcx.com'
             },
             {
-              text: 'footer.ethvm',
-              href: 'https://www.ethvm.com/'
+              text: 'footer.fourtwentyvm',
+              href: 'https://www.fourtwentyvm.com/'
             },
             {
               text: 'buyHardwareWallet.page.title',
@@ -241,8 +241,8 @@ export default {
               to: '/press-kit'
             },
             {
-              text: 'footer.generate-eth2',
-              to: '/generate-eth2-keystore'
+              text: 'footer.generate-fourtwenty2',
+              to: '/generate-fourtwenty2-keystore'
             }
           ]
         },
@@ -268,62 +268,54 @@ export default {
               to: '/#faqs'
             },
             {
-              text: 'common.mewtopia',
-              href: 'https://www.mewtopia.com'
-            },
-            {
               text: 'common.cstm-support',
-              href: 'mailto:support@myetherwallet.com'
+              href: 'mailto:support@420integrated.com'
             },
             {
               text: 'common.help-center',
-              href: 'https://kb.myetherwallet.com'
+              href: 'https://kb.my420wallet.420integrated.com'
             }
           ]
         }
       ],
       links: [
         {
-          to: 'https://www.facebook.com/myetherwallet',
+          to: 'https://www.facebook.com/420integrated',
           class: 'fa-facebook'
         },
         {
-          to: 'https://www.twitter.com/@myetherwallet',
+          to: 'https://www.twitter.com/@420integrated',
           class: 'fa-twitter'
         },
         {
-          to: 'https://www.instagram.com/myetherwallet',
+          to: 'https://www.instagram.com/420integrated',
           class: 'fa-instagram'
         },
         {
-          to: 'https://www.linkedin.com/company/myetherwallet',
+          to: 'https://www.linkedin.com/company/420integrated',
           class: 'fa-linkedin'
         },
         {
-          to: 'https://www.github.com/myetherwallet',
+          to: 'https://www.github.com/420integrated',
           class: 'fa-github'
         },
         {
-          to: 'https://www.reddit.com/r/myetherwallet',
+          to: 'https://www.reddit.com/r/420integrated',
           class: 'fa-reddit-alien'
         },
         {
-          to: 'https://www.medium.com/@myetherwallet',
+          to: 'https://www.medium.com/@420integrated',
           class: 'fa-medium'
         },
         {
-          to: 'https://vk.com/public190491855',
-          class: 'fa-vk'
-        },
-        {
-          to: 'https://t.me/myetherwallet',
+          to: 'https://t.me/420integrated',
           class: 'fa-telegram'
         }
       ]
     };
   },
   computed: {
-    ...mapState('main', ['ethDonationAddress'])
+    ...mapState('main', ['fourtwentyConationAddress'])
   },
   mounted() {},
   methods: {

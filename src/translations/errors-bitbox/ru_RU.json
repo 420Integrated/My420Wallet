@@ -5,5 +5,5 @@
   "user-timeout": "Время ожидания истекло. Чтобы подтвердить транзакцию, удерживайте нажатой кнопку BitBox 4 секунды.",
   "not-initialized": "BitBox не инициализирован. Используйте приложение Shift Cryptosecurity's BitBox для настройки кошелька.",
   "upgrade-firmware": "Пожалуйста, обновитесь до последней прошивки, используя приложение Shift Cryptosecurity's BitBox.",
-  "unsupported-firmware": "MyEtherWallet пока не поддерживает эту версию прошивки"
+  "unsupported-firmware": "My420Wallet пока не поддерживает эту версию прошивки"
 }

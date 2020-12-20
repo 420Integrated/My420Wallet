@@ -28,11 +28,11 @@
             {{ network.type.currencyName }}
           </p>
         </div>
-        <div v-if="showGasWarning" class="gas-price-warning">
-          {{ $t('errorsGlobal.high-gas-limit-warning') }}
+        <div v-if="showSmokeWarning" class="smoke-price-warning">
+          {{ $t('errorsGlobal.high-smoke-limit-warning') }}
         </div>
-        <div v-else-if="showCollectionLowGasWarning" class="gas-price-warning">
-          {{ $t('errorsGlobal.low-gas-price') }}
+        <div v-else-if="showCollectionLowSmokeWarning" class="smoke-price-warning">
+          {{ $t('errorsGlobal.low-smoke-price') }}
         </div>
         <div class="modal-content-body">
           <div
@@ -80,14 +80,14 @@
             </div>
             <b-collapse :id="`accordion${idx}`" class="body">
               <div class="body-item">
-                <span class="item-title">{{ $t('common.gas.limit') }}t</span>
-                <span>{{ web3.utils.hexToNumberString(item.gas) }}</span>
+                <span class="item-title">{{ $t('common.smoke.limit') }}t</span>
+                <span>{{ web3.utils.hexToNumberString(item.smoke) }}</span>
               </div>
               <div class="body-item">
-                <span class="item-title">{{ $t('common.gas.price') }}</span>
+                <span class="item-title">{{ $t('common.smoke.price') }}</span>
                 <span>
-                  {{ web3.utils.fromWei(item.gasPrice, 'gwei') }}
-                  {{ $t('common.gas.gwei') }}
+                  {{ web3.utils.fromWei(item.smokePrice, 'maher') }}
+                  {{ $t('common.smoke.maher') }}
                 </span>
               </div>
               <div class="body-item">
@@ -128,7 +128,7 @@
         <p class="learn-more">
           {{ $t('common.have-issues') }}
           <a
-            href="https://kb.myetherwallet.com/"
+            href="https://kb.my420wallet.420integrated.com/"
             target="_blank"
             rel="noopener noreferrer"
             >{{ $t('common.learn-more') }}</a
@@ -163,11 +163,11 @@ export default {
       type: Boolean,
       default: false
     },
-    showGasWarning: {
+    showSmokeWarning: {
       type: Boolean,
       default: false
     },
-    showCollectionLowGasWarning: {
+    showCollectionLowSmokeWarning: {
       type: Boolean,
       default: false
     }
@@ -194,15 +194,15 @@ export default {
     txTotal() {
       if (this.unSignedArray.length > 0) {
         const BN = this.web3.utils.BN;
-        let totalGas = new BN();
+        let totalSmoke = new BN();
         this.unSignedArray.forEach(item => {
-          totalGas = totalGas.add(
-            new BN(item.gasPrice.replace('0x', ''), 'hex').mul(
-              new BN(item.gas.replace('0x', ''), 'hex')
+          totalSmoke = totalSmoke.add(
+            new BN(item.smokePrice.replace('0x', ''), 'hex').mul(
+              new BN(item.smoke.replace('0x', ''), 'hex')
             )
           );
         });
-        return this.web3.utils.fromWei(totalGas.toString(), 'ether').toString();
+        return this.web3.utils.fromWei(totalSmoke.toString(), '420coin').toString();
       }
       return 0;
     }

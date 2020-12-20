@@ -8,12 +8,12 @@ const toQueryString = params => {
     })
     .join('&');
 };
-class EtherscanProxy {
+class FourtwentyscanProxy {
   constructor(url, apikey) {
     this.url = url;
     this.apikey = apikey;
   }
-  etherscanXHR(isGET, params) {
+  fourtwentyscanXHR(isGET, params) {
     return new Promise((resolve, reject) => {
       Object.keys(params).forEach(
         key => params[key] === undefined && delete params[key]
@@ -36,20 +36,20 @@ class EtherscanProxy {
   request(payload) {
     return new Promise((resolve, reject) => {
       switch (payload.method) {
-        case 'eth_blockNumber':
-          this.etherscanXHR(true, {
+        case 'fourtwenty_blockNumber':
+          this.fourtwentyscanXHR(true, {
             module: 'proxy',
-            action: 'eth_blockNumber'
+            action: 'fourtwenty_blockNumber'
           })
             .then(body => {
               resolve(toPayload(payload.id, body.result));
             })
             .catch(reject);
           break;
-        case 'eth_getBlockByNumber':
-          this.etherscanXHR(true, {
+        case 'fourtwenty_getBlockByNumber':
+          this.fourtwentyscanXHR(true, {
             module: 'proxy',
-            action: 'eth_getBlockByNumber',
+            action: 'fourtwenty_getBlockByNumber',
             tag: payload.params[0],
             boolean: payload.params[1]
           })
@@ -58,10 +58,10 @@ class EtherscanProxy {
             })
             .catch(reject);
           break;
-        case 'eth_getBlockTransactionCountByNumber':
-          this.etherscanXHR(true, 'eth_getBlockTransactionCountByNumber', {
+        case 'fourtwenty_getBlockTransactionCountByNumber':
+          this.fourtwentyscanXHR(true, 'fourtwenty_getBlockTransactionCountByNumber', {
             module: 'proxy',
-            action: 'eth_getBlockTransactionCountByNumber',
+            action: 'fourtwenty_getBlockTransactionCountByNumber',
             tag: payload.params[0]
           })
             .then(body => {
@@ -69,10 +69,10 @@ class EtherscanProxy {
             })
             .catch(reject);
           break;
-        case 'eth_getTransactionByHash':
-          this.etherscanXHR(true, {
+        case 'fourtwenty_getTransactionByHash':
+          this.fourtwentyscanXHR(true, {
             module: 'proxy',
-            action: 'eth_getTransactionByHash',
+            action: 'fourtwenty_getTransactionByHash',
             txhash: payload.params[0]
           })
             .then(body => {
@@ -80,8 +80,8 @@ class EtherscanProxy {
             })
             .catch(reject);
           break;
-        case 'eth_getBalance':
-          this.etherscanXHR(true, {
+        case 'fourtwenty_getBalance':
+          this.fourtwentyscanXHR(true, {
             module: 'account',
             action: 'balance',
             address: payload.params[0],
@@ -92,17 +92,17 @@ class EtherscanProxy {
             })
             .catch(reject);
           break;
-        case 'eth_call':
+        case 'fourtwenty_call':
           Object.keys(payload.params[0]).forEach(key =>
             payload.params[0][key] === undefined
               ? delete payload.params[0][key]
               : ''
           );
-          this.etherscanXHR(
+          this.fourtwentyscanXHR(
             true,
             Object.assign(payload.params[0], {
               module: 'proxy',
-              action: 'eth_call'
+              action: 'fourtwenty_call'
             })
           )
             .then(body => {
@@ -110,13 +110,13 @@ class EtherscanProxy {
             })
             .catch(reject);
           break;
-        case 'eth_estimateGas':
-          this.etherscanXHR(
+        case 'fourtwenty_estimateSmoke':
+          this.fourtwentyscanXHR(
             true,
             Object.assign(
               {
                 module: 'proxy',
-                action: 'eth_estimateGas'
+                action: 'fourtwenty_estimateSmoke'
               },
               payload.params[0]
             )
@@ -126,69 +126,69 @@ class EtherscanProxy {
             })
             .catch(reject);
           break;
-        case 'eth_sendRawTransaction':
-          this.etherscanXHR(true, {
+        case 'fourtwenty_sendRawTransaction':
+          this.fourtwentyscanXHR(true, {
             hex: payload.params[0],
             module: 'proxy',
-            action: 'eth_sendRawTransaction'
+            action: 'fourtwenty_sendRawTransaction'
           })
             .then(body => {
               resolve(toPayload(payload.id, body.result));
             })
             .catch(reject);
           break;
-        case 'eth_getTransactionReceipt':
-          this.etherscanXHR(true, {
+        case 'fourtwenty_getTransactionReceipt':
+          this.fourtwentyscanXHR(true, {
             txhash: payload.params[0],
             module: 'proxy',
-            action: 'eth_getTransactionReceipt'
+            action: 'fourtwenty_getTransactionReceipt'
           })
             .then(body => {
               resolve(toPayload(payload.id, body.result));
             })
             .catch(reject);
           break;
-        case 'eth_getTransactionCount':
-          this.etherscanXHR(true, {
+        case 'fourtwenty_getTransactionCount':
+          this.fourtwentyscanXHR(true, {
             address: payload.params[0],
             tag: payload.params[1],
             module: 'proxy',
-            action: 'eth_getTransactionCount'
+            action: 'fourtwenty_getTransactionCount'
           })
             .then(body => {
               resolve(toPayload(payload.id, body.result));
             })
             .catch(reject);
           break;
-        case 'eth_gasPrice':
-          this.etherscanXHR(true, {
+        case 'fourtwenty_smokePrice':
+          this.fourtwentyscanXHR(true, {
             module: 'proxy',
-            action: 'eth_gasPrice'
+            action: 'fourtwenty_smokePrice'
           })
             .then(body => {
               resolve(toPayload(payload.id, body.result));
             })
             .catch(reject);
           break;
-        case 'eth_getCode':
-          this.etherscanXHR(true, {
+        case 'fourtwenty_getCode':
+          this.fourtwentyscanXHR(true, {
             address: payload.params[0],
             tag: payload.params[1],
             module: 'proxy',
-            action: 'eth_getCode'
+            action: 'fourtwenty_getCode'
           })
             .then(body => {
               resolve(toPayload(payload.id, body.result));
             })
             .catch(reject);
           break;
-        case 'eth_getStorageAt':
-          this.etherscanXHR(true, {
+        case 'fourtwenty_getStorageAt':
+          this.fourtwentyscanXHR(true, {
             address: payload.params[0],
             position: payload.params[1],
             tag: payload.params[2],
             module: 'proxy',
-            action: 'eth_getStorageAt'
+            action: 'fourtwenty_getStorageAt'
           })
             .then(body => {
               resolve(toPayload(payload.id, body.result));
@@ -201,4 +201,4 @@ class EtherscanProxy {
     });
   }
 }
-export default EtherscanProxy;
+export default FourtwentyscanProxy;

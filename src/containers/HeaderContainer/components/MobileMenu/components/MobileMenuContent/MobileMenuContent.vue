@@ -3,14 +3,14 @@
     <div class="menu-content-header">
       <a
         v-if="false"
-        href="https://ccswap.myetherwallet.com/#/"
+        href="https://ccswap.my420wallet.420integrated.com/#/"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <div class="buy-eth">
-          <img src="@/assets/images/icons/buy-eth.svg" alt />
+        <div class="buy-fourtwenty">
+          <img src="@/assets/images/icons/buy-fourtwenty.svg" alt />
           <div class="font-reset-disabled">
-            {{ $t('common.dont-have-eth') }}
+            {{ $t('common.dont-have-fourtwenty') }}
           </div>
         </div>
       </a>

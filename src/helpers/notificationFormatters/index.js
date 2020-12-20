@@ -73,7 +73,7 @@ const swapReceipt = async (notifArray, val) => {
   return notifArray;
 };
 
-// For swaps not using the ethereum network
+// For swaps not using the 420coin network
 const swapOrder = (notifArray, val, network) => {
   notifArray.push(formatSwap(val, network));
   return notifArray;

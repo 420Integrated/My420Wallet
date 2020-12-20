@@ -1,5 +1,5 @@
 import { chainCurrencies, fiat } from './currencyDetails';
-import EthereumTokens from '@/_generated/partners/EthereumTokens.json';
+import FourtwentycoinTokens from '@/_generated/partners/FourtwentycoinTokens.json';
 import OtherCoins from '@/_generated/partners/OtherCoins.json';
 import ERC20 from './ERC20Token.abi';
 import haveIcon from './haveIcon';
@@ -23,7 +23,7 @@ export {
   TOP_OPTIONS_ORDER,
   swapNotificationStatuses,
   baseCurrencyEntry,
-  EthereumTokens,
+  FourtwentycoinTokens,
   OtherCoins,
   haveIcon,
   networkSymbols,

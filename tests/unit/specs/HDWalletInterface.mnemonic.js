@@ -1,9 +1,9 @@
 import HDWalletInterface from '@/wallets/HDWalletInterface';
 import * as HDKey from 'hdkey';
 import bip39 from 'bip39';
-import { hashPersonalMessage, ecsign, toBuffer } from 'ethereumjs-util';
-import ethTx from 'ethereumjs-tx';
-const ETH_PATH = "m/44'/60'/0'/0";
+import { hashPersonalMessage, ecsign, toBuffer } from 'fourtwentyjs-util';
+import fourtwentyTx from 'fourtwentyjs-tx';
+const FOURTWENTY_PATH = "m/44'/60'/0'/0";
 const mnemonic =
   'board shadow cave liquid sand hour maid capable stand candy frog slogan intact error glimpse project galaxy tackle table sausage salute west airport umbrella';
 
@@ -35,15 +35,15 @@ const hdk = HDKey.fromMasterSeed(seed);
 const testWallets = [];
 const txParams = {
   nonce: '0x00',
-  gasPrice: '0x09184e72a000',
-  gasLimit: '0x2710',
+  smokePrice: '0x09184e72a000',
+  smokeLimit: '0x2710',
   to: '0x0000000000000000000000000000000000000000',
   value: '0x00',
   data:
     '0x7f7465737432000000000000000000000000000000000000000000000000000000600057',
   chainId: 3
 };
-const ethSignMessage = (msg, privKey) => {
+const fourtwentySignMessage = (msg, privKey) => {
   const msgHash = hashPersonalMessage(toBuffer(msg));
   const signed = ecsign(msgHash, privKey);
   return Buffer.concat([
@@ -55,15 +55,15 @@ const ethSignMessage = (msg, privKey) => {
 for (let i = 0; i < 3; i++)
   testWallets.push(
     new HDWalletInterface(
-      ETH_PATH + '/' + i,
-      hdk.derive(ETH_PATH + '/' + i).publicKey,
+      FOURTWENTY_PATH + '/' + i,
+      hdk.derive(FOURTWENTY_PATH + '/' + i).publicKey,
       false,
       'mnemonic',
       () => {},
       tx => {
-        tx = new ethTx(tx);
+        tx = new fourtwentyTx(tx);
         return new Promise(resolve => {
-          tx.sign(hdk.derive(ETH_PATH + '/' + i).privateKey);
+          tx.sign(hdk.derive(FOURTWENTY_PATH + '/' + i).privateKey);
           resolve(tx);
         });
       },
@@ -72,7 +72,7 @@ for (let i = 0; i < 3; i++)
           const msgHash = hashPersonalMessage(toBuffer(msg));
           const signed = ecsign(
             msgHash,
-            hdk.derive(ETH_PATH + '/' + i).privateKey
+            hdk.derive(FOURTWENTY_PATH + '/' + i).privateKey
           );
           resolve(
             Buffer.concat([
@@ -98,7 +98,7 @@ describe('HDWalletInterface Mnemonic', () => {
         accountList[i].address
       );
       const signedTx = await testWallets[i].signTransaction(txParams);
-      const _signedTx = new ethTx(txParams);
+      const _signedTx = new fourtwentyTx(txParams);
       _signedTx.sign(
         Buffer.from(accountList[i].privkey.replace('0x', ''), 'hex')
       );
@@ -111,9 +111,9 @@ describe('HDWalletInterface Mnemonic', () => {
         _signedTx.s
       ]).toString('hex');
       expect(sig).toEqual(_sig);
-      const MSG = 'MyEtherWallet v5';
+      const MSG = 'My420Wallet v5';
       const signedMessage = await testWallets[i].signMessage(MSG);
-      const _signedMessage = ethSignMessage(
+      const _signedMessage = fourtwentySignMessage(
         MSG,
         Buffer.from(accountList[i].privkey.replace('0x', ''), 'hex')
       );

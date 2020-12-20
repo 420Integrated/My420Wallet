@@ -15,12 +15,12 @@
   "tx-fee": "Комиссия за транзакцию",
   "tx-hash": "Хеш транзакции",
   "max-tx-fee": "Максимальная комиссия за транзакцию",
-  "cost-eth-convert": "Стоимость {txFeeEth} ETH = ${convert}",
+  "cost-fourtwenty-convert": "Стоимость {txFeeFourtwenty} FOURTWENTY = ${convert}",
   "add-data": "Добавить данные",
   "ph-add-data": "Добавить данные (например, 0x7834f874g298hf298h234f)",
   "nonce": "Nonce-Число",
   "data": "Данные",
-  "data-gas": "Данные и лимит газа",
+  "data-smoke": "Данные и лимит газа",
   "dep-amount": "Сумма депозита",
   "button-entire": "Весь баланс",
   "transaction-receipt": "Квитанция транзакции",
@@ -43,7 +43,7 @@
   "success": {
     "title": "Готово",
     "sub-title": "Транзакция отправлена!",
-    "button-check-status": "Проверить статус на Etherscan.io",
+    "button-check-status": "Проверить статус на fourtwentyscan.420integrated.com",
     "button-check-explorer": "Проверить статус на {explorrerName}"
   },
   "invalid-data": "Предоставленные данные являются недействительными или неполными!",

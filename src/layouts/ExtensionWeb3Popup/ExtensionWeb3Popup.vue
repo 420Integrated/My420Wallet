@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import ENS from 'ethereum-ens';
+import ENS from 'fourtwenty-ens';
 import { mapState, mapActions } from 'vuex';
 
 export default {
@@ -20,7 +20,7 @@ export default {
       window.chrome.storage.sync.get(null, obj => {
         const defaultNetwork = obj.hasOwnProperty('defNetwork')
           ? this.Networks[JSON.parse(obj['defNetwork']).key][0]
-          : this.Networks['ETH'][0];
+          : this.Networks['FOURTWENTY'][0];
         this.switchNetwork(defaultNetwork).then(() => {
           this.setWeb3Instance().then(() => {
             this.setENS(

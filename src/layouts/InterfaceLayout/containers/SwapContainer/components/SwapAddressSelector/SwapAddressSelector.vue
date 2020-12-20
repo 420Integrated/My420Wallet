@@ -13,7 +13,7 @@
 import '@/assets/images/currency/coins/asFont/cryptocoins.css';
 import '@/assets/images/currency/coins/asFont/cryptocoins-colors.css';
 import { mapState } from 'vuex';
-import { EthereumTokens, hasIcon } from '@/partners';
+import { FourtwentycoinTokens, hasIcon } from '@/partners';
 import DropDownAddressSelector from '@/components/DropDownAddressSelector';
 
 export default {
@@ -31,7 +31,7 @@ export default {
     },
     currency: {
       type: String,
-      default: 'ETH'
+      default: 'FOURTWENTY'
     },
     preFill: {
       type: Boolean,
@@ -50,7 +50,7 @@ export default {
     return {
       validityState: 0,
       EnsAddress: '',
-      EthereumTokens: EthereumTokens,
+      FourtwentycoinTokens: FourtwentycoinTokens,
       selectedAddress: '',
       isValidAddress: false,
       unableToValidate: false

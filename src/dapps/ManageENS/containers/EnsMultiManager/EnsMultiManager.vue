@@ -102,7 +102,7 @@ export default {
         const hashes = names.map(item => {
           return item.id;
         });
-        const contract = new this.web3.eth.Contract(ExpiryAbi, EXPIRY_ADDRESS);
+        const contract = new this.web3.fourtwenty.Contract(ExpiryAbi, EXPIRY_ADDRESS);
         const expiry = contract.methods
           .getExpirationDates(ENS_CURRENT_ADDRESS, hashes)
           .call()

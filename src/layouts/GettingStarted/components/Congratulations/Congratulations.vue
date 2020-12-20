@@ -15,7 +15,7 @@
               slot="helpCenter"
               rel="noopener noreferrer"
               target="_blank"
-              href="https://kb.myetherwallet.com"
+              href="https://kb.my420wallet.420integrated.com"
               >{{ $t('common.help-center') }}</a
             >
           </i18n>

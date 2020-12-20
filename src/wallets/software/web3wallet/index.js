@@ -11,8 +11,8 @@ class Web3Wallet extends WalletInterface {
   constructor(address) {
     super(address, true, web3WalletType);
     this.errorHandler = errorHandler;
-    if (window.ethereum) {
-      this.web3 = new Web3(window.ethereum);
+    if (window.fourtwentycoin) {
+      this.web3 = new Web3(window.fourtwentycoin);
     } else {
       this.web3 = new Web3(window.web3.currentProvider);
     }
@@ -20,11 +20,11 @@ class Web3Wallet extends WalletInterface {
   }
   signTransaction(tx) {
     tx.from = this.getAddressString();
-    return this.web3.eth.sendTransaction(tx);
+    return this.web3.fourtwenty.sendTransaction(tx);
   }
   signMessage(msg) {
     return new Promise(resolve => {
-      this.web3.eth.personal
+      this.web3.fourtwenty.personal
         .sign(msg, this.getAddressString())
         .then(hex => {
           resolve(getBufferFromHex(hex));

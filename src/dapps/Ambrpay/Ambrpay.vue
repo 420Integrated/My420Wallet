@@ -29,7 +29,7 @@
         <div class="balance-container">
           <i v-show="loadingBalance" class="fa fa-spinner fa-spin" />
           <span v-show="!loadingBalance" class="fund-text"
-            >{{ availableBalanceEth }} {{ $t('common.currency.eth') }}
+            >{{ availableBalanceFourtwenty }} {{ $t('common.currency.fourtwenty') }}
           </span>
           <span v-show="!loadingBalance" class="usd-text"
             >{{ availableBalanceUSD }} {{ $t('common.currency.usd') }}</span
@@ -45,7 +45,7 @@
     <manage-funds-modal
       ref="manageFunds"
       :manage-funds-text="manageFundsText"
-      :available-balance-eth="availableBalanceEth"
+      :available-balance-fourtwenty="availableBalanceFourtwenty"
       :available-balance-usd="availableBalanceUSD"
       @addFunds="addFunds"
       @withdrawFunds="withdrawFunds"
@@ -77,10 +77,10 @@ export default {
   },
   data() {
     return {
-      availableBalanceEth: '',
+      availableBalanceFourtwenty: '',
       availableBalanceUSD: '',
       manageFundsText: '',
-      ethPrice: 0,
+      fourtwentyPrice: 0,
       loadingBalance: true,
       ambrpay: '',
       subscriptions: []
@@ -101,7 +101,7 @@ export default {
     this.$refs.manageSubs.$refs.manageSubscriptionsModal.$on('show', () => {
       this.getSubscriptions();
     });
-    if (this.online) this.getEthPrice();
+    if (this.online) this.getFourtwentyPrice();
   },
   methods: {
     init() {
@@ -117,8 +117,8 @@ export default {
       this.ambrpay
         .getSubscriptionFunds()
         .then(res => {
-          this.availableBalanceEth = new BigNumber(
-            this.web3.utils.fromWei(res, 'ether')
+          this.availableBalanceFourtwenty = new BigNumber(
+            this.web3.utils.fromWei(res, '420coin')
           ).toFixed();
           this.convertToUSD();
           this.loadingBalance = false;
@@ -131,10 +131,10 @@ export default {
     convertToUSD() {
       this.availableBalanceUSD = '--';
 
-      if (this.availableBalanceEth) {
+      if (this.availableBalanceFourtwenty) {
         this.availableBalanceUSD = new BigNumber(
-          new BigNumber(this.availableBalanceEth).times(
-            new BigNumber(this.ethPrice)
+          new BigNumber(this.availableBalanceFourtwenty).times(
+            new BigNumber(this.fourtwentyPrice)
           )
         ).toFixed(2);
       }
@@ -146,9 +146,9 @@ export default {
     openManageSubModal() {
       this.$refs.manageSubs.$refs.manageSubscriptionsModal.show();
     },
-    async getEthPrice() {
+    async getFourtwentyPrice() {
       const price = await fetch(
-        'https://cryptorates.mewapi.io/ticker?filter=ETH'
+        'https://cryptorates.mewapi.io/ticker?filter=FOURTWENTY'
       )
         .then(res => {
           return res.json();
@@ -156,8 +156,8 @@ export default {
         .catch(e => {
           Toast.responseHandler(e, Toast.ERROR);
         });
-      this.ethPrice =
-        typeof price === 'object' ? price.data.ETH.quotes.USD.price : 0;
+      this.fourtwentyPrice =
+        typeof price === 'object' ? price.data.FOURTWENTY.quotes.USD.price : 0;
     },
     startSubscription(params) {
       this.ambrpay

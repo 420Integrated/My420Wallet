@@ -133,11 +133,11 @@ export default {
         return {};
       }
     },
-    convertToGwei: {
+    convertToMaher: {
       type: Function,
       default: function () {}
     },
-    convertToEth: {
+    convertToFourtwenty: {
       type: Function,
       default: function () {}
     },

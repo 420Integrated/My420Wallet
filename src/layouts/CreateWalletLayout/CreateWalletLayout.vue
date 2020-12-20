@@ -52,7 +52,7 @@
                       />
                     </div>
                     <a
-                      href="https://play.google.com/store/apps/details?id=com.myetherwallet.mewwallet"
+                      href="https://play.google.com/store/apps/details?id=com.420integrated.my420wallet"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

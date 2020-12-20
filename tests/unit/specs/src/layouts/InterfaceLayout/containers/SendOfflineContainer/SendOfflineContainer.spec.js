@@ -52,24 +52,24 @@ xdescribe('SendOfflineContainer.vue', () => {
       toData: '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D',
       toAmt: '5',
       address: '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D',
-      gasLimit: '3000',
+      smokeLimit: '3000',
       localNonce: '1000',
-      localGasPrice: '15',
+      localSmokePrice: '15',
       selectedCurrency: {
         name: 'Bitcoin',
-        symobl: 'ETH'
+        symobl: 'FOURTWENTY'
       }
     });
     wrapper.find('.clear-all-btn').trigger('click');
     expect(wrapper.vm.$data.toData).toEqual('0x');
     expect(wrapper.vm.$data.toAmt).toEqual(0);
-    expect(wrapper.vm.$data.localGasPrice).toEqual(wrapper.vm.$data.highestGas);
+    expect(wrapper.vm.$data.localSmokePrice).toEqual(wrapper.vm.$data.highestSmoke);
     expect(wrapper.vm.$data.address).toEqual('');
-    expect(wrapper.vm.$data.gasLimit).toEqual('21000');
+    expect(wrapper.vm.$data.smokeLimit).toEqual('21000');
     expect(wrapper.vm.$data.localNonce).toEqual(wrapper.vm.$data.nonce);
     expect(wrapper.vm.$data.selectedCurrency).toEqual({
-      name: 'Ethereum',
-      symbol: 'ETH'
+      name: '420coin',
+      symbol: 'FOURTWENTY'
     });
   });
 
@@ -79,10 +79,10 @@ xdescribe('SendOfflineContainer.vue', () => {
     // ).toBe(String(wrapper.vm.$data.nonce));
   });
 
-  xit('should render correct gasLimit data', () => {
+  xit('should render correct smokeLimit data', () => {
     expect(
-      wrapper.vm.$el.querySelector('router-view').getAttribute('gas-limit')
-    ).toBe(String(wrapper.vm.$data.gasLimit));
+      wrapper.vm.$el.querySelector('router-view').getAttribute('smoke-limit')
+    ).toBe(String(wrapper.vm.$data.smokeLimit));
   });
 
   xit('should render correct rawTx data', () => {

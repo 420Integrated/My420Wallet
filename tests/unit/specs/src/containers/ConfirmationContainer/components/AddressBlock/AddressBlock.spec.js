@@ -14,7 +14,7 @@ describe('AddressBlock.vue', () => {
   let localVue, i18n, wrapper, store;
   const address = '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D';
   const direction = 'from';
-  const currency = 'ETH';
+  const currency = 'FOURTWENTY';
   const tokenTransferTo = 'tokenTransferTo';
   const tokenSymbol = 'tokenSymbol';
   const tokenTransferVal = '100';
@@ -91,7 +91,7 @@ describe('AddressBlock.vue', () => {
 
   it('should render correct value props', () => {
     wrapper.setProps({ tokenTransferVal: '' });
-    const eth = web3.utils.fromWei(value, 'ether');
+    const eth = web3.utils.fromWei(value, '420coin');
     expect(
       wrapper.vm.$el
         .querySelector('.currency-amt')

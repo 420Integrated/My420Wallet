@@ -1,7 +1,7 @@
 <template>
   <div class="crypto-kitties-manager">
     <interface-container-title :title="$t('nftManager.title')" />
-    <div v-if="!isReady && isOnlineAndEth">
+    <div v-if="!isReady && isOnlineAndFourtwenty">
       <loading-sign :loadingmessage1="$t('common.loading')" />
     </div>
 
@@ -131,7 +131,7 @@
       <span v-show="reLoading">{{ $t('nftManager.reloading') }}</span>
     </div>
 
-    <div v-if="!isOnlineAndEth">
+    <div v-if="!isOnlineAndFourtwenty">
       <div v-show="!online">{{ $t('nftManager.nft-are') }}</div>
       <div v-show="online" class="not-supported-txt">
         {{ $t('nftManager.not-supported', { value: network.type.name_long }) }}
@@ -291,10 +291,10 @@ export default {
       return Object.values(this.nftConfig).length > 0;
     },
     isReady() {
-      return this.isOnlineAndEth && this.countsRetrieved;
+      return this.isOnlineAndFourtwenty && this.countsRetrieved;
     },
-    isOnlineAndEth() {
-      return this.online && this.network.type.name === 'ETH';
+    isOnlineAndFourtwenty() {
+      return this.online && this.network.type.name === 'FOURTWENTY';
     }
   },
   watch: {},
@@ -392,7 +392,7 @@ export default {
     },
 
     async setup() {
-      if (this.network.type.name === 'ETH') {
+      if (this.network.type.name === 'FOURTWENTY') {
         const customNFTs = store.get('customNFTs');
 
         if (customNFTs !== undefined && customNFTs !== null) {

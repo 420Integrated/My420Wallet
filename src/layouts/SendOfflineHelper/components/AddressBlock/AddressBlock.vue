@@ -41,7 +41,7 @@ export default {
     },
     currency: {
       type: String,
-      default: 'eth'
+      default: 'fourtwenty'
     },
     tokenTransferTo: {
       type: String,
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     converter(num) {
-      return web3.utils.fromWei(num.toString(), 'ether');
+      return web3.utils.fromWei(num.toString(), '420coin');
     }
   }
 };

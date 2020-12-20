@@ -1,1 +1,1 @@
-export { default } from './buyEthAd';
+export { default } from './buyFourtwentyAd';

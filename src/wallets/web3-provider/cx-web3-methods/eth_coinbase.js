@@ -7,7 +7,7 @@ import {
   WEB3_GET_ACC
 } from '@/builds/mewcx/cxHelpers/cxEvents.js';
 export default async ({ payload }, res, next) => {
-  if (payload.method !== 'eth_coinbase') return next();
+  if (payload.method !== 'fourtwenty_coinbase') return next();
   const id = window.extensionID;
   const callerUrl = window.location.hostname;
   const obj = {

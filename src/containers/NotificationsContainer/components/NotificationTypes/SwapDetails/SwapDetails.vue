@@ -84,7 +84,7 @@
             <p :class="['status', txStatus.class]">({{ $t(txStatus.text) }})</p>
           </div>
         </li>
-        <li v-if="isEthereum">
+        <li v-if="is420coin">
           <p>{{ $t('sendTx.to-addr') }}:</p>
           <div class="detail-data">
             <p>
@@ -134,40 +134,40 @@
             </p>
           </div>
         </li>
-        <li v-if="notice.body.gasUsed && isEthereum">
+        <li v-if="notice.body.smokeUsed && is420coin">
           <p>{{ $t('sendTx.tx-fee') }}:</p>
           <div class="detail-data">
             <p>
-              {{ convertToEth(details.gasPrice * details.gasUsed) }}
-              {{ $t('common.currency.eth') }} (${{
-                getFiatValue(details.gasPrice * details.gasUsed)
+              {{ convertToFourtwenty(details.smokePrice * details.smokeUsed) }}
+              {{ $t('common.currency.fourtwenty') }} (${{
+                getFiatValue(details.smokePrice * details.smokeUsed)
               }})
             </p>
           </div>
         </li>
-        <li v-if="isEthereum">
+        <li v-if="is420coin">
           <p>{{ $t('sendTx.max-tx-fee') }}:</p>
           <div class="detail-data">
             <p>
-              {{ convertToEth(details.gasPrice * details.gasLimit) }}
-              {{ $t('common.currency.eth') }} (${{
-                getFiatValue(details.gasPrice * details.gasLimit)
+              {{ convertToFourtwenty(details.smokePrice * details.smokeLimit) }}
+              {{ $t('common.currency.fourtwenty') }} (${{
+                getFiatValue(details.smokePrice * details.smokeLimit)
               }})
             </p>
           </div>
         </li>
-        <li v-if="isEthereum">
-          <p>{{ $t('common.gas.price') }}:</p>
+        <li v-if="is420coin">
+          <p>{{ $t('common.smoke.price') }}:</p>
           <div class="detail-data">
             <p>
-              {{ convertToGwei(details.gasPrice) }} {{ $t('common.gas.gwei') }}
+              {{ convertToMaher(details.smokePrice) }} {{ $t('common.smoke.maher') }}
             </p>
           </div>
         </li>
-        <li v-if="isEthereum">
-          <p>{{ $t('common.gas.limit') }}:</p>
+        <li v-if="is420coin">
+          <p>{{ $t('common.smoke.limit') }}:</p>
           <div class="detail-data">
-            <p>{{ details.gasLimit }}</p>
+            <p>{{ details.smokeLimit }}</p>
           </div>
         </li>
         <li v-if="notice.hash">
@@ -207,7 +207,7 @@ import {
   providerNames,
   offChainProviders,
   fiat,
-  EthereumTokens,
+  420coinTokens,
   hasIcon
 } from '@/partners';
 
@@ -235,11 +235,11 @@ export default {
         return {};
       }
     },
-    convertToGwei: {
+    convertToMaher: {
       type: Function,
       default: function () {}
     },
-    convertToEth: {
+    convertToFourtwenty: {
       type: Function,
       default: function () {}
     },
@@ -294,7 +294,7 @@ export default {
       'network',
       'notifications',
       'wallet',
-      'gasPrice'
+      'smokePrice'
     ]),
     errorMessage() {
       return this.errorMessageString(this.notice);
@@ -313,14 +313,14 @@ export default {
       const minutes = Math.floor((this.timeRemaining / 60) % 60);
       return seconds >= 10 ? `${minutes}:${seconds}` : `${minutes}:0${seconds}`;
     },
-    isEthereum() {
-      return EthereumTokens[this.notice.body.fromCurrency] !== undefined;
+    is420coin() {
+      return 420coinTokens[this.notice.body.fromCurrency] !== undefined;
     },
     isToOtherChain() {
-      return EthereumTokens[this.notice.body.toCurrency] === undefined;
+      return 420coinTokens[this.notice.body.toCurrency] === undefined;
     },
     isFromOtherChain() {
-      return EthereumTokens[this.notice.body.fromCurrency] === undefined;
+      return 420coinTokens[this.notice.body.fromCurrency] === undefined;
     },
     isFromFiat() {
       return this.fiatCurrencies.includes(this.notice.body.fromCurrency);

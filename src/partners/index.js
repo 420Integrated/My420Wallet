@@ -17,7 +17,7 @@ import {
   networkSymbols,
   chainCurrencies,
   fiat,
-  EthereumTokens,
+  FourtwentycoinTokens,
   OtherCoins,
   BASE_CURRENCY,
   MIN_SWAP_AMOUNT
@@ -75,7 +75,7 @@ export {
   networkSymbols,
   chainCurrencies,
   fiat,
-  EthereumTokens,
+  FourtwentycoinTokens,
   OtherCoins,
   ERC20,
   utils,

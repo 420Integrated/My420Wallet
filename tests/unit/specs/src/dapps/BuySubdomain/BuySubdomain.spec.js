@@ -38,7 +38,7 @@ describe('BuySubdomain.vue', () => {
 
   xit('should render correct knownRegistrarInstances data', () => {
     wrapper.find('.subdomain-input input').setValue('adsfasdf');
-    const web3C = newWeb3.eth.Contract;
+    const web3C = newWeb3.fourtwenty.Contract;
     const knownRegistrarInstances = {};
     domains.forEach(domain => {
       const updatedDomain = Object.assign({}, domain);

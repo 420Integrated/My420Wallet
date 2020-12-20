@@ -60,8 +60,8 @@ describe('ManageSubscriptionsModal.vue', () => {
           subscriptionPlan: 'Crypto to Crypto',
           subscriptionInterval: 1,
           receiverWallet: '0x5D6a22Cc5c70D452E406Df657C0f6beE5508C802',
-          subscriptionPlanCurrencyCode: 'ETH',
-          subscriptionCurrencyCode: 'ETH',
+          subscriptionPlanCurrencyCode: 'FOURTWENTYRTWENTYRTWENTYRTWENTY',
+          subscriptionCurrencyCode: 'FOURTWENTYRTWENTYRTWENTYRTWENTY',
           subscriptionStatus: 'Unpaid',
           smartContractAddress: '0xa5a179c7570F4d17F174F73c7668013000E305a4'
         }

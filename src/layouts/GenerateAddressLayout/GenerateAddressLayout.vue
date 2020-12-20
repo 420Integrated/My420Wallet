@@ -19,7 +19,6 @@
 
 <script>
 import createPassword from './components/CreatePassword/CreatePassword';
-import KeyStore, { verifyKeystore } from '@myetherwallet/eth2-keystore';
 import mnemonicPhrase from './components/MnemonicPhrase/MnemonicPhrase';
 import success from './components/Success/Success';
 import createBlob from '@/helpers/createBlob.js';

@@ -43,15 +43,15 @@
   "icon": "Иконка",
   "no-icon": "Нет Иконки",
   "currency": {
-    "eth": "ETH",
+    "fourtwenty": "FOURTWENTY",
     "btc": "BTC",
     "usd": "USD",
-    "peth": "PETH",
-    "ethereum": "Ethereum",
+    "pfourtwenty": "PFOURTWENTY",
+    "fourtwentycoin": "420coin",
     "etc": "ETC"
   },
-  "mew": "MyEtherWallet",
-  "support-email": "support@myetherwallet.com",
+  "mew": "My420Wallet",
+  "support-email": "support@my420wallet.420integrated.com",
   "support": {
     "string": "Поддержка",
     "browser": "Браузер",
@@ -91,7 +91,7 @@
   },
   "mew-wallet": {
     "string": "MEW wallet",
-    "desc": "Официальное полнофункциональное приложение MEW дает доступ к Ethereum прямо с вашего смартфона iOS или Android. С MEW wallet, вы в полном контроле. {learn-more}"
+    "desc": "Официальное полнофункциональное приложение MEW дает доступ к 420coin прямо с вашего смартфона iOS или Android. С MEW wallet, вы в полном контроле. {learn-more}"
   },
   "swap": "Обмен",
   "token": "Токен | Токены",
@@ -148,11 +148,11 @@
   "issue-info": "Информация о проблеме",
   "learn-more": "Подробнее",
   "dapps": "Dapps",
-  "gas": {
-    "current-gas": "Текущая цена газа",
+  "smoke": {
+    "current-smoke": "Текущая цена газа",
     "limit": "Лимит газа",
     "price": "Цена газа",
-    "gwei": "Gwei",
+    "maher": "Maher",
     "wei": "Wei",
     "fee": "Комиссия",
     "string": "Газ"
@@ -163,8 +163,8 @@
   "signature": "Подпись",
   "to": "Кому",
   "ok": "OK",
-  "buy-eth": "Купить ETH",
-  "dont-have-eth": "Нет ETH? Купите!",
+  "buy-fourtwenty": "Купить FOURTWENTY",
+  "dont-have-fourtwenty": "Нет FOURTWENTY? Купите!",
   "security": "Безопасность",
   "status": "Статус",
   "time": "Время",

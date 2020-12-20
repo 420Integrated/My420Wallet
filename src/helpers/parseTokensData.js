@@ -31,14 +31,14 @@ function parseTokensData(data, to, _web3, networkToken, networkName) {
     stateMutability: 'nonpayable',
     type: 'function'
   };
-  const transferFuncSig = web3.eth.abi.encodeFunctionSignature(jsonInterface);
+  const transferFuncSig = web3.fourtwenty.abi.encodeFunctionSignature(jsonInterface);
   const tokenData = {
     tokenTransferTo: '',
     tokenTransferVal: '',
     tokenSymbol: ''
   };
   if (data.substr(0, 10) === transferFuncSig) {
-    const params = web3.eth.abi.decodeParameters(
+    const params = web3.fourtwenty.abi.decodeParameters(
       ['address', 'uint256'],
       `${data.substr(10)}`
     );

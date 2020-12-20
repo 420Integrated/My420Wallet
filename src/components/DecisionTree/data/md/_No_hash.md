@@ -1,6 +1,6 @@
 ## I Do Not Have My Transaction Hash
 
-#### Search your public address on Etherscan.io to find your most recent transactions.
+#### Search your public address on fourtwentyscan.420integrated.com to find your most recent transactions.
 
 It’s possible one of these is the transaction you’re looking for. This is how you will find the transaction hash.
 
@@ -15,4 +15,4 @@ It’s possible one of these is the transaction you’re looking for. This is ho
 #### 2. The transaction I’m looking for is not in this list
 
 * Your transaction never posted, it did not make it through.
-* Try again with a higher gas price & limit.
+* Try again with a higher smoke price & limit.

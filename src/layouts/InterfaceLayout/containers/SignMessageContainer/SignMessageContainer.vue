@@ -74,7 +74,7 @@ export default {
     signMessage() {
       const _this = this;
       try {
-        this.web3.eth
+        this.web3.fourtwenty
           .sign(this.message, this.account.address)
           .then(_signedMessage => {
             _this.signature = JSON.stringify(

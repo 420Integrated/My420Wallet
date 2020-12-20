@@ -70,7 +70,7 @@
               <div class="read">
                 > {{ $t('common.read') }}:
                 <a
-                  href="https://kb.myetherwallet.com/en/security-and-privacy/mnemonic-phrase-extra-word/"
+                  href="https://kb.my420wallet.420integrated.com/en/security-and-privacy/mnemonic-phrase-extra-word/"
                   target="_blank"
                   rel="noopener noreferrer"
                   >{{ $t('common.article.mnemonic-password') }}</a

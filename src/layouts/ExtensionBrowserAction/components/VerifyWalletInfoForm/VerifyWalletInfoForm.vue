@@ -17,7 +17,7 @@
           <p>
             <span class="total-balance">{{ convertedBalance }}</span>
             <br />
-            <span class="eth-balance">
+            <span class="fourtwenty-balance">
               {{ balance.length > 7 ? balance.substr(0, 7) + '...' : balance }}
               {{ network.type.currencyName }}
             </span>

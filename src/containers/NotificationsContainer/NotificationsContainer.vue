@@ -69,8 +69,8 @@
                 :expand="expand(idx, notification)"
                 :shown="shown"
                 :notice="notification"
-                :convert-to-gwei="convertToGwei"
-                :convert-to-eth="convertToEth"
+                :convert-to-maher="convertToMaher"
+                :convert-to-fourtwenty="convertToFourtwenty"
                 :get-fiat-value="getFiatValue"
                 :date-string="dateString"
                 :time-string="timeString"
@@ -95,8 +95,8 @@
           :is="useDetailComponent(detailType)"
           :shown="shown"
           :notice="notificationDetails"
-          :convert-to-gwei="convertToGwei"
-          :convert-to-eth="convertToEth"
+          :convert-to-maher="convertToMaher"
+          :convert-to-fourtwenty="convertToFourtwenty"
           :get-fiat-value="getFiatValue"
           :date-string="dateString"
           :time-string="timeString"
@@ -117,7 +117,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import store from 'store';
-import unit from 'ethjs-unit';
+import unit from 'fourtwentyjs-unit';
 import BigNumber from 'bignumber.js';
 
 import SwapNotification from './components/NotificationTypes/SwapNotification';
@@ -151,7 +151,7 @@ export default {
       cancelHide: false,
       shown: false,
       unreadCount: 0,
-      ethPrice: new BigNumber(0),
+      fourtwentyPrice: new BigNumber(0),
       detailsShown: false,
       detailType: '',
       notificationDetails: {}
@@ -218,7 +218,7 @@ export default {
           return isOlder && isUnResolved && hasHash && notExternalSwap;
         });
       check.forEach(entry => {
-        this.web3.eth.getTransactionReceipt(entry.hash).then(result => {
+        this.web3.fourtwenty.getTransactionReceipt(entry.hash).then(result => {
           if (result === null) return;
           const noticeIdx = this.notifications[this.account.address].findIndex(
             noticeEntry => entry.id === noticeEntry.id
@@ -231,7 +231,7 @@ export default {
             entry.body.errorMessage = result.status
               ? ''
               : INVESTIGATE_FAILURE_KEY;
-            entry.body.gasUsed = new BigNumber(result.gasUsed).toString();
+            entry.body.smokeUsed = new BigNumber(result.smokeUsed).toString();
             entry.body.blockNumber = new BigNumber(
               result.blockNumber
             ).toString();
@@ -369,22 +369,22 @@ export default {
       const fetchValues = await fetch(url);
       const values = await fetchValues.json();
       if (!values) return 0;
-      if (!values && !values.data && !values.data['ETH']) return 0;
-      this.ethPrice = new BigNumber(values.data['ETH'].quotes.USD.price);
+      if (!values && !values.data && !values.data['FOURTWENTY']) return 0;
+      this.fourtwentyPrice = new BigNumber(values.data['FOURTWENTY'].quotes.USD.price);
     },
-    convertToGwei(value) {
+    convertToMaher(value) {
       if (this.notValidNumber(value)) return '';
-      return unit.fromWei(new BigNumber(value).toFixed(), 'Gwei');
+      return unit.fromWei(new BigNumber(value).toFixed(), 'Maher');
     },
-    convertToEth(value) {
+    convertToFourtwenty(value) {
       if (this.notValidNumber(value)) return '';
-      return unit.fromWei(new BigNumber(value).toFixed(), 'ether');
+      return unit.fromWei(new BigNumber(value).toFixed(), '420coin');
     },
     getFiatValue(value) {
       if (this.notValidNumber(value)) return '';
-      if (this.ethPrice === 0) return '';
-      return new BigNumber(this.convertToEth(value))
-        .multipliedBy(new BigNumber(this.ethPrice))
+      if (this.fourtwentyPrice === 0) return '';
+      return new BigNumber(this.convertToFourtwenty(value))
+        .multipliedBy(new BigNumber(this.fourtwentyPrice))
         .decimalPlaces(2)
         .toFixed();
     },

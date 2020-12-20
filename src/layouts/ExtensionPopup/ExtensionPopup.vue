@@ -4,7 +4,7 @@
       <accounts-container
         :add-wallet="addWallet"
         :accounts="accounts"
-        :usd="ethPrice"
+        :usd="fourtwentyPrice"
       />
     </div>
     <div v-else>
@@ -20,7 +20,7 @@ import AccountsContainer from './containers/AccountsContainer';
 import { ExtensionHelpers } from '@/helpers';
 import { isAddress } from '@/helpers/addressUtils';
 import BigNumber from 'bignumber.js';
-import ENS from 'ethereum-ens';
+import ENS from 'fourtwenty-ens';
 import { mapState, mapActions } from 'vuex';
 
 export default {
@@ -32,7 +32,7 @@ export default {
     return {
       hasAccounts: false,
       accounts: [],
-      ethPrice: 0
+      fourtwentyPrice: 0
     };
   },
   computed: {
@@ -59,7 +59,7 @@ export default {
       window.chrome.storage.sync.get(null, obj => {
         const defaultNetwork = obj.hasOwnProperty('defNetwork')
           ? this.Networks[JSON.parse(obj['defNetwork']).key][0]
-          : this.Networks['ETH'][0];
+          : this.Networks['FOURTWENTY'][0];
         this.switchNetwork(defaultNetwork).then(() => {
           this.setWeb3Instance().then(() => {
             this.setENS(
@@ -70,8 +70,8 @@ export default {
         ExtensionHelpers.getAccounts(this.getAccountsCb);
       });
     },
-    fetchEthBalance() {
-      const price = fetch('https://cryptorates.mewapi.io/ticker?filter=ETH')
+    fetchFourtwentyBalance() {
+      const price = fetch('https://cryptorates.mewapi.io/ticker?filter=FOURTWENTY')
         .then(res => {
           return res.json();
         })
@@ -80,13 +80,13 @@ export default {
         });
       price.then(res => {
         const priceAvailable = res.hasOwnProperty('data')
-          ? res.data.ETH.quotes.USD.price
+          ? res.data.FOURTWENTY.quotes.USD.price
           : res;
         this.convertedBalance = `$ ${new BigNumber(priceAvailable)
           .times(this.totalBalance)
           .toFixed(2)}`;
 
-        this.ethPrice = priceAvailable;
+        this.fourtwentyPrice = priceAvailable;
       });
     },
     getAccountsCb(res) {
@@ -101,7 +101,7 @@ export default {
         });
       this.hasAccounts = accounts.length > 0;
       this.accounts = this.hasAccounts ? accounts : {};
-      this.fetchEthBalance();
+      this.fetchFourtwentyBalance();
     }
   }
 };

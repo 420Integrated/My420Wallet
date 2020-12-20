@@ -10,7 +10,7 @@
             </div>
             <currency-picker
               :currency="tokensWithBalance"
-              :page="'sendEthAndTokens'"
+              :page="'sendFourtwentyAndTokens'"
               :token="true"
               :default="selectedCurrency !== '' ? selectedCurrency : {}"
               @selectedCurrency="selectedCurrency = $event"
@@ -66,20 +66,20 @@
             </p>
           </div>
           <div class="fee-value">
-            <div class="gwei">
-              {{ displayedGasPrice }}
-              {{ $t('common.gas.gwei') }}
+            <div class="maher">
+              {{ displayedSmokePrice }}
+              {{ $t('common.smoke.maher') }}
               <!--(Economic)-->
             </div>
-            <div v-show="network.type.name === 'ETH'" class="usd">
-              <i18n path="sendTx.cost-eth-convert" tag="div">
-                <span slot="txFeeEth">{{ txFeeEth }}</span>
+            <div v-show="network.type.name === 'FOURTWENTY'" class="usd">
+              <i18n path="sendTx.cost-fourtwenty-convert" tag="div">
+                <span slot="txFeeFourtwenty">{{ txFeeFourtwenty }}</span>
                 <span slot="convert">{{ convert }}</span>
               </i18n>
             </div>
           </div>
-          <div v-if="showGasWarning" class="gas-price-warning">
-            {{ $t('errorsGlobal.high-gas-limit-warning') }}
+          <div v-if="showSmokeWarning" class="smoke-price-warning">
+            {{ $t('errorsGlobal.high-smoke-limit-warning') }}
           </div>
         </div>
       </div>
@@ -90,7 +90,7 @@
         <div class="toggle-button-container">
           <h4>{{ $t('common.advanced') }}</h4>
           <div class="toggle-button">
-            <span>{{ $t('sendTx.data-gas') }}</span>
+            <span>{{ $t('sendTx.data-smoke') }}</span>
             <!-- Rounded switch -->
             <div class="sliding-switch-white">
               <label class="switch">
@@ -125,17 +125,17 @@
               />
             </div>
             <div class="the-form user-input">
-              <p>{{ $t('common.gas.limit') | capitalize }}</p>
+              <p>{{ $t('common.smoke.limit') | capitalize }}</p>
               <input
-                v-model="gasLimit"
-                :placeholder="$t('common.gas.limit')"
+                v-model="smokeLimit"
+                :placeholder="$t('common.smoke.limit')"
                 type="number"
                 min="0"
                 name
               />
               <i
                 :class="[
-                  isValidGasLimit ? '' : 'not-good',
+                  isValidSmokeLimit ? '' : 'not-good',
                   'fa fa-check-circle good-button'
                 ]"
                 aria-hidden="true"
@@ -166,10 +166,10 @@
 import { mapState } from 'vuex';
 import InterfaceContainerTitle from '../../components/InterfaceContainerTitle';
 import CurrencyPicker from '../../components/CurrencyPicker';
-import { Transaction } from 'ethereumjs-tx';
+import { Transaction } from 'fourtwentyjs-tx';
 import { Misc, Toast } from '@/helpers';
 import BigNumber from 'bignumber.js';
-import ethUnit from 'ethjs-unit';
+import fourtwentyUnit from 'fourtwentyjs-unit';
 import utils from 'web3-utils';
 import fetch from 'node-fetch';
 import DropDownAddressSelector from '@/components/DropDownAddressSelector';
@@ -205,11 +205,11 @@ export default {
       type: String,
       default: ''
     },
-    gaslimit: {
+    smokelimit: {
       type: String,
       default: ''
     },
-    gas: {
+    smoke: {
       type: Number,
       default: 0
     },
@@ -235,10 +235,10 @@ export default {
       hexAddress: '',
       address: '',
       toValue: '0',
-      gasLimit: '21000',
+      smokeLimit: '21000',
       toData: '',
       selectedCurrency: '',
-      ethPrice: 0,
+      fourtwentyPrice: 0,
       clearAddress: false
     };
   },
@@ -246,34 +246,34 @@ export default {
   computed: {
     ...mapState('main', [
       'account',
-      'gasPrice',
+      'smokePrice',
       'web3',
       'network',
       'linkQuery',
       'online',
-      'gasLimitWarning'
+      'smokeLimitWarning'
     ]),
     currency() {
       return this.selectedCurrency.symbol;
     },
-    showGasWarning() {
-      return this.gasPrice >= this.gasLimitWarning;
+    showSmokeWarning() {
+      return this.smokePrice >= this.smokeLimitWarning;
     },
     txFee() {
-      return new BigNumber(ethUnit.toWei(this.gasPrice, 'gwei')).times(
-        this.gasLimit || 0
+      return new BigNumber(fourtwentyUnit.toWei(this.smokePrice, 'maher')).times(
+        this.smokeLimit || 0
       );
     },
-    txFeeEth() {
+    txFeeFourtwenty() {
       if (new BigNumber(this.txFee).gt(0)) {
-        return ethUnit.fromWei(this.txFee, 'ether');
+        return fourtwentyUnit.fromWei(this.txFee, '420coin');
       }
       return 0;
     },
     isValidAmount() {
-      const notEnoughGasMsg =
+      const notEnoughSmokeMsg =
         this.$t('errorsGlobal.not-valid-amount-total') +
-        ' Gas ' +
+        ' Smoke ' +
         this.$t('errorsGlobal.to-send');
       const notEnoughTokenMsg =
         this.$t('errorsGlobal.not-valid-amount-total') +
@@ -292,9 +292,9 @@ export default {
         this.selectedCurrency.balance
       );
       const enoughCurrency = new BigNumber(this.toValue)
-        .plus(this.txFeeEth)
+        .plus(this.txFeeFourtwenty)
         .lte(this.balanceDefault);
-      const enoughGas = new BigNumber(this.txFeeEth).lte(this.balanceDefault);
+      const enoughSmoke = new BigNumber(this.txFeeFourtwenty).lte(this.balanceDefault);
       const validDecimal = this.isValidDecimals;
       if (new BigNumber(this.toValue).lt(0)) {
         return {
@@ -303,15 +303,15 @@ export default {
         };
       }
       if (this.isToken) {
-        const enoughBalance = enoughTokenBalance && enoughGas && validDecimal;
+        const enoughBalance = enoughTokenBalance && enoughSmoke && validDecimal;
         return {
           valid: enoughBalance,
           msg: enoughBalance
             ? ''
             : !enoughTokenBalance
             ? notEnoughTokenMsg
-            : !enoughGas
-            ? notEnoughGasMsg
+            : !enoughSmoke
+            ? notEnoughSmokeMsg
             : invalidValueMsg
         };
       }
@@ -335,17 +335,17 @@ export default {
     isValidData() {
       return Misc.validateHexString(this.toData);
     },
-    isValidGasLimit() {
-      return new BigNumber(this.gasLimit).gte(0);
+    isValidSmokeLimit() {
+      return new BigNumber(this.smokeLimit).gte(0);
     },
     balanceDefault() {
-      return new BigNumber(ethUnit.fromWei(this.account.balance, 'ether'));
+      return new BigNumber(fourtwentyUnit.fromWei(this.account.balance, '420coin'));
     },
     validInputs() {
       return (
         this.isValidAmount.valid &&
         this.isValidAddress &&
-        new BigNumber(this.gasLimit).gte(0) &&
+        new BigNumber(this.smokeLimit).gte(0) &&
         Misc.validateHexString(this.toData)
       );
     },
@@ -367,7 +367,7 @@ export default {
         return '0x00';
       }
       return Misc.sanitizeHex(
-        ethUnit.toWei(this.toValue, 'ether').toString(16)
+        fourtwentyUnit.toWei(this.toValue, '420coin').toString(16)
       );
     },
     txTo() {
@@ -385,17 +385,17 @@ export default {
       );
     },
     convert() {
-      if (this.ethPrice) {
+      if (this.fourtwentyPrice) {
         return new BigNumber(
-          new BigNumber(this.txFeeEth).times(new BigNumber(this.ethPrice))
+          new BigNumber(this.txFeeFourtwenty).times(new BigNumber(this.fourtwentyPrice))
         )
           .toFixed(2)
           .toString();
       }
       return '--';
     },
-    displayedGasPrice() {
-      const newVal = this.gasPrice.toString();
+    displayedSmokePrice() {
+      const newVal = this.smokePrice.toString();
       const showMore = `~${new BigNumber(newVal).toString()}`;
       const showSome = `~${new BigNumber(newVal).toFixed(2).toString()}`;
       return newVal.includes('.')
@@ -407,10 +407,10 @@ export default {
   },
   watch: {
     multiWatch: utils._.debounce(function () {
-      if (this.validInputs) this.estimateGas();
+      if (this.validInputs) this.estimateSmoke();
     }, 500),
     network(newVal) {
-      if (this.online && newVal.type.name === 'ETH') this.getEthPrice();
+      if (this.online && newVal.type.name === 'FOURTWENTY') this.getFourtwentyPrice();
     },
     isPrefilled() {
       this.prefillForm();
@@ -418,7 +418,7 @@ export default {
   },
   mounted() {
     this.checkPrefilled();
-    if (this.online && this.network.type.name === 'ETH') this.getEthPrice();
+    if (this.online && this.network.type.name === 'FOURTWENTY') this.getFourtwentyPrice();
   },
   methods: {
     clear() {
@@ -426,7 +426,7 @@ export default {
       this.toValue = '0';
       this.hexAddress = '';
       this.address = '';
-      this.gasLimit = '21000';
+      this.smokeLimit = '21000';
       this.isValidAddress = false;
       this.advancedExpand = false;
       this.clearAddress = !this.clearAddress;
@@ -454,7 +454,7 @@ export default {
         this.toValue = this.value;
         this.hexAddress = this.to;
         this.address = this.to;
-        this.gasLimit = new BigNumber(this.gaslimit).toString();
+        this.smokeLimit = new BigNumber(this.smokelimit).toString();
 
         this.selectedCurrency = foundToken ? foundToken : this.selectedCurrency;
         this.advancedExpand = true;
@@ -474,11 +474,11 @@ export default {
         this.toValue =
           this.balanceDefault > 0
             ? this.balanceDefault.minus(
-                ethUnit.fromWei(
-                  new BigNumber(ethUnit.toWei(this.gasPrice, 'gwei'))
-                    .times(this.gasLimit)
+                fourtwentyUnit.fromWei(
+                  new BigNumber(fourtwentyUnit.toWei(this.smokePrice, 'maher'))
+                    .times(this.smokeLimit)
                     .toString(),
-                  'ether'
+                  '420coin'
                 )
               )
             : 0;
@@ -498,7 +498,7 @@ export default {
           type: 'function'
         }
       ];
-      const contract = new this.web3.eth.Contract(jsonInterface);
+      const contract = new this.web3.fourtwenty.Contract(jsonInterface);
       return contract.methods
         .transfer(
           this.hexAddress.toLowerCase(),
@@ -506,36 +506,36 @@ export default {
         )
         .encodeABI();
     },
-    async estimateGas() {
-      const coinbase = await this.web3.eth.getCoinbase();
+    async estimateSmoke() {
+      const coinbase = await this.web3.fourtwenty.getCoinbase();
       const params = {
         from: coinbase,
         value: this.txValue,
         to: this.txTo,
-        gasPrice: Misc.sanitizeHex(
-          ethUnit.toWei(this.gasPrice, 'gwei').toString(16)
+        smokePrice: Misc.sanitizeHex(
+          fourtwentyUnit.toWei(this.smokePrice, 'maher').toString(16)
         ),
         data: this.txData
       };
 
-      this.web3.eth
-        .estimateGas(params)
-        .then(gasLimit => {
-          this.gasLimit = gasLimit;
+      this.web3.fourtwenty
+        .estimateSmoke(params)
+        .then(smokeLimit => {
+          this.smokeLimit = smokeLimit;
         })
         .catch(err => {
-          this.gasLimit = -1;
+          this.smokeLimit = -1;
           Toast.responseHandler(err, Toast.ERROR);
         });
     },
     async submitTransaction() {
       window.scrollTo(0, 0);
       try {
-        const coinbase = await this.web3.eth.getCoinbase();
-        const nonce = await this.web3.eth.getTransactionCount(coinbase);
+        const coinbase = await this.web3.fourtwenty.getCoinbase();
+        const nonce = await this.web3.fourtwenty.getTransactionCount(coinbase);
         const raw = {
           nonce: Misc.sanitizeHex(new BigNumber(nonce).toString(16)),
-          gasLimit: Misc.sanitizeHex(new BigNumber(this.gasLimit).toString(16)),
+          smokeLimit: Misc.sanitizeHex(new BigNumber(this.smokeLimit).toString(16)),
           to: this.txTo,
           value: this.txValue,
           data: this.txData
@@ -543,7 +543,7 @@ export default {
         const _tx = new Transaction(raw);
         const json = _tx.toJSON(true);
         json.from = coinbase;
-        this.web3.eth.sendTransaction(json).catch(err => {
+        this.web3.fourtwenty.sendTransaction(json).catch(err => {
           Toast.responseHandler(err, Toast.ERROR);
         });
         this.clear();
@@ -551,9 +551,9 @@ export default {
         Toast.responseHandler(e, Toast.ERROR);
       }
     },
-    async getEthPrice() {
+    async getFourtwentyPrice() {
       const price = await fetch(
-        'https://cryptorates.mewapi.io/ticker?filter=ETH'
+        'https://cryptorates.mewapi.io/ticker?filter=FOURTWENTY'
       )
         .then(res => {
           return res.json();
@@ -561,8 +561,8 @@ export default {
         .catch(e => {
           Toast.responseHandler(e, Toast.ERROR);
         });
-      this.ethPrice =
-        typeof price === 'object' ? price.data.ETH.quotes.USD.price : 0;
+      this.fourtwentyPrice =
+        typeof price === 'object' ? price.data.FOURTWENTY.quotes.USD.price : 0;
     }
   }
 };

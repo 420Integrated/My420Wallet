@@ -211,7 +211,7 @@ export default {
       this.addressBook.push({
         address: this.contactAddress,
         resolverAddr: this.hexAddress,
-        currency: 'ETH',
+        currency: 'FOURTWENTY',
         nickname: this.contactNickname || this.addressBook.length + 1
       });
 

@@ -1,6 +1,6 @@
-import MEWconnect from '@myetherwallet/mewconnect-web-client';
+import MEWconnect from '@my420wallet/mewconnect-web-client';
 import store from '@/store';
-import { Transaction } from 'ethereumjs-tx';
+import { Transaction } from 'fourtwentyjs-tx';
 import { MEW_CONNECT as mewConnectType } from '../../bip44/walletTypes';
 import {
   getSignTransactionObject,
@@ -8,7 +8,7 @@ import {
   getBufferFromHex,
   calculateChainIdFromV
 } from '../../utils';
-import { hashPersonalMessage } from 'ethereumjs-util';
+import { hashPersonalMessage } from 'fourtwentyjs-util';
 import errorHandler from './errorHandler';
 import commonGenerator from '@/helpers/commonGenerator';
 import { Misc } from '@/helpers';
@@ -52,11 +52,11 @@ class MEWconnectWallet {
       }
       const networkId = tx.chainId;
       return new Promise(resolve => {
-        if (!tx.gas && tx.gasLimit) {
-          tx.gas = tx.gasLimit;
-          delete tx['gasLimit'];
-        } else if (tx.gas && tx.gasLimit) {
-          delete tx['gasLimit'];
+        if (!tx.smoke && tx.smokeLimit) {
+          tx.smoke = tx.smokeLimit;
+          delete tx['smokeLimit'];
+        } else if (tx.smoke && tx.smokeLimit) {
+          delete tx['smokeLimit'];
         }
 
         this.mewConnect.sendRtcMessage('signTx', JSON.stringify(tx));

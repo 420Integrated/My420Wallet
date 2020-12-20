@@ -28,7 +28,7 @@ const CHECK_IF_ONLINE = async function (state, status) {
   state.online = status;
   if (state.online) {
     const darkList = await fetch(
-      'https://raw.githubusercontent.com/MyEtherWallet/ethereum-lists/master/src/addresses/addresses-darklist.json'
+      'https://raw.githubusercontent.com/420integrated/My420Wallet/fourtwenty-lists/master/src/addresses/addresses-darklist.json'
     )
       .then(res => res.json())
       .catch(e => {
@@ -76,9 +76,9 @@ const SET_ENS = function (state, ens) {
   state.ens = ens;
 };
 
-const SET_GAS_PRICE = function (state, val) {
-  state.gasPrice = val;
-  store.set('gasPrice', val);
+const SET_SMOKE_PRICE = function (state, val) {
+  state.smokePrice = val;
+  store.set('smokePrice', val);
 };
 
 const SET_ADDRESS_BOOK = function (state, val) {
@@ -132,9 +132,9 @@ const TOGGLE_TEMP_HIDE = function (state) {
   state.tempHide = !state.tempHide;
 };
 
-const SET_ETH_GASPRICE = function (state, val) {
-  state.ethGasPrice = val;
-  store.set('fetchedGasPrice', val);
+const SET_FOURTWENTY_SMOKEPRICE = function (state, val) {
+  state.fourtwentySmokePrice = val;
+  store.set('fetchedSmokePrice', val);
 };
 
 export default {
@@ -147,7 +147,7 @@ export default {
   INIT_STATES,
   SET_ACCOUNT_BALANCE,
   SET_LAST_PATH,
-  SET_GAS_PRICE,
+  SET_SMOKE_PRICE,
   SET_ENS,
   SET_WEB3_INSTANCE,
   SWITCH_NETWORK,
@@ -160,5 +160,5 @@ export default {
   SET_ADDRESS_BOOK,
   SET_LOCALE,
   TOGGLE_TEMP_HIDE,
-  SET_ETH_GASPRICE
+  SET_FOURTWENTY_SMOKEPRICE
 };

@@ -72,12 +72,12 @@
       </div>
       <div class="fee-container">
         <span class="fee-estimate">{{ $t('swap.estimated-fee') }}</span>
-        {{ calculatedFee }} ETH (${{ calculatedFeeUsd }})
+        {{ calculatedFee }} FOURTWENTY (${{ calculatedFeeUsd }})
       </div>
-      <div v-if="showGasWarning" class="gas-price-warning">
-        {{ $t('errorsGlobal.high-gas-limit-warning') }}
-        <p>{{ $t('swap.current-gas-price', { value: gasPrice }) }}</p>
-        <p class="notice">{{ $t('swap.gas-price-source-notice') }}</p>
+      <div v-if="showSmokeWarning" class="smoke-price-warning">
+        {{ $t('errorsGlobal.high-smoke-limit-warning') }}
+        <p>{{ $t('swap.current-smoke-price', { value: smokePrice }) }}</p>
+        <p class="notice">{{ $t('swap.smoke-price-source-notice') }}</p>
       </div>
       <!--<p> Exchange Rate: 0.000</p>-->
       <div class="confirm-send-container">
@@ -103,16 +103,16 @@ import '@/assets/images/currency/coins/asFont/cryptocoins.css';
 import '@/assets/images/currency/coins/asFont/cryptocoins-colors.css';
 
 import BigNumber from 'bignumber.js';
-import * as unit from 'ethjs-unit';
+import * as unit from 'fourtwentyjs-unit';
 import { mapState, mapActions } from 'vuex';
 
 import Arrow from '@/assets/images/etc/single-arrow.svg';
 import iconBtc from '@/assets/images/currency/btc.svg';
-import iconEth from '@/assets/images/currency/eth.svg';
+import iconFourtwenty from '@/assets/images/currency/fourtwenty.svg';
 import HelpCenterButton from '@/components/Buttons/HelpCenterButton';
 
 import {
-  EthereumTokens,
+  FourtwentycoinTokens,
   BASE_CURRENCY,
   ERC20,
   fiat,
@@ -147,7 +147,7 @@ export default {
       swapReady: false,
       currencyIcons: {
         BTC: iconBtc,
-        ETH: iconEth
+        FOURTWENTY: iconFourtwenty
       },
       timeRemaining: 0,
       qrcode: '',
@@ -156,18 +156,18 @@ export default {
       toAddress: {},
       fiatCurrenciesArray: fiat.map(entry => entry.symbol),
       totalFee: new BigNumber(21000),
-      ethPrice: new BigNumber(0)
+      fourtwentyPrice: new BigNumber(0)
     };
   },
   computed: {
     ...mapState('main', [
       'ens',
-      'gasPrice',
+      'smokePrice',
       'web3',
       'account',
       'wallet',
       'network',
-      'gasLimitWarning'
+      'smokeLimitWarning'
     ]),
     toFiat() {
       return this.fiatCurrenciesArray.includes(this.toAddress.name);
@@ -179,18 +179,18 @@ export default {
       return '';
     },
     calculatedFee() {
-      const feeTotal = this.totalFee.times(this.gasPrice);
-      const feeInEth = unit.fromWei(unit.toWei(feeTotal, 'gwei'), 'ether');
-      return new BigNumber(feeInEth).toFormat(6).toString();
+      const feeTotal = this.totalFee.times(this.smokePrice);
+      const feeInFourtwenty = unit.fromWei(unit.toWei(feeTotal, 'maher'), '420coin');
+      return new BigNumber(feeInFourtwenty).toFormat(6).toString();
     },
     calculatedFeeUsd() {
       return new BigNumber(this.calculatedFee)
-        .times(new BigNumber(this.ethPrice))
+        .times(new BigNumber(this.fourtwentyPrice))
         .toFormat(2)
         .toString();
     },
-    showGasWarning() {
-      return this.gasPrice >= this.gasLimitWarning;
+    showSmokeWarning() {
+      return this.smokePrice >= this.smokeLimitWarning;
     },
     timerHasEnded() {
       return this.timeRemaining === 'expired';
@@ -308,7 +308,7 @@ export default {
                   });
               });
           } else {
-            this.web3.eth
+            this.web3.fourtwenty
               .sendTransaction(this.preparedSwap[0])
               .once('transactionHash', hash => {
                 this.addSwapNotification([
@@ -342,7 +342,7 @@ export default {
               });
           }
         } else {
-          this.web3.eth
+          this.web3.fourtwenty
             .sendTransaction(this.preparedSwap)
             .once('transactionHash', hash => {
               this.addSwapNotification([
@@ -384,7 +384,7 @@ export default {
       if (swapDetails.isExitToFiat && !swapDetails.bypass) return;
       this.timeUpdater(swapDetails);
       try {
-        await this.fetchEthData();
+        await this.fetchFourtwentyData();
       } catch (e) {
         // eslint-disable-next-line
             console.error(e);
@@ -399,13 +399,13 @@ export default {
           swapDetails.maybeToken &&
           swapDetails.fromCurrency !== BASE_CURRENCY
         ) {
-          const tokenInfo = EthereumTokens[swapDetails.fromCurrency];
+          const tokenInfo = FourtwentycoinTokens[swapDetails.fromCurrency];
           if (!tokenInfo) throw Error('Selected Token not known to MEW Swap');
           this.preparedSwap = {
             from: this.account.address,
             to: tokenInfo.contractAddress,
             value: 0,
-            data: new this.web3.eth.Contract(
+            data: new this.web3.fourtwenty.Contract(
               ERC20,
               tokenInfo.contractAddress
             ).methods
@@ -417,7 +417,7 @@ export default {
               )
               .encodeABI()
           };
-          await this.estimateGas(this.preparedSwap);
+          await this.estimateSmoke(this.preparedSwap);
         } else if (
           swapDetails.maybeToken &&
           swapDetails.fromCurrency === BASE_CURRENCY
@@ -425,9 +425,9 @@ export default {
           this.preparedSwap = {
             from: this.account.address,
             to: swapDetails.providerAddress,
-            value: unit.toWei(swapDetails.providerReceives, 'ether')
+            value: unit.toWei(swapDetails.providerReceives, '420coin')
           };
-          await this.estimateGas(this.preparedSwap);
+          await this.estimateSmoke(this.preparedSwap);
         } else if (
           swapDetails.maybeToken &&
           this.fiatCurrenciesArray.includes(swapDetails.toCurrency)
@@ -435,14 +435,14 @@ export default {
           this.preparedSwap = {
             from: this.wallet.getChecksumAddressString(),
             to: swapDetails.providerAddress,
-            value: unit.toWei(swapDetails.providerReceives, 'ether')
+            value: unit.toWei(swapDetails.providerReceives, '420coin')
           };
-          await this.estimateGas(this.preparedSwap);
+          await this.estimateSmoke(this.preparedSwap);
         }
       } else {
         this.preparedSwap = swapDetails.dataForInitialization.map(entry => {
-          if (entry.gas) {
-            this.incrementFee(entry.gas);
+          if (entry.smoke) {
+            this.incrementFee(entry.smoke);
           }
           entry.from = this.account.address;
           return entry;
@@ -450,22 +450,22 @@ export default {
       }
       this.swapReady = true;
     },
-    async estimateGas(params) {
+    async estimateSmoke(params) {
       try {
-        const gasLimit = await this.web3.eth.estimateGas(params);
-        this.incrementFee(gasLimit);
+        const smokeLimit = await this.web3.fourtwenty.estimateSmoke(params);
+        this.incrementFee(smokeLimit);
       } catch (e) {
         Toast.responseHandler(e, 3);
       }
     },
-    async fetchEthData() {
+    async fetchFourtwentyData() {
       try {
         const url = 'https://cryptorates.mewapi.io/ticker';
         const fetchValues = await fetch(url);
         const values = await fetchValues.json();
         if (!values) return 0;
-        if (!values && !values.data && !values.data['ETH']) return 0;
-        this.ethPrice = new BigNumber(values.data['ETH'].quotes.USD.price);
+        if (!values && !values.data && !values.data['FOURTWENTY']) return 0;
+        this.fourtwentyPrice = new BigNumber(values.data['FOURTWENTY'].quotes.USD.price);
       } catch (e) {
         Toast.responseHandler(e, 3);
       }

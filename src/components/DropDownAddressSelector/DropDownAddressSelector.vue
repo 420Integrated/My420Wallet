@@ -50,9 +50,9 @@
           </div>
           <div v-if="isToken(currency)">
             <img
-              :alt="$t('common.currency.ethereum')"
+              :alt="$t('common.currency.fourtwentycoin')"
               class="currency-icon"
-              src="@/assets/images/currency/eth.svg"
+              src="@/assets/images/currency/fourtwenty.svg"
             />
           </div>
           <div v-else>
@@ -84,9 +84,9 @@
                 height="30px"
               />
               <img
-                :alt="$t('common.currency.ethereum')"
+                :alt="$t('common.currency.fourtwentycoin')"
                 class="currency-icon"
-                src="@/assets/images/currency/eth.svg"
+                src="@/assets/images/currency/fourtwenty.svg"
               />
             </div>
             <div class="address-block">
@@ -95,7 +95,7 @@
                 <span
                   v-if="
                     addr.address !== currentAddress &&
-                    addr.currency !== 'ETH' &&
+                    addr.currency !== 'FOURTWENTY' &&
                     addr.currency
                   "
                   class="address-note"
@@ -126,7 +126,7 @@
 import '@/assets/images/currency/coins/asFont/cryptocoins.css';
 import '@/assets/images/currency/coins/asFont/cryptocoins-colors.css';
 import Blockie from '@/components/Blockie';
-import { EthereumTokens, BASE_CURRENCY } from '@/partners';
+import { 420coinTokens, BASE_CURRENCY } from '@/partners';
 import { mapState, mapActions } from 'vuex';
 import { Toast } from '@/helpers';
 import utils from 'web3-utils';
@@ -144,7 +144,7 @@ export default {
     },
     currency: {
       type: String,
-      default: 'ETH'
+      default: 'FOURTWENTY'
     },
     clearAddress: {
       type: Boolean,
@@ -238,7 +238,7 @@ export default {
       Toast.responseHandler(this.$t('common.copied'), Toast.INFO);
     },
     isToken(symbol) {
-      return typeof EthereumTokens[symbol] !== 'undefined';
+      return typeof 420coinTokens[symbol] !== 'undefined';
     },
     listedAddressClick(address) {
       this.toAddressCheckMark = true;

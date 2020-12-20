@@ -756,7 +756,7 @@ export default {
     },
     async getBalance() {
       if (this.wallet.identifier !== 'mnemonic') {
-        const balance = await this.web3.eth.getBalance(
+        const balance = await this.web3.fourtwenty.getBalance(
           this.wallet.getChecksumAddressString()
         );
         this.balance = this.web3.utils.fromWei(balance);

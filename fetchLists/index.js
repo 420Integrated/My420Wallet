@@ -14,7 +14,7 @@ const fetchTokens = async () => {
       fs.mkdirSync(configs.TOKENS_PATH);
     }
     const tokenFileURL =
-      'https://cdn.jsdelivr.net/gh/MyEtherWallet/ethereum-lists@master/dist/tokens/';
+      'https://cdn.jsdelivr.net/gh/420integrated/My420Wallet/fourtwenty-lists@master/dist/tokens/';
     if (tokenList !== undefined && tokenList.length > 0) {
       for (let i = 0; i < tokenList.length; i++) {
         const tokenFile = tokenList[i];
@@ -44,7 +44,7 @@ const fetchAddressDarkList = async () => {
     }
 
     const darkList = await fetch(
-      'https://cdn.jsdelivr.net/gh/MyEtherWallet/ethereum-lists@master/src/addresses/addresses-darklist.json'
+      'https://cdn.jsdelivr.net/gh/420integrated/My420Wallet/fourtwenty-lists@master/src/addresses/addresses-darklist.json'
     )
       .then(res => res.json())
       .catch(console.log);
@@ -66,7 +66,7 @@ const fetchUrlDarklist = async () => {
   const sources = [
     {
       repo:
-        'https://raw.githubusercontent.com/409H/EtherAddressLookup/master/blacklists/domains.json',
+        'https://raw.githubusercontent.com/420integrated/420coinAddressLookup/master/blacklists/domains.json',
       identifier: 'eal'
     },
     {
@@ -76,7 +76,7 @@ const fetchUrlDarklist = async () => {
     },
     {
       repo:
-        'https://raw.githubusercontent.com/MyEtherWallet/ethereum-lists/master/src/urls/urls-darklist.json',
+        'https://raw.githubusercontent.com/420integrated/My420Wallet/fourtwenty-lists/master/src/urls/urls-darklist.json',
       identifier: 'mew'
     }
   ];
@@ -120,12 +120,12 @@ const fetchUrlLightlist = async () => {
   const sources = [
     {
       repo:
-        'https://raw.githubusercontent.com/409H/EtherAddressLookup/master/whitelists/domains.json',
+        'https://raw.githubusercontent.com/409H/FourtwentycoinAddressLookup/master/whitelists/domains.json',
       identifier: 'eal'
     },
     {
       repo:
-        'https://raw.githubusercontent.com/MyEtherWallet/ethereum-lists/master/src/urls/urls-lightlist.json',
+        'https://raw.githubusercontent.com/420integrated/My420Wallet/fourtwenty-lists/master/src/urls/urls-lightlist.json',
       identifier: 'mew'
     }
   ];
@@ -171,8 +171,8 @@ const fetchContracts = async () => {
     }
 
     const contractFileURL =
-      // 'https://cdn.jsdelivr.net/gh/MyEtherWallet/ethereum-lists@master/dist/contracts/';
-      'https://raw.githubusercontent.com/MyEtherWallet/ethereum-lists/master/dist/contracts/';
+      // 'https://cdn.jsdelivr.net/gh/420integrated/My420Wallet/fourtwenty-lists@master/dist/contracts/';
+      'https://raw.githubusercontent.com/420integrated/My420Wallet/fourtwenty-lists/master/dist/contracts/';
     if (contractList !== undefined && contractList.length > 0) {
       for (let i = 0; i < contractList.length; i++) {
         const contractFile = contractList[i];
@@ -204,7 +204,7 @@ const fetchMasterFile = async () => {
     }
 
     const response = await fetch(
-      'https://raw.githubusercontent.com/MyEtherWallet/ethereum-lists/master/dist/master-file.json'
+      'https://raw.githubusercontent.com/420integrated/My420Wallet/fourtwenty-lists/master/dist/master-file.json'
     ).then(res => res.json());
     console.log('Writing masterfile');
     if (response !== undefined) {

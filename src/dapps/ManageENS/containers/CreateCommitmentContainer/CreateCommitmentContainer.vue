@@ -35,10 +35,10 @@
           }}
         </div>
         <div
-          v-if="network.type.name === 'ETH'"
+          v-if="network.type.name === 'FOURTWENTY'"
           class="estimate-price-container"
         >
-          Estimated bid price: {{ estimatedPrice.ethAmount }}
+          Estimated bid price: {{ estimatedPrice.fourtwentyAmount }}
           {{ network.type.currencyName }} (${{ estimatedPrice.usd }})
         </div>
       </div>
@@ -62,7 +62,7 @@
     <interface-bottom-text
       :link-text="$t('common.help-center')"
       :question="$t('common.have-issues')"
-      link="https://kb.myetherwallet.com"
+      link="https://kb.my420wallet.420integrated.com"
     />
   </div>
 </template>
@@ -126,7 +126,7 @@ export default {
       return 5;
     },
     estimatedPrice() {
-      const ethAmount = new BigNumber(this.pricingByLength)
+      const fourtwentyAmount = new BigNumber(this.pricingByLength)
         .dividedBy(this.usd)
         .times(this.duration)
         .toFixed(2);
@@ -135,7 +135,7 @@ export default {
 
       return {
         usd: usd,
-        ethAmount: ethAmount
+        fourtwentyAmount: fourtwentyAmount
       };
     },
     info() {

@@ -9,7 +9,7 @@ import {
 import {
   BASE_CURRENCY,
   TOP_OPTIONS_ORDER,
-  EthereumTokens,
+  FourtwentycoinTokens,
   OtherCoins,
   fiat
 } from './partnersConfig';
@@ -50,8 +50,8 @@ export default class SwapProviders {
       this.providerRateUpdates[entry.getName()] = 0;
       this.providers.set(entry.getName(), new entry(environmentSupplied));
     });
-    this.ethereumTokenList = [];
-    this.nonEthereumTokenList = [];
+    this.fourtwentycoinTokenList = [];
+    this.nonFourtwentycoinTokenList = [];
     this.providerRatesRecieved = [];
 
     let checkCount = 0;
@@ -80,22 +80,22 @@ export default class SwapProviders {
 
   tokenListReceived(tokens) {
     try {
-      const areEth = Object.values(tokens).filter(
+      const areFourtwenty = Object.values(tokens).filter(
         item => item.address !== null
       );
 
       this.updateProviderRates = this.updateProviderRates + 1;
-      if (this.ethereumTokenList.length === 0) {
-        this.ethereumTokenList = areEth;
+      if (this.fourtwentycoinTokenList.length === 0) {
+        this.fourtwentycoinTokenList = areFourtwenty;
       } else {
-        for (let i = 0; i < areEth.length; i++) {
-          const present = this.ethereumTokenList.find(item => {
+        for (let i = 0; i < areFourtwenty.length; i++) {
+          const present = this.fourtwentycoinTokenList.find(item => {
             return (
-              item.address.toLowerCase() === areEth[i].address.toLowerCase()
+              item.address.toLowerCase() === areFourtwenty[i].address.toLowerCase()
             );
           });
-          if (!present && areEth[i]) {
-            this.ethereumTokenList.push(areEth[i]);
+          if (!present && areFourtwenty[i]) {
+            this.fourtwentycoinTokenList.push(areFourtwenty[i]);
           }
         }
       }
@@ -125,11 +125,11 @@ export default class SwapProviders {
     return result;
   }
 
-  updateGasPrice(provider, value) {
+  updateSmokePrice(provider, value) {
     if (provider === 'bancor') {
       const providerInstance = this.providers.get('dexag');
-      if (providerInstance.updateGasPrice) {
-        providerInstance.updateGasPrice(value);
+      if (providerInstance.updateSmokePrice) {
+        providerInstance.updateSmokePrice(value);
       }
     }
   }
@@ -307,8 +307,8 @@ export default class SwapProviders {
   }
 
   checkIsToken(currency) {
-    if (this.ethereumTokenList.length > 0) {
-      return this.ethereumTokenList.find(item => {
+    if (this.fourtwentycoinTokenList.length > 0) {
+      return this.fourtwentycoinTokenList.find(item => {
         return item.symbol.toLowerCase() === currency.toLowerCase();
       });
     }
@@ -317,18 +317,18 @@ export default class SwapProviders {
 
   getTokenAddress(currency, noError) {
     if (this.checkIsToken(currency)) {
-      if (this.ethereumTokenList.length > 0) {
-        const found = this.ethereumTokenList.find(item => {
+      if (this.fourtwentycoinTokenList.length > 0) {
+        const found = this.fourtwentycoinTokenList.find(item => {
           return item.symbol.toLowerCase() === currency.toLowerCase();
         });
         return found.address;
       }
-      return EthereumTokens[currency].contractAddress;
+      return FourtwentycoinTokens[currency].contractAddress;
     }
     if (noError) {
       return false;
     }
-    throw Error('Not an Ethereum Token');
+    throw Error('Not an Fourtwentycoin Token');
   }
 
   calculateFromValue(toValue, bestRate, currency) {
@@ -439,23 +439,23 @@ export default class SwapProviders {
   // Static Methods
 
   static isToken(currency) {
-    return !!EthereumTokens[currency];
+    return !!FourtwentycoinTokens[currency];
   }
 
   static isNotToken(currency) {
-    return !EthereumTokens[currency];
+    return !FourtwentycoinTokens[currency];
   }
 
   static getTokenDecimals(currency) {
     if (SwapProviders.isToken(currency)) {
-      return EthereumTokens[currency].decimals;
-    } else if (currency === 'ETH') {
+      return FourtwentycoinTokens[currency].decimals;
+    } else if (currency === 'FOURTWENTY') {
       return 18;
     }
-    throw Error('Not an Ethereum Token');
+    throw Error('Not an Fourtwentycoin Token');
   }
 
-  // Get address explorer base url for non-ethereum blockchain
+  // Get address explorer base url for non-fourtwentycoin blockchain
   static getAddressLookupUrl(coin, address) {
     if (OtherCoins[coin] && OtherCoins[coin].addressLookup) {
       if (address) {
@@ -465,7 +465,7 @@ export default class SwapProviders {
     }
     return '';
   }
-  // Get transaction explorer base url for non-ethereum blockchain
+  // Get transaction explorer base url for non-fourtwentycoin blockchain
   static getBlockChainExplorerUrl(coin, hash) {
     if (OtherCoins[coin] && OtherCoins[coin].explorer) {
       if (hash) {

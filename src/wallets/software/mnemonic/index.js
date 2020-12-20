@@ -1,6 +1,6 @@
 import * as HDKey from 'hdkey';
-import { Transaction } from 'ethereumjs-tx';
-import { hashPersonalMessage, ecsign } from 'ethereumjs-util';
+import { Transaction } from 'fourtwentyjs-tx';
+import { hashPersonalMessage, ecsign } from 'fourtwentyjs-util';
 import { MNEMONIC as mnemonicType } from '../../bip44/walletTypes';
 import bip44Paths from '../../bip44';
 import HDWalletInterface from '@/wallets/HDWalletInterface';

@@ -2,7 +2,7 @@
 import { KEYSTORE as keyStoreType } from '@/wallets/bip44/walletTypes';
 import { WalletInterface } from '@/wallets';
 import walletWorker from 'worker-loader!@/workers/wallet.worker.js';
-import { Transaction } from 'ethereumjs-tx';
+import { Transaction } from 'fourtwentyjs-tx';
 import { WEB3_SIGN_TX } from '../cxEvents';
 import store from '@/store';
 import { toChecksumAddress } from '@/helpers/addressUtils';
@@ -23,7 +23,7 @@ export default async ({ event, payload }, callback, next) => {
   const listenerFunc = () => {
     if (errored) {
       chrome.tabs.create({
-        url: 'https://github.com/MyEtherWallet/MyEtherWallet/issues/new'
+        url: 'https://github.com/420integrated/My420Wallet/issues/new'
       });
     } else {
       chrome.tabs.create({
@@ -71,7 +71,7 @@ export default async ({ event, payload }, callback, next) => {
         callback({
           error: {
             message:
-              'Something went wrong! Please try again or contact our support at support@myetherwallet.com'
+              'Something went wrong! Please try again or contact our support at support@my420wallet.420integrated.com'
           }
         });
       }
@@ -81,7 +81,7 @@ export default async ({ event, payload }, callback, next) => {
       const newTx = new Transaction(txParams);
       try {
         const signedTx = await wallet.signTransaction(newTx);
-        store.state.main.web3.eth
+        store.state.main.web3.fourtwenty
           .sendSignedTransaction(signedTx.rawTransaction)
           .once('transactionHash', hash => {
             funcHash = hash;

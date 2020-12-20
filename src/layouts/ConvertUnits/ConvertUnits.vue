@@ -14,7 +14,7 @@
 
         <div><unit-input :options="options" /></div>
 
-        <div class="ether-unit-reference-guide">
+        <div class="fourtwentycoin-unit-reference-guide">
           <div class="block-title">
             <h3>{{ $t('convertUnits.title-refference') }}</h3>
           </div>
@@ -22,7 +22,7 @@
           <div class="unit-table">
             <table>
               <tbody>
-                <tr v-for="eu in etherUnitRef" :key="eu.key">
+                <tr v-for="eu in fourtwentycoinUnitRef" :key="eu.key">
                   <td>{{ eu.name }}</td>
                   <td class="unit-long">{{ eu.unit1 }}</td>
                   <td class="unit-short">
@@ -52,9 +52,9 @@ export default {
   },
   data() {
     return {
-      etherUnitRef: [
+      fourtwentycoinUnitRef: [
         {
-          name: 'Wei',
+          name: 'Marley',
           unit1: '1',
           unit2: '1',
           unit2e: '',
@@ -65,66 +65,66 @@ export default {
           unit1: '1,000',
           unit2: '10',
           unit2e: '3',
-          desc: 'ada, femtoether'
+          desc: 'ada, femto420'
         },
         {
           name: 'Mwei',
           unit1: '1,000,000',
           unit2: '10',
           unit2e: '6',
-          desc: 'babbage, picoether'
+          desc: 'babbage, pico420'
         },
         {
-          name: 'Gwei',
+          name: 'Maher',
           unit1: '1,000,000,000',
           unit2: '10',
           unit2e: '9',
-          desc: 'shannon, nanoether, nano'
+          desc: 'shannon, nano420, nano'
         },
         {
           name: 'Szabo',
           unit1: '1,000,000,000,000',
           unit2: '10',
           unit2e: '12',
-          desc: 'microether, micro'
+          desc: 'micro420, micro'
         },
         {
           name: 'Finney',
           unit1: '1,000,000,000,000,000',
           unit2: '10',
           unit2e: '15',
-          desc: 'milliether, milli'
+          desc: 'milli420, milli'
         },
         {
-          name: 'Ether',
+          name: 'Fourtwentycoin',
           unit1: '1,000,000,000,000,000,000',
           unit2: '10',
           unit2e: '18',
           desc: ''
         },
         {
-          name: 'Kether',
+          name: 'K420',
           unit1: '1,000,000,000,000,000,000,000',
           unit2: '10',
           unit2e: '21',
           desc: 'grand, einstein'
         },
         {
-          name: 'Mether',
+          name: 'M420',
           unit1: '1,000,000,000,000,000,000,000,000',
           unit2: '10',
           unit2e: '24',
           desc: ''
         },
         {
-          name: 'Gether',
+          name: 'G420',
           unit1: '1,000,000,000,000,000,000,000,000,000',
           unit2: '10',
           unit2e: '27',
           desc: ''
         },
         {
-          name: 'Tether',
+          name: 'T420',
           unit1: '1,000,000,000,000,000,000,000,000,000,000',
           unit2: '10',
           unit2e: '30',
@@ -135,14 +135,14 @@ export default {
         'wei',
         'kwei',
         'mwei',
-        'gwei',
+        'maher',
         'szabo',
         'finney',
-        'ether',
-        'kether',
-        'mether',
-        'gether',
-        'tether'
+        '420coin',
+        'k420',
+        'm420',
+        'g420',
+        't420'
       ]
     };
   }

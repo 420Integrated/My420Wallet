@@ -5,7 +5,7 @@ import {
   WEB3_REJECT
 } from '@/builds/mewcx/cxHelpers/cxEvents.js';
 export default async ({ payload }, res, next) => {
-  if (payload.method !== 'eth_unsubscribe') return next();
+  if (payload.method !== 'fourtwenty_unsubscribe') return next();
   const id = window.extensionID;
   const obj = {
     detail: payload

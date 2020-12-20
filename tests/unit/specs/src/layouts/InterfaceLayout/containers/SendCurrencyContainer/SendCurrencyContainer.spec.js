@@ -75,11 +75,11 @@ describe('SendCurrencyContainer.vue', () => {
     );
   });
 
-  it('should render correct gasLimit data', () => {
+  it('should render correct smokeLimit data', () => {
     wrapper.setData({ advancedExpand: true });
     expect(
       wrapper.vm.$el.querySelectorAll('.user-input input')[1].value
-    ).toEqual(String(wrapper.vm.$data.gasLimit));
+    ).toEqual(String(wrapper.vm.$data.smokeLimit));
   });
 
   describe('SendCurrencyContainer.vue Methods', () => {
@@ -113,11 +113,11 @@ describe('SendCurrencyContainer.vue', () => {
       hexAddress: '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D',
       address: '0xDECAF9CD2367cdbb726E904cD6397eDFcAe6068D',
       isValidAddress: true,
-      gasLimit: '3000',
+      smokeLimit: '3000',
       advancedExpand: true,
       selectedCurrency: {
         name: 'Bitcoin',
-        symobl: 'ETH'
+        symobl: 'FOURTWENTY'
       }
     });
     wrapper.find('.clear-all-btn').trigger('click');
@@ -125,12 +125,12 @@ describe('SendCurrencyContainer.vue', () => {
     expect(wrapper.vm.$data.toValue).toEqual('0');
     expect(wrapper.vm.$data.hexAddress).toEqual('');
     expect(wrapper.vm.$data.address).toEqual('');
-    expect(wrapper.vm.$data.gasLimit).toEqual('21000');
+    expect(wrapper.vm.$data.smokeLimit).toEqual('21000');
     expect(wrapper.vm.$data.isValidAddress).toEqual(false);
     expect(wrapper.vm.$data.advancedExpand).toEqual(false);
     expect(wrapper.vm.$data.selectedCurrency).toEqual({
-      name: 'Ethereum',
-      symbol: 'ETH'
+      name: '420coin',
+      symbol: 'FOURTWENTY'
     });
   });
 });

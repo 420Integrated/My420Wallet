@@ -18,7 +18,7 @@ export default {
     },
     url: {
       type: String,
-      default: 'https://mewconnect.myetherwallet.com/#/'
+      default: 'https://mewconnect.my420wallet.420integrated.com/#/'
     }
   },
   data() {
@@ -32,7 +32,7 @@ export default {
       return require(`@/assets/images/ads/${name}`);
     },
     useUrl(url) {
-      if (url === '') url = 'https://mewconnect.myetherwallet.com/#/';
+      if (url === '') url = 'https://mewconnect.my420wallet.420integrated.com/#/';
       return url;
     }
   }

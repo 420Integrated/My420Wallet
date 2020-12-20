@@ -23,7 +23,7 @@
                     $t(`privacyPol.${item}`).includes('at:') ||
                     $t(`privacyPol.${item}`).includes('to:')
                   "
-                  href="mailto:support@myetherwallet.com"
+                  href="mailto:support@my420wallet.420integrated.com"
                   rel="noopener noreferrer"
                 >
                   {{ $t('common.support-email') }}

@@ -19,7 +19,7 @@
         >
           <div class="tx-success">
             {{ $t('notifications.your-transaction-amount') }}
-            <span>2.100000 {{ $t('common.currency.eth') }}</span>
+            <span>2.100000 {{ $t('common.currency.fourtwenty') }}</span>
             {{ $t('notifications.to-address') }}
             <p>0x1d3649b580f77f8fd81a6546398d1926c49eb336</p>
             {{ $t('notifications.successfully-transferred') }}

@@ -67,7 +67,7 @@
             <b-tab title="My Wallets" title-link-class="tab-default-style">
               <div v-if="myWallets.length > 0" class="wallet-display-container">
                 <div
-                  v-if="network.type.name === 'ETH'"
+                  v-if="network.type.name === 'FOURTWENTY'"
                   class="total-balance-container"
                 >
                   <div>
@@ -77,7 +77,7 @@
                   </div>
                   <div>
                     <p class="total-amt">{{ totalDollarAmount }}</p>
-                    <p class="eth-amt">
+                    <p class="fourtwenty-amt">
                       {{ totalBalance }} {{ network.type.currencyName }}
                     </p>
                   </div>
@@ -88,7 +88,7 @@
                 >
                   <wallet-info-component
                     :prices="tokenPrices"
-                    :usd="ethPrice"
+                    :usd="fourtwentyPrice"
                     :address="wallet.address"
                     :wallet="wallet.wallet"
                     :nickname="wallet.nickname"
@@ -128,7 +128,7 @@
                 >
                   <wallet-info-component
                     :prices="tokenPrices"
-                    :usd="ethPrice"
+                    :usd="fourtwentyPrice"
                     :address="wallet.address"
                     :wallet="wallet.wallet"
                     :nickname="wallet.nickname"
@@ -157,7 +157,7 @@
         </div>
       </div>
     </div>
-    <add-wallet-modal ref="addWalletModal" :usd="ethPrice" />
+    <add-wallet-modal ref="addWalletModal" :usd="fourtwentyPrice" />
   </extension-browser-action-wrapper>
 </template>
 
@@ -186,7 +186,7 @@ export default {
       type: Object,
       default: () => {}
     },
-    ethPrice: {
+    fourtwentyPrice: {
       type: Number,
       default: 0
     },
@@ -224,7 +224,7 @@ export default {
     },
     totalDollarAmount() {
       const totalDollarAmt = new BigNumber(this.totalBalance).times(
-        this.ethPrice
+        this.fourtwentyPrice
       );
       return Misc.toDollar(totalDollarAmt.toNumber());
     },
@@ -255,7 +255,7 @@ export default {
       return this.watchOnlyAddresses;
     },
     convertedBalance() {
-      return `$ ${new BigNumber(this.ethPrice)
+      return `$ ${new BigNumber(this.fourtwentyPrice)
         .times(this.totalBalance)
         .toFixed(2)}`;
     }

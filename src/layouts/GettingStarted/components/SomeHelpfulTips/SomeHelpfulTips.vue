@@ -68,7 +68,7 @@ export default {
           desc: 'gettingStarted.helpful-tips.tip3.desc',
           linkText: 'gettingStarted.helpful-tips.tip3.link',
           linkUrl:
-            'https://chrome.google.com/webstore/detail/myetherwallet/nlbmnnijcnlegkjjpcfjclmcfggfefdm?hl=en'
+            'https://chrome.google.com/webstore/detail/my420wallet/gettingstarted?hl=en'
         },
         {
           title: 'gettingStarted.helpful-tips.tip4.title',
@@ -80,7 +80,7 @@ export default {
           title: 'gettingStarted.helpful-tips.tip5.title',
           desc: 'gettingStarted.helpful-tips.tip5.desc',
           linkText: 'gettingStarted.helpful-tips.tip5.link',
-          linkUrl: 'mailto:support@myetherwallet.com'
+          linkUrl: 'mailto:support@my420wallet.420integrated.com'
         }
       ]
     };

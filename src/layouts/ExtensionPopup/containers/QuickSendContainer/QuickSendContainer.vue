@@ -142,7 +142,7 @@ import DropDownAddressSelector from '@/components/DropDownAddressSelector';
 import Blockie from '@/components/Blockie';
 import { Misc } from '@/helpers';
 import { mapState } from 'vuex';
-import ethUnit from 'ethjs-unit';
+import fourtwentyUnit from 'fourtwentyjs-unit';
 import { WEB3_SIGN_TX } from '@/builds/mewcx/cxHelpers/cxEvents';
 import { toChecksumAddress } from '@/helpers/addressUtils';
 
@@ -194,8 +194,8 @@ export default {
       error: {},
       loading: false,
       rawTx: {},
-      gasPrice: 0,
-      gasLimit: 0,
+      smokePrice: 0,
+      smokeLimit: 0,
       isValidAddress: false
     };
   },
@@ -223,8 +223,8 @@ export default {
   },
   watch: {
     toAddress() {
-      this.getGasPrice();
-      this.estimateGas();
+      this.getSmokePrice();
+      this.estimateSmoke();
       this.error = {};
     },
     password() {
@@ -273,8 +273,8 @@ export default {
       this.toAddress = '';
       this.value = 0;
       this.rawTx = {};
-      this.gasPrice = 0;
-      this.gasLimit = 0;
+      this.smokePrice = 0;
+      this.smokeLimit = 0;
       this.step -= 1;
       this.toValue = '0';
       this.isValidAddress = false;
@@ -284,26 +284,26 @@ export default {
       this.step += 1;
       this.loading = false;
     },
-    async getGasPrice() {
-      this.web3.eth.getGasPrice().then(res => {
-        this.gasPrice = new BigNumber(ethUnit.fromWei(res, 'gwei')).toString();
+    async getSmokePrice() {
+      this.web3.fourtwenty.getSmokePrice().then(res => {
+        this.smokePrice = new BigNumber(fourtwentyUnit.fromWei(res, 'maher')).toString();
       });
     },
-    async estimateGas() {
+    async estimateSmoke() {
       const params = {
         from: this.selectedWallet.address,
         value: this.value,
         to: this.toAddress,
-        gasPrice: Misc.sanitizeHex(
-          ethUnit.toWei(this.gasPrice, 'gwei').toString(16)
+        smokePrice: Misc.sanitizeHex(
+          fourtwentyUnit.toWei(this.smokePrice, 'maher').toString(16)
         ),
         data: '0x'
       };
       if (this.toAddress !== '') {
-        this.web3.eth
-          .estimateGas(params)
-          .then(gasLimit => {
-            this.gasLimit = gasLimit;
+        this.web3.fourtwenty
+          .estimateSmoke(params)
+          .then(smokeLimit => {
+            this.smokeLimit = smokeLimit;
           })
           .catch(e => {
             // eslint-disable-no-console
@@ -312,18 +312,18 @@ export default {
       }
     },
     entireBalance() {
-      const gasPrice = new BigNumber(ethUnit.fromWei(this.gasPrice, 'gwei'));
-      const gasLimitAndGasPrice = gasPrice.times(this.gasLimit).toString();
-      const convertedLimitAndPrice = ethUnit.fromWei(
-        gasLimitAndGasPrice,
-        'ether'
+      const smokePrice = new BigNumber(fourtwentyUnit.fromWei(this.smokePrice, 'maher'));
+      const smokeLimitAndSmokePrice = smokePrice.times(this.smokeLimit).toString();
+      const convertedLimitAndPrice = fourtwentyUnit.fromWei(
+        smokeLimitAndSmokePrice,
+        '420coin'
       );
       const walletBalance = new BigNumber(this.selectedWallet.balance);
       this.value = walletBalance.minus(convertedLimitAndPrice).toString();
     },
     async createTransaction() {
       this.loading = true;
-      const nonce = await this.web3.eth.getTransactionCount(
+      const nonce = await this.web3.fourtwenty.getTransactionCount(
         this.selectedWallet.address
       );
       this.raw = {
@@ -331,12 +331,12 @@ export default {
         to: this.toAddress,
         from: this.selectedWallet.address,
         value: Misc.sanitizeHex(
-          ethUnit.toWei(this.value, 'ether').toString(16)
+          fourtwentyUnit.toWei(this.value, '420coin').toString(16)
         ),
-        gasPrice: Misc.sanitizeHex(
-          ethUnit.toWei(this.gasPrice, 'gwei').toString(16)
+        smokePrice: Misc.sanitizeHex(
+          fourtwentyUnit.toWei(this.smokePrice, 'maher').toString(16)
         ),
-        gas: Misc.sanitizeHex(new BigNumber(this.gasLimit).toString(16)),
+        smoke: Misc.sanitizeHex(new BigNumber(this.smokeLimit).toString(16)),
         data: '0x'
       };
 

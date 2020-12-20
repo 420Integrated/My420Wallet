@@ -13,9 +13,9 @@ import {
   web3Detected,
   web3Subscription,
   web3Unsubscribe,
-  web3QueryGasPrice,
+  web3QuerySmokePrice,
   web3GetTxCount,
-  web3GetGas,
+  web3GetSmoke,
   web3SignTx,
   web3SignMsg
 } from './backgroundEvents';
@@ -74,10 +74,10 @@ const networkChanger = items => {
             });
           })
           .then(() => {
-            store.state.main.web3.eth.getGasPrice().then(res => {
+            store.state.main.web3.fourtwenty.getSmokePrice().then(res => {
               store.dispatch(
-                'main/setGasPrice',
-                utils.fromWei(new BigNumber(res).toString(), 'gwei')
+                'main/setSmokePrice',
+                utils.fromWei(new BigNumber(res).toString(), 'maher')
               );
             });
           });
@@ -164,9 +164,9 @@ const eventsListeners = (request, _, callback) => {
   middleware.use(web3Detected);
   middleware.use(web3Subscription);
   middleware.use(web3Unsubscribe);
-  middleware.use(web3QueryGasPrice);
+  middleware.use(web3QuerySmokePrice);
   middleware.use(web3GetTxCount);
-  middleware.use(web3GetGas);
+  middleware.use(web3GetSmoke);
   middleware.use(web3SignTx);
   middleware.use(web3SignMsg);
   middleware.run(obj, callback);
@@ -236,7 +236,7 @@ function onStartupCb() {
 
 function querycB(tab) {
   if (tab.url) {
-    const SEARCH_STRING = ['myetherwallet'];
+    const SEARCH_STRING = ['my420wallet'];
     const ealBlacklisted = Object.assign({}, helpers.blackListDomains['eal']),
       phishfortBlacklisted = Object.assign(
         {},
@@ -269,7 +269,7 @@ function querycB(tab) {
         helpers.checkUrlSimilarity(tab.url, SEARCH_STRING)
       ) {
         urlRedirect = encodeURI(
-          `https://www.myetherwallet.com/phishing-catcher?phishing-address=${tab.url}`
+          `https://www.my420wallet.420integrated.com/phishing-catcher?phishing-address=${tab.url}`
         );
         chrome.tabs.update(null, { url: urlRedirect });
       } else {

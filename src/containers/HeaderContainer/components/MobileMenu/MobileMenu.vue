@@ -34,13 +34,13 @@
       </router-link>
       <div class="mobile-menu-button--container">
         <a
-          href="https://ccswap.myetherwallet.com/#/"
+          href="https://ccswap.my420wallet.420integrated.com/#/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div class="buy-eth">
-            <img src="@/assets/images/icons/buy-eth.svg" alt />
-            <p>{{ $t('common.buy-eth') }}</p>
+          <div class="buy-fourtwenty">
+            <img src="@/assets/images/icons/buy-fourtwenty.svg" alt />
+            <p>{{ $t('common.buy-fourtwenty') }}</p>
           </div>
         </a>
         <mobile-menu-button :ismenuopen="false" @click.native="openMenu" />
@@ -98,7 +98,7 @@ export default {
   data() {
     const isMewCx = Misc.isMewCx();
     return {
-      localGasPrice: '10',
+      localSmokePrice: '10',
       balance: 0,
       isOnTop: true,
       isMenuOpen: false,
